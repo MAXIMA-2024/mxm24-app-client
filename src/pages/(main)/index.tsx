@@ -1,10 +1,10 @@
-import { Stack } from "@chakra-ui/react";
+import { Stack, Text } from "@chakra-ui/react";
 
 const LandingPage = () => {
   return (
     <>
       <Stack>
-        <h1>Landing Page</h1>
+        <Text fontFamily={"Luthier"}>Landing Page</Text>
       </Stack>
     </>
   );
