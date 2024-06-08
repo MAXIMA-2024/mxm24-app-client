@@ -1,7 +1,11 @@
-import { Stack } from "@chakra-ui/react";
+import { Stack, Text } from "@chakra-ui/react";
 
 const Onboarding = () => {
-  return <Stack>Onboarding</Stack>;
+  return (
+    <Stack>
+      <Text>Onboarding</Text>
+    </Stack>
+  );
 };
 
 export default Onboarding;

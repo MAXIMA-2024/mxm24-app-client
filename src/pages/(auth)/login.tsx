@@ -1,7 +1,11 @@
-import { Stack } from "@chakra-ui/react";
+import { Stack, Text } from "@chakra-ui/react";
 
 const Login = () => {
-  return <Stack>Login</Stack>;
+  return (
+    <Stack>
+      <Text>Login</Text>
+    </Stack>
+  );
 };
 
 export default Login;
