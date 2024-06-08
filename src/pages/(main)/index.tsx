@@ -10,7 +10,7 @@ const LandingPage = () => {
         minH={"100vh"}
         bgImage={{
           base: "/bg/welcome-page-mobile.png",
-          md: "/bg/welcome-page-desktop.png",
+          lg: "/bg/welcome-page-desktop.png",
         }}
         bgSize={"cover"}
         bgRepeat={"no-repeat"}
