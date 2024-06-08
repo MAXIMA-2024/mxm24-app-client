@@ -1,7 +1,11 @@
-import { Stack } from "@chakra-ui/react";
+import { Stack, Text } from "@chakra-ui/react";
 
 const Home = () => {
-  return <Stack>HoME</Stack>;
+  return (
+    <Stack>
+      <Text>HoME</Text>
+    </Stack>
+  );
 };
 
 export default Home;

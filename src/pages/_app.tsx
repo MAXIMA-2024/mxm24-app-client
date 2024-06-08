@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 const GlobalLayout = () => {
   return (
-    <Stack minH={"100vh"} minW={"100vw"}>
+    <Stack minW={"100vw"} minH={"100vh"}>
       <Outlet />
     </Stack>
   );
