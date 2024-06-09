@@ -3,7 +3,10 @@ import { Stack, Text } from "@chakra-ui/react";
 const Home = () => {
   return (
     <Stack
-      bgImage={"/bg/home-desktop.png"}
+      bgImage={{
+        base: "/bg/home-mobile.png",
+        lg: "/bg/home-desktop.png",
+      }}
       bgSize={"cover"}
       bgRepeat={"no-repeat"}
       bgPosition={"center"}
