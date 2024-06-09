@@ -44,19 +44,25 @@ const Home = () => {
       justifyContent={"center"}
       alignItems={"center"}
     >
-      <Stack direction={"row"} gap={5} mt={"25rem"}>
+      <Stack
+        direction={"row"}
+        gap={5}
+        mt={{ base: "17.5rem", lg: "25rem" }}
+        flexWrap={"wrap"}
+        justifyContent={"center"}
+      >
         {CardData.map((card, index) => (
           <Button
-            flexDirection={"column"}
+            flexDirection={{ base: "row", lg: "column" }}
             variant={"ghost"}
             key={index}
             bgColor={"card.primary"}
-            p={5}
+            p={{ base: 3, lg: 5 }}
             rounded={"xl"}
             justifyContent={"center"}
             alignItems={"center"}
             w={"14rem"}
-            h={"9rem"}
+            h={{ base: "7rem", lg: "9rem" }}
             gap={4}
             onClick={card.title === "Challenge" ? onOpen : () => {}}
             _hover={{
@@ -78,7 +84,7 @@ const Home = () => {
         onClose={onClose}
         isCentered
         motionPreset="slideInBottom"
-        size={"2xl"}
+        size={{ base: "sm", lg: "2xl" }}
       >
         <ModalOverlay />
         <ModalContent
@@ -96,7 +102,7 @@ const Home = () => {
           >
             Nama Challenge
           </ModalHeader>
-          <ModalBody p={10} mx={16}>
+          <ModalBody p={{ base: 5, lg: 10 }} mx={{ base: 8, lg: 16 }}>
             <Text textAlign={"justify"} fontFamily={"Lexend"} mb={5}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.

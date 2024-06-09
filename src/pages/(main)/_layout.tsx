@@ -7,7 +7,17 @@ import {
   Button,
   Hide,
   Show,
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  useDisclosure,
 } from "@chakra-ui/react";
+import { motion } from "framer-motion";
+import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 
 const NavBarData = [
@@ -152,9 +162,27 @@ const MainLayoutDesktop = () => {
 };
 
 const MainLayoutMobile = () => {
+  // const { isOpen, onOpen, onClose } = useDisclosure();
+  // const [open, setOpen] = useState(false);
+
   return (
     <>
       <Text>Ini Mobile Layout</Text>
+
+      {/* <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerHeader borderBottomWidth="1px">Basic Drawer</DrawerHeader>
+          <DrawerBody>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer> */}
+      <Stack>
+        <Outlet />
+      </Stack>
     </>
   );
 };
