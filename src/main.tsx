@@ -9,7 +9,7 @@ import "@fontsource-variable/lexend";
 const theme = extendTheme({
   fonts: {
     Luthier: `'Luthier', sans-serif`,
-    Lexend: `'Lexend', sans-serif`,
+    Lexend: `'Lexend Variable', sans-serif`,
   },
   colors: {
     text: {
