@@ -7,18 +7,19 @@ import {
   Button,
   Hide,
   Show,
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  useDisclosure,
+  // Drawer,
+  // DrawerBody,
+  // DrawerFooter,
+  // DrawerHeader,
+  // DrawerOverlay,
+  // DrawerContent,
+  // DrawerCloseButton,
+  // useDisclosure,
 } from "@chakra-ui/react";
-import { motion } from "framer-motion";
-import { useState } from "react";
+// import { motion } from "framer-motion";
+// import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
+import Sidebar from "@/components/Sidebar/Sidebar";
 
 const NavBarData = [
   {
@@ -166,9 +167,8 @@ const MainLayoutMobile = () => {
   // const [open, setOpen] = useState(false);
 
   return (
-    <>
-      <Text>Ini Mobile Layout</Text>
-
+    <Stack gap={0}>
+      <Sidebar />
       {/* <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
@@ -180,10 +180,10 @@ const MainLayoutMobile = () => {
           </DrawerBody>
         </DrawerContent>
       </Drawer> */}
-      <Stack>
+      <Stack className="abc">
         <Outlet />
       </Stack>
-    </>
+    </Stack>
   );
 };
 
