@@ -14,7 +14,7 @@ const NavBarData = [
   {
     title: "HoME",
     icon: "/icons/home-icon.png",
-    link: "/",
+    link: "/home",
   },
   {
     title: "State",
