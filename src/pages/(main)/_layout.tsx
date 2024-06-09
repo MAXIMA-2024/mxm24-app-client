@@ -130,6 +130,7 @@ const MainLayoutDesktop = () => {
               fontSize={{ lg: "smaller", xl: "larger" }}
               mr={{ lg: 0, xl: 5 }}
               letterSpacing={"0.1rem"}
+              textShadow={"0 0 1rem #000000"}
             >
               NAMA LENGKAP
             </Text>
