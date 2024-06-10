@@ -96,13 +96,18 @@ const Home = () => {
           <ModalHeader
             fontFamily={"Luthier"}
             color={"text.primary"}
-            fontSize={"2.5rem"}
-            pt={10}
+            fontSize={{ base: "2rem", lg: "2.5rem" }}
+            pt={{ base: 8, lg: 10 }}
           >
             Nama Challenge
           </ModalHeader>
-          <ModalBody p={{ base: 5, lg: 10 }} mx={{ base: 8, lg: 16 }}>
-            <Text textAlign={"justify"} fontFamily={"Lexend"} mb={5}>
+          <ModalBody p={{ base: 2, lg: 10 }} mx={{ base: 4, lg: 16 }}>
+            <Text
+              textAlign={"justify"}
+              fontFamily={"Lexend"}
+              mb={{ base: 3, lg: 5 }}
+              fontSize={{ base: "0.75rem", lg: "1rem" }}
+            >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
               Porttitor massa id neque aliquam vestibulum morbi blandit cursus
@@ -123,8 +128,8 @@ const Home = () => {
               variant={"ghost"}
               bgColor={"button.primary"}
               color={"text.tertiary"}
-              p={7}
-              px={10}
+              p={{ base: 6, lg: 7 }}
+              px={{ base: 8, lg: 10 }}
               mr={3}
               onClick={onClose}
               _hover={{
