@@ -16,18 +16,24 @@ const LandingPage = () => {
         bgRepeat={"no-repeat"}
         bgPosition={"center"}
       >
-        <Stack align={"center"} color={"text.primary"} fontWeight={"700"}>
+        <Stack
+          align={"center"}
+          color={"text.primary"}
+          fontWeight={"700"}
+          gap={{ base: 0, lg: 2 }}
+          pt={{ base: "7.5rem", md: "0rem", lg: "0rem", xl: "0rem" }}
+        >
           <Heading
             fontFamily={"Luthier"}
-            fontSize={{ base: "1.75rem", md: "4rem", lg: "6rem", xl: "7.5rem" }}
-            // size={{ base: "xl", sm: "4xl" }}
+            fontSize={{ base: "2rem", md: "4rem", lg: "6rem", xl: "7.5rem" }}
+            textShadow={"0 0 5rem #000000"}
           >
             Halo! Selamat Datang
           </Heading>
           <Heading
             fontFamily={"Luthier"}
-            fontSize={{ base: "4rem", sm: "7.5rem" }}
-            // size={"4xl"}
+            fontSize={{ base: "2rem", md: "4rem", lg: "6rem", xl: "7.5rem" }}
+            textShadow={"0 0 5rem #000000"}
           >
             Maximers!
           </Heading>
