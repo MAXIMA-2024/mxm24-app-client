@@ -19,7 +19,7 @@ const Onboarding = () => {
       minH={"100vh"}
       bgImage={{
         base: "/bg/onboarding-mobile.png",
-        lg: "/bg/onboarding-desktop.png",
+        md: "/bg/onboarding-desktop.png",
       }}
       bgSize={"cover"}
       bgRepeat={"no-repeat"}
@@ -29,8 +29,9 @@ const Onboarding = () => {
         bgColor={"card.secondary"}
         rounded={"xl"}
         px={["2rem", "4rem", "8rem", "6rem", "10rem"]}
-        py={"3rem"}
-        w={"75%"}
+        py={{ base: "1rem", lg: "3rem" }}
+        pb={{ base: "2rem", lg: "3rem" }}
+        w={"70%"}
         align={"center"}
       >
         <Text
@@ -172,6 +173,7 @@ const Onboarding = () => {
         >
           Wrong account?
           <Link fontFamily={"Luthier"} color={"#FFBE00"} fontWeight={"bold"}>
+            {" "}
             Log Out
           </Link>
         </Text>
@@ -182,6 +184,8 @@ const Onboarding = () => {
           fontSize={"xl"}
           w={["8rem", "10rem", "16rem", "16rem", "16rem"]}
           rounded={"2xl"}
+          fontFamily={"Lexend"}
+          fontWeight={"400"}
         >
           Continue
         </Button>
