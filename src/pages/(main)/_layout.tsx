@@ -128,32 +128,33 @@ const MainLayoutDesktop = () => {
           ))}
         </Stack>
         {/* Right Side */}
-        <Stack
-          direction={"row"}
-          justifyContent={"center"}
-          alignItems={"center"}
-          pr={{ lg: 12, xl: 20 }}
-        >
-          <Hide below="xl">
-            <Text
-              color={"text.tertiary"}
-              fontFamily={"Lexend"}
-              fontSize={{ lg: "smaller", xl: "larger" }}
-              mr={{ lg: 0, xl: 5 }}
-              letterSpacing={"0.1rem"}
-              textShadow={"0 0 1rem #000000"}
-            >
-              NAMA LENGKAP
-            </Text>
-          </Hide>
-
-          <Avatar>
-            <AvatarBadge
-              boxSize={{ lg: "0.75rem", xl: "1.25rem" }}
-              bg="green.500"
-            />
-          </Avatar>
-        </Stack>
+        <Link to={"/profile"}>
+          <Stack
+            direction={"row"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            pr={{ lg: 12, xl: 20 }}
+          >
+            <Hide below="xl">
+              <Text
+                color={"text.tertiary"}
+                fontFamily={"Lexend"}
+                fontSize={{ lg: "smaller", xl: "larger" }}
+                mr={{ lg: 0, xl: 5 }}
+                letterSpacing={"0.1rem"}
+                textShadow={"0 0 1rem #000000"}
+              >
+                NAMA LENGKAP
+              </Text>
+            </Hide>
+            <Avatar>
+              <AvatarBadge
+                boxSize={{ lg: "0.75rem", xl: "1.25rem" }}
+                bg="green.500"
+              />
+            </Avatar>
+          </Stack>
+        </Link>
       </Stack>
       <Stack>
         <Outlet />

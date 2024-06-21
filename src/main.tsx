@@ -24,6 +24,7 @@ const theme = extendTheme({
     },
     card: {
       primary: "#FAF4EB",
+      secondary: "#FFF3D9",
     },
   },
 });

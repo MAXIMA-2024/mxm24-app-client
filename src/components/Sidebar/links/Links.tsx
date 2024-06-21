@@ -90,29 +90,31 @@ const Links = ({ closeSidebar }: { closeSidebar: () => void }) => {
             </motion.div>
           ))}
         </Stack>
-        <Stack
-          direction={"row"}
-          justifyContent={"center"}
-          alignItems={"center"}
-          pr={{ lg: 12, xl: 20 }}
-          p={{ base: 5, lg: 10, xl: 20 }}
-        >
-          <Avatar>
-            <AvatarBadge
-              boxSize={{ lg: "0.75rem", xl: "1.25rem" }}
-              bg="green.500"
-            />
-          </Avatar>
-          <Text
-            color={"text.secondary"}
-            fontFamily={"Lexend"}
-            fontSize={{ base: "small", lg: "smaller", xl: "larger" }}
-            ml={{ base: 1, xl: 5 }}
-            // letterSpacing={"0.05rem"}
+        <Link to={"/profile"}>
+          <Stack
+            direction={"row"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            pr={{ lg: 12, xl: 20 }}
+            p={{ base: 5, lg: 10, xl: 20 }}
           >
-            NAMA LENGKAP
-          </Text>
-        </Stack>
+            <Avatar>
+              <AvatarBadge
+                boxSize={{ lg: "0.75rem", xl: "1.25rem" }}
+                bg="green.500"
+              />
+            </Avatar>
+            <Text
+              color={"text.secondary"}
+              fontFamily={"Lexend"}
+              fontSize={{ base: "small", lg: "smaller", xl: "larger" }}
+              ml={{ base: 1, xl: 5 }}
+              // letterSpacing={"0.05rem"}
+            >
+              NAMA LENGKAP
+            </Text>
+          </Stack>
+        </Link>
       </motion.div>
     </Stack>
   );
