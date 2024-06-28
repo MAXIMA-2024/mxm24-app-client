@@ -11,25 +11,46 @@ import { Link } from "react-router-dom";
 
 const Profile = () => {
   return (
-    <Stack bgColor={"#FAF4E8"} minH={"100vh"} align={"center"} padding={"5rem"}>
-      {/* Back button */}
-      <Stack w={"75%"}>
-        <Link to={"/home"}>
-          <Stack w={"5rem"}>
+    <Stack
+      bgImage={{
+        base: "/bg/profile-mobile.png",
+        lg: "/bg/profile-desktop.png",
+      }}
+      bgSize={"contain"}
+      bgRepeat={"no-repeat"}
+      bgPosition={"center"}
+      bgColor={"#FAF4E8"}
+      minH={"100vh"}
+      justifyContent={"center"}
+      alignItems={"center"}
+      padding={"5rem"}
+    >
+      {/* START Back button */}
+      <Stack w={"90%"}>
+        <Stack w={"5rem"}>
+          <Link to={"/home"}>
             <Image
               src="/icons/back-icon.png"
               w={"5rem"}
               transition={"all 0.2s ease-in-out"}
               _hover={{ w: "4.5rem", transformOrigin: "center" }}
             />
-          </Stack>
-        </Link>
+          </Link>
+        </Stack>
       </Stack>
+      {/* END Back button */}
 
       {/* Ticket */}
-      <Stack align={"center"} gap={"0rem"}>
-        {/* Header Ticket */}
-        <Stack direction={"row"} gap={"0rem"} w={"75%"} justify={"center"}>
+      <Stack
+        align={"center"}
+        justify={"center"}
+        gap={"0rem"}
+        direction={{ base: "column", lg: "row" }}
+        w={"90%"}
+      >
+        {/* START Left ticket */}
+        <Stack direction={"column"} gap={"0rem"} w={"60%"} justify={"center"}>
+          {/* START NAMA LENGKAP */}
           <Stack
             bgGradient="linear(to-r, #350025, #980538)"
             direction={"row"}
@@ -38,7 +59,7 @@ const Profile = () => {
             paddingX={"5rem"}
             paddingY={"1rem"}
             borderTopRadius={"1rem"}
-            w={"60%"}
+            w={"100%"}
           >
             <Image
               src="/icons/ticket-logo-maxima.png"
@@ -57,45 +78,17 @@ const Profile = () => {
             </Heading>
             <Box boxSize="50px" />
           </Stack>
+          {/* END NAMA LENGKAP */}
 
+          {/* START INPUT */}
           <Stack
-            bgGradient="linear(to-r, #980538, #350025)"
-            direction={"row"}
-            alignItems={"end"}
-            justify={"center"}
-            paddingX={"5rem"}
-            paddingY={"1rem"}
-            marginX={"0"}
-            borderTopRadius={"1rem"}
-            w={"40%"}
-          >
-            <Heading
-              textAlign={"justify"}
-              fontFamily={"Luthier"}
-              fontWeight={"Bold"}
-              color={"white"}
-              fontSize={"3xl"}
-            >
-              ENTRY CODE
-            </Heading>
-          </Stack>
-        </Stack>
-
-        {/* Footer Ticket */}
-        <Stack
-          bgColor={"yellow"}
-          bgGradient="linear(to-r, #87001D, #B6154B, #87001D)"
-          w={"75%"}
-          direction={"row"}
-          gap={"0rem"}
-          borderBottomRadius={"1rem"}
-        >
-          <Stack
-            w={"60%"}
+            w={"100%"}
+            bgGradient="linear(to-r, #87001D, #B6154B)"
             padding={"2rem"}
             paddingX={"3rem"}
             direction={"row"}
             spacing={10}
+            borderBottomRadius={"1rem"}
           >
             <Stack w={"60%"} gap={"2rem"}>
               <Stack>
@@ -147,14 +140,49 @@ const Profile = () => {
               </Stack>
             </Stack>
           </Stack>
-          <Stack w={"40%"} align={"center"}>
+          {/* END INPUT */}
+        </Stack>
+        {/* END Left Ticket */}
+
+        {/* START Right Ticket */}
+        <Stack direction={"column"} gap={"0rem"} w={"40%"} justify={"center"}>
+          {/* START Entry code */}
+          <Stack
+            bgGradient="linear(to-r, #980538, #350025)"
+            direction={"column"}
+            justify={"center"}
+            paddingX={"5rem"}
+            paddingY={"1rem"}
+            marginX={"0"}
+            borderTopRadius={"1rem"}
+            w={"100%"}
+          >
+            <Heading
+              flex="1"
+              textAlign="center"
+              fontFamily={"Luthier"}
+              fontWeight={"Bold"}
+              color={"white"}
+              fontSize={"3xl"}
+            >
+              ENTRY CODE
+            </Heading>
+          </Stack>
+          {/* END Entry code */}
+
+          {/* START QR Code */}
+          <Stack
+            w={"100%"}
+            align={"center"}
+            bgGradient="linear(to-r, #B6154B, #87001D)"
+            borderBottomRadius={"1rem"}
+          >
             <Image src="/icons/qr-dummy.png" w={"60%"} paddingY={"2.5rem"} />
           </Stack>
+          {/* END QR Code */}
         </Stack>
+        {/* END Right Ticket */}
       </Stack>
-
-      {/* Footer */}
-      <Stack></Stack>
     </Stack>
   );
 };
