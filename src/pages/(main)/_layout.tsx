@@ -140,7 +140,12 @@ const MainLayoutDesktop = () => {
               alignItems={"center"}
               // pr={{ lg: 12, xl: 20 }}
             >
-              <Avatar bg={"#44002B"} size={"md"}>
+              <Avatar
+                bg={"#44002B"}
+                size={"md"}
+                _hover={{ transform: "scale(0.95)" }}
+                transition={"all 0.2s ease-in-out"}
+              >
                 <AvatarBadge
                   boxSize={{ lg: "0.75rem", xl: "1.25rem" }}
                   bg="green.500"
