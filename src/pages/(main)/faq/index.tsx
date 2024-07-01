@@ -12,7 +12,7 @@ const ButtonData = [
     link: "/state",
   },
   {
-    content: "Malam Puncak",
+    content: "MalPun",
     link: "/malpun",
   },
 ];
@@ -49,7 +49,7 @@ const Faq = () => {
             dui. Id diam maecenas ultricies mi eget mauris.
           </Text>
         );
-      case "Malam Puncak":
+      case "MalPun":
         return (
           <Text
             fontSize={{ base: "1rem", xl: "1rem" }}
