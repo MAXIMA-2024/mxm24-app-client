@@ -54,7 +54,7 @@ const MainLayoutDesktop = () => {
     <>
       <Stack
         direction={"row"}
-        justifyContent={"space-between"}
+        justifyContent={"center"}
         zIndex={999}
         position={"absolute"}
         pt={10}
@@ -63,16 +63,21 @@ const MainLayoutDesktop = () => {
         flex={1}
       >
         <Stack
-          bgColor={"#FFFFFF90"}
+          bgColor={"rgba(255, 255, 255, 0.85)"}
           p={5}
-          px={{ l: 5, xl: 10 }}
+          py={{ lg: 0, xl: 8 }}
+          px={{ lg: 5, xl: 12 }}
           direction={"row"}
           alignItems={"center"}
-          roundedTopRight={"xl"}
-          roundedBottomRight={"xl"}
+          justifyContent={"space-between"}
+          backdropFilter={"blur(10px)"}
+          rounded={"full"}
+          // roundedTopRight={"xl"}
+          // roundedBottomRight={"xl"}
           gap={{ lg: 3, xl: 12 }}
-          pl={{ lg: 12, xl: 20 }}
+          // px={{ lg: 22, xl: 20 }}
           h={"5rem"}
+          // w={"50%"}
           // w={"70rem"}
           // w={"50%"}
         >
@@ -80,6 +85,7 @@ const MainLayoutDesktop = () => {
           <Link to={"/dashboard"}>
             <Stack w={"7.5rem"}>
               <Image
+                mx={{ lg: 0, xl: 5 }}
                 src="/icons/maxima2024-logo.png"
                 w={"7.5rem"}
                 transition={"all 0.2s ease-in-out"}
@@ -88,8 +94,8 @@ const MainLayoutDesktop = () => {
             </Stack>
           </Link>
           {/* Navbar Items */}
-          {NavBarData.map((item) => (
-            <Stack direction={"row"} alignItems={"center"}>
+          <Stack direction={"row"} alignItems={"center"} mx={{ lg: 0, xl: 5 }}>
+            {NavBarData.map((item) => (
               <Link to={item.link}>
                 <Button
                   variant={"ghost"}
@@ -124,37 +130,50 @@ const MainLayoutDesktop = () => {
                   <Text>{item.title}</Text>
                 </Button>
               </Link>
-            </Stack>
-          ))}
-        </Stack>
-        {/* Right Side */}
-        <Link to={"/profile"}>
-          <Stack
-            direction={"row"}
-            justifyContent={"center"}
-            alignItems={"center"}
-            pr={{ lg: 12, xl: 20 }}
-          >
-            <Hide below="xl">
-              <Text
-                color={"text.tertiary"}
-                fontFamily={"Lexend"}
-                fontSize={{ lg: "smaller", xl: "larger" }}
-                mr={{ lg: 0, xl: 5 }}
-                letterSpacing={"0.1rem"}
-                textShadow={"0 0 1rem #000000"}
-              >
-                NAMA LENGKAP
-              </Text>
-            </Hide>
-            <Avatar>
-              <AvatarBadge
-                boxSize={{ lg: "0.75rem", xl: "1.25rem" }}
-                bg="green.500"
-              />
-            </Avatar>
+            ))}
           </Stack>
-        </Link>
+          {/* Right Side */}
+          <Link to={"/profile"}>
+            <Stack
+              direction={"row"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              // pr={{ lg: 12, xl: 20 }}
+            >
+              <Avatar bg={"#44002B"} size={"md"}>
+                <AvatarBadge
+                  boxSize={{ lg: "0.75rem", xl: "1.25rem" }}
+                  bg="green.500"
+                />
+              </Avatar>
+              <Hide below="xl">
+                <Stack
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  gap={0}
+                  color={"text.primary"}
+                  fontFamily={"Lexend"}
+                  fontWeight={500}
+                  mx={{ lg: 0, xl: 2.5 }}
+                  noOfLines={2}
+                  isTruncated={true}
+                  textOverflow={"ellipsis"}
+
+                  // letterSpacing={"0.1rem"}
+                  // textShadow={"0 0 1rem #000000"}
+                >
+                  <Text fontSize={{ lg: "x-small", xl: "smaller" }}>Halo,</Text>
+                  <Text
+                    fontWeight={600}
+                    fontSize={{ lg: "smaller", xl: "large" }}
+                  >
+                    Jonathan
+                  </Text>
+                </Stack>
+              </Hide>
+            </Stack>
+          </Link>
+        </Stack>
       </Stack>
       <Stack>
         <Outlet />
