@@ -11,6 +11,7 @@ export type Path =
   | `/home`
   | `/login`
   | `/malpun`
+  | `/malpun/claimticket`
   | `/onboarding`
   | `/profile`
   | `/state`
