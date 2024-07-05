@@ -1,24 +1,32 @@
-import { Stack, Image, Text, Input, Button, Heading } from "@chakra-ui/react";
+import {
+  Stack,
+  Image,
+  Text,
+  Input,
+  Button,
+  Heading,
+  Box,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
   return (
     <Stack
-      bgImage={{
-        base: "/bg/profile-mobile.png",
-        lg: "/bg/profile-desktop.png",
-      }}
+      // bgImage={{
+      //   base: "/bg/profile-mobile.png",
+      //   lg: "/bg/profile-desktop.png",
+      // }}
       bgSize={"contain"}
       bgRepeat={"no-repeat"}
       bgPosition={"center"}
       bgColor={"#FAF4E8"}
       minH={"100vh"}
-      justifyContent={"center"}
-      alignItems={"center"}
+      justify={"flex-start"}
+      align={"center"}
       padding={{ base: "1rem", lg: "5rem" }}
     >
       {/* START Back button */}
-      <Stack w={"90%"}>
+      <Stack w={"90%"} zIndex={"10000"}>
         <Stack w={"5rem"}>
           <Link to={"/home"}>
             <Image
@@ -33,12 +41,39 @@ const Profile = () => {
       {/* END Back button */}
 
       {/* Ticket */}
+      {/* START bg prop */}
+      <Box
+        bgImage={"/bg/profile-prop-desktop.png"}
+        bgSize={"contain"}
+        bgRepeat={"no-repeat"}
+        bgPosition={"center"}
+        h={"90vh"}
+        w={"90vw"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        pos={"absolute"}
+        zIndex={"100"}
+      />
+      {/* END bg prop */}
+
+      {/* START bg atas desktop */}
+      {/* <Box
+        display={{ base: "none", lg: "block" }}
+        bgImage={"/bg/profile-top-desktop.png"}
+        bgSize={"contain"}
+        w={"100%"}
+        h={"25vh"}
+        bgRepeat={"no-repeat"}
+      /> */}
+      {/* END bg atas desktop */}
+
       <Stack
         align={"center"}
         justify={"center"}
         gap={"0rem"}
         direction={{ base: "column-reverse", lg: "row" }}
         w={"90%"}
+        zIndex={"1000"}
       >
         {/* START Left ticket */}
         <Stack
@@ -79,7 +114,6 @@ const Profile = () => {
           {/* END NAMA LENGKAP */}
 
           {/* START INPUT */}
-
           <Stack
             w={"100%"}
             bgGradient="linear(to-r, #87001D, #B6154B)"
@@ -156,7 +190,6 @@ const Profile = () => {
               {/* END Save Button */}
             </Stack>
           </Stack>
-
           {/* END INPUT */}
         </Stack>
         {/* END Left Ticket */}
@@ -219,6 +252,17 @@ const Profile = () => {
         </Stack>
         {/* END Right Ticket */}
       </Stack>
+
+      {/* START bg bottom desktop */}
+      {/* <Box
+        display={{ base: "none", lg: "block" }}
+        bgImage={"/bg/profile-bottom-desktop.png"}
+        bgSize={"contain"}
+        w={"100%"}
+        h={"100vh"}
+        bgRepeat={"no-repeat"}
+      /> */}
+      {/* END bg bottom desktop */}
     </Stack>
   );
 };
