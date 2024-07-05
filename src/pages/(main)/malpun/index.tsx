@@ -45,7 +45,7 @@ const Malpun = () => {
             MAXIMA 2024
           </Heading>
         </Stack>
-        <Link to="/login">
+        <Link to="/malpun/claimticket">
           <Button
             bgColor={"button.primary"}
             p={{ base: 5, md: 8, lg: 10 }}
