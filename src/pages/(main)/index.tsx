@@ -37,7 +37,10 @@ const LandingPage = () => {
     <>
       <Stack
         alignItems={"center"}
-        justifyContent={"space-around"}
+        justifyContent={
+          auth.status === "authenticated" ? "flex-start" : "space-around"
+        }
+        pt={auth.status === "authenticated" ? "10rem" : "0"}
         minH={"100vh"}
         bgImage={{
           base: "/bg/welcome-page-mobile.png",
@@ -54,13 +57,23 @@ const LandingPage = () => {
           gap={{ base: 0, lg: 2 }}
           pt={{ base: "7.5rem", md: "0rem", lg: "0rem", xl: "0rem" }}
         >
-          <Heading
-            fontFamily={"Luthier"}
-            fontSize={{ base: "2rem", md: "4rem", lg: "6rem", xl: "7.5rem" }}
-            textShadow={"0 0 5rem #000000"}
-          >
-            Halo! Selamat Datang
-          </Heading>
+          {auth.status === "authenticated" ? (
+            <Heading
+              fontFamily={"Luthier"}
+              fontSize={{ base: "2rem", md: "4rem", lg: "6rem", xl: "7.5rem" }}
+              textShadow={"0 0 5rem #000000"}
+            >
+              Selamat Datang
+            </Heading>
+          ) : (
+            <Heading
+              fontFamily={"Luthier"}
+              fontSize={{ base: "2rem", md: "4rem", lg: "6rem", xl: "7.5rem" }}
+              textShadow={"0 0 5rem #000000"}
+            >
+              Halo! Selamat Datang
+            </Heading>
+          )}
           <Heading
             fontFamily={"Luthier"}
             fontSize={{ base: "2rem", md: "4rem", lg: "6rem", xl: "7.5rem" }}
@@ -90,7 +103,6 @@ const LandingPage = () => {
             </Text>
           </Button>
         )}
-
       </Stack>
     </>
   );
