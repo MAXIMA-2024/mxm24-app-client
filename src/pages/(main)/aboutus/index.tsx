@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Stack, Text, Button, Image, Show } from "@chakra-ui/react";
+import { Stack, Text, Button, Image } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 
 const ButtonData = [
   {
@@ -79,6 +80,7 @@ const AboutUs = () => {
         >
           {/* ISI CONTENT START */}
           <Text
+            as={motion.div}
             fontSize={{
               // base: "1rem",
               // md: "1rem",
@@ -90,6 +92,11 @@ const AboutUs = () => {
             textAlign={"justify"}
             mt={{ base: "40px", lg: "40px", xl: "40px" }}
             mb={8}
+            // key={activeContent}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={"0.3 ease-in-out"}
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.

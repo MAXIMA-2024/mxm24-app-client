@@ -91,7 +91,7 @@ const Faq = () => {
       >
         <Image
           src="/bg/maxi.svg"
-          alt="test aja"
+          alt="maxi"
           h={{ base: "4rem", md: "7rem" }}
           position={"absolute"}
           left={{ base: "0.8rem", md: "1.5rem", lg: "2rem", xl: "2rem" }}
@@ -105,7 +105,7 @@ const Faq = () => {
 
         <Image
           src="/bg/xima.svg"
-          alt="test aja"
+          alt="xima"
           h={{ base: "4rem", md: "7rem" }}
           position={"absolute"}
           left={{ base: "13.5rem", md: "29.5rem", lg: "41.5rem", xl: "60rem" }}
