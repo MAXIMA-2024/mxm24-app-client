@@ -12,18 +12,20 @@ import { Link } from "react-router-dom";
 const Profile = () => {
   return (
     <Stack
-      // bgImage={{
-      //   base: "/bg/profile-mobile.png",
-      //   lg: "/bg/profile-desktop.png",
-      // }}
+      bgImage={{
+        base: "/bg/profile-mobile.png",
+        lg: "",
+      }}
       bgSize={"contain"}
       bgRepeat={"no-repeat"}
       bgPosition={"center"}
       bgColor={"#FAF4E8"}
       minH={"100vh"}
-      justify={"flex-start"}
+      justify={"center"}
       align={"center"}
       padding={{ base: "1rem", lg: "5rem" }}
+      pb={{ base: "0rem", lg: "5rem" }}
+      pos={"relative"}
     >
       {/* START Back button */}
       <Stack w={"90%"} zIndex={"10000"}>
@@ -42,7 +44,7 @@ const Profile = () => {
 
       {/* Ticket */}
       {/* START bg prop */}
-      <Box
+      {/* <Box
         bgImage={"/bg/profile-prop-desktop.png"}
         bgSize={"contain"}
         bgRepeat={"no-repeat"}
@@ -53,6 +55,21 @@ const Profile = () => {
         alignItems={"center"}
         pos={"absolute"}
         zIndex={"100"}
+      /> */}
+      <Image
+        src="/bg/profile-bottom-desktop.png"
+        pos={"absolute"}
+        zIndex={"100"}
+        bottom={"4rem"}
+        w={"75vw"}
+      />
+      <Image
+        src="/bg/profile-top-desktop.png"
+        pos={"absolute"}
+        zIndex={"100"}
+        top={"9rem"}
+        right={"15rem"}
+        w={"50vw"}
       />
       {/* END bg prop */}
 
