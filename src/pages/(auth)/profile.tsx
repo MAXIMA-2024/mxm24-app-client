@@ -1,12 +1,4 @@
-import {
-  Stack,
-  Image,
-  Text,
-  Input,
-  Button,
-  Heading,
-  Box,
-} from "@chakra-ui/react";
+import { Stack, Image, Text, Input, Button, Heading } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
@@ -23,9 +15,10 @@ const Profile = () => {
       minH={"100vh"}
       justify={"center"}
       align={"center"}
-      padding={{ base: "1rem", lg: "5rem" }}
+      padding={{ base: "1rem", sm: "2rem", lg: "5rem" }}
       pb={{ base: "0rem", lg: "5rem" }}
       pos={"relative"}
+      paddingY={{ base: "3rem", lg: "0" }}
     >
       {/* START Back button */}
       <Stack w={"90%"} zIndex={"10000"}>
@@ -33,7 +26,7 @@ const Profile = () => {
           <Link to={"/home"}>
             <Image
               src="/icons/back-icon.png"
-              w={{ base: "3rem", lg: "5rem" }}
+              w={{ base: "3rem", md: "4rem", lg: "5rem" }}
               transition={"all 0.2s ease-in-out"}
               _hover={{ w: "4.5rem", transformOrigin: "center" }}
             />
@@ -59,18 +52,39 @@ const Profile = () => {
       <Image
         src="/bg/profile-bottom-desktop.png"
         pos={"absolute"}
+        display={{ base: "none", lg: "block" }}
         zIndex={"100"}
-        bottom={"4rem"}
-        w={"75vw"}
+        bottom={{ lg: "2rem" }}
+        w={{ lg: "70vw" }}
+        h={{ lg: "85vh" }}
       />
       <Image
         src="/bg/profile-top-desktop.png"
         pos={"absolute"}
+        display={{ base: "none", lg: "block" }}
         zIndex={"100"}
-        top={"9rem"}
-        right={"15rem"}
-        w={"50vw"}
+        top={{ lg: "6rem" }}
+        right={{ lg: "15rem" }}
+        w={{ lg: "50vw" }}
       />
+      {/* <Image
+        src="/bg/pen-holder.png"
+        pos={"absolute"}
+        display={{ base: "none", lg: "block" }}
+        zIndex={"10000"}
+        top={{ lg: "6.375rem" }}
+        left={{ lg: "24.5rem" }}
+        w={{ lg: "1vw" }}
+      /> */}
+      {/* <Image
+        src="/bg/clip.png"
+        pos={"absolute"}
+        display={{ base: "none", lg: "block" }}
+        zIndex={{ lg: "10000" }}
+        top={{ lg: "4.95rem" }}
+        right={{ lg: "50.75rem" }}
+        w={{ lg: "5.1vw" }}
+      /> */}
       {/* END bg prop */}
 
       {/* START bg atas desktop */}
