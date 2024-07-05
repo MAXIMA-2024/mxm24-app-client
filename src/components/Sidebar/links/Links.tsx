@@ -98,21 +98,32 @@ const Links = ({ closeSidebar }: { closeSidebar: () => void }) => {
             pr={{ lg: 12, xl: 20 }}
             p={{ base: 5, lg: 10, xl: 20 }}
           >
-            <Avatar>
+            <Avatar bg={"#44002B"} size={"md"}>
               <AvatarBadge
                 boxSize={{ lg: "0.75rem", xl: "1.25rem" }}
                 bg="green.500"
               />
             </Avatar>
-            <Text
-              color={"text.secondary"}
+            <Stack
+              justifyContent={"center"}
+              alignItems={"center"}
+              gap={0}
+              color={"text.primary"}
               fontFamily={"Lexend"}
-              fontSize={{ base: "small", lg: "smaller", xl: "larger" }}
-              ml={{ base: 1, xl: 5 }}
-              // letterSpacing={"0.05rem"}
+              fontWeight={500}
+              mx={2}
+              noOfLines={2}
+              isTruncated={true}
+              textOverflow={"ellipsis"}
+
+              // letterSpacing={"0.1rem"}
+              // textShadow={"0 0 1rem #000000"}
             >
-              NAMA LENGKAP
-            </Text>
+              <Text fontSize={{ base: "x-small", md: "smaller" }}>Halo,</Text>
+              <Text fontWeight={600} fontSize={{ base: "small", md: "medium" }}>
+                Jonathan
+              </Text>
+            </Stack>
           </Stack>
         </Link>
       </motion.div>
