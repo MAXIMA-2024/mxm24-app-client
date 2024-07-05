@@ -38,23 +38,23 @@ const LandingPage = () => {
             Maximers!
           </Heading>
         </Stack>
-        <Button
-          bgColor={"button.primary"}
-          p={8}
-          px={["3rem", "3rem", "5rem", "5rem"]}
-          variant={"ghost"}
-          transition={"0.3s"}
-          color={"text.tertiary"}
-          rounded={"xl"}
-          _hover={{ bgColor: "#3A0025" }}
-          mb={{ base: 0, md: 10 }}
-        >
-          <Link to="/login">
+        <Link to="/login">
+          <Button
+            bgColor={"button.primary"}
+            p={8}
+            px={["3rem", "3rem", "5rem", "5rem"]}
+            variant={"ghost"}
+            transition={"0.3s"}
+            color={"text.tertiary"}
+            rounded={"xl"}
+            _hover={{ bgColor: "#3A0025" }}
+            mb={{ base: 0, md: 10 }}
+          >
             <Text fontFamily={"Lexend"} fontWeight={"400"} fontSize={"x-large"}>
               Login With SSO
             </Text>
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </Stack>
     </>
   );
