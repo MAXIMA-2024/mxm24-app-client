@@ -1,10 +1,7 @@
 import { Heading, Stack, Text, Button, Image } from "@chakra-ui/react";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const ClaimTicket = () => {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <Stack
@@ -123,17 +120,12 @@ const ClaimTicket = () => {
                 <Stack alignItems={{ base: "center", lg: "flex-end" }}>
                   <Button
                     bgColor={"button.primary"}
-                    // p={{ base: 5, md: 8, lg: 10 }}
-                    // py={{ base: 0, md: 8, lg: 12 }}
-                    // px={{ base: "2rem", md: "4rem", lg: "10rem" }}
                     w={{ base: "6rem", md: "8rem", lg: "8rem" }}
                     variant={"ghost"}
                     transition={"0.3s"}
                     color={"text.tertiary"}
                     rounded={"xl"}
                     _hover={{ bgColor: "#3A0025" }}
-                    // mt={{ base: 5, lg: 10 }}
-                    // mb={{ base: 5 }}
                   >
                     <Text
                       fontFamily={"Lexend"}
