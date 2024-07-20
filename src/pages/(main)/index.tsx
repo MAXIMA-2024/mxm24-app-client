@@ -55,12 +55,12 @@ const LandingPage = () => {
           color={"text.primary"}
           fontWeight={"700"}
           gap={{ base: 0, lg: 2 }}
-          pt={{ base: "7.5rem", md: "0rem", lg: "0rem", xl: "0rem" }}
+          pt={{ base: "7.5rem", md: "0rem", lg: "2.5rem", xl: "2.5rem" }}
         >
           {auth.status === "authenticated" ? (
             <Heading
               fontFamily={"Luthier"}
-              fontSize={{ base: "2rem", md: "4rem", lg: "6rem", xl: "7.5rem" }}
+              fontSize={{ base: "2rem", md: "4rem", lg: "5rem", xl: "6.5rem" }}
               textShadow={"0 0 5rem #000000"}
             >
               Selamat Datang
@@ -68,7 +68,7 @@ const LandingPage = () => {
           ) : (
             <Heading
               fontFamily={"Luthier"}
-              fontSize={{ base: "2rem", md: "4rem", lg: "6rem", xl: "7.5rem" }}
+              fontSize={{ base: "2rem", md: "4rem", lg: "5rem", xl: "6.5rem" }}
               textShadow={"0 0 5rem #000000"}
             >
               Halo! Selamat Datang
