@@ -49,7 +49,7 @@ const Profile = () => {
         pos={"absolute"}
         zIndex={"100"}
       /> */}
-      <Image
+      {/* <Image
         src="/bg/profile-bottom-desktop.png"
         pos={"absolute"}
         display={{ base: "none", lg: "block" }}
@@ -66,7 +66,7 @@ const Profile = () => {
         top={{ lg: "6rem" }}
         right={{ lg: "15rem" }}
         w={{ lg: "50vw" }}
-      />
+      /> */}
       {/* <Image
         src="/bg/pen-holder.png"
         pos={"absolute"}
