@@ -1,21 +1,22 @@
 import { Heading, Stack, Text, Button, Image } from "@chakra-ui/react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ClaimTicket = () => {
   return (
     <>
       <Stack
         alignItems={"center"}
-        justifyContent={{ base: "start", lg: "space-around" }}
+        justifyContent={{ base: "center", lg: "space-around" }}
         minH={"100vh"}
+        minW={"100vw"}
         bgImage={{
           base: "/bg/malpun-bg-mobile.png",
           lg: "/bg/malpun-bg-desktop.png",
         }}
         bgSize={"cover"}
         bgRepeat={"no-repeat"}
-        bgPosition={"center"}
-        pt={{ base: "2rem", lg: "5rem" }}
+        bgPosition={{ base: "", md: "center" }}
+        pt={{ base: "5rem", lg: "5rem" }}
       >
         <Stack
           align={"center"}
@@ -26,19 +27,28 @@ const ClaimTicket = () => {
             base: "/bg/scroll-claim-ticket-mobile.png",
             lg: "/bg/scroll-claim-ticket-desktop.png",
           }}
-          bgSize={"contain"}
+          bgSize={{ base: "22rem", md: "25rem", lg: "65rem", xl: "65rem" }}
           bgRepeat={"no-repeat"}
           bgPosition={"center"}
           w={"100%"}
-          p={"8rem"}
+          p={{ base: "8rem", lg: "6rem" }}
+          px={{ base: "2rem", md: "2rem", lg: "4rem" }}
         >
-          <Stack direction={"row"} flex={1} justifyContent={"space-between"}>
+          <Stack
+            direction={{ base: "column", lg: "row" }}
+            flex={1}
+            justifyContent={"space-between"}
+          >
             {/* LEFT IMAGE */}
-            <Stack>
+            <Stack
+              alignItems={{ base: "center", lg: "start" }}
+              justifyContent={{ lg: "center" }}
+              mb={"1rem"}
+            >
               <Image
                 src="/icons/claim-ticket-malpun.png"
-                w={{ base: "5rem", lg: "28rem" }}
-                mr={{ base: "0", lg: "5rem" }}
+                w={{ base: "10rem", md: "12rem", lg: "25rem" }}
+                mr={{ base: "0", lg: "2rem" }}
               ></Image>
             </Stack>
             {/* RIGHT SIDE */}
@@ -46,14 +56,14 @@ const ClaimTicket = () => {
               <Stack alignItems={"center"}>
                 <Stack color={"text.secondary"}>
                   <Heading
-                    fontSize={{ base: "1.5rem", md: "2.5rem", lg: "2.5rem" }}
+                    fontSize={{ base: "1.2rem", md: "1.5rem", lg: "2rem" }}
                     textAlign={"center"}
                     fontFamily={"Luthier"}
                   >
                     Tiket Malam Puncak
                   </Heading>
                   <Heading
-                    fontSize={{ base: "1.5rem", md: "2.5rem", lg: "2.5rem" }}
+                    fontSize={{ base: "1.2rem", md: "1.5rem", lg: "2.5rem" }}
                     textAlign={"center"}
                     fontFamily={"Luthier"}
                   >
@@ -62,62 +72,71 @@ const ClaimTicket = () => {
                 </Stack>
               </Stack>
               {/* ICONS AND INFO */}
-              <Stack color={"text.secondary"} fontFamily={"Lexend"} mt={5}>
+              <Stack
+                color={"text.secondary"}
+                fontFamily={"Lexend"}
+                mt={{ base: 3, md: 5 }}
+                alignItems={{ base: "center", lg: "start" }}
+              >
                 <Stack
                   direction={"row"}
                   justifyContent={"flex-start"}
                   alignItems={"center"}
                   fontWeight={700}
-                  my={3}
+                  my={{ base: 1, md: 3 }}
                 >
                   <Image src="/icons/date-icon.png" w={"2rem"} mr={2}></Image>
-                  <Text>7 Oktober 2024</Text>
+                  <Text fontSize={{ base: "0.9rem", md: "0.9rem" }}>
+                    7 Oktober 2024
+                  </Text>
                 </Stack>
                 <Stack
                   direction={"row"}
                   justifyContent={"flex-start"}
                   alignItems={"center"}
                   fontWeight={700}
-                  my={3}
+                  my={{ base: 1, md: 3 }}
                 >
                   <Image src="/icons/time-icon.png" w={"2rem"} mr={2}></Image>
-                  <Text>00:00 WIB</Text>
+                  <Text fontSize={{ base: "0.9rem", md: "0.9rem" }}>
+                    00:00 WIB
+                  </Text>
                 </Stack>
                 <Stack
                   direction={"row"}
                   justifyContent={"flex-start"}
                   alignItems={"center"}
                   fontWeight={700}
-                  my={3}
+                  my={{ base: 1, md: 3 }}
                 >
                   <Image src="/icons/loct-icon.png" w={"1.5rem"} mr={2}></Image>
-                  <Text>Lapangan Parkir UMN</Text>
+                  <Text fontSize={{ base: "0.9rem", md: "0.9rem" }}>
+                    Lapangan Parkir UMN
+                  </Text>
                 </Stack>
               </Stack>
               {/* BUTTON CLAIM */}
-              <Stack alignItems={"flex-end"}>
-                <Button
-                  bgColor={"button.primary"}
-                  // p={{ base: 5, md: 8, lg: 10 }}
-                  // py={{ base: 0, md: 8, lg: 12 }}
-                  // px={{ base: "2rem", md: "4rem", lg: "10rem" }}
-                  w={{ base: "5rem", md: "6rem", lg: "8rem" }}
-                  variant={"ghost"}
-                  transition={"0.3s"}
-                  color={"text.tertiary"}
-                  rounded={"xl"}
-                  _hover={{ bgColor: "#3A0025" }}
-                  mt={{ base: 10, lg: 10 }}
-                >
-                  <Text
-                    fontFamily={"Lexend"}
-                    fontWeight={"400"}
-                    fontSize={{ base: "small", md: "medium", lg: "large" }}
+              <Link to="/malpun/viewticket">
+                <Stack alignItems={{ base: "center", lg: "flex-end" }}>
+                  <Button
+                    bgColor={"button.primary"}
+                    w={{ base: "6rem", md: "8rem", lg: "8rem" }}
+                    variant={"ghost"}
+                    transition={"0.3s"}
+                    color={"text.tertiary"}
+                    rounded={"xl"}
+                    _hover={{ bgColor: "#3A0025" }}
                   >
-                    Klaim
-                  </Text>
-                </Button>
-              </Stack>
+                    <Text
+                      fontFamily={"Lexend"}
+                      fontWeight={"400"}
+                      fontSize={{ base: "small", md: "medium", lg: "large" }}
+                    >
+                      Klaim
+                    </Text>
+                  </Button>
+                </Stack>
+              </Link>
             </Stack>
           </Stack>
         </Stack>
