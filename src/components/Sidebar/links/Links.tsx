@@ -1,6 +1,7 @@
 import { Stack, Image, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { ProfileDropDown } from "./ProfileDropDown";
 
 const variants = {
   open: {
@@ -52,7 +53,7 @@ const items = [
 
 const Links = ({ closeSidebar }: { closeSidebar: () => void }) => {
   return (
-    <Stack>
+    <Stack as={"div"}>
       <motion.div
         initial="closed"
         animate="open"
@@ -92,6 +93,7 @@ const Links = ({ closeSidebar }: { closeSidebar: () => void }) => {
           ))}
         </Stack>
         {/* Dropdown Profile */}
+        <ProfileDropDown />
       </motion.div>
     </Stack>
   );

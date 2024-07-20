@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 
 const ProfileDropDown = () => {
   return (
-    <Stack className="menuDropDown">
+    <Stack mb={10}>
       <Menu>
         <MenuButton>
           <Button
@@ -118,4 +118,82 @@ const ProfileDropDown = () => {
   );
 };
 
-export default ProfileDropDown;
+const TopLeftProfile = () => {
+  return (
+    <Stack pos={"fixed"} right={-2} top={"25px"}>
+      <Menu>
+        <MenuButton>
+          <Button
+            variant={"ghost"}
+            w={"full"}
+            // justifyContent={"start"}
+            // p={[0, 0, 0, 2]}
+            // mt={[0, 0, "0.75rem", "1rem"]}
+            cursor={"default"}
+            disabled={true}
+            _hover={{
+              pointerEvents: "none",
+              draggable: "none",
+            }}
+            textAlign={"left"}
+          >
+            <Stack
+              direction={"row"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              pr={{ lg: 12, xl: 20 }}
+              p={{ base: 5, lg: 10, xl: 20 }}
+            >
+              <Avatar bg={"#44002B"} size={"md"}></Avatar>
+            </Stack>
+          </Button>
+        </MenuButton>
+        <MenuList px={2} shadow={"lg"} borderRadius={"2xl"}>
+          <Link to={"/auth/profile"}>
+            <Button
+              // bg={"status.error"}
+              p={2}
+              py={0}
+              my={1}
+              mb={2}
+              fontSize={["0.8rem", "0.8rem", "0.85rem", "1rem"]}
+              borderRadius={"xl"}
+              color={"black"}
+              fontWeight={"medium"}
+              gap={2}
+              w={"full"}
+              justifyContent={"center"}
+              // onClick={auth.logout}
+            >
+              <FaRegEdit color="black" fontSize={"1rem"} fontWeight={"bold"} />
+              Edit Profile
+            </Button>
+          </Link>
+          <Button
+            bg={"status.error"}
+            p={2}
+            py={0}
+            my={1}
+            fontSize={["0.8rem", "0.8rem", "0.85rem", "1rem"]}
+            borderRadius={"xl"}
+            color={"white"}
+            fontWeight={"medium"}
+            gap={2}
+            w={"full"}
+            // justifyContent={"center"}
+            // onClick={auth.logout}
+          >
+            <IoLogOutOutline
+              color="white"
+              fontSize={"1.25rem"}
+              fontWeight={"bold"}
+            />
+            Log Out
+          </Button>
+        </MenuList>
+      </Menu>
+    </Stack>
+  );
+};
+
+export { ProfileDropDown, TopLeftProfile };
