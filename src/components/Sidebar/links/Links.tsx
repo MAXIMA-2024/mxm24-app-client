@@ -1,4 +1,4 @@
-import { Stack, Image, Text, Avatar, AvatarBadge } from "@chakra-ui/react";
+import { Stack, Image, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -60,6 +60,7 @@ const Links = ({ closeSidebar }: { closeSidebar: () => void }) => {
         variants={variants}
         className="links"
       >
+        {/* Links */}
         <Stack spacing={6}>
           {items.map((item, index) => (
             <motion.div
@@ -90,42 +91,7 @@ const Links = ({ closeSidebar }: { closeSidebar: () => void }) => {
             </motion.div>
           ))}
         </Stack>
-        <Link to={"/profile"}>
-          <Stack
-            direction={"row"}
-            justifyContent={"center"}
-            alignItems={"center"}
-            pr={{ lg: 12, xl: 20 }}
-            p={{ base: 5, lg: 10, xl: 20 }}
-          >
-            <Avatar bg={"#44002B"} size={"md"}>
-              <AvatarBadge
-                boxSize={{ lg: "0.75rem", xl: "1.25rem" }}
-                bg="green.500"
-              />
-            </Avatar>
-            <Stack
-              justifyContent={"center"}
-              alignItems={"center"}
-              gap={0}
-              color={"text.primary"}
-              fontFamily={"Lexend"}
-              fontWeight={500}
-              mx={2}
-              noOfLines={2}
-              isTruncated={true}
-              textOverflow={"ellipsis"}
-
-              // letterSpacing={"0.1rem"}
-              // textShadow={"0 0 1rem #000000"}
-            >
-              <Text fontSize={{ base: "x-small", md: "smaller" }}>Halo,</Text>
-              <Text fontWeight={600} fontSize={{ base: "small", md: "medium" }}>
-                Jonathan
-              </Text>
-            </Stack>
-          </Stack>
-        </Link>
+        {/* Dropdown Profile */}
       </motion.div>
     </Stack>
   );

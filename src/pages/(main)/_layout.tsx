@@ -22,6 +22,7 @@ import {
 // import { motion } from "framer-motion";
 // import { useState } from "react";
 import { IoLogOutOutline } from "react-icons/io5";
+import { FaRegEdit } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 import Sidebar from "@/components/Sidebar/Sidebar";
 
@@ -86,7 +87,7 @@ const MainLayoutDesktop = () => {
           // w={"50%"}
         >
           {/* Logo MAXIMA 2024 */}
-          <Link to={"/dashboard"}>
+          <Link to={"/home"}>
             <Stack w={"7.5rem"}>
               <Image
                 mx={{ lg: 0, xl: 5 }}
@@ -199,18 +200,43 @@ const MainLayoutDesktop = () => {
                 </Stack>
               </Button>
             </MenuButton>
-            <MenuList px={2} shadow={"lg"} borderRadius={"xl"}>
+            <MenuList px={2} shadow={"lg"} borderRadius={"2xl"}>
+              <Link to={"/auth/profile"}>
+                <Button
+                  // bg={"status.error"}
+                  p={2}
+                  py={0}
+                  my={1}
+                  mb={2}
+                  fontSize={["0.8rem", "0.8rem", "0.85rem", "1rem"]}
+                  borderRadius={"xl"}
+                  color={"black"}
+                  fontWeight={"medium"}
+                  gap={2}
+                  w={"full"}
+                  justifyContent={"center"}
+                  // onClick={auth.logout}
+                >
+                  <FaRegEdit
+                    color="black"
+                    fontSize={"1rem"}
+                    fontWeight={"bold"}
+                  />
+                  Edit Profile
+                </Button>
+              </Link>
               <Button
                 bg={"status.error"}
                 p={2}
                 py={0}
+                my={1}
                 fontSize={["0.8rem", "0.8rem", "0.85rem", "1rem"]}
                 borderRadius={"xl"}
                 color={"white"}
                 fontWeight={"medium"}
                 gap={2}
                 w={"full"}
-                justifyContent={"center"}
+                // justifyContent={"center"}
                 // onClick={auth.logout}
               >
                 <IoLogOutOutline
