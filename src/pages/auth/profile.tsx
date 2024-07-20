@@ -11,7 +11,8 @@ const Profile = () => {
       bgSize={"contain"}
       bgRepeat={"no-repeat"}
       bgPosition={"center"}
-      bgColor={"#FAF4E8"}
+      bgColor={"#FAF4E850"}
+      minW={"100vw"}
       minH={"100vh"}
       justify={"center"}
       align={"center"}
