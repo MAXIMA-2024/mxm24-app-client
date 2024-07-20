@@ -1,11 +1,19 @@
-import { Stack, Image, Text, Input, Button, Heading } from "@chakra-ui/react";
+import {
+  Stack,
+  Image,
+  Text,
+  Input,
+  Button,
+  Heading,
+  Show,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
   return (
     <Stack
       bgImage={{
-        base: "/bg/profile-mobile.png",
+        // base: "/bg/profile-mobile.png",
         lg: "",
       }}
       bgSize={"contain"}
@@ -132,16 +140,39 @@ const Profile = () => {
               boxSize="3rem"
               display={{ base: "none", lg: "block" }}
             />
-            <Heading
-              flex="1"
-              textAlign="center"
-              fontFamily={"Luthier"}
-              fontWeight={"Bold"}
-              color={"white"}
-              fontSize={{ base: "xl", lg: "3xl" }}
-            >
-              Hai, NAMA LENGKAP
-            </Heading>
+
+            <Show below={"md"}>
+              <Heading
+                flex="1"
+                textAlign="center"
+                fontFamily={"Luthier"}
+                fontWeight={"Bold"}
+                color={"white"}
+                fontSize={{ base: "xl", lg: "3xl" }}
+              >
+                Hai,
+                <Heading
+                  fontFamily={"Luthier"}
+                  fontWeight={"Bold"}
+                  fontSize={{ base: "xl", lg: "3xl" }}
+                >
+                  NAMA LENGKAP
+                </Heading>
+              </Heading>
+            </Show>
+
+            <Show above={"lg"}>
+              <Heading
+                flex="1"
+                textAlign="center"
+                fontFamily={"Luthier"}
+                fontWeight={"Bold"}
+                color={"white"}
+                fontSize={{ base: "xl", lg: "3xl" }}
+              >
+                Hai, NAMA LENGKAP
+              </Heading>
+            </Show>
           </Stack>
           {/* END NAMA LENGKAP */}
 
@@ -236,9 +267,9 @@ const Profile = () => {
           {/* START Entry code */}
           <Stack
             bgGradient="linear(to-r, #980538, #350025)"
-            direction={"row"}
+            direction={"column"}
             alignItems={"center"}
-            justify={"center"}
+            // justify={"center"}
             paddingX={{ base: "2rem", lg: "5rem" }}
             paddingY={"1rem"}
             borderTopRadius={"1rem"}
@@ -253,7 +284,7 @@ const Profile = () => {
             />
             <Heading
               flex="1"
-              textAlign="center"
+              // textAlign="start"
               fontFamily={"Luthier"}
               fontWeight={"Bold"}
               color={"white"}
