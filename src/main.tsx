@@ -27,6 +27,10 @@ const theme = extendTheme({
       primary: "#FAF4EB",
       secondary: "#FFF3D9",
     },
+    status: {
+      success: "#36AD2C",
+      error: "#F43535",
+    },
   },
 });
 

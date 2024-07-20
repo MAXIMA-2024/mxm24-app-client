@@ -7,6 +7,9 @@ import {
   Button,
   Hide,
   Show,
+  Menu,
+  MenuButton,
+  MenuList,
   // Drawer,
   // DrawerBody,
   // DrawerFooter,
@@ -18,6 +21,7 @@ import {
 } from "@chakra-ui/react";
 // import { motion } from "framer-motion";
 // import { useState } from "react";
+import { IoLogOutOutline } from "react-icons/io5";
 import { Link, Outlet } from "react-router-dom";
 import Sidebar from "@/components/Sidebar/Sidebar";
 
@@ -133,51 +137,91 @@ const MainLayoutDesktop = () => {
             ))}
           </Stack>
           {/* Right Side */}
-          <Link to={"/profile"}>
-            <Stack
-              direction={"row"}
-              justifyContent={"center"}
-              alignItems={"center"}
-              // pr={{ lg: 12, xl: 20 }}
-            >
-              <Avatar
-                bg={"#44002B"}
-                size={"md"}
-                _hover={{ transform: "scale(0.95)" }}
-                transition={"all 0.2s ease-in-out"}
+          <Menu>
+            <MenuButton>
+              <Button
+                variant={"ghost"}
+                w={"full"}
+                justifyContent={"start"}
+                // p={[0, 0, 0, 2]}
+                // mt={[0, 0, "0.75rem", "1rem"]}
+                cursor={"default"}
+                disabled={true}
+                _hover={{
+                  pointerEvents: "none",
+                  draggable: "none",
+                }}
               >
-                <AvatarBadge
-                  boxSize={{ lg: "0.75rem", xl: "1.25rem" }}
-                  bg="green.500"
-                />
-              </Avatar>
-              <Hide below="xl">
                 <Stack
+                  direction={"row"}
                   justifyContent={"center"}
                   alignItems={"center"}
-                  gap={0}
-                  color={"text.primary"}
-                  fontFamily={"Lexend"}
-                  fontWeight={500}
-                  mx={{ lg: 0, xl: 2.5 }}
-                  noOfLines={2}
-                  isTruncated={true}
-                  textOverflow={"ellipsis"}
-
-                  // letterSpacing={"0.1rem"}
-                  // textShadow={"0 0 1rem #000000"}
+                  // pr={{ lg: 12, xl: 20 }}
                 >
-                  <Text fontSize={{ lg: "x-small", xl: "smaller" }}>Halo,</Text>
-                  <Text
-                    fontWeight={600}
-                    fontSize={{ lg: "smaller", xl: "large" }}
+                  <Avatar
+                    bg={"#44002B"}
+                    size={"md"}
+                    _hover={{ transform: "scale(0.95)" }}
+                    transition={"all 0.2s ease-in-out"}
                   >
-                    Jonathan
-                  </Text>
+                    <AvatarBadge
+                      boxSize={{ lg: "0.75rem", xl: "1.25rem" }}
+                      bg="green.500"
+                    />
+                  </Avatar>
+                  <Hide below="xl">
+                    <Stack
+                      justifyContent={"center"}
+                      alignItems={"center"}
+                      textAlign={"left"}
+                      gap={0}
+                      color={"text.primary"}
+                      fontFamily={"Lexend"}
+                      fontWeight={500}
+                      mx={{ lg: 0, xl: 2.5 }}
+                      noOfLines={2}
+                      isTruncated={true}
+                      textOverflow={"ellipsis"}
+                      // letterSpacing={"0.1rem"}
+                      // textShadow={"0 0 1rem #000000"}
+                    >
+                      <Text fontSize={{ lg: "x-small", xl: "smaller" }}>
+                        Halo,
+                      </Text>
+                      <Text
+                        fontWeight={600}
+                        fontSize={{ lg: "smaller", xl: "large" }}
+                      >
+                        Jonathan
+                      </Text>
+                    </Stack>
+                  </Hide>
                 </Stack>
-              </Hide>
-            </Stack>
-          </Link>
+              </Button>
+            </MenuButton>
+            <MenuList px={2} shadow={"lg"} borderRadius={"xl"}>
+              <Button
+                bg={"status.error"}
+                p={2}
+                py={0}
+                fontSize={["0.8rem", "0.8rem", "0.85rem", "1rem"]}
+                borderRadius={"xl"}
+                color={"white"}
+                fontWeight={"medium"}
+                gap={2}
+                w={"full"}
+                justifyContent={"center"}
+                // onClick={auth.logout}
+              >
+                <IoLogOutOutline
+                  color="white"
+                  fontSize={"1.25rem"}
+                  fontWeight={"bold"}
+                />
+                Log Out
+              </Button>
+            </MenuList>
+          </Menu>
         </Stack>
       </Stack>
       <Stack>
