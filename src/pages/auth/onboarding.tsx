@@ -153,16 +153,16 @@ const Onboarding = () => {
               role: "mahasiswa",
             })
             .then(() => {
-              toast({
-                title: "Success",
-                description: "Successfully registered, please login again",
-                status: "success",
-                isClosable: true,
-              });
+              // toast({
+              //   title: "Success",
+              //   description: "Successfully registered, please login again",
+              //   status: "success",
+              //   isClosable: true,
+              // });
 
-              auth.logout();
-
+              // auth.logout();
               nav("/");
+              window.location.reload();
             })
             .catch(errorHandler);
         })}
