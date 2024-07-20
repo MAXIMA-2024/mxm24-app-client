@@ -14,107 +14,122 @@ import { Link } from "react-router-dom";
 
 const ProfileDropDown = () => {
   return (
-    <Stack mb={10}>
-      <Menu>
-        <MenuButton>
-          <Button
-            variant={"ghost"}
-            w={"full"}
-            // justifyContent={"start"}
-            // p={[0, 0, 0, 2]}
-            // mt={[0, 0, "0.75rem", "1rem"]}
-            cursor={"default"}
-            disabled={true}
-            _hover={{
-              pointerEvents: "none",
-              draggable: "none",
-            }}
-            textAlign={"left"}
-          >
-            <Stack
-              direction={"row"}
-              justifyContent={"center"}
-              alignItems={"center"}
-              pr={{ lg: 12, xl: 20 }}
-              p={{ base: 5, lg: 10, xl: 20 }}
+    <>
+      {/* <style>
+        {`
+            .chakra-menu__menu-list css-13654e8 {
+                padding: 0 !important;
+                width: 1px !important;
+            }
+          `}
+      </style> */}
+      <Stack mb={10}>
+        <Menu>
+          <MenuButton>
+            <Button
+              variant={"ghost"}
+              w={"full"}
+              // justifyContent={"start"}
+              // p={[0, 0, 0, 2]}
+              // mt={[0, 0, "0.75rem", "1rem"]}
+              cursor={"default"}
+              disabled={true}
+              _hover={{
+                pointerEvents: "none",
+                draggable: "none",
+              }}
+              textAlign={"left"}
             >
-              <Avatar bg={"#44002B"} size={"md"}>
-                <AvatarBadge
-                  boxSize={{ lg: "0.75rem", xl: "1.25rem" }}
-                  bg="green.500"
-                />
-              </Avatar>
               <Stack
+                direction={"row"}
                 justifyContent={"center"}
                 alignItems={"center"}
-                gap={0}
-                color={"text.primary"}
-                fontFamily={"Lexend"}
-                fontWeight={500}
-                mx={2}
-                noOfLines={2}
-                isTruncated={true}
-                textOverflow={"ellipsis"}
-
-                // letterSpacing={"0.1rem"}
-                // textShadow={"0 0 1rem #000000"}
+                pr={{ lg: 12, xl: 20 }}
+                p={{ base: 5, lg: 10, xl: 20 }}
               >
-                <Text fontSize={{ base: "x-small", md: "smaller" }}>Halo,</Text>
-                <Text
-                  fontWeight={600}
-                  fontSize={{ base: "small", md: "medium" }}
+                <Avatar bg={"#44002B"} size={"md"}>
+                  <AvatarBadge
+                    boxSize={{ lg: "0.75rem", xl: "1.25rem" }}
+                    bg="green.500"
+                  />
+                </Avatar>
+                <Stack
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  gap={0}
+                  color={"text.primary"}
+                  fontFamily={"Lexend"}
+                  fontWeight={500}
+                  mx={2}
+                  noOfLines={2}
+                  isTruncated={true}
+                  textOverflow={"ellipsis"}
+
+                  // letterSpacing={"0.1rem"}
+                  // textShadow={"0 0 1rem #000000"}
                 >
-                  Jonathan
-                </Text>
+                  <Text fontSize={{ base: "x-small", md: "smaller" }}>
+                    Halo,
+                  </Text>
+                  <Text
+                    fontWeight={600}
+                    fontSize={{ base: "small", md: "medium" }}
+                  >
+                    Jonathan
+                  </Text>
+                </Stack>
               </Stack>
-            </Stack>
-          </Button>
-        </MenuButton>
-        <MenuList px={2} shadow={"lg"} borderRadius={"2xl"}>
-          <Link to={"/auth/profile"}>
+            </Button>
+          </MenuButton>
+          <MenuList px={2} shadow={"lg"} borderRadius={"2xl"}>
+            <Link to={"/auth/profile"}>
+              <Button
+                // bg={"status.error"}
+                //   p={2}
+                py={0}
+                my={1}
+                mb={2}
+                fontSize={["0.8rem", "0.8rem", "0.85rem", "1rem"]}
+                borderRadius={"xl"}
+                color={"black"}
+                fontWeight={"medium"}
+                gap={2}
+                w={"full"}
+                justifyContent={"center"}
+              >
+                <FaRegEdit
+                  color="black"
+                  fontSize={"1rem"}
+                  fontWeight={"bold"}
+                />
+                Edit Profile
+              </Button>
+            </Link>
             <Button
-              // bg={"status.error"}
+              bg={"status.error"}
               p={2}
               py={0}
               my={1}
-              mb={2}
               fontSize={["0.8rem", "0.8rem", "0.85rem", "1rem"]}
               borderRadius={"xl"}
-              color={"black"}
+              color={"white"}
               fontWeight={"medium"}
               gap={2}
               w={"full"}
               justifyContent={"center"}
               // onClick={auth.logout}
             >
-              <FaRegEdit color="black" fontSize={"1rem"} fontWeight={"bold"} />
-              Edit Profile
+              <IoLogOutOutline
+                color="white"
+                fontSize={"1.25rem"}
+                fontWeight={"bold"}
+              />
+              Log Out
             </Button>
-          </Link>
-          <Button
-            bg={"status.error"}
-            p={2}
-            py={0}
-            my={1}
-            fontSize={["0.8rem", "0.8rem", "0.85rem", "1rem"]}
-            borderRadius={"xl"}
-            color={"white"}
-            fontWeight={"medium"}
-            gap={2}
-            w={"full"}
-            // justifyContent={"center"}
-            // onClick={auth.logout}
-          >
-            <IoLogOutOutline
-              color="white"
-              fontSize={"1.25rem"}
-              fontWeight={"bold"}
-            />
-            Log Out
-          </Button>
-        </MenuList>
-      </Menu>
-    </Stack>
+          </MenuList>
+        </Menu>
+      </Stack>
+    </>
   );
 };
 
