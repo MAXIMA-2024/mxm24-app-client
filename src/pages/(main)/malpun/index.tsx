@@ -47,11 +47,15 @@ const Exbutton = () => {
             transition={"0.3s"}
             color={"text.tertiary"}
             rounded={"xl"}
-            _hover={{ bgColor: "#3A0025" }}
+            _hover={{
+              bgColor: "#3A0025",
+              transform: "scale(1.025)",
+              borderWidth: "thick",
+            }}
             mt={{ base: 10, lg: 0 }}
             shadow={"0 0 5rem #ffffff80"}
             borderColor={"#fff"}
-            borderWidth={"thick"}
+            borderWidth={"medium"}
           >
             <Text
               fontFamily={"Lexend"}
