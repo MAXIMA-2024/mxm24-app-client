@@ -41,7 +41,8 @@ const BuyTicket = () => {
         >
           <Stack
             justifyContent={"center"}
-            width={{ base: "100%", l: "50%", md: "40%" }}
+            // SIZE FORM
+            width={{ sm: "25%", md: "35%", lg: "40%", xl: "30%" }}
           >
             {/* JUDUL */}
             <Stack alignItems={"center"} paddingBottom={"3rem"}>
