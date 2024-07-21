@@ -140,7 +140,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         setUser(res.data.data);
         setStatus("authenticated");
       })
-      .catch((err: AxiosError) => {
+      .catch((err: AxiosError<ResponseModel>) => {
         if (err.response?.status === 401) {
           axios
             .get<ResponseModel>(baseUrl + "/auth/refresh", {
@@ -156,13 +156,14 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
                   setStatus("authenticated");
                 })
                 .catch(() => {
-                  setStatus("unauthenticated");
+                  logout();
                 });
             })
             .catch(() => {
               logout();
-              setStatus("unauthenticated");
             });
+
+          return;
         }
 
         logout();

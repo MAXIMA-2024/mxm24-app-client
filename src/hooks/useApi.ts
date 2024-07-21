@@ -55,7 +55,7 @@ const useApi = () => {
 
             return instance.request(error.config!);
           } catch (e) {
-            auth.logout();
+            return auth.logout();
           }
         }
 
