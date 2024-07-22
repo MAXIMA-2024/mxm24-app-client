@@ -1,11 +1,11 @@
 import { Heading, Stack } from "@chakra-ui/react";
 
-const State = () => {
+const SelectState = () => {
   return (
     <Stack bgColor={"red.400"} minH={"100vh"}>
-      <Heading>STATE PUNYA DIMAS</Heading>
+      <Heading>STATE PUNYA OWIN</Heading>
     </Stack>
   );
 };
 
-export default State;
+export default SelectState;
