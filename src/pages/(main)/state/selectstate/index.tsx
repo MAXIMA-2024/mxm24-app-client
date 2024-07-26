@@ -3,29 +3,32 @@ import {
   Stack,
   Text,
   Button,
-  Link,
   Card,
   CardBody,
   Image,
+  CardFooter,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 // Button hari ke-
 const BtAtas = () => {
   return (
     <>
-      <Button
-        bgColor={"#FFDB7A"}
-        color={"#661226"}
-        outlineColor={"#661226"}
-        paddingX={"2rem"}
-        paddingY={"0rem"}
-        borderRadius={"2rem"}
-        _hover={{ bg: "#661226", color: "#FFDB7A" }}
-      >
-        <Text fontFamily={"Lexend"} fontSize={{ lg: "1.5rem" }}>
-          1
-        </Text>
-      </Button>
+      <Link to={"/1"}>
+        <Button
+          bgColor={"#FFDB7A"}
+          color={"#661226"}
+          outlineColor={"#661226"}
+          paddingX={"2rem"}
+          paddingY={"0rem"}
+          borderRadius={"2rem"}
+          _hover={{ bg: "#661226", color: "#FFDB7A" }}
+        >
+          <Text fontFamily={"Lexend"} fontSize={{ lg: "1.5rem" }}>
+            1
+          </Text>
+        </Button>
+      </Link>
       <Button
         bgColor={"#FFDB7A"}
         color={"#661226"}
@@ -132,11 +135,12 @@ const SelectState = () => {
         bgImage={"/bg/map-state-desktop.png"}
         bgRepeat={"no-repeat"}
         bgSize={"cover"}
-        w={"100vw"}
-        paddingTop={{ lg: "12rem" }}
+        maxW={"100vw"}
+        paddingTop={{ lg: "8.5rem" }}
+        paddingBottom={{ lg: "5rem" }}
       >
         {/* START Header main */}
-        {/* <Stack align={"center"} justify={"center"}>
+        <Stack align={"center"} justify={"center"}>
           <Heading
             color={"text.primary"}
             fontFamily={"Lexend"}
@@ -147,19 +151,57 @@ const SelectState = () => {
           <Text color={"#941636"} fontFamily={"Lexend"} fontWeight={"semibold"}>
             Hari, 01 Bulan 2024
           </Text>
-        </Stack> */}
+        </Stack>
         {/* END Header main */}
         {/* START card */}
-        {/* <Stack pt={"10rem"} px={"3rem"}>
-          <Card maxW="md">
+        <Stack pt={"10rem"} px={"3rem"}>
+          <Card maxW={"sm"} align={"center"} borderRadius={"1rem"}>
             <CardBody>
-              <Image src="/icons/placeholder-300.png" borderRadius="lg" />
-              <Stack mt="6">
-                <Heading size="md">UKM</Heading>
+              <Stack align={"center"}>
+                <Image src="/icons/placeholder-300.png" borderRadius="lg" />
+                <Stack mt="6">
+                  <Heading
+                    fontFamily={"Lexend"}
+                    fontWeight={"semibold"}
+                    size="md"
+                  >
+                    UKM
+                  </Heading>
+                </Stack>
               </Stack>
             </CardBody>
+            <CardFooter>
+              <Stack direction={"row"} gap={"0"} pb={"1.5rem"}>
+                <Stack
+                  bgColor={"#941636"}
+                  paddingX={"1.5rem"}
+                  borderLeftRadius={"1rem"}
+                >
+                  <Text
+                    fontFamily={"Lexend"}
+                    fontWeight={"semibold"}
+                    color={"white"}
+                  >
+                    Kuota
+                  </Text>
+                </Stack>
+                <Stack
+                  bgColor={"#FFB1C9"}
+                  paddingX={"1.5rem"}
+                  borderRightRadius={"1rem"}
+                >
+                  <Text
+                    fontFamily={"Lexend"}
+                    fontWeight={"semibold"}
+                    color={"#941636"}
+                  >
+                    0/100
+                  </Text>
+                </Stack>
+              </Stack>
+            </CardFooter>
           </Card>
-        </Stack> */}
+        </Stack>
         {/* END card */}
       </Stack>
       {/* END MAIN */}
