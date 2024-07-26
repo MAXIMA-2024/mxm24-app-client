@@ -13,6 +13,8 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  Show,
+  Hide,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "@/router";
@@ -24,8 +26,22 @@ const LandingPage = () => {
   const nav = useNavigate();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [size, setSize] = React.useState("xs");
 
-  const handleClick = () => {
+  const handleClick = (newSize: string) => {
+    toast({
+      title: "Buy Ticket for MalPun",
+      description:
+        "Get your tickets and attend the Malam Puncak MAXIMA 2024 soon!",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
+    setSize(newSize);
+    onClose();
+  };
+
+  const handleClickOne = () => {
     toast({
       title: "Buy Ticket for MalPun",
       description:
@@ -36,7 +52,6 @@ const LandingPage = () => {
     });
     onClose();
   };
-
   const OverlayOne = () => (
     <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
   );
@@ -151,57 +166,145 @@ const LandingPage = () => {
                 Login With SSO
               </Text>
             </Button>
-            <Modal
-              isOpen={isOpen}
-              onClose={onClose}
-              isCentered={true}
-              motionPreset="slideInBottom"
-            >
-              {overlay}
-              <ModalContent>
-                {/* <ModalHeader>Modal Title</ModalHeader> */}
-                <ModalCloseButton />
-                <ModalBody>
-                  <Text
-                    fontFamily={"Lexend"}
-                    py={"3rem"}
-                    textAlign={"center"}
-                    fontSize={"1.6rem"}
-                  >
-                    Apakah kamu Mahasiswa/i UMN angkatan 2024?
-                  </Text>
-                </ModalBody>
+            <Show above="md">
+              <Modal
+                isOpen={isOpen}
+                onClose={onClose}
+                // size={size}
+                isCentered={true}
+                motionPreset="slideInBottom"
+              >
+                {overlay}
+                <ModalContent>
+                  {/* <ModalHeader>Modal Title</ModalHeader> */}
+                  <ModalCloseButton />
+                  <ModalBody>
+                    <Text
+                      fontFamily={"Lexend"}
+                      py={"3rem"}
+                      textAlign={"center"}
+                      fontSize={"1.6rem"}
+                    >
+                      Apakah kamu Mahasiswa/i UMN angkatan 2024?
+                    </Text>
+                  </ModalBody>
 
-                <ModalFooter justifyContent={"center"} pb={"2rem"}>
-                  <Button
-                    as={Link}
-                    to={`https://sso.umn.ac.id/cas/login?service=${
-                      import.meta.env.VITE_FRONTEND_URL + "/auth/sso"
-                    }`}
-                    bgColor={"button.primary"}
-                    mr={3}
-                    onClick={onClose}
-                    // onClick={handleClickYes}
-                    color={"text.tertiary"}
-                    _hover={{ bgColor: "#3A0025" }}
-                  >
-                    Iya Mahasiswa 2024
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    borderWidth={1}
-                    borderColor={"button.primary"}
-                    color={"text.primary"}
-                    as={Link}
-                    to={`/malpun`}
-                    // onClick={onClose}
-                    onClick={handleClick}
-                  >
-                    Bukan Mahasiswa 2024
-                  </Button>
-                </ModalFooter>
-              </ModalContent>
-            </Modal>
+                  <ModalFooter justifyContent={"center"} pb={"2rem"}>
+                    <Button
+                      as={Link}
+                      to={`https://sso.umn.ac.id/cas/login?service=${
+                        import.meta.env.VITE_FRONTEND_URL + "/auth/sso"
+                      }`}
+                      bgColor={"button.primary"}
+                      mr={3}
+                      onClick={onClose}
+                      // onClick={handleClickYes}
+                      color={"text.tertiary"}
+                      _hover={{ bgColor: "#3A0025" }}
+                    >
+                      Iya Mahasiswa 2024
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      borderWidth={1}
+                      borderColor={"button.primary"}
+                      color={"text.primary"}
+                      as={Link}
+                      to={`/malpun`}
+                      // onClick={onClose}
+                      onClick={handleClickOne}
+                    >
+                      Bukan Mahasiswa 2024
+                    </Button>
+
+                    <Show below="md">
+                      <Stack>
+                        <Button
+                          as={Link}
+                          to={`https://sso.umn.ac.id/cas/login?service=${
+                            import.meta.env.VITE_FRONTEND_URL + "/auth/sso"
+                          }`}
+                          bgColor={"button.primary"}
+                          onClick={onClose}
+                          // onClick={handleClickYes}
+                          color={"text.tertiary"}
+                          _hover={{ bgColor: "#3A0025" }}
+                        >
+                          Iya Mahasiswa 2024
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          borderWidth={1}
+                          borderColor={"button.primary"}
+                          color={"text.primary"}
+                          as={Link}
+                          to={`/malpun`}
+                          onClick={() => handleClick(size)}
+                        >
+                          Bukan Mahasiswa 2024
+                        </Button>
+                      </Stack>
+                    </Show>
+                  </ModalFooter>
+                </ModalContent>
+              </Modal>
+            </Show>
+            <Show below="md">
+              <Modal
+                isOpen={isOpen}
+                onClose={onClose}
+                size={size}
+                isCentered={true}
+                motionPreset="slideInBottom"
+              >
+                {overlay}
+                <ModalContent>
+                  {/* <ModalHeader>Modal Title</ModalHeader> */}
+                  <ModalCloseButton />
+                  <ModalBody>
+                    <Text
+                      fontFamily={"Lexend"}
+                      py={"3rem"}
+                      textAlign={"center"}
+                      fontSize={"1.6rem"}
+                    >
+                      Apakah kamu Mahasiswa/i UMN angkatan 2024?
+                    </Text>
+                  </ModalBody>
+
+                  <ModalFooter justifyContent={"center"} pb={"2rem"}>
+                    <Stack>
+                      <Button
+                        as={Link}
+                        to={`https://sso.umn.ac.id/cas/login?service=${
+                          import.meta.env.VITE_FRONTEND_URL + "/auth/sso"
+                        }`}
+                        bgColor={"button.primary"}
+                        onClick={onClose}
+                        // onClick={handleClickYes}
+                        color={"text.tertiary"}
+                        _hover={{ bgColor: "#3A0025" }}
+                        w={"15rem"}
+                      >
+                        Iya Mahasiswa 2024
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        borderWidth={1}
+                        borderColor={"button.primary"}
+                        color={"text.primary"}
+                        as={Link}
+                        to={`/malpun`}
+                        onClick={() => handleClick(size)}
+                        w={"15rem"}
+                      >
+                        Bukan Mahasiswa 2024
+                      </Button>
+                    </Stack>
+                  </ModalFooter>
+                </ModalContent>
+              </Modal>
+            </Show>
           </>
         )}
       </Stack>
