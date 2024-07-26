@@ -25,6 +25,18 @@ const LandingPage = () => {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const handleClick = () => {
+    toast({
+      title: "Buy Ticket for MalPun",
+      description:
+        "Get your tickets and attend the Malam Puncak MAXIMA 2024 soon!",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
+    onClose();
+  };
+
   const OverlayOne = () => (
     <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
   );
@@ -169,6 +181,7 @@ const LandingPage = () => {
                     bgColor={"button.primary"}
                     mr={3}
                     onClick={onClose}
+                    // onClick={handleClickYes}
                     color={"text.tertiary"}
                     _hover={{ bgColor: "#3A0025" }}
                   >
@@ -181,7 +194,8 @@ const LandingPage = () => {
                     color={"text.primary"}
                     as={Link}
                     to={`/malpun`}
-                    onClick={onClose}
+                    // onClick={onClose}
+                    onClick={handleClick}
                   >
                     Bukan Mahasiswa 2024
                   </Button>

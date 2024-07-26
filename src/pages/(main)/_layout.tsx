@@ -18,6 +18,7 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  useToast,
   // Drawer,
   // DrawerBody,
   // DrawerFooter,
@@ -64,6 +65,7 @@ const NavBarData = [
 ];
 
 const MainLayoutDesktop = () => {
+  const toast = useToast();
   const isLogin = false;
 
   const user = {
@@ -79,6 +81,18 @@ const MainLayoutDesktop = () => {
   const [overlay, setOverlay] = React.useState(<OverlayOne />);
 
   const paddingRight = user.status !== "authenticated" ? { lg: 4, xl: 6 } : {};
+
+  const handleClick = () => {
+    toast({
+      title: "Buy Ticket for MalPun",
+      description:
+        "Get your tickets and attend the Malam Puncak MAXIMA 2024 soon!",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
+    onClose();
+  };
 
   return (
     <>
@@ -329,6 +343,7 @@ const MainLayoutDesktop = () => {
                       bgColor={"button.primary"}
                       mr={3}
                       onClick={onClose}
+                      // onClick={handleClickYes}
                       color={"text.tertiary"}
                       _hover={{ bgColor: "#3A0025" }}
                     >
@@ -341,7 +356,8 @@ const MainLayoutDesktop = () => {
                       color={"text.primary"}
                       as={Link}
                       to={`/malpun`}
-                      onClick={onClose}
+                      // onClick={onClose}
+                      onClick={handleClick}
                     >
                       Bukan Mahasiswa 2024
                     </Button>
