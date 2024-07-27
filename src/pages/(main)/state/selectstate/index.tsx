@@ -7,81 +7,89 @@ import {
   CardBody,
   Image,
   CardFooter,
+  WrapItem,
+  Wrap,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-// Button hari ke-
-const BtAtas = () => {
+const NomorList = [1, 2, 3, 4, 5];
+
+// button atas
+const BtStyle = ({ nomor }: { nomor: number }) => {
   return (
     <>
-      <Link to={"/1"}>
+      <Link to={`${nomor}`}>
         <Button
           bgColor={"#FFDB7A"}
           color={"#661226"}
           outlineColor={"#661226"}
-          paddingX={"2rem"}
+          paddingX={{ base: "1rem", md: "2rem" }}
           paddingY={"0rem"}
-          borderRadius={"2rem"}
+          borderRadius={{ base: "1rem", md: "2rem" }}
           _hover={{ bg: "#661226", color: "#FFDB7A" }}
         >
-          <Text fontFamily={"Lexend"} fontSize={{ lg: "1.5rem" }}>
-            1
+          <Text fontFamily={"Lexend"} fontSize={{ lg: "2rem" }}>
+            {nomor}
           </Text>
         </Button>
       </Link>
-      <Button
-        bgColor={"#FFDB7A"}
-        color={"#661226"}
-        outlineColor={"#661226"}
-        paddingX={"2rem"}
-        paddingY={"0rem"}
-        borderRadius={"2rem"}
-        _hover={{ bg: "#661226", color: "#FFDB7A" }}
-      >
-        <Text fontFamily={"Lexend"} fontSize={{ lg: "1.5rem" }}>
-          2
-        </Text>
-      </Button>
-      <Button
-        bgColor={"#FFDB7A"}
-        color={"#661226"}
-        outlineColor={"#661226"}
-        paddingX={"2rem"}
-        paddingY={"0rem"}
-        borderRadius={"2rem"}
-        _hover={{ bg: "#661226", color: "#FFDB7A" }}
-      >
-        <Text fontFamily={"Lexend"} fontSize={{ lg: "1.5rem" }}>
-          3
-        </Text>
-      </Button>
-      <Button
-        bgColor={"#FFDB7A"}
-        color={"#661226"}
-        outlineColor={"#661226"}
-        paddingX={"2rem"}
-        paddingY={"0rem"}
-        borderRadius={"2rem"}
-        _hover={{ bg: "#661226", color: "#FFDB7A" }}
-      >
-        <Text fontFamily={"Lexend"} fontSize={{ lg: "1.5rem" }}>
-          4
-        </Text>
-      </Button>
-      <Button
-        bgColor={"#FFDB7A"}
-        color={"#661226"}
-        outlineColor={"#661226"}
-        paddingX={"2rem"}
-        paddingY={"0rem"}
-        borderRadius={"2rem"}
-        _hover={{ bg: "#661226", color: "#FFDB7A" }}
-      >
-        <Text fontFamily={"Lexend"} fontSize={{ lg: "1.5rem" }}>
-          5
-        </Text>
-      </Button>
     </>
+  );
+};
+
+// kartu
+const Kartu = () => {
+  return (
+    <WrapItem>
+      <Card
+        w={{ base: "10rem", md: "12rem", lg: "20rem" }}
+        align={"center"}
+        borderRadius={"1rem"}
+      >
+        <CardBody>
+          <Stack align={"center"}>
+            <Image src="/icons/placeholder-300.png" borderRadius="lg" />
+            <Stack mt="4">
+              <Heading fontFamily={"Lexend"} fontWeight={"semibold"} size="md">
+                UKM
+              </Heading>
+            </Stack>
+          </Stack>
+        </CardBody>
+        <CardFooter>
+          <Stack direction={"row"} gap={"0"} pb={"1.5rem"}>
+            <Stack
+              bgColor={"#941636"}
+              paddingX={{ base: "0.5rem", md: "1rem" }}
+              borderLeftRadius={"1rem"}
+            >
+              <Text
+                fontSize={{ base: "0.75rem", md: "1rem" }}
+                fontFamily={"Lexend"}
+                fontWeight={"semibold"}
+                color={"white"}
+              >
+                Kuota
+              </Text>
+            </Stack>
+            <Stack
+              bgColor={"#FFB1C9"}
+              paddingX={{ base: "0.5rem", md: "1rem" }}
+              borderRightRadius={"1rem"}
+            >
+              <Text
+                fontSize={{ base: "0.75rem", md: "1rem" }}
+                fontFamily={"Lexend"}
+                fontWeight={"semibold"}
+                color={"#941636"}
+              >
+                0/100
+              </Text>
+            </Stack>
+          </Stack>
+        </CardFooter>
+      </Card>
+    </WrapItem>
   );
 };
 
@@ -98,8 +106,8 @@ const SelectState = () => {
         gap={"0"}
         align={"center"}
         justify={"center"}
-        paddingTop={{ lg: "20rem" }}
-        paddingBottom={{ lg: "10rem" }}
+        paddingTop={{ base: "20rem", md: "20rem", lg: "20rem" }}
+        paddingBottom={{ md: "7.5rem", lg: "10rem" }}
       >
         <Stack
           bgColor={"#661226"}
@@ -110,7 +118,7 @@ const SelectState = () => {
             color={"#FFDB7A"}
             fontFamily={"Lexend"}
             fontWeight={"bold"}
-            fontSize={{ lg: "2.5rem" }}
+            fontSize={{ base: "1.75rem", lg: "4rem" }}
           >
             Hari ke
           </Heading>
@@ -121,10 +129,12 @@ const SelectState = () => {
           paddingX={"2rem"}
           paddingY={"1rem"}
           borderRadius={"2rem"}
-          gap={"1.5rem"}
+          gap={{ base: "1rem", md: "1.5rem" }}
         >
           {/* START Button hari ke- */}
-          <BtAtas />
+          {NomorList.map((nomor) => (
+            <BtStyle key={nomor} nomor={nomor} />
+          ))}
           {/* END Button hari ke- */}
         </Stack>
       </Stack>
@@ -136,71 +146,60 @@ const SelectState = () => {
         bgRepeat={"no-repeat"}
         bgSize={"cover"}
         maxW={"100vw"}
-        paddingTop={{ lg: "8.5rem" }}
-        paddingBottom={{ lg: "5rem" }}
+        paddingTop={{ base: "1.75rem", md: "2rem", lg: "5rem" }}
+        paddingBottom={{ base: "3rem", md: "3rem", lg: "5rem" }}
       >
         {/* START Header main */}
         <Stack align={"center"} justify={"center"}>
           <Heading
+            fontSize={{ base: "1.75rem", md: "2rem", xl: "4rem" }}
             color={"text.primary"}
             fontFamily={"Lexend"}
             fontWeight={"bold"}
           >
             STATE HARI KE-1
           </Heading>
-          <Text color={"#941636"} fontFamily={"Lexend"} fontWeight={"semibold"}>
+          <Text
+            fontSize={{ base: "1rem", md: "1.5rem", xl: "2.5rem" }}
+            color={"#941636"}
+            fontFamily={"Lexend"}
+            fontWeight={"semibold"}
+          >
             Hari, 01 Bulan 2024
           </Text>
         </Stack>
         {/* END Header main */}
+
         {/* START card */}
-        <Stack pt={"10rem"} px={"3rem"}>
-          <Card maxW={"sm"} align={"center"} borderRadius={"1rem"}>
-            <CardBody>
-              <Stack align={"center"}>
-                <Image src="/icons/placeholder-300.png" borderRadius="lg" />
-                <Stack mt="6">
-                  <Heading
-                    fontFamily={"Lexend"}
-                    fontWeight={"semibold"}
-                    size="md"
-                  >
-                    UKM
-                  </Heading>
-                </Stack>
-              </Stack>
-            </CardBody>
-            <CardFooter>
-              <Stack direction={"row"} gap={"0"} pb={"1.5rem"}>
-                <Stack
-                  bgColor={"#941636"}
-                  paddingX={"1.5rem"}
-                  borderLeftRadius={"1rem"}
-                >
-                  <Text
-                    fontFamily={"Lexend"}
-                    fontWeight={"semibold"}
-                    color={"white"}
-                  >
-                    Kuota
-                  </Text>
-                </Stack>
-                <Stack
-                  bgColor={"#FFB1C9"}
-                  paddingX={"1.5rem"}
-                  borderRightRadius={"1rem"}
-                >
-                  <Text
-                    fontFamily={"Lexend"}
-                    fontWeight={"semibold"}
-                    color={"#941636"}
-                  >
-                    0/100
-                  </Text>
-                </Stack>
-              </Stack>
-            </CardFooter>
-          </Card>
+        <Stack pt={{ base: "3rem", md: "3rem", lg: "10rem", xl: "13rem" }}>
+          <Wrap
+            justify={"center"}
+            alignSelf={"center"}
+            w={{ md: "90vw", lg: "80vw" }}
+            h={"70vh"}
+            overflowY={"auto"}
+            spacing={"1rem"}
+          >
+            <Kartu />
+            <Kartu />
+            <Kartu />
+            <Kartu />
+            <Kartu />
+            <Kartu />
+            <Kartu />
+            <Kartu />
+            <Kartu />
+            <Kartu />
+            <Kartu />
+            <Kartu />
+            <Kartu />
+            <Kartu />
+            <Kartu />
+            <Kartu />
+            <Kartu />
+            <Kartu />
+            <Kartu />
+          </Wrap>
         </Stack>
         {/* END card */}
       </Stack>
