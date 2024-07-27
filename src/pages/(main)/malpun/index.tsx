@@ -1,3 +1,4 @@
+import useAuth from "@/hooks/useAuth";
 import { Heading, Stack, Text, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
@@ -17,7 +18,7 @@ const Inbutton = () => {
             rounded={"xl"}
             _hover={{ bgColor: "#3A0025" }}
             mt={{ base: 10, lg: 0 }}
-            shadow={"0 0 5rem #000000"}
+            shadow={"0 0 5rem #ffffff80"}
           >
             <Text
               fontFamily={"Lexend"}
@@ -72,9 +73,9 @@ const Exbutton = () => {
 };
 
 const Malpun = () => {
-  const mockMhs = {
-    isMahasiswa: false,
-  };
+  const auth = useAuth();
+
+  const isMahasiswa = auth.user?.role === "mahasiswa";
 
   return (
     <>
@@ -119,7 +120,7 @@ const Malpun = () => {
             MAXIMA 2024
           </Heading>
         </Stack>
-        {mockMhs.isMahasiswa ? <Inbutton /> : <Exbutton />}
+        {isMahasiswa ? <Inbutton /> : <Exbutton />}
         {/* <Link to="/malpun/claimticket">
           <Button
             bgColor={"button.primary"}
