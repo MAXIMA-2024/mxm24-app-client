@@ -94,7 +94,7 @@ const Kartu = () => {
   );
 };
 
-const SelectState = () => {
+const SelectStateId = () => {
   const { id } = useParams<{ id: string }>(); // Get nomor from URL
   const [selectedNomor, setSelectedNomor] = useState<number | null>(null);
 
@@ -222,4 +222,4 @@ const SelectState = () => {
   );
 };
 
-export default SelectState;
+export default SelectStateId;
