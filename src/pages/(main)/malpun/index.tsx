@@ -50,12 +50,12 @@ const Exbutton = () => {
             _hover={{
               bgColor: "#3A0025",
               transform: "scale(1.025)",
-              borderWidth: "thick",
+              // borderWidth: "thick",
             }}
             mt={{ base: 10, lg: 0 }}
             shadow={"0 0 5rem #ffffff80"}
-            borderColor={"#fff"}
-            borderWidth={"medium"}
+            // borderColor={"#fff"}
+            // borderWidth={"medium"}
           >
             <Text
               fontFamily={"Lexend"}
