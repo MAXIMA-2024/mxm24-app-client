@@ -9,102 +9,118 @@ import {
   CardFooter,
   WrapItem,
   Wrap,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  Box,
+  useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-const NomorList = [1, 2, 3, 4, 5];
-
-// button atas
-const BtStyle = ({ nomor }: { nomor: number }) => {
-  return (
-    <>
-      <Link to={`/state/selectstate/${nomor}`}>
-        <Button
-          bgColor={"#FFDB7A"}
-          color={"#661226"}
-          outlineColor={"#661226"}
-          paddingX={{ base: "1rem", md: "2rem" }}
-          paddingY={"0rem"}
-          borderRadius={{ base: "1rem", md: "2rem" }}
-          _hover={{ bg: "#661226", color: "#FFDB7A" }}
-        >
-          <Text fontFamily={"Lexend"} fontSize={{ lg: "2rem" }}>
-            {nomor}
-          </Text>
-        </Button>
-      </Link>
-    </>
-  );
-};
-
-// kartu
-const Kartu = () => {
-  return (
-    <WrapItem>
-      <Card
-        w={{ base: "10rem", md: "12rem", lg: "20rem" }}
-        align={"center"}
-        borderRadius={"1rem"}
-      >
-        <CardBody>
-          <Stack align={"center"}>
-            <Image src="/icons/placeholder-300.png" borderRadius="lg" />
-            <Stack mt="4">
-              <Heading fontFamily={"Lexend"} fontWeight={"semibold"} size="md">
-                UKM
-              </Heading>
-            </Stack>
-          </Stack>
-        </CardBody>
-        <CardFooter>
-          <Stack direction={"row"} gap={"0"} pb={"1.5rem"}>
-            <Stack
-              bgColor={"#941636"}
-              paddingX={{ base: "0.5rem", md: "1rem" }}
-              borderLeftRadius={"1rem"}
-            >
-              <Text
-                fontSize={{ base: "0.75rem", md: "1rem" }}
-                fontFamily={"Lexend"}
-                fontWeight={"semibold"}
-                color={"white"}
-              >
-                Kuota
-              </Text>
-            </Stack>
-            <Stack
-              bgColor={"#FFB1C9"}
-              paddingX={{ base: "0.5rem", md: "1rem" }}
-              borderRightRadius={"1rem"}
-            >
-              <Text
-                fontSize={{ base: "0.75rem", md: "1rem" }}
-                fontFamily={"Lexend"}
-                fontWeight={"semibold"}
-                color={"#941636"}
-              >
-                0/100
-              </Text>
-            </Stack>
-          </Stack>
-        </CardFooter>
-      </Card>
-    </WrapItem>
-  );
-};
-
 const SelectStateId = () => {
-  const { id } = useParams<{ id: string }>(); // Get nomor from URL
+  const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { id } = useParams<{ id: string }>();
   const [selectedNomor, setSelectedNomor] = useState<number | null>(null);
+  const NomorList = [1, 2, 3, 4, 5];
 
   useEffect(() => {
     console.log("URL Parameter:", id);
-    // Update selectedNomor when URL changes
     if (id) {
       setSelectedNomor(parseInt(id, 10));
     }
   }, [id]);
+
+  // button atas
+  const BtStyle = ({ nomor }: { nomor: number }) => {
+    return (
+      <>
+        <Link to={`/state/selectstate/${nomor}`}>
+          <Button
+            bgColor={"#FFDB7A"}
+            color={"#661226"}
+            outlineColor={"#661226"}
+            paddingX={{ base: "1rem", md: "2rem" }}
+            paddingY={"0rem"}
+            borderRadius={{ base: "1rem", md: "2rem" }}
+            _hover={{ bg: "#661226", color: "#FFDB7A" }}
+          >
+            <Text fontFamily={"Lexend"} fontSize={{ lg: "2rem" }}>
+              {nomor}
+            </Text>
+          </Button>
+        </Link>
+      </>
+    );
+  };
+
+  // kartu
+  const Kartu = () => {
+    return (
+      <WrapItem>
+        <Box onClick={onOpen} cursor="pointer">
+          <Card
+            w={{ base: "10rem", md: "12rem", lg: "20rem" }}
+            align={"center"}
+            borderRadius={"1rem"}
+          >
+            <CardBody>
+              <Stack align={"center"}>
+                <Image src="/icons/placeholder-300.png" borderRadius="lg" />
+                <Stack mt="4">
+                  <Heading
+                    fontFamily={"Lexend"}
+                    fontWeight={"semibold"}
+                    size="md"
+                  >
+                    UKM
+                  </Heading>
+                </Stack>
+              </Stack>
+            </CardBody>
+            <CardFooter>
+              <Stack direction={"row"} gap={"0"} pb={"1.5rem"}>
+                <Stack
+                  bgColor={"#941636"}
+                  paddingX={{ base: "0.5rem", md: "1rem" }}
+                  borderLeftRadius={"1rem"}
+                >
+                  <Text
+                    fontSize={{ base: "0.75rem", md: "1rem" }}
+                    fontFamily={"Lexend"}
+                    fontWeight={"semibold"}
+                    color={"white"}
+                  >
+                    Kuota
+                  </Text>
+                </Stack>
+                <Stack
+                  bgColor={"#FFB1C9"}
+                  paddingX={{ base: "0.5rem", md: "1rem" }}
+                  borderRightRadius={"1rem"}
+                >
+                  <Text
+                    fontSize={{ base: "0.75rem", md: "1rem" }}
+                    fontFamily={"Lexend"}
+                    fontWeight={"semibold"}
+                    color={"#941636"}
+                  >
+                    0/100
+                  </Text>
+                </Stack>
+              </Stack>
+            </CardFooter>
+          </Card>
+        </Box>
+      </WrapItem>
+    );
+  };
 
   return (
     <Stack
@@ -113,6 +129,26 @@ const SelectStateId = () => {
       bgSize={"cover"}
       w={"100vw"}
     >
+      {/* START logo atas */}
+      <Stack
+        alignSelf={"center"}
+        mt={"2rem"}
+        bgColor={"#BBDEE7"}
+        p={"1rem"}
+        borderRadius={"50%"}
+        w={"5rem"}
+        h={"5rem"}
+        display={{ base: "flex", lg: "none" }}
+      >
+        <Image
+          src="/icons/LOGO-MAXIMA-OFFICIAL.png"
+          w={"2.5rem"}
+          alignSelf={"center"}
+          justifySelf={"center"}
+        />
+      </Stack>
+      {/* END logo atas */}
+
       {/* START CTA atas */}
       <Stack
         gap={"0"}
@@ -218,6 +254,120 @@ const SelectStateId = () => {
         {/* END card */}
       </Stack>
       {/* END MAIN */}
+
+      {/* START modal card */}
+      <Modal
+        onClose={onClose}
+        isOpen={isOpen}
+        isCentered
+        motionPreset="slideInBottom"
+
+        // size={{ base: "sm", lg: "xl" }}
+      >
+        <ModalOverlay backdropFilter="auto" backdropBlur="3px" />
+        <ModalContent
+          py={"2rem"}
+          px={"2rem"}
+          // mt={{ base: "4rem", md: "5rem", lg: "7rem" }}
+          maxH={{ lg: "90vh" }}
+          maxW="90vw"
+        >
+          {/* <ModalHeader>Nama Organisator</ModalHeader> */}
+          <ModalCloseButton />
+          <ModalBody>
+            <Stack
+              direction={{ base: "column", lg: "row" }}
+              gap={"5rem"}
+              alignItems={"center"}
+            >
+              <Stack
+                align={"center"}
+                gap={"1rem"}
+                w={{ base: "100%", lg: "25%" }}
+              >
+                <Heading fontFamily={"Luthier"}>Nama Organisator</Heading>
+                <Image src="/icons/placeholder-300.png" />
+                <Text fontFamily={"Lexend"} fontWeight={"bold"}>
+                  Hari, 01 Bulan 2024
+                </Text>
+                <Text fontFamily={"Lexend"} fontWeight={"semibold"}>
+                  Kuota: 15/20
+                </Text>
+              </Stack>
+              <Stack gap={"2rem"} w={{ base: "100%", lg: "75%" }}>
+                <Stack>
+                  <Heading fontFamily={"Luthier"}>Detail</Heading>
+                  <Text fontFamily={"Lexend"}>
+                    Lorem ipsum dolor sit amet consectetur. Sed pellentesque
+                    laoreet dui dui cursus lobortis lorem non interdum. Semper
+                    cum lectus pulvinar risus. Tincidunt ullamcorper dui diam
+                    senectus eleifend eget mattis. Sit interdum eros enim non
+                    turpis.
+                  </Text>
+                </Stack>
+                <Stack gap={"1rem"}>
+                  <Heading fontFamily={"Luthier"}>Foto Kegiatan</Heading>
+                  <Stack
+                    direction={{ base: "column", lg: "row" }}
+                    overflowX={"scroll"}
+                    gap={"1rem"}
+                    pb={"0.5rem"}
+                  >
+                    <Image src="/icons/placeholder-300-panjang.png" />
+                    <Image src="/icons/placeholder-300-panjang.png" />
+                    <Image src="/icons/placeholder-300-panjang.png" />
+                    <Image src="/icons/placeholder-300-panjang.png" />
+                  </Stack>
+                </Stack>
+              </Stack>
+            </Stack>
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              fontFamily={"Lexend"}
+              bgColor={"#AF1648"}
+              color="white"
+              mr={3}
+              _hover={{ bg: "#FFB1C9", color: "white" }}
+              onClick={() => {
+                // Create an example promise that resolves in 5s
+                const examplePromise = new Promise((resolve, reject) => {
+                  setTimeout(() => resolve(200), 5000);
+                });
+
+                // Will display the loading toast until the promise is either resolved
+                // or rejected.
+                toast.promise(examplePromise, {
+                  success: {
+                    title: "Selamat!",
+                    description: "Nama Organisator kamu telah dipilih",
+                  },
+                  error: {
+                    title: "Aduh, ada sedikit kendala nih",
+                    description: "Coba dalam beberapa saat lagi ya",
+                  },
+                  loading: {
+                    title: "Tunggu sebentar ya",
+                    description: "Permintaan mu sedang diproses",
+                  },
+                });
+              }}
+            >
+              Save
+            </Button>
+            <Button
+              fontFamily={"Lexend"}
+              onClick={onClose}
+              bgColor={"#FFBE00"}
+              color={"#AF1648"}
+              _hover={{ bg: "#FFDB7A", color: "AF1648" }}
+            >
+              Cancel
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      {/* END modal card */}
     </Stack>
   );
 };
