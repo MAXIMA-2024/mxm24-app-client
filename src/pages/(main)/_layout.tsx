@@ -19,6 +19,7 @@ import {
   ModalCloseButton,
   useDisclosure,
   useToast,
+  Box,
   // Drawer,
   // DrawerBody,
   // DrawerFooter,
@@ -35,6 +36,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import React from "react";
+import { IoTicket } from "react-icons/io5";
 
 const NavBarData = [
   {
@@ -67,7 +69,7 @@ const NavBarData = [
 const MainLayoutDesktop = () => {
   const toast = useToast();
   const isLogin = false;
-
+  const [size, setSize] = React.useState("xl");
   const user = {
     status: isLogin ? "authenticated" : "unaunthenticated",
     name: "Jonathan",
@@ -82,15 +84,53 @@ const MainLayoutDesktop = () => {
 
   const paddingRight = user.status !== "authenticated" ? { lg: 4, xl: 6 } : {};
 
-  const handleClick = () => {
+  const handleClick = (newSize: string) => {
     toast({
-      title: "Buy Ticket for MalPun",
-      description:
-        "Get your tickets and attend the Malam Puncak MAXIMA 2024 soon!",
-      status: "success",
+      position: "bottom-right",
       duration: 9000,
-      isClosable: true,
+      render: () => (
+        <Stack
+          mb={"1rem"}
+          mr={"1rem"}
+          p={4}
+          w={"30rem"}
+          bg="white"
+          shadow={"xl"}
+          rounded={"lg"}
+          direction={"row"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          gap={5}
+        >
+          <IoTicket color={"#44002B"} size={"5rem"} />
+          <Stack direction={"column"}>
+            <Text
+              fontSize={"1.2rem"}
+              fontFamily={"Lexend"}
+              fontWeight={"semibold"}
+              color={"text.primary"}
+            >
+              Buy Ticket for MalPun
+            </Text>
+            <Text
+              fontSize={"1rem"}
+              fontFamily={"Lexend"}
+              fontWeight={"base"}
+              color={"text.primary"}
+            >
+              Get your tickets and attend the Malam Puncak MAXIMA 2024 soon!
+            </Text>
+          </Stack>
+        </Stack>
+      ),
+      // title: "Buy Ticket for MalPun",
+      // description:
+      //   "Get your tickets and attend the Malam Puncak MAXIMA 2024 soon!",
+      // status: "success",
+      // duration: 9000,
+      // isClosable: true,
     });
+    setSize(newSize);
     onClose();
   };
 
@@ -316,6 +356,7 @@ const MainLayoutDesktop = () => {
               <Modal
                 isOpen={isOpen}
                 onClose={onClose}
+                size={size}
                 isCentered={true}
                 motionPreset="slideInBottom"
               >
@@ -326,7 +367,7 @@ const MainLayoutDesktop = () => {
                   <ModalBody>
                     <Text
                       fontFamily={"Lexend"}
-                      py={"3rem"}
+                      py={"2rem"}
                       textAlign={"center"}
                       fontSize={"1.6rem"}
                     >
@@ -334,20 +375,21 @@ const MainLayoutDesktop = () => {
                     </Text>
                   </ModalBody>
 
-                  <ModalFooter justifyContent={"center"} pb={"2rem"}>
+                  <ModalFooter justifyContent={"center"} pb={"2rem"} gap={4}>
                     <Button
                       as={Link}
                       to={`https://sso.umn.ac.id/cas/login?service=${
                         import.meta.env.VITE_FRONTEND_URL + "/auth/sso"
                       }`}
                       bgColor={"button.primary"}
-                      mr={3}
+                      // mr={3}
                       onClick={onClose}
                       // onClick={handleClickYes}
                       color={"text.tertiary"}
                       _hover={{ bgColor: "#3A0025" }}
+                      px={"2rem"}
                     >
-                      Iya Mahasiswa 2024
+                      Iya Mahasiswa/i UMN 2024
                     </Button>
                     <Button
                       variant="ghost"
@@ -356,10 +398,10 @@ const MainLayoutDesktop = () => {
                       color={"text.primary"}
                       as={Link}
                       to={`/malpun`}
-                      // onClick={onClose}
-                      onClick={handleClick}
+                      onClick={() => handleClick(size)}
+                      px={"2rem"}
                     >
-                      Bukan Mahasiswa 2024
+                      Bukan Mahasiswa/i UMN 2024
                     </Button>
                   </ModalFooter>
                 </ModalContent>

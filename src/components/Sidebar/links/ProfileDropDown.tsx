@@ -17,7 +17,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { FaRegEdit } from "react-icons/fa";
-import { IoLogOutOutline } from "react-icons/io5";
+import { IoLogOutOutline, IoTicket } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import React from "react";
 
@@ -39,13 +39,50 @@ const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
 
   const handleClick = (newSize: string) => {
     toast({
-      // position: "top", nanti palingan diset position nya + custom toast sekalian, karena ga custom nanti keututupan toast nya
-      title: "Buy Ticket for MalPun",
-      description:
-        "Get your tickets and attend the Malam Puncak MAXIMA 2024 soon!",
-      status: "success",
-      duration: 9000,
-      isClosable: true,
+      position: "top",
+      duration: 4000,
+      render: () => (
+        <Stack
+          mt={"1rem"}
+          // mr={"1rem"}
+          p={4}
+          w={"22rem"}
+          bg="white"
+          shadow={"xl"}
+          rounded={"lg"}
+          direction={"row"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          gap={5}
+        >
+          <IoTicket color={"#44002B"} size={"4rem"} />
+          <Stack direction={"column"}>
+            <Text
+              fontSize={"0.8rem"}
+              fontFamily={"Lexend"}
+              fontWeight={"semibold"}
+              color={"text.primary"}
+            >
+              Buy Ticket for MalPun
+            </Text>
+            <Text
+              fontSize={"0.8rem"}
+              fontFamily={"Lexend"}
+              fontWeight={"base"}
+              color={"text.primary"}
+            >
+              Get your tickets and attend the Malam Puncak MAXIMA 2024 soon!
+            </Text>
+          </Stack>
+        </Stack>
+      ),
+
+      // title: "Buy Ticket for MalPun",
+      // description:
+      //   "Get your tickets and attend the Malam Puncak MAXIMA 2024 soon!",
+      // status: "success",
+      // duration: 9000,
+      // isClosable: true,
     });
     setSize(newSize);
     onClose();
@@ -224,9 +261,9 @@ const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
                       color={"text.tertiary"}
                       _hover={{ bgColor: "#3A0025" }}
                       // fontSize={"0.3rem"}
-                      w={"15rem"}
+                      w={"16rem"}
                     >
-                      Iya Mahasiswa 2024
+                      Iya Mahasiswa/i UMN 2024
                     </Button>
                     <Button
                       variant="ghost"
@@ -237,9 +274,9 @@ const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
                       to={`/malpun`}
                       // onClick={onClose}
                       onClick={() => handleClick(size)}
-                      w={"15rem"}
+                      w={"16rem"}
                     >
-                      Bukan Mahasiswa 2024
+                      Bukan Mahasiswa/i UMN 2024
                     </Button>
                   </Stack>
                 </ModalFooter>
