@@ -12,6 +12,7 @@ export type Path =
   | `/faq`
   | `/home`
   | `/malpun`
+  | `/malpun/buyticket`
   | `/malpun/claimticket`
   | `/malpun/viewticket`
   | `/state`
