@@ -17,8 +17,9 @@ const Inbutton = () => {
             color={"text.tertiary"}
             rounded={"xl"}
             _hover={{ bgColor: "#3A0025" }}
-            mt={{ base: 10, lg: 0 }}
+            mt={{ base: "5rem", lg: 0 }}
             shadow={"0 0 5rem #ffffff80"}
+            mb={{ base: "8rem", lg: "0rem" }}
           >
             <Text
               fontFamily={"Lexend"}
@@ -84,7 +85,7 @@ const Malpun = () => {
         color={"text.primary"}
         fontWeight={"900"}
         gap={{ base: 0, lg: 2 }}
-        pt={{ base: "20rem", md: "18rem", lg: "2.5rem", xl: "2.5rem" }}
+        pt={{ base: "0rem", md: "18rem", lg: "2.5rem", xl: "2.5rem" }}
       >
         <Heading
           fontFamily={"Luthier"}
