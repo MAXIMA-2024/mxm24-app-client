@@ -41,12 +41,20 @@ const MyTicket = () => {
           <Image src={imageLeftSrc}></Image>
         </Stack>
         {/* RIGHT TICKET */}
-        <Stack w={{ base: "22rem", md: "25rem", lg: "34rem", xl: "28.5rem" }}>
+        <Stack
+          w={{ base: "22rem", md: "25rem", lg: "34rem", xl: "28.5rem" }}
+          pos={"relative"}
+          justify={"center"}
+          align={"center"}
+        >
           <Image src={imageRightSrc}></Image>
           {/* QR Placeholder */}
-          {/* <Stack position={"absolute"} top={"0"} right={"0"}>
-            <Image src="/icons/qr-dummy.png" w={"25%"}></Image>
-          </Stack> */}
+          <Image
+            src="/icons/qr-dummy.png"
+            w={"60%"}
+            pos={"absolute"}
+            mr={"3.5rem"}
+          ></Image>
         </Stack>
       </Stack>
     </>
