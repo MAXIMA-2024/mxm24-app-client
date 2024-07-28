@@ -1,5 +1,6 @@
 import { Stack, Text, Button, Image, keyframes } from "@chakra-ui/react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const fadeIn = keyframes`
   from { opacity: 0; }
@@ -87,7 +88,7 @@ const ViewTicket = () => {
                 alignItems={"center"}
                 justifyContent={"center"}
                 alignContent={"center"}
-                animation={isTicketViewed ? `${zoomIn} 1s` : "none"}
+                animation={!isTicketViewed ? `${zoomIn} 1s` : "none"}
               >
                 <Image
                   src="/icons/claim-ticket-malpun-v2.png"
@@ -102,7 +103,7 @@ const ViewTicket = () => {
                     textAlign={"center"}
                     fontFamily={"Lexend"}
                     fontWeight={"semibold"}
-                    animation={isTicketViewed ? `${fadeIn} 1s` : "none"}
+                    animation={!isTicketViewed ? `${fadeIn} 1s` : "none"}
                   >
                     {isTicketViewed ? (
                       <Stack w={{ base: "18rem", lg: "40rem" }} gap={"1rem"}>
@@ -131,27 +132,29 @@ const ViewTicket = () => {
 
               {/* BUTTON CLAIM */}
               {!isTicketViewed && (
-                <Stack alignItems={"center"}>
-                  <Button
-                    bgColor={"button.primary"}
-                    w={{ base: "6rem", md: "8rem", lg: "10rem" }}
-                    variant={"ghost"}
-                    transition={"0.3s"}
-                    color={"text.tertiary"}
-                    rounded={"xl"}
-                    _hover={{ bgColor: "#3A0025" }}
-                    mt={"1rem"}
-                    onClick={() => setIsTicketViewed(true)}
-                  >
-                    <Text
-                      fontFamily={"Lexend"}
-                      fontWeight={"400"}
-                      fontSize={{ base: "small", md: "medium", lg: "large" }}
+                <Link to="/malpun/myticket">
+                  <Stack alignItems={"center"}>
+                    <Button
+                      bgColor={"button.primary"}
+                      w={{ base: "6rem", md: "8rem", lg: "10rem" }}
+                      variant={"ghost"}
+                      transition={"0.3s"}
+                      color={"text.tertiary"}
+                      rounded={"xl"}
+                      _hover={{ bgColor: "#3A0025" }}
+                      mt={"1rem"}
+                      onClick={() => setIsTicketViewed(true)}
                     >
-                      Lihat Tiket
-                    </Text>
-                  </Button>
-                </Stack>
+                      <Text
+                        fontFamily={"Lexend"}
+                        fontWeight={"400"}
+                        fontSize={{ base: "small", md: "medium", lg: "large" }}
+                      >
+                        Lihat Tiket
+                      </Text>
+                    </Button>
+                  </Stack>
+                </Link>
               )}
             </Stack>
           </Stack>

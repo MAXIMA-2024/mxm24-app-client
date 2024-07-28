@@ -1,4 +1,24 @@
-import { Heading, Stack, Text, Button, Image } from "@chakra-ui/react";
+import {
+  Heading,
+  Stack,
+  Text,
+  Button,
+  Image,
+  keyframes,
+} from "@chakra-ui/react";
+
+const zoomIn = keyframes`
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
 
 const MyTicket = () => {
   return (
@@ -30,6 +50,7 @@ const MyTicket = () => {
           px={{ base: "2rem", md: "8rem", lg: "4rem" }}
           align={"center"}
           position={"relative"}
+          animation={`${zoomIn} 1s`}
         >
           <Stack position={"absolute"} top={"0"} right={"0"}>
             <Image src="/icons/qr-dummy.png" w={"25%"}></Image>
