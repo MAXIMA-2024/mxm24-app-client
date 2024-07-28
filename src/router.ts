@@ -14,8 +14,10 @@ export type Path =
   | `/malpun`
   | `/malpun/buyticket`
   | `/malpun/claimticket`
+  | `/malpun/myticket`
   | `/malpun/viewticket`
   | `/state`
+  | `/state/selectstate`
 
 export type Params = {
   
