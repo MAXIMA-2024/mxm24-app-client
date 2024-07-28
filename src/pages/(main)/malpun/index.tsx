@@ -109,29 +109,6 @@ const Malpun = () => {
         </Heading>
       </Stack>
       {isMahasiswa ? <Inbutton /> : <Exbutton />}
-      {/* <Link to="/malpun/claimticket">
-          <Button
-            bgColor={"button.primary"}
-            p={{ base: 5, md: 8, lg: 10 }}
-            py={{ base: 0, md: 8, lg: 12 }}
-            px={{ base: "2rem", md: "4rem", lg: "10rem" }}
-            variant={"ghost"}
-            transition={"0.3s"}
-            color={"text.tertiary"}
-            rounded={"xl"}
-            _hover={{ bgColor: "#3A0025" }}
-            mt={{ base: 10, lg: 0 }}
-            shadow={"0 0 5rem #000000"}
-          >
-            <Text
-              fontFamily={"Lexend"}
-              fontWeight={"400"}
-              fontSize={{ base: "medium", md: "larger", lg: "xx-large" }}
-            >
-              KLAIM TIKET
-            </Text>
-          </Button>
-        </Link> */}
     </>
   );
 };
