@@ -19,6 +19,7 @@ const GlobalLayout = () => {
         }}
       >
         <AnimatePresence mode="wait">
+          {/* auth loading */}
           {auth.status === "loading" && (
             <Stack
               as={motion.div}
@@ -62,28 +63,29 @@ const GlobalLayout = () => {
               <Hide below="md">
                 <Image
                   as={motion.img}
-                  src="/bg/loader/curtains1.png"
+                  src="/bg/loader/big_curtain_l.png"
+                  zIndex={1000}
                   h={"100%"}
-                  w={"16rem"}
+                  // w={"16rem"}
                   left={0}
                   position={"absolute"}
                   variants={{
                     initial: {
-                      opacity: 0,
-                      x: -150,
+                      opacity: 1,
+                      x: 0,
                     },
                     enter: {
                       opacity: 1,
-                      x: [-100, 0, -10],
+                      x: [0, -500, -400],
                       transition: {
-                        duration: 1,
+                        duration: 2,
                         delay: 0.5,
                         easings: "backOut",
                       },
                     },
                     exit: {
                       opacity: 0,
-                      x: -150,
+                      x: -800,
                       transition: {
                         duration: 1,
                         delay: 0.5,
@@ -97,7 +99,45 @@ const GlobalLayout = () => {
                   overflow={"hidden"}
                 />
               </Hide>
+
               <Show below="md">
+                <Image
+                  as={motion.img}
+                  src="/bg/loader/big_curtain_l.png"
+                  zIndex={1000}
+                  h={"100%"}
+                  // w={"16rem"}
+                  left={0}
+                  position={"absolute"}
+                  variants={{
+                    initial: {
+                      opacity: 1,
+                      x: 0,
+                    },
+                    enter: {
+                      opacity: 1,
+                      x: [-100, -500, -800],
+                      transition: {
+                        duration: 2,
+                        delay: 0.5,
+                        easings: "backOut",
+                      },
+                    },
+                    exit: {
+                      opacity: 0,
+                      x: -800,
+                      transition: {
+                        duration: 1,
+                        delay: 0.5,
+                        easings: "backOut",
+                      },
+                    },
+                  }}
+                  initial={"initial"}
+                  animate={"enter"}
+                  exit={"exit"}
+                  overflow={"hidden"}
+                />
                 <Image
                   as={motion.img}
                   src="/bg/loader/curtainsMobile.png"
@@ -134,32 +174,69 @@ const GlobalLayout = () => {
                   exit={"exit"}
                   overflow={"hidden"}
                 />
-              </Show>
-              <Hide below="md">
+
                 <Image
                   as={motion.img}
-                  src="/bg/loader/curtains2.png"
+                  src="/bg/loader/big_curtain_r.png"
+                  zIndex={1000}
                   h={"100%"}
-                  w={"16rem"}
                   right={0}
                   position={"absolute"}
                   variants={{
                     initial: {
-                      opacity: 0,
-                      x: 150,
+                      opacity: 1,
+                      x: 0,
                     },
                     enter: {
                       opacity: 1,
-                      x: [100, 0, 10],
+                      x: [100, 500, 800],
                       transition: {
-                        duration: 1,
+                        duration: 2,
                         delay: 0.5,
                         easings: "backOut",
                       },
                     },
                     exit: {
                       opacity: 0,
-                      x: 150,
+                      x: 800,
+                      transition: {
+                        duration: 1,
+                        delay: 0.5,
+                        easings: "backOut",
+                      },
+                    },
+                  }}
+                  initial={"initial"}
+                  animate={"enter"}
+                  exit={"exit"}
+                  overflow={"hidden"}
+                />
+              </Show>
+              <Hide below="md">
+                <Image
+                  as={motion.img}
+                  src="/bg/loader/big_curtain_r.png"
+                  zIndex={1000}
+                  h={"100%"}
+                  right={0}
+                  position={"absolute"}
+                  variants={{
+                    initial: {
+                      opacity: 1,
+                      x: 0,
+                    },
+                    enter: {
+                      opacity: 1,
+                      x: [0, 500, 400],
+                      transition: {
+                        duration: 2,
+                        delay: 0.5,
+                        easings: "backOut",
+                      },
+                    },
+                    exit: {
+                      opacity: 0,
+                      x: 800,
                       transition: {
                         duration: 1,
                         delay: 0.5,
@@ -184,7 +261,7 @@ const GlobalLayout = () => {
                 align={"center"}
                 gap={"2rem"}
               >
-                <Image src="/icons/maxima2024-logo.png" w={"6rem"} />
+                <Image src="/icons/maxima2024-logo.png" w={"10rem"} />
                 <Stack
                   // direction={"row"}
                   gap={"1rem"}
@@ -209,6 +286,7 @@ const GlobalLayout = () => {
             </Stack>
           )}
         </AnimatePresence>
+
         {auth.status !== "loading" && <Outlet />}
       </SWRConfig>
     </Stack>

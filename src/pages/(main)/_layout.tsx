@@ -167,7 +167,7 @@ const MainLayoutDesktop = () => {
           // w={"50%"}
         >
           {/* Logo MAXIMA 2024 */}
-          <Link to={"/home"}>
+          <Link to={"/"}>
             <Stack w={"7.5rem"}>
               <Image
                 mx={{ lg: 0, xl: 5 }}
