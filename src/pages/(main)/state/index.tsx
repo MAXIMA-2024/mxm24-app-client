@@ -24,6 +24,7 @@ const State = () => {
           <Img
             src={"/state/banner.png"}
             w={["16rem", "24rem", "32rem", "32rem", "32rem"]}
+            pb={["24rem", "16rem", "10rem", 0, 0]}
           />
           <Button
             w={{ base: "16rem", md: "20rem" }}
