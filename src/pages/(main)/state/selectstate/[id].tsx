@@ -131,7 +131,7 @@ const SelectStateId = () => {
       w={"100vw"}
     >
       {/* START logo atas */}
-      <Stack
+      {/* <Stack
         alignSelf={"center"}
         mt={"2rem"}
         bgColor={"#BBDEE7"}
@@ -147,7 +147,7 @@ const SelectStateId = () => {
           alignSelf={"center"}
           justifySelf={"center"}
         />
-      </Stack>
+      </Stack> */}
       {/* END logo atas */}
 
       {/* START CTA atas */}
@@ -155,7 +155,7 @@ const SelectStateId = () => {
         gap={"0"}
         align={"center"}
         justify={"center"}
-        paddingTop={{ base: "20rem", md: "20rem", lg: "20rem" }}
+        paddingTop={{ base: "12rem", md: "20rem", lg: "20rem" }}
         paddingBottom={{ md: "7.5rem", lg: "10rem" }}
       >
         <Stack
@@ -327,6 +327,7 @@ const SelectStateId = () => {
                     gap={"1rem"}
                     pb={"0.5rem"}
                   >
+                    <Image src="/icons/placeholder-300-panjang.png" />
                     <Image src="/icons/placeholder-300-panjang.png" />
                     <Image src="/icons/placeholder-300-panjang.png" />
                     <Image src="/icons/placeholder-300-panjang.png" />
