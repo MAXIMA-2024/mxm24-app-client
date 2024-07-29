@@ -21,7 +21,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 const SelectStateId = () => {
   const toast = useToast();
@@ -39,24 +39,25 @@ const SelectStateId = () => {
 
   // button atas
   const BtStyle = ({ nomor }: { nomor: number }) => {
+    const location = useLocation();
+    const isActive = location.pathname.includes(`${nomor}`);
+
     return (
-      <>
-        <Link to={`/state/selectstate/${nomor}`}>
-          <Button
-            bgColor={"#FFDB7A"}
-            color={"#661226"}
-            outlineColor={"#661226"}
-            paddingX={{ base: "1rem", md: "2rem" }}
-            paddingY={"0rem"}
-            borderRadius={{ base: "1rem", md: "2rem" }}
-            _hover={{ bg: "#661226", color: "#FFDB7A" }}
-          >
-            <Text fontFamily={"Lexend"} fontSize={{ lg: "2rem" }}>
-              {nomor}
-            </Text>
-          </Button>
-        </Link>
-      </>
+      <Link to={`/state/selectstate/${nomor}`}>
+        <Button
+          bgColor={isActive ? "#661226" : "#FFDB7A"}
+          color={isActive ? "#FFDB7A" : "#661226"}
+          outlineColor={"#661226"}
+          paddingX={{ base: "1rem", md: "2rem" }}
+          paddingY={"0rem"}
+          borderRadius={{ base: "1rem", md: "2rem" }}
+          _hover={{ bg: "#661226", color: "#FFDB7A" }}
+        >
+          <Text fontFamily={"Lexend"} fontSize={{ lg: "2rem" }}>
+            {nomor}
+          </Text>
+        </Button>
+      </Link>
     );
   };
 
