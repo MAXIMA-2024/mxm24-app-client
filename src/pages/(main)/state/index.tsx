@@ -1,11 +1,21 @@
-import { Button, Heading, Img, Stack } from "@chakra-ui/react";
+import { Button, Img, Stack } from "@chakra-ui/react";
 import Boag from "@/components/Boag";
+import { Link } from "react-router-dom";
+import { useRef } from "react";
 import { wrap } from "framer-motion";
 
 const State = () => {
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <Stack
-      bgImage={{ base: "/bg/waves-mobile.png", lg: "/bg/waves-desktop.png" }}
+      bgImage={{ base: "/bg/waves-mobile.png", xl: "/bg/waves-desktop.png" }}
       bgSize={"cover"}
       minH={"100vh"}
       w={"100%"}
@@ -26,6 +36,18 @@ const State = () => {
             w={["16rem", "24rem", "32rem", "32rem", "32rem"]}
             pb={["24rem", "16rem", "10rem", 0, 0]}
           />
+          <Link to="/state/selectstate/1">
+            <Button
+              w={{ base: "16rem", md: "20rem" }}
+              bgColor={"#44002B"}
+              textColor={"white"}
+              fontFamily={"Lexend"}
+              fontWeight={"light"}
+              fontSize={"lg"}
+            >
+              Pilih UKM dan Komunitas
+            </Button>
+          </Link>
           <Button
             w={{ base: "16rem", md: "20rem" }}
             bgColor={"#44002B"}
@@ -33,17 +55,8 @@ const State = () => {
             fontFamily={"Lexend"}
             fontWeight={"light"}
             fontSize={"lg"}
-          >
-            Pilih UKM dan Komunitas
-          </Button>
-          <Button
-            w={"20rem"}
-            bgColor={"#44002B"}
-            textColor={"white"}
-            fontFamily={"Lexend"}
-            fontWeight={"light"}
-            fontSize={"lg"}
-            display={{ base: "none", lg: "flex" }}
+            // display={{ base: "none", lg: "flex" }}
+            onClick={scrollToBottom}
           >
             Lihat State Pilihanmu!
           </Button>
@@ -61,6 +74,7 @@ const State = () => {
         <Boag />
         <Boag />
       </Stack>
+      <div ref={bottomRef} style={{ height: "1px", visibility: "hidden" }} />
     </Stack>
   );
 };
