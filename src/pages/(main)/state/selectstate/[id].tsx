@@ -230,6 +230,19 @@ const SelectStateId = () => {
             h={"70vh"}
             overflowY={"auto"}
             spacing={"1rem"}
+            css={{
+              "&::-webkit-scrollbar": {
+                width: "8px",
+              },
+              "&::-webkit-scrollbar-thumb": {
+                backgroundColor: "#D9D9D9",
+                borderRadius: "4px",
+              },
+              "&::-webkit-scrollbar-track": {
+                backgroundColor: "#D9D9D975",
+                borderRadius: "4px",
+              },
+            }}
           >
             <Kartu />
             <Kartu />
