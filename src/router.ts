@@ -17,10 +17,11 @@ export type Path =
   | `/malpun/myticket`
   | `/malpun/viewticket`
   | `/state`
-  | `/state/selectstate`
+  | `/state/selectstate/:id`
+
 
 export type Params = {
-  
+  '/state/selectstate/:id': { id: string }
 }
 
 export type ModalPath = never
