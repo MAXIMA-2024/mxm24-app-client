@@ -5,7 +5,7 @@ import { wrap } from "framer-motion";
 const State = () => {
   return (
     <Stack
-      bgImage={"/bg/waves-desktop.png"}
+      bgImage={{ base: "/bg/waves-mobile.png", lg: "/bg/waves-desktop.png" }}
       bgSize={"cover"}
       minH={"100vh"}
       w={"100%"}

@@ -354,7 +354,7 @@ const SelectStateId = () => {
                 });
               }}
             >
-              Save
+              Ambil
             </Button>
             <Button
               fontFamily={"Lexend"}
@@ -363,7 +363,7 @@ const SelectStateId = () => {
               color={"#AF1648"}
               _hover={{ bg: "#FFDB7A", color: "AF1648" }}
             >
-              Cancel
+              Batal
             </Button>
           </ModalFooter>
         </ModalContent>
