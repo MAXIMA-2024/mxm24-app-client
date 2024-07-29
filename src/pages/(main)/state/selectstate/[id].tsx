@@ -195,7 +195,7 @@ const SelectStateId = () => {
         bgRepeat={"no-repeat"}
         bgSize={"cover"}
         maxW={"100vw"}
-        paddingTop={{ base: "1.75rem", md: "2rem", lg: "5rem" }}
+        paddingTop={{ base: "3rem", md: "2.5rem", lg: "5rem" }}
         paddingBottom={{ base: "3rem", md: "3rem", lg: "5rem" }}
       >
         {/* START Header main */}
