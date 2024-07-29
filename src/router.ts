@@ -19,7 +19,6 @@ export type Path =
   | `/state`
   | `/state/selectstate/:id`
 
-
 export type Params = {
   '/state/selectstate/:id': { id: string }
 }

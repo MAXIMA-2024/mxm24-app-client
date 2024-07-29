@@ -109,7 +109,7 @@ const Malpun = () => {
           MAXIMA 2024
         </Heading>
       </Stack>
-      {isMahasiswa ? <Inbutton /> : <Exbutton />}
+      {!isMahasiswa ? <Inbutton /> : <Exbutton />}
     </>
   );
 };

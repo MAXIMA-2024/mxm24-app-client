@@ -226,10 +226,11 @@ const LandingPage = () => {
               p={8}
               px={"2rem"}
               variant={"ghost"}
-              transition={"0.3s"}
+              transition={"0.3s all"}
               color={"text.tertiary"}
               rounded={"xl"}
-              _hover={{ bgColor: "#3A0025" }}
+              _hover={{ bgColor: "#3A0025", transform: "scale(1.25)" }}
+              shadow={"0 0 5rem #ffffff80"}
               mb={{ base: 0, md: 10 }}
               onClick={() => {
                 setOverlay(<OverlayOne />);
