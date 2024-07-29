@@ -12,10 +12,13 @@ export type Path =
   | `/faq`
   | `/home`
   | `/malpun`
+  | `/malpun/buyticket`
   | `/malpun/claimticket`
+  | `/malpun/myticket`
   | `/malpun/viewticket`
   | `/state`
   | `/state/selectstate/:id`
+
 
 export type Params = {
   '/state/selectstate/:id': { id: string }

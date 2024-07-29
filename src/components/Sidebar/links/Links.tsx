@@ -93,7 +93,11 @@ const Links = ({ closeSidebar }: { closeSidebar: () => void }) => {
           ))}
         </Stack>
         {/* Dropdown Profile */}
-        <ProfileDropDown />
+        <ProfileDropDown
+          closeSidebar={function (): void {
+            throw new Error("Function not implemented.");
+          }}
+        />
       </motion.div>
     </Stack>
   );
