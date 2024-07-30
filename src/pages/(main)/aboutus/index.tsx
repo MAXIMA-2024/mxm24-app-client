@@ -36,7 +36,7 @@ const AboutUs = () => {
         gap={5}
         alignItems={"center"}
         mx={"20%"}
-        mt={{ base: "10rem", lg: "5rem", xl: "0rem" }}
+        mt={{ base: "10rem", lg: "5rem" }}
         position={"relative"}
       >
         <Image

@@ -57,6 +57,7 @@ type User =
       role: "unknown";
       data: {
         email: string;
+        name: string;
       };
     };
 

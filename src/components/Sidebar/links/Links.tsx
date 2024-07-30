@@ -1,7 +1,8 @@
-import { Stack, Image, Text } from "@chakra-ui/react";
+import { Stack, Image, Text, Tooltip, Button } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ProfileDropDown } from "./ProfileDropDown";
+import useAuth from "@/hooks/useAuth";
 
 const variants = {
   open: {
@@ -52,6 +53,7 @@ const items = [
 ];
 
 const Links = ({ closeSidebar }: { closeSidebar: () => void }) => {
+  const auth = useAuth();
   return (
     <Stack as={"div"}>
       <motion.div
@@ -70,34 +72,57 @@ const Links = ({ closeSidebar }: { closeSidebar: () => void }) => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Link to={item.link} onClick={closeSidebar}>
-                <Stack
-                  className="a"
-                  direction="row"
-                  alignItems="center"
-                  spacing={6}
+              {item.title === "State" && auth.status !== "authenticated" ? (
+                <Tooltip
+                  label="Please login to access State"
+                  aria-label="A tooltip"
+                  bgColor={"button.primary"}
+                  rounded={"lg"}
+                  mx={"0.3rem"}
+                  py={"0.5rem"}
+                  shadow={"lg"}
                 >
-                  <Image
-                    src={item.icon}
-                    w={
-                      item.title !== "State" && item.title !== "FAQ"
-                        ? "1rem"
-                        : "1.25rem"
-                    }
-                    h={"1rem"}
-                  />
-                  <Text fontFamily={"Lexend"}>{item.title}</Text>
-                </Stack>
-              </Link>
+                  <Button
+                    variant="link"
+                    onClick={(e) => e.preventDefault()}
+                    style={{ cursor: "not-allowed" }}
+                    sx={{
+                      textDecoration: "none",
+                      color: "text.primary",
+                      _hover: { textDecoration: "none" },
+                    }}
+                  >
+                    <Stack direction="row" alignItems="center" spacing={6}>
+                      <Image src={item.icon} w="1.25rem" h="1rem" />
+                      <Text fontFamily={"Lexend"} fontWeight={400}>
+                        {item.title}
+                      </Text>
+                    </Stack>
+                  </Button>
+                </Tooltip>
+              ) : (
+                <Link to={item.link} onClick={closeSidebar}>
+                  <Stack direction="row" alignItems="center" spacing={6}>
+                    <Image
+                      src={item.icon}
+                      w={
+                        item.title !== "State" && item.title !== "FAQ"
+                          ? "1rem"
+                          : "1.25rem"
+                      }
+                      h={"1rem"}
+                    />
+                    <Text fontFamily={"Lexend"} color={"text.primary"}>
+                      {item.title}
+                    </Text>
+                  </Stack>
+                </Link>
+              )}
             </motion.div>
           ))}
         </Stack>
         {/* Dropdown Profile */}
-        <ProfileDropDown
-          closeSidebar={function (): void {
-            throw new Error("Function not implemented.");
-          }}
-        />
+        <ProfileDropDown closeSidebar={closeSidebar} />
       </motion.div>
     </Stack>
   );

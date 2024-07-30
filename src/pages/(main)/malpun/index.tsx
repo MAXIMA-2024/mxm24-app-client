@@ -19,7 +19,7 @@ const Inbutton = () => {
             _hover={{ bgColor: "#3A0025" }}
             mt={{ base: "5rem", lg: 0 }}
             shadow={"0 0 5rem #ffffff80"}
-            mb={{ base: "8rem", lg: "0rem" }}
+            mb={{ base: "8rem", lg: "7rem" }}
           >
             <Text
               fontFamily={"Lexend"}
@@ -54,7 +54,7 @@ const Exbutton = () => {
               transform: "scale(1.025)",
               // borderWidth: "thick",
             }}
-            mt={{ base: 10, lg: 0 }}
+            mb={{ base: "8rem", lg: "7rem" }}
             shadow={"0 0 5rem #ffffff80"}
             // borderColor={"#fff"}
             // borderWidth={"medium"}
@@ -85,11 +85,11 @@ const Malpun = () => {
         color={"text.primary"}
         fontWeight={"900"}
         gap={{ base: 0, lg: 2 }}
-        pt={{ base: "0rem", md: "18rem", lg: "2.5rem", xl: "2.5rem" }}
+        pt={{ base: "0rem", md: "18rem", lg: "7rem" }}
       >
         <Heading
           fontFamily={"Luthier"}
-          fontSize={{ base: "2rem", md: "4rem", lg: "5rem", xl: "6.5rem" }}
+          fontSize={{ base: "2rem", md: "4rem", lg: "5rem" }}
           textShadow={"0 0 5rem #000000"}
           color={"text.tertiary"}
         >
@@ -109,7 +109,8 @@ const Malpun = () => {
           MAXIMA 2024
         </Heading>
       </Stack>
-      {!isMahasiswa ? <Inbutton /> : <Exbutton />}
+      {/* {!isMahasiswa ? <Inbutton /> : <Exbutton />} */}
+      {!isMahasiswa ? <Exbutton /> : <Inbutton />}
     </>
   );
 };

@@ -80,6 +80,11 @@ const LandingPage = () => {
     onClose();
   };
 
+  const paddingTopForSelamatDatang =
+    auth.status !== "authenticated"
+      ? { base: "12rem", md: "5rem", lg: "11rem" }
+      : { base: "12rem", md: "5rem", lg: "3rem" };
+
   const handleClickDesktop = (newSize: string) => {
     toast({
       position: "bottom-right",
@@ -183,16 +188,15 @@ const LandingPage = () => {
           color={"text.primary"}
           fontWeight={"700"}
           gap={{ base: 0, lg: 2 }}
-          pt={{ base: "7.5rem", md: "0rem", lg: "2.5rem", xl: "2.5rem" }}
+          pt={paddingTopForSelamatDatang}
         >
           {auth.status === "authenticated" ? (
             <Heading
               fontFamily={"Luthier"}
               fontSize={{
-                base: "2rem",
-                md: "4rem",
-                lg: "5rem",
-                xl: "5rem",
+                base: "1.5rem",
+                md: "2.5rem",
+                lg: "2.8rem",
               }}
               // textShadow={"0 0 5rem #000000"}
             >
@@ -201,7 +205,7 @@ const LandingPage = () => {
           ) : (
             <Heading
               fontFamily={"Luthier"}
-              fontSize={{ base: "2rem", md: "4rem", lg: "5rem", xl: "6.5rem" }}
+              fontSize={{ base: "1.5rem", md: "2.5rem", lg: "2.8rem" }}
               // textShadow={"0 0 5rem #000000"}
             >
               Halo! Selamat Datang
@@ -209,19 +213,22 @@ const LandingPage = () => {
           )}
           <Heading
             fontFamily={"Luthier"}
-            fontSize={{ base: "2rem", md: "4rem", lg: "6rem", xl: "6.5rem" }}
+            fontSize={{ base: "1.5rem", md: "2.5rem", lg: "2.8rem" }}
             // textShadow={"0 0 5rem #000000"}
           >
             Maximers!
           </Heading>
         </Stack>
-        {auth.status === "authenticated" && (
+        {auth.status !== "authenticated" && (
           <>
             <Button
               // as={Link}
               // to={`https://sso.umn.ac.id/cas/login?service=${
               //   import.meta.env.VITE_FRONTEND_URL + "/auth/sso"
               // }`}
+              position={"absolute"}
+              zIndex={1}
+              bottom={180}
               bgColor={"button.primary"}
               p={8}
               px={"2rem"}
@@ -231,7 +238,8 @@ const LandingPage = () => {
               rounded={"xl"}
               _hover={{ bgColor: "#3A0025", transform: "scale(1.25)" }}
               shadow={"0 0 5rem #ffffff80"}
-              mb={{ base: 0, md: 10 }}
+              // mb={{ base: 0, md: 10 }}
+              mt={"5rem"}
               onClick={() => {
                 setOverlay(<OverlayOne />);
                 onOpen();
