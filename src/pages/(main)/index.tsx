@@ -81,6 +81,11 @@ const LandingPage = () => {
     onClose();
   };
 
+  const paddingTopForSelamatDatang =
+    auth.status !== "authenticated"
+      ? { base: "12rem", md: "5rem", lg: "11rem" }
+      : { base: "12rem", md: "5rem", lg: "3rem" };
+
   const handleClickDesktop = (newSize: string) => {
     toast({
       position: "bottom-right",
@@ -163,76 +168,82 @@ const LandingPage = () => {
 
   return (
     <>
-      <WelcomeBG>
-        <Stack alignItems={"center"} gap={"15rem"} minH={"100vh"}>
-          <Stack
-            align={"center"}
-            color={"text.primary"}
-            fontWeight={"700"}
-            gap={{ base: 0, lg: 2 }}
-            pt={{ base: "7.5rem", md: "9rem", lg: "9rem", xl: "10rem" }}
-          >
-            <motion.div
-              variants={{
-                initial: {
-                  opacity: 0,
-                  y: -100,
-                },
-                enter: {
-                  opacity: 1,
-                  y: 0,
-                  transition: {
-                    duration: 1,
-                    delay: 0.5,
-                  },
-                },
+      <Stack
+        alignItems={"center"}
+        gap={"15rem"}
+        // justifyContent={
+        //   auth.status === "authenticated" ? "flex-start" : "space-around"
+        // }
+        pt={auth.status === "authenticated" ? "8rem" : "0"}
+        minH={"100vh"}
+        bgImage={{
+          base: "/bg/welcome-page-mobile.png",
+          lg: "/bg/welcome-page-desktop.png",
+        }}
+        bgSize={"cover"}
+        bgRepeat={"no-repeat"}
+        bgPosition={"center"}
+      >
+        <Stack
+          align={"center"}
+          color={"text.primary"}
+          fontWeight={"700"}
+          gap={{ base: 0, lg: 2 }}
+          pt={paddingTopForSelamatDatang}
+        >
+          {auth.status === "authenticated" ? (
+            <Heading
+              fontFamily={"Luthier"}
+              fontSize={{
+                base: "1.5rem",
+                md: "2.5rem",
+                lg: "2.8rem",
               }}
-              initial={"initial"}
-              whileInView={"enter"}
+              // textShadow={"0 0 5rem #000000"}
             >
-              {auth.status === "authenticated" ? (
-                <Heading
-                  fontFamily={"Luthier"}
-                  fontSize={{
-                    base: "2rem",
-                    md: "4rem",
-                    lg: "5rem",
-                    xl: "5rem",
-                  }}
-                  // textShadow={"0 0 5rem #000000"}
-                >
-                  Selamat Datang
-                </Heading>
-              ) : (
-                <Heading
-                  fontFamily={"Luthier"}
-                  fontSize={{
-                    base: "2rem",
-                    md: "4rem",
-                    lg: "5rem",
-                    xl: "6.5rem",
-                  }}
-                  // textShadow={"0 0 5rem #000000"}
-                >
-                  Halo! Selamat Datang
-                </Heading>
-              )}
-            </motion.div>
-
-            <motion.div
-              variants={{
-                initial: {
-                  opacity: 0,
-                  y: -100,
-                },
-                enter: {
-                  opacity: 1,
-                  y: 0,
-                  transition: {
-                    duration: 1,
-                    delay: 0.75,
-                  },
-                },
+              Selamat Datang
+            </Heading>
+          ) : (
+            <Heading
+              fontFamily={"Luthier"}
+              fontSize={{ base: "1.5rem", md: "2.5rem", lg: "2.8rem" }}
+              // textShadow={"0 0 5rem #000000"}
+            >
+              Halo! Selamat Datang
+            </Heading>
+          )}
+          <Heading
+            fontFamily={"Luthier"}
+            fontSize={{ base: "1.5rem", md: "2.5rem", lg: "2.8rem" }}
+            // textShadow={"0 0 5rem #000000"}
+          >
+            Maximers!
+          </Heading>
+        </Stack>
+        {auth.status !== "authenticated" && (
+          <>
+            <Button
+              // as={Link}
+              // to={`https://sso.umn.ac.id/cas/login?service=${
+              //   import.meta.env.VITE_FRONTEND_URL + "/auth/sso"
+              // }`}
+              position={"absolute"}
+              zIndex={1}
+              bottom={180}
+              bgColor={"button.primary"}
+              p={8}
+              px={"2rem"}
+              variant={"ghost"}
+              transition={"0.3s all"}
+              color={"text.tertiary"}
+              rounded={"xl"}
+              _hover={{ bgColor: "#3A0025", transform: "scale(1.25)" }}
+              shadow={"0 0 5rem #ffffff80"}
+              // mb={{ base: 0, md: 10 }}
+              mt={"5rem"}
+              onClick={() => {
+                setOverlay(<OverlayOne />);
+                onOpen();
               }}
               initial={"initial"}
               whileInView={"enter"}

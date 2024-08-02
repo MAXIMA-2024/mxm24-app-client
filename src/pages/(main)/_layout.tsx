@@ -19,24 +19,16 @@ import {
   ModalCloseButton,
   useDisclosure,
   useToast,
-  Box,
-  // Drawer,
-  // DrawerBody,
-  // DrawerFooter,
-  // DrawerHeader,
-  // DrawerOverlay,
-  // DrawerContent,
-  // DrawerCloseButton,
-  // useDisclosure,
+  Tooltip,
 } from "@chakra-ui/react";
-// import { motion } from "framer-motion";
-// import { useState } from "react";
+
 import { IoLogOutOutline } from "react-icons/io5";
 import { FaRegEdit } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import React from "react";
 import { IoTicket } from "react-icons/io5";
+import useAuth from "@/hooks/useAuth";
 
 const NavBarData = [
   {
@@ -67,13 +59,10 @@ const NavBarData = [
 ];
 
 const MainLayoutDesktop = () => {
+  const auth = useAuth();
   const toast = useToast();
-  const isLogin = false;
+
   const [size, setSize] = React.useState("xl");
-  const user = {
-    status: isLogin ? "authenticated" : "unaunthenticated",
-    name: "Jonathan",
-  };
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const OverlayOne = () => (
@@ -82,7 +71,7 @@ const MainLayoutDesktop = () => {
 
   const [overlay, setOverlay] = React.useState(<OverlayOne />);
 
-  const paddingRight = user.status !== "authenticated" ? { lg: 4, xl: 6 } : {};
+  const paddingRight = auth.status !== "authenticated" ? { lg: 4, xl: 6 } : {};
 
   const handleClick = (newSize: string) => {
     toast({
@@ -123,12 +112,6 @@ const MainLayoutDesktop = () => {
           </Stack>
         </Stack>
       ),
-      // title: "Buy Ticket for MalPun",
-      // description:
-      //   "Get your tickets and attend the Malam Puncak MAXIMA 2024 soon!",
-      // status: "success",
-      // duration: 9000,
-      // isClosable: true,
     });
     setSize(newSize);
     onClose();
@@ -157,14 +140,7 @@ const MainLayoutDesktop = () => {
           justifyContent={"space-around"}
           backdropFilter={"blur(10px)"}
           rounded={"full"}
-          // roundedTopRight={"xl"}
-          // roundedBottomRight={"xl"}
           gap={{ lg: 3, xl: 12 }}
-          // px={{ lg: 22, xl: 20 }}
-          // h={"5rem"}
-          // w={"50%"}
-          // w={"70rem"}
-          // w={"50%"}
         >
           {/* Logo MAXIMA 2024 */}
           <Link to={"/"}>
@@ -181,45 +157,94 @@ const MainLayoutDesktop = () => {
           {/* Navbar Items */}
           <Stack direction={"row"} alignItems={"center"} mx={{ lg: 0, xl: 5 }}>
             {NavBarData.map((item) => (
-              <Link to={item.link}>
-                <Button
-                  variant={"ghost"}
-                  gap={2}
-                  w={"7.5rem"}
-                  p={5}
-                  transition={"all 0.2s ease-in-out"}
-                  fontFamily={"Lexend"}
-                  fontWeight={500}
-                  color={"text.primary"}
-                  _hover={{
-                    transform: "scale(0.90)",
-                    fontWeight: 600,
-                    "> img": {
-                      opacity: 1,
-                      transition: "opacity 0.2s ease-in-out",
-                    },
-                    transformOrigin: "center",
-                    bgColor: "#FFFFFF0",
-                  }}
-                  _active={{
-                    bgColor: "#FFFFFF0",
-                  }}
-                >
-                  <Image
-                    src={item.icon}
-                    w={"1rem"}
-                    h={"1rem"}
-                    transition={"all 0.2s ease-in-out"}
-                    _hover={{ w: "1.1rem", h: "1.1rem" }}
-                  ></Image>
-                  <Text>{item.title}</Text>
-                </Button>
-              </Link>
+              <React.Fragment key={item.title}>
+                {item.title === "State" && auth.status !== "authenticated" ? (
+                  <Tooltip
+                    label="Please login to access State"
+                    aria-label="A tooltip"
+                    bgColor={"button.primary"}
+                    rounded={"lg"}
+                    px={"0.8rem"}
+                    py={"0.5rem"}
+                    shadow={"lg"}
+                  >
+                    <Button
+                      variant={"ghost"}
+                      gap={2}
+                      w={"7.5rem"}
+                      p={5}
+                      transition={"all 0.2s ease-in-out"}
+                      fontFamily={"Lexend"}
+                      fontWeight={500}
+                      color={"text.primary"}
+                      _hover={{
+                        transform: "scale(0.90)",
+                        fontWeight: 600,
+                        "> img": {
+                          opacity: 1,
+                          transition: "opacity 0.2s ease-in-out",
+                        },
+                        transformOrigin: "center",
+                        bgColor: "#FFFFFF0",
+                      }}
+                      _active={{
+                        bgColor: "#FFFFFF0",
+                      }}
+                      style={{ cursor: "not-allowed" }}
+                    >
+                      <Image
+                        src={item.icon}
+                        w={"1rem"}
+                        h={"1rem"}
+                        transition={"all 0.2s ease-in-out"}
+                        _hover={{ w: "1.1rem", h: "1.1rem" }}
+                      ></Image>
+                      <Text>{item.title}</Text>
+                    </Button>
+                  </Tooltip>
+                ) : (
+                  <Link to={item.link}>
+                    <Button
+                      variant={"ghost"}
+                      gap={2}
+                      w={"7.5rem"}
+                      p={5}
+                      transition={"all 0.2s ease-in-out"}
+                      fontFamily={"Lexend"}
+                      fontWeight={500}
+                      color={"text.primary"}
+                      _hover={{
+                        transform: "scale(0.90)",
+                        fontWeight: 600,
+                        "> img": {
+                          opacity: 1,
+                          transition: "opacity 0.2s ease-in-out",
+                        },
+                        transformOrigin: "center",
+                        bgColor: "#FFFFFF0",
+                      }}
+                      _active={{
+                        bgColor: "#FFFFFF0",
+                      }}
+                    >
+                      <Image
+                        src={item.icon}
+                        w={"1rem"}
+                        h={"1rem"}
+                        transition={"all 0.2s ease-in-out"}
+                        _hover={{ w: "1.1rem", h: "1.1rem" }}
+                      ></Image>
+                      <Text>{item.title}</Text>
+                    </Button>
+                  </Link>
+                )}
+              </React.Fragment>
             ))}
           </Stack>
+
           {/* Right Side */}
 
-          {user.status === "authenticated" && (
+          {auth.status === "authenticated" && (
             <Menu>
               <MenuButton>
                 <Button
@@ -277,7 +302,7 @@ const MainLayoutDesktop = () => {
                             fontWeight={600}
                             fontSize={{ lg: "smaller", xl: "large" }}
                           >
-                            Jonathan
+                            {auth.user?.data.name}
                           </Text>
                         </Stack>
                       </Stack>
@@ -323,7 +348,7 @@ const MainLayoutDesktop = () => {
                   gap={2}
                   w={"full"}
                   // justifyContent={"center"}
-                  // onClick={auth.logout}
+                  onClick={auth.logout}
                 >
                   <IoLogOutOutline
                     color="white"
@@ -336,7 +361,7 @@ const MainLayoutDesktop = () => {
             </Menu>
           )}
 
-          {user.status !== "authenticated" && (
+          {auth.status !== "authenticated" && (
             <>
               <Button
                 rounded={"full"}

@@ -11,7 +11,7 @@ const GlobalLayout = () => {
   const auth = useAuth();
 
   return (
-    <Stack minW={"100vw"} minH={"100vh"}>
+    <Stack w={"100vw"} h={"100vh"} overflowX={"hidden"}>
       <SWRConfig
         value={{
           fetcher,

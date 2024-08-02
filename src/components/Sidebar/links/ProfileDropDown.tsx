@@ -20,15 +20,17 @@ import { FaRegEdit } from "react-icons/fa";
 import { IoLogOutOutline, IoTicket } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import React from "react";
+import useAuth from "@/hooks/useAuth";
 
-const isLogin = false;
+// const isLogin = false;
 
-const user = {
-  status: isLogin ? "authenticated" : "unaunthenticated",
-  name: "Jonathan",
-};
+// const user = {
+//   status: isLogin ? "authenticated" : "unaunthenticated",
+//   name: "Jonathan",
+// };
 
 const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
+  const auth = useAuth();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("xs");
@@ -40,7 +42,7 @@ const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
   const handleClick = (newSize: string) => {
     toast({
       position: "top",
-      duration: 4000,
+      duration: 10000,
       render: () => (
         <Stack
           mt={"1rem"}
@@ -88,8 +90,12 @@ const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
     onClose();
     closeSidebar();
   };
-
   const [overlay, setOverlay] = React.useState(<OverlayOne />);
+
+  const firstName = auth.user?.data?.name
+    ? auth.user.data.name.split(" ")[0]
+    : "";
+
   return (
     <>
       {/* <style>
@@ -101,7 +107,7 @@ const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
           `}
       </style> */}
       <Stack mb={10}>
-        {user.status === "authenticated" && (
+        {auth.status === "authenticated" && (
           <Menu>
             <MenuButton>
               <Button
@@ -120,30 +126,29 @@ const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
               >
                 <Stack
                   direction={"row"}
-                  justifyContent={"center"}
+                  justifyContent={"start"}
                   alignItems={"center"}
-                  pr={{ lg: 12, xl: 20 }}
-                  p={{ base: 5, lg: 10, xl: 20 }}
+                  // pr={{ lg: 12, xl: 20 }}
+                  // p={{ base: 5, lg: 10, xl: 20 }}
+
+                  pb={"1rem"}
+                  spacing={"0.8rem"}
                 >
                   <Avatar bg={"#44002B"} size={"md"}>
-                    <AvatarBadge
-                      boxSize={{ lg: "0.75rem", xl: "1.25rem" }}
-                      bg="green.500"
-                    />
+                    <AvatarBadge bg="green.500" boxSize="1.2rem" />
                   </Avatar>
 
                   <Stack
-                    justifyContent={"center"}
-                    alignItems={"center"}
+                    justifyContent={"start"}
+                    alignItems={"start"}
                     gap={0}
                     color={"text.primary"}
                     fontFamily={"Lexend"}
                     fontWeight={500}
-                    mx={2}
+                    // mx={2}
                     noOfLines={2}
                     isTruncated={true}
                     textOverflow={"ellipsis"}
-
                     // letterSpacing={"0.1rem"}
                     // textShadow={"0 0 1rem #000000"}
                   >
@@ -154,7 +159,9 @@ const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
                       fontWeight={600}
                       fontSize={{ base: "small", md: "medium" }}
                     >
-                      Jonathan
+                      {firstName.length > 10
+                        ? `${firstName.substring(0, 10)}...`
+                        : firstName}
                     </Text>
                   </Stack>
                 </Stack>
@@ -196,7 +203,7 @@ const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
                 gap={2}
                 w={"full"}
                 justifyContent={"center"}
-                // onClick={auth.logout}
+                onClick={auth.logout}
               >
                 <IoLogOutOutline
                   color="white"
@@ -209,7 +216,7 @@ const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
           </Menu>
         )}
 
-        {user.status !== "authenticated" && (
+        {auth.status !== "authenticated" && (
           <>
             <Button
               rounded={"full"}
@@ -290,9 +297,10 @@ const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
 };
 
 const TopLeftProfile = () => {
+  const auth = useAuth();
   return (
     <Stack pos={"fixed"} right={-2} top={"25px"}>
-      {user.status === "authenticated" && (
+      {auth.status === "authenticated" && (
         <Menu>
           <MenuButton>
             <Button
@@ -357,7 +365,7 @@ const TopLeftProfile = () => {
               gap={2}
               w={"full"}
               // justifyContent={"center"}
-              // onClick={auth.logout}
+              onClick={auth.logout}
             >
               <IoLogOutOutline
                 color="white"
