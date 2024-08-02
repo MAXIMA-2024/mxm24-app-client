@@ -31,9 +31,14 @@ const Faq = () => {
             textAlign={"justify"}
             mb={8}
           >
-            Ini adalah konten untuk HoME. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Porttitor massa id neque aliquam
-            vestibulum morbi blandit cursus risus.
+            <b>Hall of MAXIMA Exhibition</b> merupakan salah satu bagian dari
+            rangkaian kegiatan MAXIMA 2024. HoME merupakan rangkaian kegiatan
+            pertama pada MAXIMA 2024 yang berupa pameran perkenalan dari setiap
+            UKM, Organisasi, LSO, Media Kampus yang berada di Universitas
+            Multimedia Nusantara. Rangkaian kegiatan HoME ini bertujuan untuk
+            menarik perhatian para mahasiswa baru agar dapat memiliki
+            ketertarikan serta gambaran yang dilengkapi dengan pengetahuan
+            terkait UKM/Organisasi/LSO/Media Kampus yang diminati.
           </Text>
         );
       case "STATE":
@@ -45,8 +50,14 @@ const Faq = () => {
             textAlign={"justify"}
             mb={8}
           >
-            Ini adalah konten untuk STATE. Libero volutpat sed cras ornare arcu
-            dui. Id diam maecenas ultricies mi eget mauris.
+            <b>STATE atau Student Activities Unit Explore</b> merupakan salah
+            satu rangkaian acara MAXIMA yang bertujuan untuk memberi kesempatan
+            untuk para peserta agar dapat mengeksplorasi, mencoba serta
+            mempelajari berbagai kegiatan yang diadakan Organisasi, Unit
+            Kegiatan Mahasiswa, Lembaga Semi Otonom, dan juga Media Kampus yang
+            ada di Universitas Multimedia Nusantara. Melalui rangkaian STATE,
+            MAXIMERS akan diberikan 3 kesempatan free trial yang dapat digunakan
+            untuk mencoba kegiatan-kegiatan yang diminati.
           </Text>
         );
       case "MalPun":
@@ -58,9 +69,14 @@ const Faq = () => {
             textAlign={"justify"}
             mb={8}
           >
-            Ini adalah konten untuk Malam Puncak. Vivamus at augue eget arcu
-            dictum varius duis. Ipsum nunc aliquet bibendum enim facilisis
-            gravida neque.
+            <b>Malam Puncak MAXIMA</b> merupakan rangkaian terakhir dari
+            kegiatan MAXIMA. Kata ‘Puncak’ merepresentasikan puncak dari seluruh
+            rangkaian kegiatan MAXIMA yang akan menampilkan berbagai pertunjukan
+            menarik dan meriah dari UKM serta Organisasi yang berada di
+            Universitas Multimedia Nusantara. Tidak hanya itu, pada MalPun
+            MAXIMA juga akan ada penampilan dari Guest Star serta dapat menjadi
+            wadah bagi para mahasiswa baru untuk mendaftarkan dirinya bergabung
+            dalam organisasi yang berada di Universitas Multimedia Nusantara.
           </Text>
         );
       default:

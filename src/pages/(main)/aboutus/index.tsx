@@ -98,19 +98,15 @@ const AboutUs = () => {
             exit={{ opacity: 0, y: -10 }}
             transition={"0.3 ease-in-out"}
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Porttitor massa id neque aliquam vestibulum morbi blandit cursus
-            risus. Libero volutpat sed cras ornare arcu dui. Id diam maecenas
-            ultricies mi eget mauris. Vivamus at augue eget arcu dictum varius
-            duis. Ipsum nunc aliquet bibendum enim facilisis gravida neque. Quam
-            viverra orci sagittis eu volutpat odio facilisis mauris. Maecenas
-            ultricies mi eget mauris pharetra et. Ultricies tristique nulla
-            aliquet enim. At tellus at urna condimentum mattis pellentesque.
-            Pellentesque habitant morbi tristique senectus et netus et. Nulla at
-            volutpat diam ut venenatis tellus. Lacus laoreet non curabitur
-            gravida arcu ac tortor. In hac habitasse platea dictumst vestibulum
-            rhoncus est pellentesque elit.
+            MAXIMA (Malam Expresi Mahasiswa) merupakan sebuah kegiatan tahunan
+            terbesar di Universitas Multimedia Nusantara yang berada di bawah
+            naungan BEM. MAXIMA merupakan kegiatan yang bertujuan untuk
+            memperkenalkan berbagai UKM/Organisasi/LSO/Media Kampus yang ada di
+            UMN kepada para mahasiswa baru. MAXIMA 2024 mengusung tema “Passion
+            Quest Unleashed” dan memiliki tagline yaitu “Express Your Uniqueness
+            Show It To Shine”. Melalui kegiatan MAXIMA, diharapkan para
+            mahasiswa baru dapat menemukan potensi dirinya dan mengekspresikan
+            bakatnya agar semakin bersinar.
           </Text>
           {/* ISI CONTENT END */}
 
