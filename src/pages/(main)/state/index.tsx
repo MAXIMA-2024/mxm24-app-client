@@ -50,7 +50,7 @@ const State = () => {
                   // display={{ base: "none", lg: "flex" }}
                   onClick={scrollToBottom}
                 >
-                  Lihat State Pilihanmu!
+                  Lihat STATE Pilihanmu!
                 </Button>
               </Stack>
             </Stack>
@@ -117,7 +117,7 @@ const State = () => {
                 // display={{ base: "none", lg: "flex" }}
                 onClick={scrollToBottom}
               >
-                Lihat State Pilihanmu!
+                Lihat STATE Pilihanmu!
               </Button>
             </Stack>
           </Stack>

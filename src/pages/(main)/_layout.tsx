@@ -38,7 +38,7 @@ const NavBarData = [
     link: "/home",
   },
   {
-    title: "State",
+    title: "STATE",
     icon: "/icons/state-icon.png",
     link: "/state",
   },
@@ -201,9 +201,9 @@ const MainLayoutDesktop = () => {
                     duration: 0.75,
                   }}
                 >
-                  {item.title === "State" && auth.status !== "authenticated" ? (
+                  {item.title === "STATE" && auth.status !== "authenticated" ? (
                     <Tooltip
-                      label="Please login to access State"
+                      label="Please login to access STATE"
                       aria-label="A tooltip"
                       bgColor={"button.primary"}
                       rounded={"lg"}
