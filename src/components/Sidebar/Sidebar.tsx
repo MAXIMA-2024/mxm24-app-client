@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import "@/components/Sidebar/Sidebar.css";
 import Links from "./links/Links";
@@ -7,6 +7,14 @@ import { TopLeftProfile } from "./links/ProfileDropDown";
 
 const Sidebar: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const [id, setId] = useState(0);
+
+  // hack buat nge paksa render ulang link sidebar
+  useEffect(() => {
+    setId(id + 1);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
 
   const closeSidebar = () => {
     setOpen(false);
@@ -34,7 +42,7 @@ const Sidebar: React.FC = () => {
   return (
     <motion.div className="sidebarContainer" animate={open ? "open" : "closed"}>
       <motion.div className="bg" variants={variants}>
-        <Links closeSidebar={closeSidebar} />
+        <Links closeSidebar={closeSidebar} key={id} />
       </motion.div>
       <div className="toggleButton">
         <ToggleButton setOpen={setOpen} />

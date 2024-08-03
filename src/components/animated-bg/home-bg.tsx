@@ -27,9 +27,7 @@ const HoMEBG = ({ children }: HomeBGProps) => {
     if (a) {
       setTimeout(() => {
         a.value = true;
-
-        console.log("stateMachineInput", a.value);
-      }, 3000);
+      }, 2800);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -28,6 +28,7 @@ const AboutUs = () => {
       bgRepeat={"no-repeat"}
       bgPosition={"center"}
       minH={"100vh"}
+      minW={"100vw"}
       justifyContent={"center"}
       alignItems={"center"}
     >

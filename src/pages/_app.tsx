@@ -10,8 +10,16 @@ const GlobalLayout = () => {
   const fetcher = useFetcher();
   const auth = useAuth();
 
+  const isLoading = auth.status === "loading";
+
   return (
-    <Stack w={"100vw"} h={"100vh"} overflowX={"hidden"}>
+    <Stack
+      minW={"100vw"}
+      minH={"100vh"}
+      overflowX={"hidden"}
+      pos={"relative"}
+      gap={0}
+    >
       <SWRConfig
         value={{
           fetcher,
@@ -20,274 +28,296 @@ const GlobalLayout = () => {
       >
         <AnimatePresence mode="wait">
           {/* auth loading */}
-          {auth.status === "loading" && (
+          <Stack
+            id="loader"
+            as={motion.div}
+            pos={"absolute"}
+            top={0}
+            left={0}
+            gap={0}
+            zIndex={50}
+            minW={"100vw"}
+            minH={"100vh"}
+            align={"center"}
+            justify={"center"}
+            bgImage={"url('/bg/loader/bg.png')"}
+            bgRepeat={"no-repeat"}
+            bgSize={"cover"}
+            position={"relative"}
+            overflow={"hidden"}
+            variants={{
+              initial: {
+                opacity: 1,
+                visibility: "visible",
+              },
+              enter: {
+                opacity: 1,
+                visibility: "visible",
+                transition: {
+                  duration: 1,
+                  delay: 0.5,
+                  easings: "backOut",
+                },
+              },
+              exit: {
+                opacity: 0,
+                visibility: "hidden",
+                transition: {
+                  duration: 1,
+                  delay: 0.5,
+                  easings: "backOut",
+                },
+              },
+            }}
+            initial={"initial"}
+            animate={isLoading ? "enter" : "exit"}
+            exit={"exit"}
+            overflowX={"hidden"}
+            overflowY={"hidden"}
+          >
+            <Hide below="md">
+              <Image
+                as={motion.img}
+                src="/bg/loader/big_curtain_l.png"
+                zIndex={51}
+                h={"100%"}
+                // w={"16rem"}
+                left={0}
+                position={"absolute"}
+                variants={{
+                  initial: {
+                    opacity: 1,
+                    x: 0,
+                    visibility: "visible",
+                  },
+                  enter: {
+                    opacity: 1,
+                    x: [0, -500, -400],
+                    visibility: "visible",
+                    transition: {
+                      duration: 2,
+                      delay: 0.5,
+                      easings: "backOut",
+                    },
+                  },
+                  exit: {
+                    opacity: 0,
+                    x: -800,
+                    visibility: "hidden",
+                    transition: {
+                      duration: 1,
+                      delay: 0.5,
+                      easings: "backOut",
+                    },
+                  },
+                }}
+                initial={"initial"}
+                animate={isLoading ? "enter" : "exit"}
+                exit={"exit"}
+                overflow={"hidden"}
+              />
+            </Hide>
+
+            <Show below="md">
+              <Image
+                as={motion.img}
+                src="/bg/loader/big_curtain_l.png"
+                zIndex={51}
+                h={"100%"}
+                // w={"16rem"}
+                left={0}
+                position={"absolute"}
+                variants={{
+                  initial: {
+                    opacity: 1,
+                    x: 0,
+                    visibility: "visible",
+                  },
+                  enter: {
+                    opacity: 1,
+                    x: [-100, -500, -800],
+                    visibility: "visible",
+                    transition: {
+                      duration: 2,
+                      delay: 0.5,
+                      easings: "backOut",
+                    },
+                  },
+                  exit: {
+                    opacity: 0,
+                    x: -800,
+                    visibility: "hidden",
+                    transition: {
+                      duration: 1,
+                      delay: 0.5,
+                      easings: "backOut",
+                    },
+                  },
+                }}
+                initial={"initial"}
+                animate={isLoading ? "enter" : "exit"}
+                exit={"exit"}
+                overflow={"hidden"}
+              />
+              <Image
+                as={motion.img}
+                src="/bg/loader/curtainsMobile.png"
+                w={"100%"}
+                position={"absolute"}
+                top={0}
+                objectFit={"cover"}
+                variants={{
+                  initial: {
+                    opacity: 0,
+                    y: -150,
+                    visibility: "visible",
+                  },
+                  enter: {
+                    opacity: 1,
+                    y: [-150, 0, -5],
+                    visibility: "visible",
+                    transition: {
+                      duration: 1,
+                      delay: 0.5,
+                      easings: "backOut",
+                    },
+                  },
+                  exit: {
+                    opacity: 0,
+                    y: -150,
+                    visibility: "hidden",
+                    transition: {
+                      duration: 1,
+                      delay: 0.5,
+                      easings: "backOut",
+                    },
+                  },
+                }}
+                initial={"initial"}
+                animate={isLoading ? "enter" : "exit"}
+                exit={"exit"}
+                overflow={"hidden"}
+              />
+
+              <Image
+                as={motion.img}
+                src="/bg/loader/big_curtain_r.png"
+                zIndex={51}
+                h={"100%"}
+                right={0}
+                position={"absolute"}
+                variants={{
+                  initial: {
+                    opacity: 1,
+                    x: 0,
+                    visibility: "visible",
+                  },
+                  enter: {
+                    opacity: 1,
+                    x: [100, 500, 800],
+                    visibility: "visible",
+                    transition: {
+                      duration: 2,
+                      delay: 0.5,
+                      easings: "backOut",
+                    },
+                  },
+                  exit: {
+                    opacity: 0,
+                    x: 800,
+                    visibility: "hidden",
+                    transition: {
+                      duration: 1,
+                      delay: 0.5,
+                      easings: "backOut",
+                    },
+                  },
+                }}
+                initial={"initial"}
+                animate={isLoading ? "enter" : "exit"}
+                exit={"exit"}
+                overflow={"hidden"}
+              />
+            </Show>
+            <Hide below="md">
+              <Image
+                as={motion.img}
+                src="/bg/loader/big_curtain_r.png"
+                zIndex={51}
+                h={"100%"}
+                right={0}
+                position={"absolute"}
+                variants={{
+                  initial: {
+                    opacity: 1,
+                    x: 0,
+                    visibility: "visible",
+                  },
+                  enter: {
+                    opacity: 1,
+                    x: [0, 500, 400],
+                    visibility: "visible",
+                    transition: {
+                      duration: 2,
+                      delay: 0.5,
+                      easings: "backOut",
+                    },
+                  },
+                  exit: {
+                    opacity: 0,
+                    x: 800,
+                    visibility: "hidden",
+                    transition: {
+                      duration: 1,
+                      delay: 0.5,
+                      easings: "backOut",
+                    },
+                  },
+                }}
+                initial={"initial"}
+                animate={isLoading ? "enter" : "exit"}
+                exit={"exit"}
+                overflow={"hidden"}
+              />
+            </Hide>
+
             <Stack
-              as={motion.div}
-              gap={0}
-              minW={"100vw"}
-              minH={"100vh"}
-              align={"center"}
+              direction={"column"}
+              bgColor={"white"}
+              rounded={"2rem"}
+              p={"4rem"}
+              m={"2rem"}
               justify={"center"}
-              bgImage={"url('/bg/loader/bg.png')"}
-              bgRepeat={"no-repeat"}
-              bgSize={"cover"}
-              position={"relative"}
-              overflow={"hidden"}
-              variants={{
-                initial: {
-                  opacity: 0,
-                },
-                enter: {
-                  opacity: 1,
-                  transition: {
-                    duration: 1,
-                    delay: 0.5,
-                    easings: "backOut",
-                  },
-                },
-                exit: {
-                  opacity: 0,
-                  transition: {
-                    duration: 1,
-                    delay: 0.5,
-                    easings: "backOut",
-                  },
-                },
-              }}
-              initial={"initial"}
-              animate={"enter"}
-              exit={"exit"}
-              overflowX={"hidden"}
-              overflowY={"hidden"}
+              align={"center"}
+              gap={"2rem"}
             >
-              <Hide below="md">
-                <Image
-                  as={motion.img}
-                  src="/bg/loader/big_curtain_l.png"
-                  zIndex={1000}
-                  h={"100%"}
-                  // w={"16rem"}
-                  left={0}
-                  position={"absolute"}
-                  variants={{
-                    initial: {
-                      opacity: 1,
-                      x: 0,
-                    },
-                    enter: {
-                      opacity: 1,
-                      x: [0, -500, -400],
-                      transition: {
-                        duration: 2,
-                        delay: 0.5,
-                        easings: "backOut",
-                      },
-                    },
-                    exit: {
-                      opacity: 0,
-                      x: -800,
-                      transition: {
-                        duration: 1,
-                        delay: 0.5,
-                        easings: "backOut",
-                      },
-                    },
-                  }}
-                  initial={"initial"}
-                  animate={"enter"}
-                  exit={"exit"}
-                  overflow={"hidden"}
-                />
-              </Hide>
-
-              <Show below="md">
-                <Image
-                  as={motion.img}
-                  src="/bg/loader/big_curtain_l.png"
-                  zIndex={1000}
-                  h={"100%"}
-                  // w={"16rem"}
-                  left={0}
-                  position={"absolute"}
-                  variants={{
-                    initial: {
-                      opacity: 1,
-                      x: 0,
-                    },
-                    enter: {
-                      opacity: 1,
-                      x: [-100, -500, -800],
-                      transition: {
-                        duration: 2,
-                        delay: 0.5,
-                        easings: "backOut",
-                      },
-                    },
-                    exit: {
-                      opacity: 0,
-                      x: -800,
-                      transition: {
-                        duration: 1,
-                        delay: 0.5,
-                        easings: "backOut",
-                      },
-                    },
-                  }}
-                  initial={"initial"}
-                  animate={"enter"}
-                  exit={"exit"}
-                  overflow={"hidden"}
-                />
-                <Image
-                  as={motion.img}
-                  src="/bg/loader/curtainsMobile.png"
-                  w={"100%"}
-                  position={"absolute"}
-                  top={0}
-                  objectFit={"cover"}
-                  variants={{
-                    initial: {
-                      opacity: 0,
-                      y: -150,
-                    },
-                    enter: {
-                      opacity: 1,
-                      y: [-150, 0, -5],
-                      transition: {
-                        duration: 1,
-                        delay: 0.5,
-                        easings: "backOut",
-                      },
-                    },
-                    exit: {
-                      opacity: 0,
-                      y: -150,
-                      transition: {
-                        duration: 1,
-                        delay: 0.5,
-                        easings: "backOut",
-                      },
-                    },
-                  }}
-                  initial={"initial"}
-                  animate={"enter"}
-                  exit={"exit"}
-                  overflow={"hidden"}
-                />
-
-                <Image
-                  as={motion.img}
-                  src="/bg/loader/big_curtain_r.png"
-                  zIndex={1000}
-                  h={"100%"}
-                  right={0}
-                  position={"absolute"}
-                  variants={{
-                    initial: {
-                      opacity: 1,
-                      x: 0,
-                    },
-                    enter: {
-                      opacity: 1,
-                      x: [100, 500, 800],
-                      transition: {
-                        duration: 2,
-                        delay: 0.5,
-                        easings: "backOut",
-                      },
-                    },
-                    exit: {
-                      opacity: 0,
-                      x: 800,
-                      transition: {
-                        duration: 1,
-                        delay: 0.5,
-                        easings: "backOut",
-                      },
-                    },
-                  }}
-                  initial={"initial"}
-                  animate={"enter"}
-                  exit={"exit"}
-                  overflow={"hidden"}
-                />
-              </Show>
-              <Hide below="md">
-                <Image
-                  as={motion.img}
-                  src="/bg/loader/big_curtain_r.png"
-                  zIndex={1000}
-                  h={"100%"}
-                  right={0}
-                  position={"absolute"}
-                  variants={{
-                    initial: {
-                      opacity: 1,
-                      x: 0,
-                    },
-                    enter: {
-                      opacity: 1,
-                      x: [0, 500, 400],
-                      transition: {
-                        duration: 2,
-                        delay: 0.5,
-                        easings: "backOut",
-                      },
-                    },
-                    exit: {
-                      opacity: 0,
-                      x: 800,
-                      transition: {
-                        duration: 1,
-                        delay: 0.5,
-                        easings: "backOut",
-                      },
-                    },
-                  }}
-                  initial={"initial"}
-                  animate={"enter"}
-                  exit={"exit"}
-                  overflow={"hidden"}
-                />
-              </Hide>
-
+              <Image src="/icons/maxima2024-logo.png" w={"10rem"} />
               <Stack
-                direction={"column"}
-                bgColor={"white"}
-                rounded={"2rem"}
-                p={"4rem"}
-                m={"2rem"}
-                justify={"center"}
+                // direction={"row"}
+                gap={"1rem"}
+                color={"text.secondary"}
                 align={"center"}
-                gap={"2rem"}
               >
-                <Image src="/icons/maxima2024-logo.png" w={"10rem"} />
-                <Stack
-                  // direction={"row"}
-                  gap={"1rem"}
-                  color={"text.secondary"}
-                  align={"center"}
+                <Text
+                  fontWeight={"semibold"}
+                  fontSize={["1rem", "1rem", "1rem", "1.5rem"]}
+                  textAlign={"center"}
                 >
-                  <Text
-                    fontWeight={"semibold"}
-                    fontSize={["1rem", "1rem", "1rem", "1.5rem"]}
-                    textAlign={"center"}
-                  >
-                    Loading your contents...
-                  </Text>
-                  <Spinner
-                    size={["md", "md", "lg", "lg"]}
-                    thickness="4px"
-                    speed="0.65s"
-                    emptyColor="gray.200"
-                  />
-                </Stack>
+                  Loading your contents...
+                </Text>
+                <Spinner
+                  size={["md", "md", "lg", "lg"]}
+                  thickness="4px"
+                  speed="0.65s"
+                  emptyColor="gray.200"
+                />
               </Stack>
             </Stack>
-          )}
+          </Stack>
+          <Stack flex={1} pos={"absolute"} top={0} left={0}>
+            <Outlet />
+          </Stack>
         </AnimatePresence>
-
-        {auth.status !== "loading" && <Outlet />}
       </SWRConfig>
     </Stack>
   );

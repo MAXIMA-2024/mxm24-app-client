@@ -1,11 +1,27 @@
 import { Hide, Show, Stack } from "@chakra-ui/react";
-import Rive, { Alignment, Fit, Layout } from "@rive-app/react-canvas";
+import { Alignment, Fit, Layout, useRive } from "@rive-app/react-canvas";
 
 type WelcomeBGProps = {
   children: React.ReactNode;
 };
 
 const WelcomeBG = ({ children }: WelcomeBGProps) => {
+  const desktop = useRive({
+    src: "/animated/assets.riv",
+    artboard: "Landing_Desktop",
+    stateMachines: "Main",
+    autoplay: true,
+    layout: new Layout({ fit: Fit.Cover, alignment: Alignment.Center }),
+  });
+
+  const mobile = useRive({
+    src: "/animated/assets.riv",
+    artboard: "Landing_Mobile",
+    stateMachines: "Main",
+    autoplay: true,
+    layout: new Layout({ fit: Fit.Cover, alignment: Alignment.TopCenter }),
+  });
+
   return (
     <Stack
       minW={"100vw"}
@@ -21,13 +37,7 @@ const WelcomeBG = ({ children }: WelcomeBGProps) => {
       bgPosition={"center"}
     >
       <Show below="md">
-        <Rive
-          src="animated/assets.riv"
-          artboard={"Landing_Mobile"}
-          stateMachines="Main"
-          layout={
-            new Layout({ fit: Fit.Cover, alignment: Alignment.TopCenter })
-          }
+        <mobile.RiveComponent
           style={{
             flex: 1,
           }}
@@ -35,11 +45,7 @@ const WelcomeBG = ({ children }: WelcomeBGProps) => {
       </Show>
 
       <Hide below="md">
-        <Rive
-          src="animated/assets.riv"
-          artboard={"Landing_Desktop"}
-          stateMachines="Main"
-          layout={new Layout({ fit: Fit.Cover, alignment: Alignment.Center })}
+        <desktop.RiveComponent
           style={{
             flex: 1,
           }}

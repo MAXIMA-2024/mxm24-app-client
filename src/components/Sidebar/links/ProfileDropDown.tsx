@@ -168,7 +168,7 @@ const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
               </Button>
             </MenuButton>
             <MenuList px={2} shadow={"lg"} borderRadius={"2xl"}>
-              <Link to={"/auth/profile"}>
+              <Link to={"/profile"}>
                 <Button
                   // bg={"status.error"}
                   //   p={2}
@@ -329,7 +329,7 @@ const TopLeftProfile = () => {
             </Button>
           </MenuButton>
           <MenuList px={2} shadow={"lg"} borderRadius={"2xl"}>
-            <Link to={"/auth/profile"}>
+            <Link to={"/profile"}>
               <Button
                 // bg={"status.error"}
                 p={2}

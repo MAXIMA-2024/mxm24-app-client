@@ -4,26 +4,6 @@ import { Link } from "react-router-dom";
 import { ProfileDropDown } from "./ProfileDropDown";
 import useAuth from "@/hooks/useAuth";
 
-const variants = {
-  open: {
-    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-  },
-  closed: {
-    transition: { staggerChildren: 0.05, staggerDirection: -1 },
-  },
-};
-
-const itemVariants = {
-  open: {
-    y: 0,
-    opacity: 1,
-  },
-  closed: {
-    y: 50,
-    opacity: 0,
-  },
-};
-
 const items = [
   {
     title: "HoME",
@@ -54,13 +34,13 @@ const items = [
 
 const Links = ({ closeSidebar }: { closeSidebar: () => void }) => {
   const auth = useAuth();
+
   return (
     <Stack as={"div"}>
       <motion.div
         initial="closed"
         animate="open"
         exit="closed"
-        variants={variants}
         className="links"
       >
         {/* Links */}
@@ -68,9 +48,24 @@ const Links = ({ closeSidebar }: { closeSidebar: () => void }) => {
           {items.map((item, index) => (
             <motion.div
               key={index}
-              variants={itemVariants}
+              variants={{
+                open: {
+                  x: 0,
+                  opacity: 1,
+                },
+                closed: {
+                  x: -50,
+                  opacity: 0,
+                },
+              }}
+              initial={"closed"}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
+              whileInView={"open"}
+              transition={{
+                duration: 0.75,
+                delay: index * 0.1,
+              }}
             >
               {item.title === "State" && auth.status !== "authenticated" ? (
                 <Tooltip
