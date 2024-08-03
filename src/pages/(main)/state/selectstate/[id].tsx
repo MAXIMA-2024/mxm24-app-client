@@ -12,7 +12,6 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
   ModalFooter,
   ModalBody,
   ModalCloseButton,
@@ -346,7 +345,9 @@ const SelectStateId = () => {
               _hover={{ bg: "#FFB1C9", color: "white" }}
               onClick={() => {
                 // Create an example promise that resolves in 5s
-                const examplePromise = new Promise((resolve, reject) => {
+
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                const examplePromise = new Promise((resolve, _reject) => {
                   setTimeout(() => resolve(200), 5000);
                 });
 
