@@ -7,7 +7,6 @@ export type Path =
   | `/`
   | `/aboutus`
   | `/auth/onboarding`
-  | `/auth/profile`
   | `/auth/sso`
   | `/faq`
   | `/home`
@@ -16,6 +15,7 @@ export type Path =
   | `/malpun/claimticket`
   | `/malpun/myticket`
   | `/malpun/viewticket`
+  | `/profile`
   | `/state`
   | `/state/selectstate/:id`
 

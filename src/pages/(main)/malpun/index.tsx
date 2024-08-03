@@ -19,7 +19,7 @@ const Inbutton = () => {
             _hover={{ bgColor: "#3A0025" }}
             mt={{ base: "5rem", lg: 0 }}
             shadow={"0 0 5rem #ffffff80"}
-            mb={{ base: "8rem", lg: "7rem" }}
+            mb={{ base: "13rem", lg: "7rem" }}
           >
             <Text
               fontFamily={"Lexend"}
@@ -54,7 +54,8 @@ const Exbutton = () => {
               transform: "scale(1.025)",
               // borderWidth: "thick",
             }}
-            mb={{ base: "8rem", lg: "7rem" }}
+            mt={{ base: "5rem", lg: 0 }}
+            mb={{ base: "13rem", lg: "7rem" }}
             shadow={"0 0 5rem #ffffff80"}
             // borderColor={"#fff"}
             // borderWidth={"medium"}
@@ -89,7 +90,7 @@ const Malpun = () => {
       >
         <Heading
           fontFamily={"Luthier"}
-          fontSize={{ base: "2rem", md: "4rem", lg: "5rem" }}
+          fontSize={{ base: "1rem", md: "3rem", lg: "4rem" }}
           textShadow={"0 0 5rem #000000"}
           color={"text.tertiary"}
         >
@@ -98,10 +99,10 @@ const Malpun = () => {
         <Heading
           fontFamily={"Luthier"}
           fontSize={{
-            base: "2rem",
-            md: "2.5rem",
-            lg: "3.5rem",
-            xl: "5rem",
+            base: "1rem",
+            md: "2rem",
+            lg: "3rem",
+            xl: "4rem",
           }}
           textShadow={"0 0 5rem #000000"}
           color={"button.yellow"}

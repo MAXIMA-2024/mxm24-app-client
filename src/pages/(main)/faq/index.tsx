@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Stack, Text, Button, Image } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
@@ -78,6 +78,7 @@ const Faq = () => {
       bgRepeat={"no-repeat"}
       bgPosition={"center"}
       minH={"100vh"}
+      minW={"100vw"}
       justifyContent={"center"}
       alignItems={"center"}
     >
