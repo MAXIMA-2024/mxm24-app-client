@@ -7,6 +7,7 @@ const AuthLayout = () => {
       alignItems={"center"}
       justifyContent={"center"}
       minH={"100vh"}
+      minW={"100vw"}
       bgImage={{
         base: "/bg/onboarding-mobile.png",
         md: "/bg/onboarding-desktop.png",

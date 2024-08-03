@@ -1,5 +1,6 @@
+import useLoading from "@/hooks/useLoading";
 import { Hide, Show, Stack } from "@chakra-ui/react";
-import Rive, {
+import {
   Alignment,
   Fit,
   Layout,
@@ -13,7 +14,7 @@ type HomeBGProps = {
 };
 
 const HoMEBG = ({ children }: HomeBGProps) => {
-  const { rive, RiveComponent } = useRive({
+  const desktop = useRive({
     src: "animated/assets.riv",
     artboard: "Home_Desktop",
     stateMachines: "Main",
@@ -21,7 +22,17 @@ const HoMEBG = ({ children }: HomeBGProps) => {
     layout: new Layout({ fit: Fit.Cover, alignment: Alignment.Center }),
   });
 
-  const a = useStateMachineInput(rive, "Main", "IsDone", false);
+  const mobile = useRive({
+    src: "animated/assets.riv",
+    artboard: "Home_Mobile",
+    stateMachines: "Main",
+    autoplay: true,
+    layout: new Layout({ fit: Fit.Cover, alignment: Alignment.TopCenter }),
+  });
+
+  const { setLoaded } = useLoading();
+
+  const a = useStateMachineInput(desktop.rive, "Main", "IsDone", false);
 
   useEffect(() => {
     if (a) {
@@ -32,6 +43,18 @@ const HoMEBG = ({ children }: HomeBGProps) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [a]);
+
+  useEffect(() => {
+    if (desktop.rive && desktop.rive.isPlaying) {
+      setLoaded(true);
+    }
+
+    if (mobile.rive && mobile.rive.isPlaying) {
+      setLoaded(true);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [desktop.rive, mobile.rive]);
 
   return (
     <Stack
@@ -48,7 +71,7 @@ const HoMEBG = ({ children }: HomeBGProps) => {
       bgPosition={"center"}
     >
       <Show below="md">
-        <Rive
+        {/* <Rive
           src="animated/assets.riv"
           artboard={"Home_Mobile"}
           stateMachines="Main"
@@ -58,11 +81,21 @@ const HoMEBG = ({ children }: HomeBGProps) => {
           style={{
             flex: 1,
           }}
+        /> */}
+        <mobile.RiveComponent
+          style={{
+            flex: 1,
+          }}
         />
       </Show>
 
       <Hide below="md">
-        <RiveComponent
+        {/* <RiveComponent
+          style={{
+            flex: 1,
+          }}
+        /> */}
+        <desktop.RiveComponent
           style={{
             flex: 1,
           }}

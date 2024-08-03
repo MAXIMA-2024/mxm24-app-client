@@ -30,6 +30,7 @@ import { IoTicket } from "react-icons/io5";
 import useAuth from "@/hooks/useAuth";
 import { useNavigate } from "@/router";
 import { motion } from "framer-motion";
+import useLoading from "@/hooks/useLoading";
 
 const NavBarData = [
   {
@@ -61,11 +62,11 @@ const NavBarData = [
 
 const MainLayoutDesktop = () => {
   const auth = useAuth();
+  const { isLoaded } = useLoading();
   const toast = useToast();
-
   const [size, setSize] = React.useState("xl");
-
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   const OverlayOne = () => (
     <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
   );
@@ -120,7 +121,7 @@ const MainLayoutDesktop = () => {
 
   return (
     <>
-      {auth.status !== "loading" && (
+      {auth.status !== "loading" && isLoaded && (
         <Stack
           as={motion.div}
           direction={"row"}

@@ -20,10 +20,12 @@ import React from "react";
 import { IoTicket } from "react-icons/io5";
 import WelcomeBG from "@/components/animated-bg/welcome-bg";
 import { motion } from "framer-motion";
+import useLoading from "@/hooks/useLoading";
 
 const LandingPage = () => {
   const auth = useAuth();
   const toast = useToast();
+  const { isLoaded } = useLoading();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [mobileSize, setMobileSize] = React.useState("xs");
   const [desktopSize, setDesktopSize] = React.useState("xl");
@@ -150,7 +152,7 @@ const LandingPage = () => {
         pt={auth.status === "authenticated" ? "8rem" : "0"}
         minH={"100vh"}
       >
-        {auth.status !== "loading" && (
+        {auth.status !== "loading" && isLoaded && (
           <Stack
             align={"center"}
             color={"text.primary"}

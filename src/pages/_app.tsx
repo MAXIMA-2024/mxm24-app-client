@@ -1,16 +1,32 @@
 import { Hide, Show, Spinner, Stack, Image, Text } from "@chakra-ui/react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { SWRConfig } from "swr";
 import { useFetcher } from "@/hooks/useApi";
 import useAuth from "@/hooks/useAuth";
 
 import { AnimatePresence, motion } from "framer-motion";
+import useLoading from "@/hooks/useLoading";
+import { useEffect } from "react";
 
 const GlobalLayout = () => {
   const fetcher = useFetcher();
   const auth = useAuth();
+  const { isLoaded, setLoaded } = useLoading();
+  const loc = useLocation();
 
-  const isLoading = auth.status === "loading";
+  // this is used for the loader
+  useEffect(() => {
+    const reset = ["/", "/home", "/state", "/malpun"];
+    if (reset.includes(loc.pathname)) {
+      setLoaded(false);
+    } else {
+      setLoaded(true);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loc]);
+
+  const isLoading = auth.status === "loading" || !isLoaded;
 
   return (
     <Stack
@@ -26,7 +42,7 @@ const GlobalLayout = () => {
           refreshInterval: 15 * 1000,
         }}
       >
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="popLayout">
           {/* auth loading */}
           <Stack
             id="loader"
@@ -54,8 +70,8 @@ const GlobalLayout = () => {
                 opacity: 1,
                 visibility: "visible",
                 transition: {
-                  duration: 1,
-                  delay: 0.5,
+                  duration: 0.5,
+                  // delay: 0.5,
                   easings: "backOut",
                 },
               },
@@ -96,7 +112,7 @@ const GlobalLayout = () => {
                     visibility: "visible",
                     transition: {
                       duration: 2,
-                      delay: 0.5,
+                      // delay: 0.5,
                       easings: "backOut",
                     },
                   },
@@ -139,7 +155,7 @@ const GlobalLayout = () => {
                     visibility: "visible",
                     transition: {
                       duration: 2,
-                      delay: 0.5,
+                      // delay: 0.5,
                       easings: "backOut",
                     },
                   },
@@ -168,7 +184,7 @@ const GlobalLayout = () => {
                 objectFit={"cover"}
                 variants={{
                   initial: {
-                    opacity: 0,
+                    opacity: 1,
                     y: -150,
                     visibility: "visible",
                   },
@@ -178,7 +194,7 @@ const GlobalLayout = () => {
                     visibility: "visible",
                     transition: {
                       duration: 1,
-                      delay: 0.5,
+                      // delay: 0.5,
                       easings: "backOut",
                     },
                   },
@@ -218,7 +234,7 @@ const GlobalLayout = () => {
                     visibility: "visible",
                     transition: {
                       duration: 2,
-                      delay: 0.5,
+                      // delay: 0.5,
                       easings: "backOut",
                     },
                   },
@@ -259,7 +275,7 @@ const GlobalLayout = () => {
                     visibility: "visible",
                     transition: {
                       duration: 2,
-                      delay: 0.5,
+                      // delay: 0.5,
                       easings: "backOut",
                     },
                   },

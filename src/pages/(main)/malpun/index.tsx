@@ -90,7 +90,7 @@ const Malpun = () => {
       >
         <Heading
           fontFamily={"Luthier"}
-          fontSize={{ base: "1rem", md: "3rem", lg: "4rem" }}
+          fontSize={{ base: "2rem", md: "3rem", lg: "4rem" }}
           textShadow={"0 0 5rem #000000"}
           color={"text.tertiary"}
         >
@@ -99,7 +99,7 @@ const Malpun = () => {
         <Heading
           fontFamily={"Luthier"}
           fontSize={{
-            base: "1rem",
+            base: "2rem",
             md: "2rem",
             lg: "3rem",
             xl: "4rem",

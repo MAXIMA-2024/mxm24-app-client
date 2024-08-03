@@ -6,6 +6,7 @@ import AuthProvider from "@/providers/auth-provider";
 
 import "./global.css";
 import "@fontsource-variable/lexend";
+import { LoadingProvider } from "./providers/loading-provider";
 
 const theme = extendTheme({
   fonts: {
@@ -38,7 +39,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
       <AuthProvider>
-        <Routes />
+        <LoadingProvider>
+          <Routes />
+        </LoadingProvider>
       </AuthProvider>
     </ChakraProvider>
   </React.StrictMode>

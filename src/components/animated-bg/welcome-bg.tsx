@@ -1,5 +1,7 @@
+import useLoading from "@/hooks/useLoading";
 import { Hide, Show, Stack } from "@chakra-ui/react";
 import { Alignment, Fit, Layout, useRive } from "@rive-app/react-canvas";
+import { useEffect } from "react";
 
 type WelcomeBGProps = {
   children: React.ReactNode;
@@ -21,6 +23,20 @@ const WelcomeBG = ({ children }: WelcomeBGProps) => {
     autoplay: true,
     layout: new Layout({ fit: Fit.Cover, alignment: Alignment.TopCenter }),
   });
+
+  const { setLoaded } = useLoading();
+
+  useEffect(() => {
+    if (desktop.rive && desktop.rive.isPlaying) {
+      setLoaded(true);
+    }
+
+    if (mobile.rive && mobile.rive.isPlaying) {
+      setLoaded(true);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [desktop.rive, mobile.rive]);
 
   return (
     <Stack
