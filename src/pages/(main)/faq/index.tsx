@@ -70,7 +70,7 @@ const Faq = () => {
             mb={8}
           >
             <b>Malam Puncak MAXIMA</b> merupakan rangkaian terakhir dari
-            kegiatan MAXIMA. Kata ‘Puncak’ merepresentasikan puncak dari seluruh
+            kegiatan MAXIMA. Kata 'Puncak' merepresentasikan puncak dari seluruh
             rangkaian kegiatan MAXIMA yang akan menampilkan berbagai pertunjukan
             menarik dan meriah dari UKM serta Organisasi yang berada di
             Universitas Multimedia Nusantara. Tidak hanya itu, pada MalPun
