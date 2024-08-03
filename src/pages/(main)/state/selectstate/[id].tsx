@@ -36,6 +36,10 @@ const SelectStateId = () => {
     }
   }, [id]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   // button atas
   const BtStyle = ({ nomor }: { nomor: number }) => {
     const location = useLocation();
