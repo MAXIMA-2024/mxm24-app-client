@@ -32,6 +32,7 @@ type Organisator = {
 
 type Mahasiswa = {
   email: string;
+  token: string;
   name: string;
   nim: string;
   angkatan: number;
