@@ -1,17 +1,28 @@
 import { Button, Img, Show, Stack } from "@chakra-ui/react";
 import Boag from "@/components/Boag";
-import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect, useRef } from "react";
 import StateBG from "@/components/animated-bg/state-bg";
+import useAuth from "@/hooks/useAuth";
 
 const State = () => {
   const bottomRef = useRef<HTMLDivElement>(null);
+  const loc = useLocation();
+  const auth = useAuth();
 
   const scrollToBottom = () => {
     if (bottomRef.current) {
       bottomRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  console.log(loc.hash);
+
+  useEffect(() => {
+    if (loc.hash === "#gondola" && auth.status !== "loading") {
+      setTimeout(scrollToBottom, 5000);
+    }
+  }, [loc, bottomRef, auth]);
 
   return (
     <>
@@ -28,7 +39,7 @@ const State = () => {
             >
               <Img src={"/state/banner.png"} w={["16rem", "24rem"]} />
               <Stack>
-                <Link to="/state/selectstate/1">
+                <Link to="/state/selectstate/D01">
                   <Button
                     w={{ base: "16rem", md: "20rem" }}
                     bgColor={"#44002B"}
@@ -95,7 +106,7 @@ const State = () => {
                 w={["16rem", "24rem", "32rem", "32rem", "32rem"]}
                 pb={["24rem", "16rem", "10rem", 0, 0]}
               />
-              <Link to="/state/selectstate/1">
+              <Link to="/state/selectstate/D01">
                 <Button
                   w={{ base: "16rem", md: "20rem" }}
                   bgColor={"#44002B"}
@@ -128,6 +139,7 @@ const State = () => {
             flexWrap={"wrap"}
             justify={"space-around"}
             pt={"12rem"}
+            id="gondola"
           >
             <Boag />
             <Boag />

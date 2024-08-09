@@ -532,7 +532,6 @@ const MainLayout = () => {
         });
 
         auth.logout();
-        return;
       }
 
       return nav("/");
