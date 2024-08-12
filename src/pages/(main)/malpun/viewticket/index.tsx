@@ -38,6 +38,7 @@ const ViewTicket = () => {
         bgPosition={"center"}
         w={"100%"}
         p={{ base: "14rem", md: "10rem", lg: "8rem" }}
+        mt={{ base: 0, lg: "5rem" }}
         px={{ base: "2rem", md: "8rem", lg: "4rem" }}
       >
         <Stack direction={"column"} flex={1}>

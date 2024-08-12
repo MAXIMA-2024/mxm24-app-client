@@ -1,7 +1,18 @@
+import ModalCheck from "@/components/ModalCheck";
 import { Heading, Stack, Text, Button, Image } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const ClaimTicket = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCheckButtonClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <Stack
@@ -116,31 +127,33 @@ const ClaimTicket = () => {
                 </Stack>
               </Stack>
               {/* BUTTON CLAIM */}
-              <Link to="/malpun/viewticket">
-                <Stack alignItems={{ base: "center", lg: "flex-end" }}>
-                  <Button
-                    bgColor={"button.primary"}
-                    w={{ base: "6rem", md: "8rem", lg: "8rem" }}
-                    variant={"ghost"}
-                    transition={"0.3s"}
-                    color={"text.tertiary"}
-                    rounded={"xl"}
-                    _hover={{ bgColor: "#3A0025" }}
+              {/* <Link to="/malpun/viewticket"> */}
+              <Stack alignItems={{ base: "center", lg: "flex-end" }}>
+                <Button
+                  bgColor={"button.primary"}
+                  w={{ base: "6rem", md: "8rem", lg: "8rem" }}
+                  variant={"ghost"}
+                  transition={"0.3s"}
+                  color={"text.tertiary"}
+                  rounded={"xl"}
+                  _hover={{ bgColor: "#3A0025" }}
+                  onClick={handleCheckButtonClick}
+                >
+                  <Text
+                    fontFamily={"Lexend"}
+                    fontWeight={"400"}
+                    fontSize={{ base: "small", md: "medium", lg: "large" }}
                   >
-                    <Text
-                      fontFamily={"Lexend"}
-                      fontWeight={"400"}
-                      fontSize={{ base: "small", md: "medium", lg: "large" }}
-                    >
-                      Klaim
-                    </Text>
-                  </Button>
-                </Stack>
-              </Link>
+                    Klaim
+                  </Text>
+                </Button>
+              </Stack>
+              {/* </Link> */}
             </Stack>
           </Stack>
         </Stack>
       </Stack>
+      <ModalCheck isOpen={isModalOpen} onClose={handleCloseModal} />
     </>
   );
 };
