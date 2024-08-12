@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
+import ModalHimbauan from "./ModalHimbauan";
 
 interface ModalCheckProps {
   isOpen: boolean;
@@ -26,11 +27,9 @@ const checkToken = (allowedPrefixes: string[]) => (val: string) => {
 
 const tokenSchema = z
   .string()
+  .length(16, { message: "Value must be 16 characters long" })
   .refine(checkToken(allowedPrefixes), {
     message: "Value does not start with an allowed prefix.",
-  })
-  .refine((val) => val.length === 16, {
-    message: "Value must be 16 characters long.",
   });
 
 const ModalCheck = ({ isOpen, onClose }: ModalCheckProps) => {
@@ -40,7 +39,17 @@ const ModalCheck = ({ isOpen, onClose }: ModalCheckProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [token, setToken] = useState<string>();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  //   const isNimLengthValid = nim.trim().length === 11;
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleHimbauanClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseHimbauanModal = () => {
+    setIsModalOpen(false);
+    onClose();
+  };
 
   const handleTokenChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setToken(e.target.value);
@@ -81,14 +90,14 @@ const ModalCheck = ({ isOpen, onClose }: ModalCheckProps) => {
               border={"2px solid #00000095"}
             />
             {errorMessage && (
-              <Text color="red.500" mt="4">
+              <Text color="red.500" mt={2} fontSize={"xs"}>
                 {errorMessage}
               </Text>
             )}
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="red" mr={3} onClick={onClose}>
+            <Button colorScheme="red" mr={3} onClick={handleHimbauanClick}>
               Close
             </Button>
             <Button
@@ -99,7 +108,6 @@ const ModalCheck = ({ isOpen, onClose }: ModalCheckProps) => {
                 bgColor: "#E79200",
               }}
               onClick={handleCheckButtonClick}
-              isDisabled={!tokenSchema.safeParse(token).success}
               isLoading={isLoading}
             >
               Check
@@ -107,6 +115,7 @@ const ModalCheck = ({ isOpen, onClose }: ModalCheckProps) => {
           </ModalFooter>
         </ModalContent>
       </Modal>
+      <ModalHimbauan isOpen={isModalOpen} onClose={handleCloseHimbauanModal} />
     </>
   );
 };
