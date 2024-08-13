@@ -1085,10 +1085,18 @@ const MainLayout = () => {
   const nav = useNavigate();
   const auth = useAuth();
   const toast = useToast();
+  const { data } = useSWR<Toggle[]>("/toggle");
 
   useEffect(() => {
     if (auth.status === "authenticated") {
       if (auth.user?.role === "unknown") {
+        if (data) {
+          const check = data.find((toggle) => toggle.name === "registration");
+          if (!check || !check.toggle) {
+            auth.logout();
+            return nav("/");
+          }
+        }
         return nav("/auth/onboarding");
       }
 
