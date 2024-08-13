@@ -325,21 +325,27 @@ const State = () => {
                   <Heading fontFamily={"Luthier"}>Detail</Heading>
                   <Text fontFamily={"Lexend"}>{stateDetails?.description}</Text>
                 </Stack>
-                <Stack gap={"1rem"}>
-                  <Heading fontFamily={"Luthier"}>Foto Kegiatan</Heading>
-                  <Stack
-                    direction={{ base: "column", lg: "row" }}
-                    overflowX={"scroll"}
-                    gap={"1rem"}
-                    pb={"0.5rem"}
-                  >
-                    {stateDetails?.gallery.map((gallery) => (
-                      <Image
-                        src={`${import.meta.env.VITE_CDN_URL}${gallery.url}`}
-                      />
-                    ))}
+                {stateDetails?.gallery.length ? (
+                  <Stack>
+                    <Heading fontFamily={"Luthier"}>Foto Kegiatan</Heading>
+                    <Stack
+                      direction={{ base: "column", lg: "row" }}
+                      gap={"1rem"}
+                      overflow={"auto"}
+                    >
+                      {stateDetails?.gallery.map((gallery) => (
+                        <Image
+                          key={gallery.id}
+                          src={`${import.meta.env.VITE_CDN_URL}${gallery.url}`}
+                          w={{ base: "100%", lg: "45%" }}
+                          h={{ base: "15rem", lg: "20rem" }}
+                          objectFit={"cover"}
+                          borderRadius={"lg"}
+                        />
+                      ))}
+                    </Stack>
                   </Stack>
-                </Stack>
+                ) : null}
               </Stack>
             </Stack>
           </ModalBody>
