@@ -31,6 +31,15 @@ import useAuth from "@/hooks/useAuth";
 import { useNavigate } from "@/router";
 import { motion } from "framer-motion";
 import useLoading from "@/hooks/useLoading";
+import useSWR from "swr";
+
+type Toggle = {
+  id: number;
+  name: string;
+  toggle: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 const NavBarData = [
   {
@@ -61,11 +70,39 @@ const NavBarData = [
 ];
 
 const MainLayoutDesktop = () => {
+  const { data } = useSWR<Toggle[]>("/toggle");
+
   const auth = useAuth();
   const { isLoaded } = useLoading();
   const toast = useToast();
   const [size, setSize] = React.useState("xl");
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const homeLink = () => {
+    if (data) {
+      const check = data.find((toggle) => toggle.name === "home");
+      if (!check || !check.toggle) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  };
+
+  const isHomeLinkActive = homeLink();
+
+  const stateLink = () => {
+    if (data) {
+      const check = data.find((toggle) => toggle.name === "state");
+      if (!check || !check.toggle) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  };
+
+  const isStateLinkActive = stateLink();
 
   const OverlayOne = () => (
     <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
@@ -150,334 +187,765 @@ const MainLayoutDesktop = () => {
           // whileInView={"visible"}
           animate={"visible"}
         >
-          <Stack
-            bgColor={"rgba(255, 255, 255, 0.85)"}
-            // p={5}
-            py={{ lg: 4, xl: 4 }}
-            pl={{ lg: 5, xl: 2 }}
-            pr={paddingRight}
-            direction={"row"}
-            alignItems={"center"}
-            justifyContent={"space-around"}
-            backdropFilter={"blur(10px)"}
-            rounded={"full"}
-            gap={{ lg: 3, xl: 12 }}
-          >
-            {/* Logo MAXIMA 2024 */}
-            <Link to={"/"}>
-              <Stack w={"7.5rem"}>
-                <Image
-                  mx={{ lg: 0, xl: 5 }}
-                  src="/icons/maxima2024-logo.png"
-                  w={"7.5rem"}
-                  transition={"all 0.2s ease-in-out"}
-                  _hover={{ w: "7rem", transformOrigin: "center" }}
-                />
-              </Stack>
-            </Link>
-            {/* Navbar Items */}
+          {auth.status === "authenticated" && (
             <Stack
+              bgColor={"rgba(255, 255, 255, 0.85)"}
+              // p={5}
+              py={{ lg: 4, xl: 4 }}
+              pl={{ lg: 5, xl: 2 }}
+              pr={paddingRight}
               direction={"row"}
               alignItems={"center"}
-              mx={{ lg: 0, xl: 5 }}
+              justifyContent={"space-around"}
+              backdropFilter={"blur(10px)"}
+              rounded={"full"}
+              gap={{ lg: 3, xl: 12 }}
             >
-              {NavBarData.map((item, index) => (
-                <motion.div
-                  variants={{
-                    open: {
-                      y: 0,
-                      opacity: 1,
-                    },
-                    closed: {
-                      y: -20,
-                      opacity: 0,
-                    },
-                  }}
-                  initial={"closed"}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  whileInView={"open"}
-                  transition={{
-                    delay: index * 0.2,
-                    duration: 0.75,
-                  }}
-                >
-                  {item.title === "STATE" && auth.status !== "authenticated" ? (
-                    <Tooltip
-                      label="Please login to access STATE"
-                      aria-label="A tooltip"
-                      bgColor={"button.primary"}
-                      rounded={"lg"}
-                      px={"0.8rem"}
-                      py={"0.5rem"}
-                      shadow={"lg"}
-                    >
-                      <Button
-                        variant={"ghost"}
-                        gap={2}
-                        w={"7.5rem"}
-                        p={5}
-                        transition={"all 0.2s ease-in-out"}
-                        fontFamily={"Lexend"}
-                        fontWeight={500}
-                        color={"text.primary"}
-                        _hover={{
-                          transform: "scale(0.90)",
-                          fontWeight: 600,
-                          "> img": {
-                            opacity: 1,
-                            transition: "opacity 0.2s ease-in-out",
-                          },
-                          transformOrigin: "center",
-                          bgColor: "#FFFFFF0",
-                        }}
-                        _active={{
-                          bgColor: "#FFFFFF0",
-                        }}
-                        style={{ cursor: "not-allowed" }}
-                      >
-                        <Image
-                          src={item.icon}
-                          w={"1rem"}
-                          h={"1rem"}
-                          transition={"all 0.2s ease-in-out"}
-                          _hover={{ w: "1.1rem", h: "1.1rem" }}
-                        ></Image>
-                        <Text>{item.title}</Text>
-                      </Button>
-                    </Tooltip>
-                  ) : (
-                    <Link to={item.link}>
-                      <Button
-                        variant={"ghost"}
-                        gap={2}
-                        w={"7.5rem"}
-                        p={5}
-                        transition={"all 0.2s ease-in-out"}
-                        fontFamily={"Lexend"}
-                        fontWeight={500}
-                        color={"text.primary"}
-                        _hover={{
-                          transform: "scale(0.90)",
-                          fontWeight: 600,
-                          "> img": {
-                            opacity: 1,
-                            transition: "opacity 0.2s ease-in-out",
-                          },
-                          transformOrigin: "center",
-                          bgColor: "#FFFFFF0",
-                        }}
-                        _active={{
-                          bgColor: "#FFFFFF0",
-                        }}
-                      >
-                        <Image
-                          src={item.icon}
-                          w={"1rem"}
-                          h={"1rem"}
-                          transition={"all 0.2s ease-in-out"}
-                          _hover={{ w: "1.1rem", h: "1.1rem" }}
-                        ></Image>
-                        <Text>{item.title}</Text>
-                      </Button>
-                    </Link>
-                  )}
-                </motion.div>
-              ))}
-            </Stack>
-
-            {/* Right Side */}
-
-            {auth.status === "authenticated" && (
-              <Menu>
-                <MenuButton>
-                  <Button
-                    variant={"ghost"}
-                    w={"full"}
-                    justifyContent={"start"}
-                    // p={[0, 0, 0, 2]}
-                    // mt={[0, 0, "0.75rem", "1rem"]}
-                    cursor={"default"}
-                    disabled={true}
-                    _hover={{
-                      pointerEvents: "none",
-                      draggable: "none",
+              {/* Logo MAXIMA 2024 */}
+              <Link to={"/"}>
+                <Stack w={"7.5rem"}>
+                  <Image
+                    mx={{ lg: 0, xl: 5 }}
+                    src="/icons/maxima2024-logo.png"
+                    w={"7.5rem"}
+                    transition={"all 0.2s ease-in-out"}
+                    _hover={{ w: "7rem", transformOrigin: "center" }}
+                  />
+                </Stack>
+              </Link>
+              {/* Navbar Items */}
+              <Stack
+                direction={"row"}
+                alignItems={"center"}
+                mx={{ lg: 0, xl: 5 }}
+              >
+                {NavBarData.map((item, index) => (
+                  <motion.div
+                    variants={{
+                      open: {
+                        y: 0,
+                        opacity: 1,
+                      },
+                      closed: {
+                        y: -20,
+                        opacity: 0,
+                      },
+                    }}
+                    initial={"closed"}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    whileInView={"open"}
+                    transition={{
+                      delay: index * 0.2,
+                      duration: 0.75,
                     }}
                   >
-                    <Stack
-                      direction={"row"}
-                      // justifyContent={"end"}
-                      // alignItems={"end"}
-                      // pl={{ lg: 12, xl: 20 }}
-                    >
-                      <Avatar
-                        bg={"#44002B"}
-                        size={"md"}
-                        _hover={{ transform: "scale(0.95)" }}
-                        transition={"all 0.2s ease-in-out"}
+                    {!isStateLinkActive && item.title === "STATE" ? (
+                      <Tooltip
+                        label="Rangkaian acara STATE akan segera dimulai"
+                        aria-label="A tooltip"
+                        bgColor={"button.primary"}
+                        rounded={"lg"}
+                        px={"0.8rem"}
+                        py={"0.5rem"}
+                        shadow={"lg"}
                       >
-                        <AvatarBadge
-                          boxSize={{ lg: "0.75rem", xl: "1.25rem" }}
-                          bg="green.500"
-                        />
-                      </Avatar>
-
-                      <Hide below="xl">
-                        <Stack
-                          justifyContent={"center"}
-                          alignItems={"center"}
-                          textAlign={"left"}
-                          gap={0}
-                          color={"text.primary"}
+                        <Button
+                          variant={"ghost"}
+                          gap={2}
+                          w={"7.5rem"}
+                          p={5}
+                          transition={"all 0.2s ease-in-out"}
                           fontFamily={"Lexend"}
                           fontWeight={500}
-                          mx={{ lg: 0, xl: 2.5 }}
-                          noOfLines={2}
-                          isTruncated={true}
-                          textOverflow={"ellipsis"}
-                          // letterSpacing={"0.1rem"}
-                          // textShadow={"0 0 1rem #000000"}
+                          color={"text.primary"}
+                          _hover={{
+                            transform: "scale(0.90)",
+                            fontWeight: 600,
+                            "> img": {
+                              opacity: 1,
+                              transition: "opacity 0.2s ease-in-out",
+                            },
+                            transformOrigin: "center",
+                            bgColor: "#FFFFFF0",
+                          }}
+                          _active={{
+                            bgColor: "#FFFFFF0",
+                          }}
+                          style={{ cursor: "not-allowed" }}
                         >
-                          <Stack p={1} gap={0}>
-                            <Text fontSize={{ lg: "x-small", xl: "smaller" }}>
-                              Halo,
-                            </Text>
-                            <Text
-                              fontWeight={600}
-                              fontSize={{ lg: "smaller", xl: "large" }}
-                            >
-                              {auth.user?.data.name}
-                            </Text>
-                          </Stack>
-                        </Stack>
-                      </Hide>
-                    </Stack>
-                  </Button>
-                </MenuButton>
+                          <Image
+                            src={item.icon}
+                            w={"1rem"}
+                            h={"1rem"}
+                            transition={"all 0.2s ease-in-out"}
+                            _hover={{ w: "1.1rem", h: "1.1rem" }}
+                          ></Image>
+                          <Text>{item.title}</Text>
+                        </Button>
+                      </Tooltip>
+                    ) : !isHomeLinkActive && item.title === "HoME" ? (
+                      <Tooltip
+                        label="Rangkaian acara HoME akan segera dimulai"
+                        aria-label="A tooltip"
+                        bgColor={"button.primary"}
+                        rounded={"lg"}
+                        px={"0.8rem"}
+                        py={"0.5rem"}
+                        shadow={"lg"}
+                      >
+                        <Button
+                          variant={"ghost"}
+                          gap={2}
+                          w={"7.5rem"}
+                          p={5}
+                          transition={"all 0.2s ease-in-out"}
+                          fontFamily={"Lexend"}
+                          fontWeight={500}
+                          color={"text.primary"}
+                          _hover={{
+                            transform: "scale(0.90)",
+                            fontWeight: 600,
+                            "> img": {
+                              opacity: 1,
+                              transition: "opacity 0.2s ease-in-out",
+                            },
+                            transformOrigin: "center",
+                            bgColor: "#FFFFFF0",
+                          }}
+                          _active={{
+                            bgColor: "#FFFFFF0",
+                          }}
+                          style={{ cursor: "not-allowed" }}
+                        >
+                          <Image
+                            src={item.icon}
+                            w={"1rem"}
+                            h={"1rem"}
+                            transition={"all 0.2s ease-in-out"}
+                            _hover={{ w: "1.1rem", h: "1.1rem" }}
+                          ></Image>
+                          <Text>{item.title}</Text>
+                        </Button>
+                      </Tooltip>
+                    ) : (
+                      <Link to={item.link}>
+                        <Button
+                          variant={"ghost"}
+                          gap={2}
+                          w={"7.5rem"}
+                          p={5}
+                          transition={"all 0.2s ease-in-out"}
+                          fontFamily={"Lexend"}
+                          fontWeight={500}
+                          color={"text.primary"}
+                          _hover={{
+                            transform: "scale(0.90)",
+                            fontWeight: 600,
+                            "> img": {
+                              opacity: 1,
+                              transition: "opacity 0.2s ease-in-out",
+                            },
+                            transformOrigin: "center",
+                            bgColor: "#FFFFFF0",
+                          }}
+                          _active={{
+                            bgColor: "#FFFFFF0",
+                          }}
+                        >
+                          <Image
+                            src={item.icon}
+                            w={"1rem"}
+                            h={"1rem"}
+                            transition={"all 0.2s ease-in-out"}
+                            _hover={{ w: "1.1rem", h: "1.1rem" }}
+                          ></Image>
+                          <Text>{item.title}</Text>
+                        </Button>
+                      </Link>
+                    )}
+                  </motion.div>
+                ))}
+              </Stack>
 
-                <MenuList px={2} shadow={"lg"} borderRadius={"2xl"}>
-                  <Link to={"/profile"}>
+              {/* Right Side */}
+
+              {auth.status === "authenticated" && (
+                <Menu>
+                  <MenuButton>
                     <Button
-                      // bg={"status.error"}
+                      variant={"ghost"}
+                      w={"full"}
+                      justifyContent={"start"}
+                      // p={[0, 0, 0, 2]}
+                      // mt={[0, 0, "0.75rem", "1rem"]}
+                      cursor={"default"}
+                      disabled={true}
+                      _hover={{
+                        pointerEvents: "none",
+                        draggable: "none",
+                      }}
+                    >
+                      <Stack
+                        direction={"row"}
+                        // justifyContent={"end"}
+                        // alignItems={"end"}
+                        // pl={{ lg: 12, xl: 20 }}
+                      >
+                        <Avatar
+                          bg={"#44002B"}
+                          size={"md"}
+                          _hover={{ transform: "scale(0.95)" }}
+                          transition={"all 0.2s ease-in-out"}
+                        >
+                          <AvatarBadge
+                            boxSize={{ lg: "0.75rem", xl: "1.25rem" }}
+                            bg="green.500"
+                          />
+                        </Avatar>
+
+                        <Hide below="xl">
+                          <Stack
+                            justifyContent={"center"}
+                            alignItems={"center"}
+                            textAlign={"left"}
+                            gap={0}
+                            color={"text.primary"}
+                            fontFamily={"Lexend"}
+                            fontWeight={500}
+                            mx={{ lg: 0, xl: 2.5 }}
+                            noOfLines={2}
+                            isTruncated={true}
+                            textOverflow={"ellipsis"}
+                            // letterSpacing={"0.1rem"}
+                            // textShadow={"0 0 1rem #000000"}
+                          >
+                            <Stack p={1} gap={0}>
+                              <Text fontSize={{ lg: "x-small", xl: "smaller" }}>
+                                Halo,
+                              </Text>
+                              <Text
+                                fontWeight={600}
+                                fontSize={{ lg: "smaller", xl: "large" }}
+                              >
+                                {auth.user?.data.name}
+                              </Text>
+                            </Stack>
+                          </Stack>
+                        </Hide>
+                      </Stack>
+                    </Button>
+                  </MenuButton>
+
+                  <MenuList px={2} shadow={"lg"} borderRadius={"2xl"}>
+                    <Link to={"/profile"}>
+                      <Button
+                        // bg={"status.error"}
+                        p={2}
+                        py={0}
+                        my={1}
+                        mb={2}
+                        fontSize={["0.8rem", "0.8rem", "0.85rem", "1rem"]}
+                        borderRadius={"xl"}
+                        color={"black"}
+                        fontWeight={"medium"}
+                        gap={2}
+                        w={"full"}
+                        justifyContent={"center"}
+                        // onClick={auth.logout}
+                      >
+                        <FaRegEdit
+                          color="black"
+                          fontSize={"1rem"}
+                          fontWeight={"bold"}
+                        />
+                        Edit Profile
+                      </Button>
+                    </Link>
+                    <Button
+                      bg={"status.error"}
                       p={2}
                       py={0}
                       my={1}
-                      mb={2}
                       fontSize={["0.8rem", "0.8rem", "0.85rem", "1rem"]}
                       borderRadius={"xl"}
-                      color={"black"}
+                      color={"white"}
                       fontWeight={"medium"}
                       gap={2}
                       w={"full"}
-                      justifyContent={"center"}
-                      // onClick={auth.logout}
+                      // justifyContent={"center"}
+                      onClick={auth.logout}
                     >
-                      <FaRegEdit
-                        color="black"
-                        fontSize={"1rem"}
+                      <IoLogOutOutline
+                        color="white"
+                        fontSize={"1.25rem"}
                         fontWeight={"bold"}
                       />
-                      Edit Profile
+                      Log Out
                     </Button>
-                  </Link>
+                  </MenuList>
+                </Menu>
+              )}
+
+              {auth.status !== "authenticated" && (
+                <>
                   <Button
-                    bg={"status.error"}
-                    p={2}
-                    py={0}
-                    my={1}
-                    fontSize={["0.8rem", "0.8rem", "0.85rem", "1rem"]}
-                    borderRadius={"xl"}
-                    color={"white"}
-                    fontWeight={"medium"}
-                    gap={2}
-                    w={"full"}
-                    // justifyContent={"center"}
-                    onClick={auth.logout}
+                    rounded={"full"}
+                    bgColor={"text.primary"}
+                    p={"1.5rem"}
+                    shadow={"md"}
+                    onClick={() => {
+                      setOverlay(<OverlayOne />);
+                      onOpen();
+                    }}
                   >
-                    <IoLogOutOutline
-                      color="white"
-                      fontSize={"1.25rem"}
-                      fontWeight={"bold"}
-                    />
-                    Log Out
+                    <Text color={"text.tertiary"} fontWeight={"medium"}>
+                      Login with SSO
+                    </Text>
                   </Button>
-                </MenuList>
-              </Menu>
-            )}
 
-            {auth.status !== "authenticated" && (
-              <>
-                <Button
-                  rounded={"full"}
-                  bgColor={"text.primary"}
-                  p={"1.5rem"}
-                  shadow={"md"}
-                  onClick={() => {
-                    setOverlay(<OverlayOne />);
-                    onOpen();
-                  }}
-                >
-                  <Text color={"text.tertiary"} fontWeight={"medium"}>
-                    Login with SSO
-                  </Text>
-                </Button>
+                  <Modal
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    size={size}
+                    isCentered={true}
+                    motionPreset="slideInBottom"
+                  >
+                    {overlay}
+                    <ModalContent>
+                      {/* <ModalHeader>Modal Title</ModalHeader> */}
+                      <ModalCloseButton />
+                      <ModalBody>
+                        <Text
+                          fontFamily={"Lexend"}
+                          py={"2rem"}
+                          textAlign={"center"}
+                          fontSize={"1.6rem"}
+                        >
+                          Apakah kamu Mahasiswa/i UMN angkatan 2024?
+                        </Text>
+                      </ModalBody>
 
-                <Modal
-                  isOpen={isOpen}
-                  onClose={onClose}
-                  size={size}
-                  isCentered={true}
-                  motionPreset="slideInBottom"
-                >
-                  {overlay}
-                  <ModalContent>
-                    {/* <ModalHeader>Modal Title</ModalHeader> */}
-                    <ModalCloseButton />
-                    <ModalBody>
-                      <Text
-                        fontFamily={"Lexend"}
-                        py={"2rem"}
-                        textAlign={"center"}
-                        fontSize={"1.6rem"}
+                      <ModalFooter
+                        justifyContent={"center"}
+                        pb={"2rem"}
+                        gap={4}
                       >
-                        Apakah kamu Mahasiswa/i UMN angkatan 2024?
-                      </Text>
-                    </ModalBody>
+                        <Button
+                          as={Link}
+                          to={`https://sso.umn.ac.id/cas/login?service=${
+                            import.meta.env.VITE_FRONTEND_URL + "/auth/sso"
+                          }`}
+                          bgColor={"button.primary"}
+                          // mr={3}
+                          onClick={onClose}
+                          // onClick={handleClickYes}
+                          color={"text.tertiary"}
+                          _hover={{ bgColor: "#3A0025" }}
+                          px={"2rem"}
+                        >
+                          Iya Mahasiswa/i UMN 2024
+                        </Button>
 
-                    <ModalFooter justifyContent={"center"} pb={"2rem"} gap={4}>
-                      <Button
-                        as={Link}
-                        to={`https://sso.umn.ac.id/cas/login?service=${
-                          import.meta.env.VITE_FRONTEND_URL + "/auth/sso"
-                        }`}
+                        <Button
+                          variant="ghost"
+                          borderWidth={1}
+                          borderColor={"button.primary"}
+                          color={"text.primary"}
+                          as={Link}
+                          to={`/malpun`}
+                          onClick={() => handleClick(size)}
+                          px={"2rem"}
+                        >
+                          Bukan Mahasiswa/i UMN 2024
+                        </Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
+                </>
+              )}
+            </Stack>
+          )}
+
+          {auth.status === "unauthenticated" && (
+            <Stack
+              bgColor={"rgba(255, 255, 255, 0.85)"}
+              // p={5}
+              py={{ lg: 4, xl: 4 }}
+              pl={{ lg: 5, xl: 2 }}
+              pr={paddingRight}
+              direction={"row"}
+              alignItems={"center"}
+              justifyContent={"space-around"}
+              backdropFilter={"blur(10px)"}
+              rounded={"full"}
+              gap={{ lg: 3, xl: 12 }}
+            >
+              {/* Logo MAXIMA 2024 */}
+              <Link to={"/"}>
+                <Stack w={"7.5rem"}>
+                  <Image
+                    mx={{ lg: 0, xl: 5 }}
+                    src="/icons/maxima2024-logo.png"
+                    w={"7.5rem"}
+                    transition={"all 0.2s ease-in-out"}
+                    _hover={{ w: "7rem", transformOrigin: "center" }}
+                  />
+                </Stack>
+              </Link>
+              {/* Navbar Items */}
+              <Stack
+                direction={"row"}
+                alignItems={"center"}
+                mx={{ lg: 0, xl: 5 }}
+              >
+                {NavBarData.map((item, index) => (
+                  <motion.div
+                    variants={{
+                      open: {
+                        y: 0,
+                        opacity: 1,
+                      },
+                      closed: {
+                        y: -20,
+                        opacity: 0,
+                      },
+                    }}
+                    initial={"closed"}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    whileInView={"open"}
+                    transition={{
+                      delay: index * 0.2,
+                      duration: 0.75,
+                    }}
+                  >
+                    {!isStateLinkActive && item.title === "STATE" ? (
+                      <Tooltip
+                        label="Silahkan Login untuk mengakses STATE"
+                        aria-label="A tooltip"
                         bgColor={"button.primary"}
-                        // mr={3}
-                        onClick={onClose}
-                        // onClick={handleClickYes}
-                        color={"text.tertiary"}
-                        _hover={{ bgColor: "#3A0025" }}
-                        px={"2rem"}
+                        rounded={"lg"}
+                        px={"0.8rem"}
+                        py={"0.5rem"}
+                        shadow={"lg"}
                       >
-                        Iya Mahasiswa/i UMN 2024
-                      </Button>
+                        <Button
+                          variant={"ghost"}
+                          gap={2}
+                          w={"7.5rem"}
+                          p={5}
+                          transition={"all 0.2s ease-in-out"}
+                          fontFamily={"Lexend"}
+                          fontWeight={500}
+                          color={"text.primary"}
+                          _hover={{
+                            transform: "scale(0.90)",
+                            fontWeight: 600,
+                            "> img": {
+                              opacity: 1,
+                              transition: "opacity 0.2s ease-in-out",
+                            },
+                            transformOrigin: "center",
+                            bgColor: "#FFFFFF0",
+                          }}
+                          _active={{
+                            bgColor: "#FFFFFF0",
+                          }}
+                          style={{ cursor: "not-allowed" }}
+                        >
+                          <Image
+                            src={item.icon}
+                            w={"1rem"}
+                            h={"1rem"}
+                            transition={"all 0.2s ease-in-out"}
+                            _hover={{ w: "1.1rem", h: "1.1rem" }}
+                          ></Image>
+                          <Text>{item.title}</Text>
+                        </Button>
+                      </Tooltip>
+                    ) : !isHomeLinkActive && item.title === "HoME" ? (
+                      <Tooltip
+                        label="Rangkaian acara HoME akan segera dimulai"
+                        aria-label="A tooltip"
+                        bgColor={"button.primary"}
+                        rounded={"lg"}
+                        px={"0.8rem"}
+                        py={"0.5rem"}
+                        shadow={"lg"}
+                      >
+                        <Button
+                          variant={"ghost"}
+                          gap={2}
+                          w={"7.5rem"}
+                          p={5}
+                          transition={"all 0.2s ease-in-out"}
+                          fontFamily={"Lexend"}
+                          fontWeight={500}
+                          color={"text.primary"}
+                          _hover={{
+                            transform: "scale(0.90)",
+                            fontWeight: 600,
+                            "> img": {
+                              opacity: 1,
+                              transition: "opacity 0.2s ease-in-out",
+                            },
+                            transformOrigin: "center",
+                            bgColor: "#FFFFFF0",
+                          }}
+                          _active={{
+                            bgColor: "#FFFFFF0",
+                          }}
+                          style={{ cursor: "not-allowed" }}
+                        >
+                          <Image
+                            src={item.icon}
+                            w={"1rem"}
+                            h={"1rem"}
+                            transition={"all 0.2s ease-in-out"}
+                            _hover={{ w: "1.1rem", h: "1.1rem" }}
+                          ></Image>
+                          <Text>{item.title}</Text>
+                        </Button>
+                      </Tooltip>
+                    ) : (
+                      <Link to={item.link}>
+                        <Button
+                          variant={"ghost"}
+                          gap={2}
+                          w={"7.5rem"}
+                          p={5}
+                          transition={"all 0.2s ease-in-out"}
+                          fontFamily={"Lexend"}
+                          fontWeight={500}
+                          color={"text.primary"}
+                          _hover={{
+                            transform: "scale(0.90)",
+                            fontWeight: 600,
+                            "> img": {
+                              opacity: 1,
+                              transition: "opacity 0.2s ease-in-out",
+                            },
+                            transformOrigin: "center",
+                            bgColor: "#FFFFFF0",
+                          }}
+                          _active={{
+                            bgColor: "#FFFFFF0",
+                          }}
+                        >
+                          <Image
+                            src={item.icon}
+                            w={"1rem"}
+                            h={"1rem"}
+                            transition={"all 0.2s ease-in-out"}
+                            _hover={{ w: "1.1rem", h: "1.1rem" }}
+                          ></Image>
+                          <Text>{item.title}</Text>
+                        </Button>
+                      </Link>
+                    )}
+                  </motion.div>
+                ))}
+              </Stack>
+
+              {/* Right Side */}
+
+              {auth.status === "authenticated" && (
+                <Menu>
+                  <MenuButton>
+                    <Button
+                      variant={"ghost"}
+                      w={"full"}
+                      justifyContent={"start"}
+                      // p={[0, 0, 0, 2]}
+                      // mt={[0, 0, "0.75rem", "1rem"]}
+                      cursor={"default"}
+                      disabled={true}
+                      _hover={{
+                        pointerEvents: "none",
+                        draggable: "none",
+                      }}
+                    >
+                      <Stack
+                        direction={"row"}
+                        // justifyContent={"end"}
+                        // alignItems={"end"}
+                        // pl={{ lg: 12, xl: 20 }}
+                      >
+                        <Avatar
+                          bg={"#44002B"}
+                          size={"md"}
+                          _hover={{ transform: "scale(0.95)" }}
+                          transition={"all 0.2s ease-in-out"}
+                        >
+                          <AvatarBadge
+                            boxSize={{ lg: "0.75rem", xl: "1.25rem" }}
+                            bg="green.500"
+                          />
+                        </Avatar>
+
+                        <Hide below="xl">
+                          <Stack
+                            justifyContent={"center"}
+                            alignItems={"center"}
+                            textAlign={"left"}
+                            gap={0}
+                            color={"text.primary"}
+                            fontFamily={"Lexend"}
+                            fontWeight={500}
+                            mx={{ lg: 0, xl: 2.5 }}
+                            noOfLines={2}
+                            isTruncated={true}
+                            textOverflow={"ellipsis"}
+                            // letterSpacing={"0.1rem"}
+                            // textShadow={"0 0 1rem #000000"}
+                          >
+                            <Stack p={1} gap={0}>
+                              <Text fontSize={{ lg: "x-small", xl: "smaller" }}>
+                                Halo,
+                              </Text>
+                              <Text
+                                fontWeight={600}
+                                fontSize={{ lg: "smaller", xl: "large" }}
+                              >
+                                {auth.user?.data.name}
+                              </Text>
+                            </Stack>
+                          </Stack>
+                        </Hide>
+                      </Stack>
+                    </Button>
+                  </MenuButton>
+
+                  <MenuList px={2} shadow={"lg"} borderRadius={"2xl"}>
+                    <Link to={"/profile"}>
                       <Button
-                        variant="ghost"
-                        borderWidth={1}
-                        borderColor={"button.primary"}
-                        color={"text.primary"}
-                        as={Link}
-                        to={`/malpun`}
-                        onClick={() => handleClick(size)}
-                        px={"2rem"}
+                        // bg={"status.error"}
+                        p={2}
+                        py={0}
+                        my={1}
+                        mb={2}
+                        fontSize={["0.8rem", "0.8rem", "0.85rem", "1rem"]}
+                        borderRadius={"xl"}
+                        color={"black"}
+                        fontWeight={"medium"}
+                        gap={2}
+                        w={"full"}
+                        justifyContent={"center"}
+                        // onClick={auth.logout}
                       >
-                        Bukan Mahasiswa/i UMN 2024
+                        <FaRegEdit
+                          color="black"
+                          fontSize={"1rem"}
+                          fontWeight={"bold"}
+                        />
+                        Edit Profile
                       </Button>
-                    </ModalFooter>
-                  </ModalContent>
-                </Modal>
-              </>
-            )}
-          </Stack>
+                    </Link>
+                    <Button
+                      bg={"status.error"}
+                      p={2}
+                      py={0}
+                      my={1}
+                      fontSize={["0.8rem", "0.8rem", "0.85rem", "1rem"]}
+                      borderRadius={"xl"}
+                      color={"white"}
+                      fontWeight={"medium"}
+                      gap={2}
+                      w={"full"}
+                      // justifyContent={"center"}
+                      onClick={auth.logout}
+                    >
+                      <IoLogOutOutline
+                        color="white"
+                        fontSize={"1.25rem"}
+                        fontWeight={"bold"}
+                      />
+                      Log Out
+                    </Button>
+                  </MenuList>
+                </Menu>
+              )}
+
+              {auth.status !== "authenticated" && (
+                <>
+                  <Button
+                    rounded={"full"}
+                    bgColor={"text.primary"}
+                    p={"1.5rem"}
+                    shadow={"md"}
+                    onClick={() => {
+                      setOverlay(<OverlayOne />);
+                      onOpen();
+                    }}
+                  >
+                    <Text color={"text.tertiary"} fontWeight={"medium"}>
+                      Login with SSO
+                    </Text>
+                  </Button>
+
+                  <Modal
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    size={size}
+                    isCentered={true}
+                    motionPreset="slideInBottom"
+                  >
+                    {overlay}
+                    <ModalContent>
+                      {/* <ModalHeader>Modal Title</ModalHeader> */}
+                      <ModalCloseButton />
+                      <ModalBody>
+                        <Text
+                          fontFamily={"Lexend"}
+                          py={"2rem"}
+                          textAlign={"center"}
+                          fontSize={"1.6rem"}
+                        >
+                          Apakah kamu Mahasiswa/i UMN angkatan 2024?
+                        </Text>
+                      </ModalBody>
+
+                      <ModalFooter
+                        justifyContent={"center"}
+                        pb={"2rem"}
+                        gap={4}
+                      >
+                        <Button
+                          as={Link}
+                          to={`https://sso.umn.ac.id/cas/login?service=${
+                            import.meta.env.VITE_FRONTEND_URL + "/auth/sso"
+                          }`}
+                          bgColor={"button.primary"}
+                          // mr={3}
+                          onClick={onClose}
+                          // onClick={handleClickYes}
+                          color={"text.tertiary"}
+                          _hover={{ bgColor: "#3A0025" }}
+                          px={"2rem"}
+                        >
+                          Iya Mahasiswa/i UMN 2024
+                        </Button>
+
+                        <Button
+                          variant="ghost"
+                          borderWidth={1}
+                          borderColor={"button.primary"}
+                          color={"text.primary"}
+                          as={Link}
+                          to={`/malpun`}
+                          onClick={() => handleClick(size)}
+                          px={"2rem"}
+                        >
+                          Bukan Mahasiswa/i UMN 2024
+                        </Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
+                </>
+              )}
+            </Stack>
+          )}
         </Stack>
       )}
       <Stack>

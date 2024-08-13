@@ -11,9 +11,21 @@ import {
   ModalFooter,
   ModalBody,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 
 import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import useSWR from "swr";
+
+type Toggle = {
+  id: number;
+  name: string;
+  toggle: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 const CardData = [
   {
@@ -31,7 +43,26 @@ const CardData = [
 ];
 
 const Home = () => {
+  const { data } = useSWR<Toggle[]>("/toggle");
+  const toast = useToast();
+  const nav = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  useEffect(() => {
+    if (data) {
+      const check = data.find((toggle) => toggle.name === "home");
+      if (!check || !check.toggle) {
+        toast({
+          title: "Access denied!",
+          description: "Rangkaian acara HoME akan segera dimulai",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+        nav("/");
+      }
+    }
+  });
 
   return (
     <HoMEBG>

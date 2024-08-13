@@ -323,6 +323,7 @@ const LandingPage = () => {
                     >
                       Iya Mahasiswa/i UMN 2024
                     </Button>
+
                     <Button
                       variant="ghost"
                       borderWidth={1}
@@ -378,6 +379,7 @@ const LandingPage = () => {
                       >
                         Iya Mahasiswa/i UMN 2024
                       </Button>
+
                       <Button
                         variant="ghost"
                         borderWidth={1}

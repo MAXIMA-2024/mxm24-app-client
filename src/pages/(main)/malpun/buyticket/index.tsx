@@ -1,7 +1,44 @@
-import { Heading, Stack, Text, Button, Input } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import {
+  Heading,
+  Stack,
+  Text,
+  Button,
+  Input,
+  useToast,
+} from "@chakra-ui/react";
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import useSWR from "swr";
+
+type Toggle = {
+  id: number;
+  name: string;
+  toggle: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 const BuyTicket = () => {
+  const { data } = useSWR<Toggle[]>("/toggle");
+  const nav = useNavigate();
+  const toast = useToast();
+
+  useEffect(() => {
+    if (data) {
+      const check = data.find((toggle) => toggle.name === "malpun-external");
+      if (!check || !check.toggle) {
+        toast({
+          title: "Access denied!",
+          description: "Anda belum bisa membeli tiket Malam Puncak saat ini.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+        nav("/");
+      }
+    }
+  }, [data]);
+
   return (
     <>
       <Stack

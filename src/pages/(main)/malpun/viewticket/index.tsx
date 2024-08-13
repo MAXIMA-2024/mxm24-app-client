@@ -1,6 +1,22 @@
-import { Stack, Text, Button, Image, keyframes } from "@chakra-ui/react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import {
+  Stack,
+  Text,
+  Button,
+  Image,
+  keyframes,
+  useToast,
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import useSWR from "swr";
+
+type Toggle = {
+  id: number;
+  name: string;
+  toggle: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 const fadeIn = keyframes`
   from { opacity: 0; }
@@ -21,7 +37,28 @@ const zoomIn = keyframes`
 `;
 
 const ViewTicket = () => {
+  const { data } = useSWR<Toggle[]>("/toggle");
+  const toast = useToast();
+  const nav = useNavigate();
   const [isTicketViewed, setIsTicketViewed] = useState(false);
+
+  useEffect(() => {
+    if (data) {
+      const check = data.find(
+        (toggle) => toggle.name === "malpun-external" || "malpun-internal"
+      );
+      if (!check || !check.toggle) {
+        toast({
+          title: "Access denied!",
+          description: "Anda belum bisa melihat tiket Malam Puncak saat ini.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+        nav("/");
+      }
+    }
+  }, [data]);
 
   return (
     <>

@@ -1,4 +1,21 @@
-import { Stack, Image, keyframes, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Stack,
+  Image,
+  keyframes,
+  useBreakpointValue,
+  useToast,
+} from "@chakra-ui/react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import useSWR from "swr";
+
+type Toggle = {
+  id: number;
+  name: string;
+  toggle: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 const zoomIn = keyframes`
   0% {
@@ -14,6 +31,29 @@ const zoomIn = keyframes`
 `;
 
 const MyTicket = () => {
+  const { data } = useSWR<Toggle[]>("/toggle");
+  const toast = useToast();
+  const nav = useNavigate();
+
+  useEffect(() => {
+    if (data) {
+      const check = data.find(
+        (toggle) => toggle.name === "malpun-external" || "malpun-internal"
+      );
+      if (!check || !check.toggle) {
+        toast({
+          title: "Access denied!",
+          description:
+            "Anda belum bisa melihat tiket Malam Puncak anda saat ini.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+        nav("/");
+      }
+    }
+  }, [data]);
+
   const imageRightSrc = useBreakpointValue({
     base: "/bg/bottom-ticket-malpun.png",
     lg: "/bg/right-ticket-malpun.png",

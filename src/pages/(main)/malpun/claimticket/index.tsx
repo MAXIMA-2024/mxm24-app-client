@@ -1,8 +1,29 @@
 import ModalCheck from "@/components/ModalCheck";
-import { Heading, Stack, Text, Button, Image } from "@chakra-ui/react";
-import { useState } from "react";
+import {
+  Heading,
+  Stack,
+  Text,
+  Button,
+  Image,
+  useToast,
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useSWR from "swr";
+
+type Toggle = {
+  id: number;
+  name: string;
+  toggle: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 const ClaimTicket = () => {
+  const { data } = useSWR<Toggle[]>("/toggle");
+  const toast = useToast();
+  const nav = useNavigate();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCheckButtonClick = () => {
@@ -12,6 +33,22 @@ const ClaimTicket = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    if (data) {
+      const check = data.find((toggle) => toggle.name === "malpun-internal");
+      if (!check || !check.toggle) {
+        toast({
+          title: "Access denied!",
+          description: "Anda belum bisa mengklaim tiket Malam Puncak saat ini.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+        nav("/");
+      }
+    }
+  }, [data]);
 
   return (
     <>
