@@ -104,6 +104,19 @@ const MainLayoutDesktop = () => {
 
   const isStateLinkActive = stateLink();
 
+  const malpunLink = () => {
+    if (data) {
+      const check = data.find((toggle) => toggle.name === "malpun");
+      if (!check || !check.toggle) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  };
+
+  const isMalpunLinkActive = malpunLink();
+
   const OverlayOne = () => (
     <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
   );
@@ -287,6 +300,50 @@ const MainLayoutDesktop = () => {
                     ) : !isHomeLinkActive && item.title === "HoME" ? (
                       <Tooltip
                         label="Rangkaian acara HoME akan segera dimulai"
+                        aria-label="A tooltip"
+                        bgColor={"button.primary"}
+                        rounded={"lg"}
+                        px={"0.8rem"}
+                        py={"0.5rem"}
+                        shadow={"lg"}
+                      >
+                        <Button
+                          variant={"ghost"}
+                          gap={2}
+                          w={"7.5rem"}
+                          p={5}
+                          transition={"all 0.2s ease-in-out"}
+                          fontFamily={"Lexend"}
+                          fontWeight={500}
+                          color={"text.primary"}
+                          _hover={{
+                            transform: "scale(0.90)",
+                            fontWeight: 600,
+                            "> img": {
+                              opacity: 1,
+                              transition: "opacity 0.2s ease-in-out",
+                            },
+                            transformOrigin: "center",
+                            bgColor: "#FFFFFF0",
+                          }}
+                          _active={{
+                            bgColor: "#FFFFFF0",
+                          }}
+                          style={{ cursor: "not-allowed" }}
+                        >
+                          <Image
+                            src={item.icon}
+                            w={"1rem"}
+                            h={"1rem"}
+                            transition={"all 0.2s ease-in-out"}
+                            _hover={{ w: "1.1rem", h: "1.1rem" }}
+                          ></Image>
+                          <Text>{item.title}</Text>
+                        </Button>
+                      </Tooltip>
+                    ) : !isMalpunLinkActive && item.title === "MalPun" ? (
+                      <Tooltip
+                        label="Rangkaian acara MalPun akan segera dimulai"
                         aria-label="A tooltip"
                         bgColor={"button.primary"}
                         rounded={"lg"}
@@ -667,6 +724,50 @@ const MainLayoutDesktop = () => {
                     ) : !isHomeLinkActive && item.title === "HoME" ? (
                       <Tooltip
                         label="Rangkaian acara HoME akan segera dimulai"
+                        aria-label="A tooltip"
+                        bgColor={"button.primary"}
+                        rounded={"lg"}
+                        px={"0.8rem"}
+                        py={"0.5rem"}
+                        shadow={"lg"}
+                      >
+                        <Button
+                          variant={"ghost"}
+                          gap={2}
+                          w={"7.5rem"}
+                          p={5}
+                          transition={"all 0.2s ease-in-out"}
+                          fontFamily={"Lexend"}
+                          fontWeight={500}
+                          color={"text.primary"}
+                          _hover={{
+                            transform: "scale(0.90)",
+                            fontWeight: 600,
+                            "> img": {
+                              opacity: 1,
+                              transition: "opacity 0.2s ease-in-out",
+                            },
+                            transformOrigin: "center",
+                            bgColor: "#FFFFFF0",
+                          }}
+                          _active={{
+                            bgColor: "#FFFFFF0",
+                          }}
+                          style={{ cursor: "not-allowed" }}
+                        >
+                          <Image
+                            src={item.icon}
+                            w={"1rem"}
+                            h={"1rem"}
+                            transition={"all 0.2s ease-in-out"}
+                            _hover={{ w: "1.1rem", h: "1.1rem" }}
+                          ></Image>
+                          <Text>{item.title}</Text>
+                        </Button>
+                      </Tooltip>
+                    ) : !isMalpunLinkActive && item.title === "MalPun" ? (
+                      <Tooltip
+                        label="Rangkaian acara MalPun akan segera dimulai"
                         aria-label="A tooltip"
                         bgColor={"button.primary"}
                         rounded={"lg"}
