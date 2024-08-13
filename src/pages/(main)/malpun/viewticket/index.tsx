@@ -7,7 +7,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import useSWR from "swr";
 
 type Toggle = {
@@ -17,6 +17,46 @@ type Toggle = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+type TicketDetails =
+  | {
+      code: string;
+      status: "internal";
+      detail: {
+        mahasiswa: {
+          email: string;
+          name: string;
+          nim: string;
+        };
+      } & {
+        id: number;
+        code: string;
+        mahasiswaId: number;
+        attendance: boolean;
+        attendanceTime: Date | null;
+        alfagiftId: string | null;
+        createdAt: Date;
+        updatedAt: Date;
+      };
+    }
+  | {
+      code: string;
+      status: "external";
+      detail: {
+        id: number;
+        code: string;
+        fullName: string;
+        email: string;
+        transactionId: string | null;
+        validatedAt: Date | null;
+        attendance: boolean;
+        attendanceTime: Date | null;
+        alfagiftId: string | null;
+        isChatimeEligible: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+      };
+    };
 
 const fadeIn = keyframes`
   from { opacity: 0; }
@@ -41,11 +81,16 @@ const ViewTicket = () => {
   const toast = useToast();
   const nav = useNavigate();
   const [isTicketViewed, setIsTicketViewed] = useState(false);
+  const [search] = useSearchParams();
+  const { data: ticket } = useSWR<TicketDetails>(
+    `/malpun/ticket/${search.get("code")}`
+  );
 
   useEffect(() => {
     if (data) {
       const check = data.find(
-        (toggle) => toggle.name === "malpun-external" || "malpun-internal"
+        (toggle) =>
+          toggle.name === "malpun-external" || toggle.name === "malpun-internal"
       );
       if (!check || !check.toggle) {
         toast({
@@ -58,7 +103,23 @@ const ViewTicket = () => {
         nav("/");
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
+
+  useEffect(() => {
+    if (!search.has("code")) {
+      toast({
+        title: "Access denied!",
+        description: "Request tidak valid",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      nav("/");
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
 
   return (
     <>
@@ -96,7 +157,9 @@ const ViewTicket = () => {
                     <Stack>
                       <Text fontSize={"1.5rem"}>Hai,</Text>
                       <Text fontSize={{ base: "2rem", lg: "3rem" }}>
-                        Nama lengkap
+                        {ticket?.status === "internal"
+                          ? ticket.detail.mahasiswa.name
+                          : ticket?.detail.fullName}
                       </Text>
                     </Stack>
                   ) : (
@@ -156,7 +219,7 @@ const ViewTicket = () => {
 
             {/* BUTTON CLAIM */}
             {!isTicketViewed && (
-              <Link to="/malpun/myticket">
+              <Link to={`/malpun/myticket?code=${ticket?.code}`}>
                 <Stack alignItems={"center"}>
                   <Button
                     bgColor={"button.primary"}

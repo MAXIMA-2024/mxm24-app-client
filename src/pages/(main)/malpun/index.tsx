@@ -11,8 +11,30 @@ type Toggle = {
   updatedAt: Date;
 };
 
+type TicketMalpun =
+  | {
+      status: "unclaimed";
+    }
+  | {
+      status: "claimed";
+      ticket: {
+        id: number;
+        code: string;
+        attendance: boolean;
+        attendanceTime: string | null;
+        alfagiftId: string | null;
+        createdAt: string;
+        mahasiswa: {
+          name: string;
+          nim: string;
+          email: string;
+        };
+      };
+    };
+
 const Inbutton = () => {
   const { data } = useSWR<Toggle[]>("/toggle");
+  const { data: ticket } = useSWR<TicketMalpun>("/malpun/internal");
 
   const claimTicket = () => {
     if (data) {
@@ -31,7 +53,13 @@ const Inbutton = () => {
     <>
       <Stack>
         {isTicketClaimable ? (
-          <Link to="/malpun/claimticket">
+          <Link
+            to={
+              ticket?.status === "unclaimed"
+                ? "/malpun/claimticket"
+                : `/malpun/myticket?code=${ticket?.ticket.code}`
+            }
+          >
             <Button
               bgColor={"button.primary"}
               p={{ base: 5, md: 8, lg: 10 }}
@@ -51,7 +79,7 @@ const Inbutton = () => {
                 fontWeight={"400"}
                 fontSize={{ base: "medium", md: "larger", lg: "xx-large" }}
               >
-                KLAIM TIKET
+                {ticket?.status === "unclaimed" ? "KLAIM TIKET" : "LIHAT TIKET"}
               </Text>
             </Button>
           </Link>

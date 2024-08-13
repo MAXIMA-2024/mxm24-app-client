@@ -1,4 +1,5 @@
 import ModalCheck from "@/components/ModalCheck";
+import useAuth from "@/hooks/useAuth";
 import {
   Heading,
   Stack,
@@ -23,6 +24,7 @@ const ClaimTicket = () => {
   const { data } = useSWR<Toggle[]>("/toggle");
   const toast = useToast();
   const nav = useNavigate();
+  const auth = useAuth();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -48,7 +50,23 @@ const ClaimTicket = () => {
         nav("/");
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
+
+  useEffect(() => {
+    if (auth.status === "authenticated" && auth.user?.role !== "mahasiswa") {
+      toast({
+        title: "Access denied!",
+        description: "Hanya mahasiswa yang bisa mengklaim tiket Malam Puncak.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      nav("/");
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auth]);
 
   return (
     <>

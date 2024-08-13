@@ -9,10 +9,23 @@ import {
   Input,
   Text,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
 import ModalHimbauan from "./ModalHimbauan";
+import useApi, { ResponseModel, useToastErrorHandler } from "@/hooks/useApi";
+
+type TicketResponse = {
+  id: number;
+  code: string;
+  mahasiswaId: number;
+  attendance: boolean;
+  attendanceTime: Date | null;
+  alfagiftId: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 interface ModalCheckProps {
   isOpen: boolean;
@@ -33,8 +46,9 @@ const tokenSchema = z
   });
 
 const ModalCheck = ({ isOpen, onClose }: ModalCheckProps) => {
-  //   const api = useApi();
-  //   const errorHandler = useToastErrorHandler();
+  const api = useApi();
+  const errorHandler = useToastErrorHandler();
+  const toast = useToast();
   const nav = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [token, setToken] = useState<string>();
@@ -62,14 +76,32 @@ const ModalCheck = ({ isOpen, onClose }: ModalCheckProps) => {
     const validation = tokenSchema.safeParse(token);
 
     if (!validation.success) {
-      setErrorMessage(validation.error.errors[0].message); // Set the first error message
+      setErrorMessage(validation.error.errors[0].message);
       setIsLoading(false);
       return;
     }
 
-    setErrorMessage(null); // Clear the error message if validation passes
-    nav("/malpun/viewticket");
-    setIsLoading(false);
+    setErrorMessage(null);
+
+    api
+      .post<ResponseModel<TicketResponse>>("/malpun/internal", {
+        alfagiftId: validation.data,
+      })
+      .then((res) => {
+        toast({
+          title: "Success!",
+          description: "Berhasil mengklaim tiket Malam Puncak.",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+        nav(`/malpun/viewticket?code=${res.data.data.code}`);
+      })
+      .catch(errorHandler)
+      .finally(() => {
+        setIsLoading(false);
+        onClose();
+      });
   };
 
   return (
