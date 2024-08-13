@@ -409,7 +409,9 @@ const SelectStateId = () => {
           <ModalCloseButton />
           <ModalBody>
             <Stack p={"1rem"}>
-              <Heading fontFamily={"Luthier"}>{stateDetails?.name}</Heading>
+              <Heading fontFamily={"Luthier"} textAlign="center">
+                {stateDetails?.name}
+              </Heading>
             </Stack>
             <Stack
               direction={{ base: "column", lg: "row" }}
@@ -428,7 +430,7 @@ const SelectStateId = () => {
                       : `${import.meta.env.VITE_CDN_URL}${stateDetails?.logo}`
                   }
                   // w={"15rem"}
-                  h={{ base: "8rem", lg: "15rem" }}
+                  h={{ base: "12.5rem", lg: "20rem" }}
                   objectFit={"contain"}
                   borderRadius="lg"
                 />

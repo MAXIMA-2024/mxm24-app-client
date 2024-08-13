@@ -142,9 +142,48 @@ const State = () => {
               justify={"space-around"}
               align={"end"}
             >
-              <Boag />
-              <Boag />
-              <Boag />
+              {isLoading && (
+                <Stack>
+                  <Spinner
+                    thickness="4px"
+                    speed="0.65s"
+                    emptyColor="gray.200"
+                    color="text.primary"
+                    size="xl"
+                  />
+                </Stack>
+              )}
+              {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                data &&
+                  Array.from({ length: 3 }).map((_, i) => (
+                    <Boag
+                      data={
+                        data.StateRegistration[i]
+                          ? {
+                              id: data.StateRegistration[i].state.id,
+                              image: data.StateRegistration[i].state.logo,
+                              setState: (id) => {
+                                const state = data.StateRegistration.find(
+                                  (sr) => sr.state.id === id
+                                );
+                                if (state) {
+                                  api
+                                    .get<ResponseModel<State>>(
+                                      `/state/${state.state.id}`
+                                    )
+                                    .then((res) => {
+                                      setStateDetails(res.data.data);
+                                    })
+                                    .catch(errorHandler);
+                                }
+                              },
+                            }
+                          : undefined
+                      }
+                    />
+                  ))
+              }
             </Stack>
             <div
               ref={bottomRef}
@@ -210,8 +249,6 @@ const State = () => {
             pt={"12rem"}
             id="gondola"
           >
-            {/* make is loading */}
-
             {isLoading && (
               <Stack>
                 <Spinner
@@ -277,7 +314,9 @@ const State = () => {
           <ModalCloseButton />
           <ModalBody>
             <Stack p={"1rem"}>
-              <Heading fontFamily={"Luthier"}>{stateDetails?.name}</Heading>
+              <Heading fontFamily={"Luthier"} textAlign={"center"}>
+                {stateDetails?.name}
+              </Heading>
             </Stack>
             <Stack
               direction={{ base: "column", lg: "row" }}
@@ -296,7 +335,7 @@ const State = () => {
                       : `${import.meta.env.VITE_CDN_URL}${stateDetails?.logo}`
                   }
                   // w={"15rem"}
-                  h={{ base: "8rem", lg: "15rem" }}
+                  h={{ base: "12.5rem", lg: "20rem" }}
                   objectFit={"contain"}
                   borderRadius="lg"
                 />
