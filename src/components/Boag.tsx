@@ -44,7 +44,9 @@ const Boag = ({ data }: SelectState) => {
           }}
           isRound
           variant="solid"
-          bgImage={data.image}
+          bgImage={`${import.meta.env.VITE_CDN_URL}${data.image}`}
+          bgPos={"center"}
+          bgSize={"contain"}
           textColor={"white"}
           aria-label="Done"
           fontSize="100px"
