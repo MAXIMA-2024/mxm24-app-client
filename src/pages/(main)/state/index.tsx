@@ -264,8 +264,6 @@ const State = () => {
         isOpen={!!stateDetails}
         isCentered
         motionPreset="slideInBottom"
-
-        // size={{ base: "sm", lg: "xl" }}
       >
         <ModalOverlay backdropFilter="auto" backdropBlur="3px" />
         <ModalContent
