@@ -157,6 +157,7 @@ const SelectStateId = () => {
         >
           <Card
             w={{ base: "10rem", md: "12rem", lg: "20rem" }}
+            h={{ base: "25rem", md: "20rem", lg: "30rem" }}
             align={"center"}
             borderRadius={"1rem"}
           >
@@ -173,11 +174,12 @@ const SelectStateId = () => {
                   objectFit={"contain"}
                   borderRadius="lg"
                 />
-                <Stack mt="4">
+                <Stack mt={4}>
                   <Heading
                     fontFamily={"Lexend"}
                     fontWeight={"semibold"}
-                    size="md"
+                    size={{ base: "sm", lg: "md" }}
+                    textAlign={"center"}
                   >
                     {name}
                   </Heading>
