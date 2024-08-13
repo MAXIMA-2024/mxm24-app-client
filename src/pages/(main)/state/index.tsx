@@ -10,6 +10,7 @@ import {
   ModalFooter,
   ModalOverlay,
   Show,
+  Spinner,
   Stack,
   Text,
   useToast,
@@ -209,6 +210,20 @@ const State = () => {
             pt={"12rem"}
             id="gondola"
           >
+            {/* make is loading */}
+
+            {isLoading && (
+              <Stack>
+                <Spinner
+                  thickness="4px"
+                  speed="0.65s"
+                  emptyColor="gray.200"
+                  color="text.primary"
+                  size="xl"
+                />
+              </Stack>
+            )}
+
             {data &&
               Array.from({ length: 3 }).map((_, i) => (
                 <Boag
