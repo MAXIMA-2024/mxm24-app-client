@@ -276,6 +276,9 @@ const State = () => {
           {/* <ModalHeader>Nama Organisator</ModalHeader> */}
           <ModalCloseButton />
           <ModalBody>
+            <Stack p={"1rem"}>
+              <Heading fontFamily={"Luthier"}>{stateDetails?.name}</Heading>
+            </Stack>
             <Stack
               direction={{ base: "column", lg: "row" }}
               gap={"5rem"}
@@ -286,7 +289,6 @@ const State = () => {
                 gap={"1rem"}
                 w={{ base: "100%", lg: "25%" }}
               >
-                <Heading fontFamily={"Luthier"}>{stateDetails?.name}</Heading>
                 <Image
                   src={
                     stateDetails?.logo === "-"
