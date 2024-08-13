@@ -33,6 +33,7 @@ const StateLayout = () => {
         nav("/");
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   useEffect(() => {
@@ -47,6 +48,7 @@ const StateLayout = () => {
       nav("/");
       return;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth]);
 
   return (

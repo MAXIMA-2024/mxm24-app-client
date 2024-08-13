@@ -15,7 +15,6 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  useDisclosure,
   Box,
   useToast,
   Spinner,
@@ -102,6 +101,7 @@ const SelectStateId = () => {
         nav("/state");
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, days]);
 
   useEffect(() => {
@@ -429,16 +429,19 @@ const SelectStateId = () => {
                   borderRadius="lg"
                 />
                 <Text fontFamily={"Lexend"} fontWeight={"bold"}>
-                  {new Date(stateDetails?.day.date!)
-                    .toLocaleDateString("id-ID", {
-                      weekday: "long",
-                      day: "numeric",
-                      month: "long",
-                      year: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })
-                    .replace("pukul", "-")}
+                  {
+                    // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+                    new Date(stateDetails?.day.date!)
+                      .toLocaleDateString("id-ID", {
+                        weekday: "long",
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })
+                      .replace("pukul", "-")
+                  }
                 </Text>
                 <Text fontFamily={"Lexend"} fontWeight={"semibold"}>
                   Kuota: {stateDetails?._count.StateRegistration}/
@@ -488,7 +491,7 @@ const SelectStateId = () => {
                       duration: 5000,
                       isClosable: true,
                     });
-                    //@ts-ignore
+                    //@ts-expect-error tolol
                     nav("/state#gondola");
                   })
                   .catch(errorHandler);
