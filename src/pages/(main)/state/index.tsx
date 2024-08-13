@@ -69,7 +69,9 @@ const State = () => {
   const bottomRef = useRef<HTMLDivElement>(null);
   const loc = useLocation();
   const auth = useAuth();
-  const { data } = useSWR<ClaimedState>("/state/registration");
+  const { data, mutate, isLoading } = useSWR<ClaimedState>(
+    "/state/registration"
+  );
   const api = useApi();
   const toast = useToast();
   const errorHandler = useToastErrorHandler();
@@ -333,34 +335,25 @@ const State = () => {
               color="white"
               mr={3}
               _hover={{ bg: "#FFB1C9", color: "white" }}
-              onClick={(id) => {
-                // api
-                //   .post<ResponseModel>("/state/registration", {
-                //     stateId: stateDetails?.id,
-                //   })
-                //   .then(() => {
-                //     toast({
-                //       title: "Berhasil!",
-                //       description: `Kamu berhasil mendaftar STATE ${stateDetails?.name}`,
-                //       status: "success",
-                //       duration: 5000,
-                //       isClosable: true,
-                //     });
-                //     //@ts-ignore
-                //     nav("/state#gondola");
-                //   })
-                //   .catch(errorHandler);
-
+              // make button onclick can delete based on state id
+              onClick={() => {
                 api
-                  .delete<ResponseModel>(`/state/registration/${id}`)
+                  .delete<ResponseModel>(
+                    `/state/registration/${stateDetails?.id}`,
+                    {
+                      data: { stateId: stateDetails?.id },
+                    }
+                  )
                   .then((res) => {
                     toast({
                       title: "Berhasil",
                       description: res.data.message,
                       status: "success",
                     });
+                    setStateDetails(null);
                   })
-                  .catch(errorHandler);
+                  .catch(errorHandler)
+                  .finally(() => mutate());
               }}
             >
               Hapus
