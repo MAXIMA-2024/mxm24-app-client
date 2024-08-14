@@ -121,12 +121,13 @@ const ViewTicket = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
+  console.log("ticket", ticket);
   useEffect(() => {
     if (!isLoading && !ticket) {
       nav("/malpun");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ticket]);
+  }, [ticket, isLoading]);
 
   return (
     <>

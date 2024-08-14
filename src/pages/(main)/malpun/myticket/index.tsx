@@ -122,7 +122,7 @@ const MyTicket = () => {
       nav("/malpun");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ticket]);
+  }, [ticket, isLoading]);
 
   const imageRightSrc = useBreakpointValue({
     base: "/bg/bottom-ticket-malpun.png",
