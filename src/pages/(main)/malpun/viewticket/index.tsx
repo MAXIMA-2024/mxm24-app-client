@@ -82,7 +82,7 @@ const ViewTicket = () => {
   const nav = useNavigate();
   const [isTicketViewed, setIsTicketViewed] = useState(false);
   const [search] = useSearchParams();
-  const { data: ticket } = useSWR<TicketDetails>(
+  const { data: ticket, isLoading } = useSWR<TicketDetails>(
     `/malpun/ticket/${search.get("order_id")}`
   );
 
@@ -120,6 +120,13 @@ const ViewTicket = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
+
+  useEffect(() => {
+    if (!isLoading && !ticket) {
+      nav("/malpun");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ticket]);
 
   return (
     <>
