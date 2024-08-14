@@ -851,7 +851,7 @@ const MainLayoutDesktop = () => {
 
               {/* Right Side */}
 
-              {auth.status === "authenticated" && (
+              {auth.status !== "unauthenticated" && (
                 <Menu>
                   <MenuButton>
                     <Button
@@ -968,7 +968,7 @@ const MainLayoutDesktop = () => {
                 </Menu>
               )}
 
-              {auth.status !== "authenticated" && (
+              {auth.status === "unauthenticated" && (
                 <>
                   <Button
                     rounded={"full"}

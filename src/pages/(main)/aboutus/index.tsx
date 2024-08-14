@@ -88,7 +88,7 @@ const AboutUs = () => {
               base: "1rem",
               xl: "1rem",
             }}
-            fontFamily={"Luthier"}
+            fontFamily={"Lexend"}
             color={"text.primary"}
             textAlign={"justify"}
             mt={{ base: "40px", lg: "40px", xl: "40px" }}

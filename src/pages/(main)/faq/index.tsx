@@ -26,10 +26,11 @@ const Faq = () => {
         return (
           <Text
             fontSize={{ base: "1rem", xl: "1rem" }}
-            fontFamily={"Luthier"}
+            fontFamily={"Lexend"}
             color={"text.primary"}
             textAlign={"justify"}
-            mb={8}
+            mt={2}
+            mb={4}
           >
             <b>Hall of MAXIMA Exhibition</b> merupakan salah satu bagian dari
             rangkaian kegiatan MAXIMA 2024. HoME merupakan rangkaian kegiatan
@@ -45,10 +46,11 @@ const Faq = () => {
         return (
           <Text
             fontSize={{ base: "1rem", xl: "1rem" }}
-            fontFamily={"Luthier"}
+            fontFamily={"Lexend"}
             color={"text.primary"}
             textAlign={"justify"}
-            mb={8}
+            mt={2}
+            mb={4}
           >
             <b>STATE atau Student Activities Unit Explore</b> merupakan salah
             satu rangkaian acara MAXIMA yang bertujuan untuk memberi kesempatan
@@ -64,10 +66,11 @@ const Faq = () => {
         return (
           <Text
             fontSize={{ base: "1rem", xl: "1rem" }}
-            fontFamily={"Luthier"}
+            fontFamily={"Lexend"}
             color={"text.primary"}
             textAlign={"justify"}
-            mb={8}
+            mt={2}
+            mb={4}
           >
             <b>Malam Puncak MAXIMA</b> merupakan rangkaian terakhir dari
             kegiatan MAXIMA. Kata 'Puncak' merepresentasikan puncak dari seluruh

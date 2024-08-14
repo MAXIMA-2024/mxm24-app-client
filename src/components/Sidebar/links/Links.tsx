@@ -71,6 +71,19 @@ const Links = ({ closeSidebar }: { closeSidebar: () => void }) => {
 
   const isStateLinkActive = stateLink();
 
+  const malpunLink = () => {
+    if (data) {
+      const check = data.find((toggle) => toggle.name === "malpun");
+      if (!check || !check.toggle) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  };
+
+  const isMalpunLinkActive = malpunLink();
+
   return (
     <Stack as={"div"}>
       <motion.div
@@ -137,6 +150,34 @@ const Links = ({ closeSidebar }: { closeSidebar: () => void }) => {
                 ) : !isHomeLinkActive && item.title === "HoME" ? (
                   <Tooltip
                     label="Rangkaian acara HoME akan segera dimulai"
+                    aria-label="A tooltip"
+                    bgColor={"button.primary"}
+                    rounded={"lg"}
+                    mx={"0.3rem"}
+                    py={"0.5rem"}
+                    shadow={"lg"}
+                  >
+                    <Button
+                      variant="link"
+                      onClick={(e) => e.preventDefault()}
+                      style={{ cursor: "not-allowed" }}
+                      sx={{
+                        textDecoration: "none",
+                        color: "text.primary",
+                        _hover: { textDecoration: "none" },
+                      }}
+                    >
+                      <Stack direction="row" alignItems="center" spacing={6}>
+                        <Image src={item.icon} w="1.25rem" h="1rem" />
+                        <Text fontFamily={"Lexend"} fontWeight={400}>
+                          {item.title}
+                        </Text>
+                      </Stack>
+                    </Button>
+                  </Tooltip>
+                ) : !isMalpunLinkActive && item.title === "MalPun" ? (
+                  <Tooltip
+                    label="Rangkaian acara MalPun akan segera dimulai"
                     aria-label="A tooltip"
                     bgColor={"button.primary"}
                     rounded={"lg"}
@@ -241,6 +282,34 @@ const Links = ({ closeSidebar }: { closeSidebar: () => void }) => {
                 ) : !isHomeLinkActive && item.title === "HoME" ? (
                   <Tooltip
                     label="Rangkaian acara HoME akan segera dimulai"
+                    aria-label="A tooltip"
+                    bgColor={"button.primary"}
+                    rounded={"lg"}
+                    mx={"0.3rem"}
+                    py={"0.5rem"}
+                    shadow={"lg"}
+                  >
+                    <Button
+                      variant="link"
+                      onClick={(e) => e.preventDefault()}
+                      style={{ cursor: "not-allowed" }}
+                      sx={{
+                        textDecoration: "none",
+                        color: "text.primary",
+                        _hover: { textDecoration: "none" },
+                      }}
+                    >
+                      <Stack direction="row" alignItems="center" spacing={6}>
+                        <Image src={item.icon} w="1.25rem" h="1rem" />
+                        <Text fontFamily={"Lexend"} fontWeight={400}>
+                          {item.title}
+                        </Text>
+                      </Stack>
+                    </Button>
+                  </Tooltip>
+                ) : !isMalpunLinkActive && item.title === "MalPun" ? (
+                  <Tooltip
+                    label="Rangkaian acara MalPun akan segera dimulai"
                     aria-label="A tooltip"
                     bgColor={"button.primary"}
                     rounded={"lg"}
