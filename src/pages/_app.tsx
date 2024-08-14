@@ -33,6 +33,7 @@ const GlobalLayout = () => {
       minW={"100vw"}
       minH={"100vh"}
       overflowX={"hidden"}
+      overflowY={auth.status !== "loading" && !isLoaded ? "hidden" : "auto"}
       pos={"relative"}
       gap={0}
     >

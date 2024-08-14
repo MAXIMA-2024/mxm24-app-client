@@ -1,7 +1,73 @@
-import { Heading, Stack, Text, Button, Image } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import ModalCheck from "@/components/ModalCheck";
+import useAuth from "@/hooks/useAuth";
+import {
+  Heading,
+  Stack,
+  Text,
+  Button,
+  Image,
+  useToast,
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useSWR from "swr";
+
+type Toggle = {
+  id: number;
+  name: string;
+  toggle: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 const ClaimTicket = () => {
+  const { data } = useSWR<Toggle[]>("/toggle");
+  const toast = useToast();
+  const nav = useNavigate();
+  const auth = useAuth();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCheckButtonClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  useEffect(() => {
+    if (data) {
+      const check = data.find((toggle) => toggle.name === "malpun-internal");
+      if (!check || !check.toggle) {
+        toast({
+          title: "Access denied!",
+          description: "Anda belum bisa mengklaim tiket Malam Puncak saat ini.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+        nav("/");
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
+  useEffect(() => {
+    if (auth.status === "authenticated" && auth.user?.role !== "mahasiswa") {
+      toast({
+        title: "Access denied!",
+        description: "Hanya mahasiswa yang bisa mengklaim tiket Malam Puncak.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      nav("/");
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auth]);
+
   return (
     <>
       <Stack
@@ -116,31 +182,33 @@ const ClaimTicket = () => {
                 </Stack>
               </Stack>
               {/* BUTTON CLAIM */}
-              <Link to="/malpun/viewticket">
-                <Stack alignItems={{ base: "center", lg: "flex-end" }}>
-                  <Button
-                    bgColor={"button.primary"}
-                    w={{ base: "6rem", md: "8rem", lg: "8rem" }}
-                    variant={"ghost"}
-                    transition={"0.3s"}
-                    color={"text.tertiary"}
-                    rounded={"xl"}
-                    _hover={{ bgColor: "#3A0025" }}
+              {/* <Link to="/malpun/viewticket"> */}
+              <Stack alignItems={{ base: "center", lg: "flex-end" }}>
+                <Button
+                  bgColor={"button.primary"}
+                  w={{ base: "6rem", md: "8rem", lg: "8rem" }}
+                  variant={"ghost"}
+                  transition={"0.3s"}
+                  color={"text.tertiary"}
+                  rounded={"xl"}
+                  _hover={{ bgColor: "#3A0025" }}
+                  onClick={handleCheckButtonClick}
+                >
+                  <Text
+                    fontFamily={"Lexend"}
+                    fontWeight={"400"}
+                    fontSize={{ base: "small", md: "medium", lg: "large" }}
                   >
-                    <Text
-                      fontFamily={"Lexend"}
-                      fontWeight={"400"}
-                      fontSize={{ base: "small", md: "medium", lg: "large" }}
-                    >
-                      Klaim
-                    </Text>
-                  </Button>
-                </Stack>
-              </Link>
+                    Klaim
+                  </Text>
+                </Button>
+              </Stack>
+              {/* </Link> */}
             </Stack>
           </Stack>
         </Stack>
       </Stack>
+      <ModalCheck isOpen={isModalOpen} onClose={handleCloseModal} />
     </>
   );
 };

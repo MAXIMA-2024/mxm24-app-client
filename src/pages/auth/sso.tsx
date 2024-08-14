@@ -13,42 +13,55 @@ const SSOCallback = () => {
   const toast = useToast();
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(loc.search);
-    const ticket = searchParams.get("ticket");
-
-    if (!ticket) {
+    if (auth.status === "authenticated") {
       toast({
         title: "Error",
-        description: "Invalid SSO callback, please try login again.",
+        description: "You are already logged in!",
         status: "error",
         isClosable: true,
       });
+
       return nav("/");
     }
 
-    auth
-      .callBack(ticket)
-      .then(() => {
-        // toast({
-        //   title: "Success",
-        //   description: "Successfully logged in!",
-        //   status: "success",
-        //   isClosable: true,
-        // });
-        nav("/");
-      })
-      .catch(() => {
+    if (auth.status === "unauthenticated") {
+      const searchParams = new URLSearchParams(loc.search);
+      const ticket = searchParams.get("ticket");
+
+      if (!ticket) {
         toast({
           title: "Error",
-          description: "Failed to login with SSO",
+          description: "Invalid SSO callback, please try login again.",
           status: "error",
           isClosable: true,
         });
-        nav("/");
-      });
+        return nav("/");
+      }
+
+      auth
+        .callBack(ticket)
+        .then(() => {
+          // toast({
+          //   title: "Success",
+          //   description: "Successfully logged in!",
+          //   status: "success",
+          //   isClosable: true,
+          // });
+          nav("/");
+        })
+        .catch(() => {
+          toast({
+            title: "Error",
+            description: "Failed to login with SSO",
+            status: "error",
+            isClosable: true,
+          });
+          nav("/");
+        });
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [auth]);
 
   return (
     <Stack

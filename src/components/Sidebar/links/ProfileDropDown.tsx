@@ -15,25 +15,43 @@ import {
   ModalCloseButton,
   useDisclosure,
   useToast,
+  Tooltip,
 } from "@chakra-ui/react";
 import { FaRegEdit } from "react-icons/fa";
 import { IoLogOutOutline, IoTicket } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import React from "react";
 import useAuth from "@/hooks/useAuth";
+import useSWR from "swr";
+import { z } from "zod";
 
-// const isLogin = false;
-
-// const user = {
-//   status: isLogin ? "authenticated" : "unaunthenticated",
-//   name: "Jonathan",
-// };
+type Toggle = {
+  id: number;
+  name: string;
+  toggle: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
+  // const { data } = useSWR<Toggle[]>("/toggle");
   const auth = useAuth();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("xs");
+
+  // const claimTicket = () => {
+  //   if (data) {
+  //     const check = data.find((toggle) => toggle.name === "registration");
+  //     if (!check || !check.toggle) {
+  //       return false;
+  //     }
+  //     return true;
+  //   }
+  //   return false;
+  // };
+
+  // const isTicketClaimable = claimTicket();
 
   const OverlayOne = () => (
     <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
@@ -272,6 +290,7 @@ const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
                     >
                       Iya Mahasiswa/i UMN 2024
                     </Button>
+
                     <Button
                       variant="ghost"
                       borderWidth={1}
@@ -299,7 +318,7 @@ const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
 const TopLeftProfile = () => {
   const auth = useAuth();
   return (
-    <Stack pos={"fixed"} right={-2} top={"25px"}>
+    <Stack pos={"fixed"} right={-2} top={"25px"} zIndex={999}>
       {auth.status === "authenticated" && (
         <Menu>
           <MenuButton>

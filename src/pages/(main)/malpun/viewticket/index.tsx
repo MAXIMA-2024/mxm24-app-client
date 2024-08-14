@@ -1,6 +1,62 @@
-import { Stack, Text, Button, Image, keyframes } from "@chakra-ui/react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import {
+  Stack,
+  Text,
+  Button,
+  Image,
+  keyframes,
+  useToast,
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import useSWR from "swr";
+
+type Toggle = {
+  id: number;
+  name: string;
+  toggle: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+type TicketDetails =
+  | {
+      code: string;
+      status: "internal";
+      detail: {
+        mahasiswa: {
+          email: string;
+          name: string;
+          nim: string;
+        };
+      } & {
+        id: number;
+        code: string;
+        mahasiswaId: number;
+        attendance: boolean;
+        attendanceTime: Date | null;
+        alfagiftId: string | null;
+        createdAt: Date;
+        updatedAt: Date;
+      };
+    }
+  | {
+      code: string;
+      status: "external";
+      detail: {
+        id: number;
+        code: string;
+        fullName: string;
+        email: string;
+        transactionId: string | null;
+        validatedAt: Date | null;
+        attendance: boolean;
+        attendanceTime: Date | null;
+        alfagiftId: string | null;
+        isChatimeEligible: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+      };
+    };
 
 const fadeIn = keyframes`
   from { opacity: 0; }
@@ -21,7 +77,49 @@ const zoomIn = keyframes`
 `;
 
 const ViewTicket = () => {
+  const { data } = useSWR<Toggle[]>("/toggle");
+  const toast = useToast();
+  const nav = useNavigate();
   const [isTicketViewed, setIsTicketViewed] = useState(false);
+  const [search] = useSearchParams();
+  const { data: ticket } = useSWR<TicketDetails>(
+    `/malpun/ticket/${search.get("order_id")}`
+  );
+
+  useEffect(() => {
+    if (data) {
+      const check = data.find(
+        (toggle) =>
+          toggle.name === "malpun-external" || toggle.name === "malpun-internal"
+      );
+      if (!check || !check.toggle) {
+        toast({
+          title: "Access denied!",
+          description: "Anda belum bisa melihat tiket Malam Puncak saat ini.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+        nav("/");
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
+  useEffect(() => {
+    if (!search.has("order_id")) {
+      toast({
+        title: "Access denied!",
+        description: "Request tidak valid",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      nav("/");
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
 
   return (
     <>
@@ -38,6 +136,7 @@ const ViewTicket = () => {
         bgPosition={"center"}
         w={"100%"}
         p={{ base: "14rem", md: "10rem", lg: "8rem" }}
+        mt={{ base: 0, lg: "5rem" }}
         px={{ base: "2rem", md: "8rem", lg: "4rem" }}
       >
         <Stack direction={"column"} flex={1}>
@@ -58,7 +157,9 @@ const ViewTicket = () => {
                     <Stack>
                       <Text fontSize={"1.5rem"}>Hai,</Text>
                       <Text fontSize={{ base: "2rem", lg: "3rem" }}>
-                        Nama lengkap
+                        {ticket?.status === "internal"
+                          ? ticket.detail.mahasiswa.name
+                          : ticket?.detail.fullName}
                       </Text>
                     </Stack>
                   ) : (
@@ -118,7 +219,7 @@ const ViewTicket = () => {
 
             {/* BUTTON CLAIM */}
             {!isTicketViewed && (
-              <Link to="/malpun/myticket">
+              <Link to={`/malpun/myticket?order_id=${ticket?.code}`}>
                 <Stack alignItems={"center"}>
                   <Button
                     bgColor={"button.primary"}

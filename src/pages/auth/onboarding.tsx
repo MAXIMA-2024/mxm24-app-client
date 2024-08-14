@@ -19,6 +19,15 @@ import useAuth from "@/hooks/useAuth";
 import { useEffect } from "react";
 import { useNavigate } from "@/router";
 import useApi, { ResponseModel, useToastErrorHandler } from "@/hooks/useApi";
+import useSWR from "swr";
+
+type Toggle = {
+  id: number;
+  name: string;
+  toggle: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 const prodiList = [
   "Akuntansi",
@@ -75,6 +84,7 @@ const mahasiswaSchema = z.object({
 type Mahasiswa = z.infer<typeof mahasiswaSchema>;
 
 const Onboarding = () => {
+  const { data } = useSWR<Toggle[]>("/toggle");
   const auth = useAuth();
   const nav = useNavigate();
   const toast = useToast();
@@ -90,6 +100,23 @@ const Onboarding = () => {
   } = useForm<Mahasiswa>({
     resolver: zodResolver(mahasiswaSchema),
   });
+
+  useEffect(() => {
+    if (data) {
+      const check = data.find((toggle) => toggle.name === "registration");
+      if (!check || !check.toggle) {
+        toast({
+          title: "Access denied!",
+          description: "Registrasi belum dibuka untuk saat ini.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+        nav("/");
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   useEffect(() => {
     if (auth.status === "unauthenticated") {
