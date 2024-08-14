@@ -57,7 +57,7 @@ const Inbutton = () => {
             to={
               ticket?.status === "unclaimed"
                 ? "/malpun/claimticket"
-                : `/malpun/myticket?code=${ticket?.ticket.code}`
+                : `/malpun/myticket?order_id=${ticket?.ticket.code}`
             }
           >
             <Button

@@ -78,7 +78,7 @@ const MyTicket = () => {
   const nav = useNavigate();
   const [search] = useSearchParams();
   const { data: ticket, isLoading } = useSWR<TicketDetails>(
-    `/malpun/ticket/${search.get("code")}`
+    `/malpun/ticket/${search.get("order_id")}`
   );
 
   useEffect(() => {
@@ -103,7 +103,7 @@ const MyTicket = () => {
   }, [data]);
 
   useEffect(() => {
-    if (!search.has("code")) {
+    if (!search.has("order_id")) {
       toast({
         title: "Access denied!",
         description: "Request tidak valid",

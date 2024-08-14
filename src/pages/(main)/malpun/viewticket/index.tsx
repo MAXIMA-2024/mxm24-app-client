@@ -83,7 +83,7 @@ const ViewTicket = () => {
   const [isTicketViewed, setIsTicketViewed] = useState(false);
   const [search] = useSearchParams();
   const { data: ticket } = useSWR<TicketDetails>(
-    `/malpun/ticket/${search.get("code")}`
+    `/malpun/ticket/${search.get("order_id")}`
   );
 
   useEffect(() => {
@@ -107,7 +107,7 @@ const ViewTicket = () => {
   }, [data]);
 
   useEffect(() => {
-    if (!search.has("code")) {
+    if (!search.has("order_id")) {
       toast({
         title: "Access denied!",
         description: "Request tidak valid",
@@ -219,7 +219,7 @@ const ViewTicket = () => {
 
             {/* BUTTON CLAIM */}
             {!isTicketViewed && (
-              <Link to={`/malpun/myticket?code=${ticket?.code}`}>
+              <Link to={`/malpun/myticket?order_id=${ticket?.code}`}>
                 <Stack alignItems={"center"}>
                   <Button
                     bgColor={"button.primary"}

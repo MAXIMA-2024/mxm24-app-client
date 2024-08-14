@@ -95,7 +95,7 @@ const ModalCheck = ({ isOpen, onClose }: ModalCheckProps) => {
           duration: 5000,
           isClosable: true,
         });
-        nav(`/malpun/viewticket?code=${res.data.data.code}`);
+        nav(`/malpun/viewticket?order_id=${res.data.data.code}`);
       })
       .catch(errorHandler)
       .finally(() => {

@@ -94,25 +94,47 @@ type ExternalResponse = {
   };
 };
 
+type ExternalCallbackResponse = {
+  id: number;
+  code: string;
+  fullName: string;
+  email: string;
+  transactionId: string | null;
+  validatedAt: string | null;
+  attendance: boolean;
+  attendanceTime: string | null;
+  alfagiftId: string | null;
+  isChatimeBundle: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+
+type CheckChatime = {
+  isChatTimeEligible: boolean;
+};
+
 const externalBuyFormSchema = z.object({
   fullName: z.string({ required_error: "Nama lengkap harus diisi" }),
   email: z.string({ required_error: "Email harus diisi" }).email({
     message: "Email tidak valid",
   }),
   turnstileToken: z.string({ required_error: "Captcha harus diselesaikan" }),
-  alfagiftId: z.string().nullable(),
-  isChatimeBundle: z.boolean(),
+  alfagiftId: z.string().optional(),
+  isChatimeBundle: z.boolean().default(false),
 });
 
 export type ExternalBuyForm = z.infer<typeof externalBuyFormSchema>;
 
 const BuyTicket = () => {
   const { data } = useSWR<Toggle[]>("/toggle");
+  const { data: chatimeData } = useSWR<CheckChatime>(
+    "/malpun/external/checkChatime"
+  );
+
   const nav = useNavigate();
   const toast = useToast();
   const api = useApi();
   const errorHandler = useToastErrorHandler();
-
   const ref = useRef<HTMLFormElement | null>(null);
 
   const {
@@ -120,6 +142,7 @@ const BuyTicket = () => {
     setValue,
     control,
     trigger,
+    register,
     formState: { errors },
   } = useForm<ExternalBuyForm>({
     resolver: zodResolver(externalBuyFormSchema),
@@ -144,19 +167,73 @@ const BuyTicket = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src =
+      import.meta.env.VITE_PUBLIC_MIDTRANS_INTERFACE_URL ??
+      "https://app.sandbox.midtrans.com/snap/snap.js";
+    script.setAttribute(
+      "data-client-key",
+      import.meta.env.VITE_PUBLIC_MIDTRANS_KEY ?? "tioCintaDylan"
+    );
+    script.async = true;
+
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <>
-      <script
-        src={import.meta.env.VITE_PUBLIC_MIDTRANS_INTERFACE_URL}
-        type="text/javascript"
-        data-client-key={import.meta.env.VITE_PUBLIC_MIDTRANS_KEY}
-        async
-      />
       <Stack
         as={"form"}
         ref={ref}
         onSubmit={handleSubmit((data) => {
-          console.log(data);
+          api
+            .post<ResponseModel<ExternalResponse>>("/malpun/external", data)
+            .then((res) => {
+              window.snap.pay(res.data.data.midtrans.token, {
+                onError: () => {
+                  toast({
+                    title: "Error",
+                    description:
+                      "Gagal melakukan pembayaran, harap coba kembali atau hubungi @maximaumn",
+                    status: "error",
+                    isClosable: true,
+                  });
+                },
+                onPending: () => {
+                  toast({
+                    title: "Pending",
+                    description:
+                      "Pembayaran sedang diproses, harap tunggu beberapa saat dan cek email secara berkala",
+                    status: "info",
+                    isClosable: true,
+                  });
+                },
+                onSuccess: (result) => {
+                  api
+                    .post<ResponseModel<ExternalCallbackResponse>>(
+                      "/malpun/external/callback",
+                      result
+                    )
+                    .then((res) => {
+                      toast({
+                        title: "Pembayaran Berhasil!",
+                        description: "Kamu berhasil membeli tiket Malam Puncak",
+                        status: "success",
+                        duration: 5000,
+                        isClosable: true,
+                      });
+
+                      nav(`/malpun/viewticket?order_id=${res.data.data.code}`);
+                    });
+                },
+              });
+            })
+            .catch(errorHandler);
         })}
         align={"center"}
         color={"text.primary"}
@@ -248,6 +325,7 @@ const BuyTicket = () => {
                   Nama Lengkap:
                 </Text>
                 <Input
+                  {...register("fullName")}
                   type="text"
                   bgColor={"white"}
                   borderColor={"text.primary"}
@@ -265,6 +343,7 @@ const BuyTicket = () => {
                   Email:
                 </Text>
                 <Input
+                  {...register("email")}
                   type="email"
                   bgColor={"white"}
                   borderColor={"text.primary"}
@@ -272,11 +351,11 @@ const BuyTicket = () => {
                   borderRadius={"0.75rem"}
                 />
                 <FormErrorMessage>
-                  {errors.turnstileToken && errors.turnstileToken.message}
+                  {errors.email && errors.email.message}
                 </FormErrorMessage>
               </FormControl>
             </Stack>
-            <Stack>
+            <Stack mt={"0.5rem"}>
               <FormControl isInvalid={!!errors.turnstileToken}>
                 <Controller
                   control={control}
@@ -333,7 +412,13 @@ const BuyTicket = () => {
                 rounded={"xl"}
                 _hover={{ bgColor: "#3A0025" }}
                 onClick={async () => {
-                  if (await trigger()) setStep(3);
+                  const isValid = await trigger();
+                  if (isValid) {
+                    if (chatimeData && chatimeData.isChatTimeEligible) {
+                      return setStep(3);
+                    }
+                    setStep(4);
+                  }
                 }}
               >
                 <Text

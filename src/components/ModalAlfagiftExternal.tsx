@@ -15,7 +15,7 @@ import { z } from "zod";
 
 interface ModalAlfagiftExternalProps {
   isOpen: boolean;
-  callback: (alfagiftId: string | null) => void;
+  callback: (alfagiftId: string | undefined) => void;
 }
 
 const allowedPrefixes = ["999999", "999001", "999004", "999003", "99902000"];
@@ -35,7 +35,7 @@ const ModalAlfagiftExternal = ({
   isOpen,
   callback,
 }: ModalAlfagiftExternalProps) => {
-  const [token, setToken] = useState<string | null>(null);
+  const [token, setToken] = useState<string | undefined>(undefined);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleTokenChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,12 +53,12 @@ const ModalAlfagiftExternal = ({
 
     setErrorMessage(null);
 
-    callback(token === "" ? null : token);
+    callback(token === "" ? undefined : token);
   };
 
   return (
     <>
-      <Modal isOpen={isOpen} isCentered onClose={() => callback(null)}>
+      <Modal isOpen={isOpen} isCentered onClose={() => callback(undefined)}>
         <ModalOverlay />
         <ModalContent bgColor={"#e9e9c0"} m={"1rem"}>
           <ModalHeader>Punya akun Alfagift?</ModalHeader>
@@ -89,7 +89,7 @@ const ModalAlfagiftExternal = ({
               colorScheme="red"
               mr={3}
               onClick={() => {
-                callback(null);
+                callback(undefined);
               }}
             >
               Saya tidak tertarik
