@@ -7,25 +7,29 @@ import {
   ModalOverlay,
   Text,
   Button,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 
 interface ModalChatimeProps {
   isOpen: boolean;
   onClose: () => void;
   setChatimeBundling: (value: boolean) => void;
+  closeModal: () => void;
 }
 
 const ModalChatime = ({
   isOpen,
   onClose,
   setChatimeBundling,
+  closeModal,
 }: ModalChatimeProps) => {
   return (
     <>
-      <Modal isOpen={isOpen} isCentered onClose={onClose}>
+      <Modal isOpen={isOpen} isCentered onClose={closeModal}>
         <ModalOverlay />
         <ModalContent bgColor={"#e9e9c0"} m={"1rem"}>
           <ModalHeader>Bundling Chatime</ModalHeader>
+          <ModalCloseButton />
           <ModalBody>
             <Text mb={"10px"}>Apakah kamu ingin membeli bundling Chatime?</Text>
             <Text>

@@ -9,6 +9,7 @@ import {
   Button,
   Input,
   Image,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { z } from "zod";
@@ -16,6 +17,7 @@ import { z } from "zod";
 interface ModalAlfagiftExternalProps {
   isOpen: boolean;
   callback: (alfagiftId: string | undefined) => void;
+  onClose: () => void;
 }
 
 const allowedPrefixes = ["999999", "999001", "999004", "999003", "99902000"];
@@ -34,6 +36,7 @@ const tokenSchema = z
 const ModalAlfagiftExternal = ({
   isOpen,
   callback,
+  onClose,
 }: ModalAlfagiftExternalProps) => {
   const [token, setToken] = useState<string | undefined>(undefined);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -58,10 +61,11 @@ const ModalAlfagiftExternal = ({
 
   return (
     <>
-      <Modal isOpen={isOpen} isCentered onClose={() => callback(undefined)}>
+      <Modal isOpen={isOpen} isCentered onClose={onClose}>
         <ModalOverlay />
         <ModalContent bgColor={"#e9e9c0"} m={"1rem"}>
           <ModalHeader>Punya akun Alfagift?</ModalHeader>
+          <ModalCloseButton />
           <ModalBody>
             <Image src="/icons/alfagift-header.jpg" rounded={"md"}></Image>
             <Text my={"10px"} fontWeight={"bold"}>

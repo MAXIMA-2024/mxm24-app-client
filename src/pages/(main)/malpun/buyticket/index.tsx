@@ -212,6 +212,14 @@ const BuyTicket = () => {
                     status: "info",
                     isClosable: true,
                   });
+                  toast({
+                    title: "Info",
+                    description:
+                      "Periksa email kamu secara berkala, email akan dikirimkan setelah pembayaran berhasil",
+                    status: "info",
+                    duration: 5000,
+                    isClosable: true,
+                  });
                 },
                 onSuccess: (result) => {
                   api
@@ -224,6 +232,14 @@ const BuyTicket = () => {
                         title: "Pembayaran Berhasil!",
                         description: "Kamu berhasil membeli tiket Malam Puncak",
                         status: "success",
+                        duration: 5000,
+                        isClosable: true,
+                      });
+                      toast({
+                        title: "Info",
+                        description:
+                          "Tiket dan bukti pembayaran sudah terkirim",
+                        status: "info",
                         duration: 5000,
                         isClosable: true,
                       });
@@ -353,6 +369,14 @@ const BuyTicket = () => {
                 <FormErrorMessage>
                   {errors.email && errors.email.message}
                 </FormErrorMessage>
+
+                <Text
+                  fontFamily={"Luthier"}
+                  color={"text.primary"}
+                  fontSize={"0.75rem"}
+                >
+                  *Email digunakan untuk mengirimkan tiket dan bukti pembayaran.
+                </Text>
               </FormControl>
             </Stack>
             <Stack mt={"0.5rem"}>
@@ -384,25 +408,24 @@ const BuyTicket = () => {
               alignItems={{ base: "center", lg: "flex-end" }}
               justifyContent={"space-between"}
             >
-              <Link to="/">
-                <Button
-                  bgColor={"button.primary"}
-                  w={{ base: "6rem", md: "8rem", lg: "8rem" }}
-                  variant={"ghost"}
-                  transition={"0.3s"}
-                  color={"text.tertiary"}
-                  rounded={"xl"}
-                  _hover={{ bgColor: "#3A0025" }}
+              <Button
+                bgColor={"button.primary"}
+                w={{ base: "6rem", md: "8rem", lg: "8rem" }}
+                variant={"ghost"}
+                transition={"0.3s"}
+                color={"text.tertiary"}
+                rounded={"xl"}
+                _hover={{ bgColor: "#3A0025" }}
+                onClick={() => setStep(1)}
+              >
+                <Text
+                  fontFamily={"Lexend"}
+                  fontWeight={"400"}
+                  fontSize={{ base: "small", md: "medium", lg: "large" }}
                 >
-                  <Text
-                    fontFamily={"Lexend"}
-                    fontWeight={"400"}
-                    fontSize={{ base: "small", md: "medium", lg: "large" }}
-                  >
-                    Kembali
-                  </Text>
-                </Button>
-              </Link>
+                  Kembali
+                </Text>
+              </Button>
               <Button
                 bgColor={"button.primary"}
                 w={{ base: "6rem", md: "8rem", lg: "8rem" }}
@@ -436,12 +459,14 @@ const BuyTicket = () => {
       <ModalChatime
         isOpen={step === 3}
         onClose={() => setStep(4)}
+        closeModal={() => setStep(2)}
         setChatimeBundling={(val) => {
           setValue("isChatimeBundle", val);
         }}
       />
       <ModalAlfagiftExternal
         isOpen={step === 4}
+        onClose={() => setStep(2)}
         callback={(alfagiftId) => {
           setValue("alfagiftId", alfagiftId);
           ref.current?.requestSubmit();
