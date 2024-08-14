@@ -80,10 +80,18 @@ const SelectStateId = () => {
   const errorHandler = useToastErrorHandler();
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const { id } = useParams("/state/selectstate/:id");
+  // const ref = useRef<HTMLDivElement | null>(null);
 
   const [stateDetails, setStateDetails] = useState<State | null>(null);
   const states = useSWR<AllState[]>("/state/");
   const days = useSWR<Day[]>("/state/enum/dayManagement/");
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  };
 
   useEffect(() => {
     console.log("URL Parameter:", id);
@@ -105,18 +113,19 @@ const SelectStateId = () => {
   }, [id, days]);
 
   useEffect(() => {
-    // window.scrollTo({ top: 0, behavior: "smooth" });
-    if (wrapperRef) {
-      wrapperRef.current?.scrollTo(0, 0);
-    }
-  }, [id]);
+    scrollToTop();
+  }, []);
 
   // button atas
   const BtStyle = ({ nomor }: { nomor: string }) => {
     const isActive = id === nomor;
 
+    const handleClick = () => {
+      wrapperRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
     return (
-      <Link to={`/state/selectstate/${nomor}`}>
+      <Link to={`/state/selectstate/${nomor}`} onClick={handleClick}>
         <Button
           bgColor={isActive ? "#661226" : "#FFDB7A"}
           color={isActive ? "#FFDB7A" : "#661226"}
@@ -233,22 +242,22 @@ const SelectStateId = () => {
     >
       {/* START logo atas */}
       {/* <Stack
-        alignSelf={"center"}
-        mt={"2rem"}
-        bgColor={"#BBDEE7"}
-        p={"1rem"}
-        borderRadius={"50%"}
-        w={"5rem"}
-        h={"5rem"}
-        display={{ base: "flex", lg: "none" }}
-      >
-        <Image
-          src="/icons/LOGO-MAXIMA-OFFICIAL.png"
-          w={"2.5rem"}
           alignSelf={"center"}
-          justifySelf={"center"}
-        />
-      </Stack> */}
+          mt={"2rem"}
+          bgColor={"#BBDEE7"}
+          p={"1rem"}
+          borderRadius={"50%"}
+          w={"5rem"}
+          h={"5rem"}
+          display={{ base: "flex", lg: "none" }}
+        >
+          <Image
+            src="/icons/LOGO-MAXIMA-OFFICIAL.png"
+            w={"2.5rem"}
+            alignSelf={"center"}
+            justifySelf={"center"}
+          />
+        </Stack> */}
       {/* END logo atas */}
 
       {/* START CTA atas */}
@@ -407,7 +416,22 @@ const SelectStateId = () => {
         >
           {/* <ModalHeader>Nama Organisator</ModalHeader> */}
           <ModalCloseButton />
-          <ModalBody>
+          <ModalBody
+            overflow={"auto"}
+            css={{
+              "&::-webkit-scrollbar": {
+                width: "8px",
+              },
+              "&::-webkit-scrollbar-thumb": {
+                backgroundColor: "#D9D9D9",
+                borderRadius: "4px",
+              },
+              "&::-webkit-scrollbar-track": {
+                backgroundColor: "#D9D9D975",
+                borderRadius: "4px",
+              },
+            }}
+          >
             <Stack p={"1rem"}>
               <Heading fontFamily={"Luthier"} textAlign="center">
                 {stateDetails?.name}
@@ -466,6 +490,23 @@ const SelectStateId = () => {
                       direction={{ base: "column", lg: "row" }}
                       gap={"1rem"}
                       overflow={"auto"}
+                      // maxH={"10rem"}
+                      css={{
+                        "&::-webkit-scrollbar": {
+                          width: "8px",
+                        },
+                        "&::-webkit-scrollbar:horizontal": {
+                          height: "8px", // Horizontal scrollbar height
+                        },
+                        "&::-webkit-scrollbar-thumb": {
+                          backgroundColor: "#D9D9D9",
+                          borderRadius: "4px",
+                        },
+                        "&::-webkit-scrollbar-track": {
+                          backgroundColor: "#D9D9D975",
+                          borderRadius: "4px",
+                        },
+                      }}
                     >
                       {stateDetails?.gallery.map((gallery) => (
                         <Image

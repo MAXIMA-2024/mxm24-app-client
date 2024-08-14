@@ -85,6 +85,13 @@ const State = () => {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  };
+
   console.log(loc.hash);
 
   useEffect(() => {
@@ -92,6 +99,10 @@ const State = () => {
       setTimeout(scrollToBottom, 5000);
     }
   }, [loc, bottomRef, auth]);
+
+  useEffect(() => {
+    scrollToTop();
+  }, [scrollToTop]);
 
   return (
     <>
@@ -296,11 +307,14 @@ const State = () => {
           />
         </StateBG>
       </Show>
+      {/* START modal card */}
       <Modal
         onClose={() => setStateDetails(null)}
         isOpen={!!stateDetails}
         isCentered
         motionPreset="slideInBottom"
+
+        // size={{ base: "sm", lg: "xl" }}
       >
         <ModalOverlay backdropFilter="auto" backdropBlur="3px" />
         <ModalContent
@@ -312,9 +326,24 @@ const State = () => {
         >
           {/* <ModalHeader>Nama Organisator</ModalHeader> */}
           <ModalCloseButton />
-          <ModalBody>
+          <ModalBody
+            overflow={"auto"}
+            css={{
+              "&::-webkit-scrollbar": {
+                width: "8px",
+              },
+              "&::-webkit-scrollbar-thumb": {
+                backgroundColor: "#D9D9D9",
+                borderRadius: "4px",
+              },
+              "&::-webkit-scrollbar-track": {
+                backgroundColor: "#D9D9D975",
+                borderRadius: "4px",
+              },
+            }}
+          >
             <Stack p={"1rem"}>
-              <Heading fontFamily={"Luthier"} textAlign={"center"}>
+              <Heading fontFamily={"Luthier"} textAlign="center">
                 {stateDetails?.name}
               </Heading>
             </Stack>
@@ -371,6 +400,23 @@ const State = () => {
                       direction={{ base: "column", lg: "row" }}
                       gap={"1rem"}
                       overflow={"auto"}
+                      // maxH={"10rem"}
+                      css={{
+                        "&::-webkit-scrollbar": {
+                          width: "8px",
+                        },
+                        "&::-webkit-scrollbar:horizontal": {
+                          height: "8px", // Horizontal scrollbar height
+                        },
+                        "&::-webkit-scrollbar-thumb": {
+                          backgroundColor: "#D9D9D9",
+                          borderRadius: "4px",
+                        },
+                        "&::-webkit-scrollbar-track": {
+                          backgroundColor: "#D9D9D975",
+                          borderRadius: "4px",
+                        },
+                      }}
                     >
                       {stateDetails?.gallery.map((gallery) => (
                         <Image
@@ -395,28 +441,26 @@ const State = () => {
               color="white"
               mr={3}
               _hover={{ bg: "#FFB1C9", color: "white" }}
-              // make button onclick can delete based on state id
               onClick={() => {
                 api
-                  .delete<ResponseModel>(
-                    `/state/registration/${stateDetails?.id}`,
-                    {
-                      data: { stateId: stateDetails?.id },
-                    }
-                  )
-                  .then((res) => {
-                    toast({
-                      title: "Berhasil",
-                      description: res.data.message,
-                      status: "success",
-                    });
-                    setStateDetails(null);
+                  .post<ResponseModel>("/state/registration", {
+                    stateId: stateDetails?.id,
                   })
-                  .catch(errorHandler)
-                  .finally(() => mutate());
+                  .then(() => {
+                    toast({
+                      title: "Berhasil!",
+                      description: `Kamu berhasil mendaftar STATE ${stateDetails?.name}`,
+                      status: "success",
+                      duration: 5000,
+                      isClosable: true,
+                    });
+                    //@ts-expect-error tolol
+                    nav("/state#gondola");
+                  })
+                  .catch(errorHandler);
               }}
             >
-              Hapus
+              Ambil
             </Button>
             <Button
               fontFamily={"Lexend"}
@@ -430,6 +474,7 @@ const State = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
+      {/* END modal card */}
     </>
   );
 };

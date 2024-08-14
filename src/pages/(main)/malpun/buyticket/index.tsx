@@ -270,6 +270,7 @@ const BuyTicket = () => {
         w={"100%"}
         p={{ base: "8rem", lg: "6rem" }}
         px={{ base: "2rem", md: "2rem", lg: "4rem" }}
+        mt={{ lg: "5rem" }}
       >
         {step === 1 && (
           <>
