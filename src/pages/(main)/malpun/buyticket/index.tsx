@@ -1,3 +1,6 @@
+import ModalAlfagiftExternal from "@/components/ModalAlfagiftExternal";
+import ModalChatime from "@/components/ModalChatime";
+import useApi, { ResponseModel, useToastErrorHandler } from "@/hooks/useApi";
 import {
   Heading,
   Stack,
@@ -5,10 +8,16 @@ import {
   Button,
   Input,
   useToast,
+  FormErrorMessage,
+  FormControl,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useSWR from "swr";
+import { Controller, useForm } from "react-hook-form";
+import { Turnstile } from "@marsidev/react-turnstile";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 type Toggle = {
   id: number;
@@ -18,10 +27,105 @@ type Toggle = {
   updatedAt: Date;
 };
 
+type SnapSuccess = {
+  status_code: string;
+  status_message: string;
+  transaction_id: string;
+  order_id: string;
+  gross_amount: string;
+  payment_type: string;
+  transaction_time: string;
+  transaction_status: string;
+  fraud_status: string;
+  payment_code: string;
+  pdf_url: string;
+  finish_redirect_url: string;
+};
+
+type SnapError = {
+  status_code: string;
+  status_message: string[];
+};
+type Snap = {
+  pay: (
+    token: string,
+    {
+      onSuccess,
+      onPending,
+      onError,
+      onClose,
+    }: {
+      onSuccess?: (result: SnapSuccess) => void;
+      onPending?: (result: SnapSuccess) => void;
+      onError?: (result: SnapError) => void;
+      onClose?: () => void;
+    }
+  ) => void;
+};
+
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    gtag: (...args: any[]) => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    dataLayer: Record<string, any>;
+    snap: Snap;
+  }
+}
+
+type ExternalResponse = {
+  account: {
+    id: number;
+    code: string;
+    fullName: string;
+    email: string;
+    transactionId: string | null;
+    validatedAt: string | null;
+    attendance: boolean;
+    attendanceTime: string | null;
+    alfagiftId: string | null;
+    isChatimeBundle: boolean;
+    createdAt: string;
+    updatedAt: string;
+  };
+  midtrans: {
+    token: string;
+    redirect_url: string;
+  };
+};
+
+const externalBuyFormSchema = z.object({
+  fullName: z.string({ required_error: "Nama lengkap harus diisi" }),
+  email: z.string({ required_error: "Email harus diisi" }).email({
+    message: "Email tidak valid",
+  }),
+  turnstileToken: z.string({ required_error: "Captcha harus diselesaikan" }),
+  alfagiftId: z.string().nullable(),
+  isChatimeBundle: z.boolean(),
+});
+
+export type ExternalBuyForm = z.infer<typeof externalBuyFormSchema>;
+
 const BuyTicket = () => {
   const { data } = useSWR<Toggle[]>("/toggle");
   const nav = useNavigate();
   const toast = useToast();
+  const api = useApi();
+  const errorHandler = useToastErrorHandler();
+
+  const ref = useRef<HTMLFormElement | null>(null);
+
+  const {
+    handleSubmit,
+    setValue,
+    control,
+    trigger,
+    formState: { errors },
+  } = useForm<ExternalBuyForm>({
+    resolver: zodResolver(externalBuyFormSchema),
+  });
+
+  const [step, setStep] = useState(1);
 
   useEffect(() => {
     if (data) {
@@ -37,11 +141,23 @@ const BuyTicket = () => {
         nav("/");
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return (
     <>
+      <script
+        src={import.meta.env.VITE_PUBLIC_MIDTRANS_INTERFACE_URL}
+        type="text/javascript"
+        data-client-key={import.meta.env.VITE_PUBLIC_MIDTRANS_KEY}
+        async
+      />
       <Stack
+        as={"form"}
+        ref={ref}
+        onSubmit={handleSubmit((data) => {
+          console.log(data);
+        })}
         align={"center"}
         color={"text.primary"}
         fontWeight={"900"}
@@ -62,61 +178,31 @@ const BuyTicket = () => {
         p={{ base: "8rem", lg: "6rem" }}
         px={{ base: "2rem", md: "2rem", lg: "4rem" }}
       >
-        <Stack
-          justifyContent={"center"}
-          // SIZE FORM
-          width={{ sm: "25%", md: "35%", lg: "40%", xl: "30%" }}
-        >
-          {/* JUDUL */}
-          <Stack alignItems={"center"} paddingBottom={"3rem"}>
-            <Stack color={"text.secondary"}>
-              <Heading
-                fontSize={{ base: "1.2rem", md: "1.5rem", lg: "2.5rem" }}
-                textAlign={"center"}
-                fontFamily={"Luthier"}
-              >
-                Detail Pembeli
-              </Heading>
-            </Stack>
-          </Stack>
-
-          {/* START FORM */}
-          <Stack>
-            <Text fontFamily={"Luthier"} color={"text.primary"}>
-              Nama Lengkap:
-            </Text>
-            <Input
-              type="text"
-              bgColor={"white"}
-              borderColor={"text.primary"}
-              borderWidth={"initial"}
-              borderRadius={"0.75rem"}
-            />
-          </Stack>
-          <Stack>
-            <Text fontFamily={"Luthier"} color={"text.primary"}>
-              Email:
-            </Text>
-            <Input
-              type="email"
-              bgColor={"white"}
-              borderColor={"text.primary"}
-              borderWidth={"initial"}
-              borderRadius={"0.75rem"}
-            />
-          </Stack>
-          {/* END FORM */}
-
-          {/* BUTTON KEMBALI DAN KIRIM */}
-
-          <Stack
-            paddingTop={"3rem"}
-            direction={{ base: "column", lg: "row" }}
-            alignItems={{ base: "center", lg: "flex-end" }}
-            justifyContent={"space-between"}
-          >
-            <Link to="/malpun">
+        {step === 1 && (
+          <>
+            <Heading>Ceritanya Poster</Heading>
+            <Stack direction={"row"}>
+              <Link to={"/"}>
+                <Button
+                  bgColor={"button.primary"}
+                  w={{ base: "6rem", md: "8rem", lg: "8rem" }}
+                  variant={"ghost"}
+                  transition={"0.3s"}
+                  color={"text.tertiary"}
+                  rounded={"xl"}
+                  _hover={{ bgColor: "#3A0025" }}
+                >
+                  <Text
+                    fontFamily={"Lexend"}
+                    fontWeight={"400"}
+                    fontSize={{ base: "small", md: "medium", lg: "large" }}
+                  >
+                    Batal
+                  </Text>
+                </Button>
+              </Link>
               <Button
+                onClick={() => setStep(2)}
                 bgColor={"button.primary"}
                 w={{ base: "6rem", md: "8rem", lg: "8rem" }}
                 variant={"ghost"}
@@ -130,11 +216,114 @@ const BuyTicket = () => {
                   fontWeight={"400"}
                   fontSize={{ base: "small", md: "medium", lg: "large" }}
                 >
-                  Kembali
+                  Lanjut
                 </Text>
               </Button>
-            </Link>
-            <Link to="/malpun/viewticket">
+            </Stack>
+          </>
+        )}
+        {step === 2 && (
+          <Stack
+            justifyContent={"center"}
+            // SIZE FORM
+            width={{ sm: "25%", md: "35%", lg: "40%", xl: "30%" }}
+          >
+            {/* JUDUL */}
+            <Stack alignItems={"center"} paddingBottom={"3rem"}>
+              <Stack color={"text.secondary"}>
+                <Heading
+                  fontSize={{ base: "1.2rem", md: "1.5rem", lg: "2.5rem" }}
+                  textAlign={"center"}
+                  fontFamily={"Luthier"}
+                >
+                  Detail Pembeli
+                </Heading>
+              </Stack>
+            </Stack>
+
+            {/* START FORM */}
+            <Stack>
+              <FormControl isInvalid={!!errors.fullName}>
+                <Text fontFamily={"Luthier"} color={"text.primary"}>
+                  Nama Lengkap:
+                </Text>
+                <Input
+                  type="text"
+                  bgColor={"white"}
+                  borderColor={"text.primary"}
+                  borderWidth={"initial"}
+                  borderRadius={"0.75rem"}
+                />
+                <FormErrorMessage>
+                  {errors.fullName && errors.fullName.message}
+                </FormErrorMessage>
+              </FormControl>
+            </Stack>
+            <Stack>
+              <FormControl isInvalid={!!errors.email}>
+                <Text fontFamily={"Luthier"} color={"text.primary"}>
+                  Email:
+                </Text>
+                <Input
+                  type="email"
+                  bgColor={"white"}
+                  borderColor={"text.primary"}
+                  borderWidth={"initial"}
+                  borderRadius={"0.75rem"}
+                />
+                <FormErrorMessage>
+                  {errors.turnstileToken && errors.turnstileToken.message}
+                </FormErrorMessage>
+              </FormControl>
+            </Stack>
+            <Stack>
+              <FormControl isInvalid={!!errors.turnstileToken}>
+                <Controller
+                  control={control}
+                  name="turnstileToken"
+                  render={({ field }) => (
+                    <>
+                      <Turnstile
+                        siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                        onSuccess={field.onChange}
+                      />
+                    </>
+                  )}
+                />
+                <FormErrorMessage>
+                  {errors.turnstileToken && errors.turnstileToken.message}
+                </FormErrorMessage>
+              </FormControl>
+            </Stack>
+            {/* END FORM */}
+
+            {/* BUTTON KEMBALI DAN KIRIM */}
+
+            <Stack
+              paddingTop={"3rem"}
+              direction={{ base: "column", lg: "row" }}
+              alignItems={{ base: "center", lg: "flex-end" }}
+              justifyContent={"space-between"}
+            >
+              <Link to="/">
+                <Button
+                  bgColor={"button.primary"}
+                  w={{ base: "6rem", md: "8rem", lg: "8rem" }}
+                  variant={"ghost"}
+                  transition={"0.3s"}
+                  color={"text.tertiary"}
+                  rounded={"xl"}
+                  _hover={{ bgColor: "#3A0025" }}
+                >
+                  <Text
+                    fontFamily={"Lexend"}
+                    fontWeight={"400"}
+                    fontSize={{ base: "small", md: "medium", lg: "large" }}
+                  >
+                    Kembali
+                  </Text>
+                </Button>
+              </Link>
               <Button
                 bgColor={"button.primary"}
                 w={{ base: "6rem", md: "8rem", lg: "8rem" }}
@@ -143,6 +332,9 @@ const BuyTicket = () => {
                 color={"text.tertiary"}
                 rounded={"xl"}
                 _hover={{ bgColor: "#3A0025" }}
+                onClick={async () => {
+                  if (await trigger()) setStep(3);
+                }}
               >
                 <Text
                   fontFamily={"Lexend"}
@@ -152,10 +344,24 @@ const BuyTicket = () => {
                   Kirim
                 </Text>
               </Button>
-            </Link>
+            </Stack>
           </Stack>
-        </Stack>
+        )}
       </Stack>
+      <ModalChatime
+        isOpen={step === 3}
+        onClose={() => setStep(4)}
+        setChatimeBundling={(val) => {
+          setValue("isChatimeBundle", val);
+        }}
+      />
+      <ModalAlfagiftExternal
+        isOpen={step === 4}
+        callback={(alfagiftId) => {
+          setValue("alfagiftId", alfagiftId);
+          ref.current?.requestSubmit();
+        }}
+      />
     </>
   );
 };
