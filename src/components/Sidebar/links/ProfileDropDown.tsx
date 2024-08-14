@@ -15,23 +15,20 @@ import {
   ModalCloseButton,
   useDisclosure,
   useToast,
-  Tooltip,
 } from "@chakra-ui/react";
 import { FaRegEdit } from "react-icons/fa";
 import { IoLogOutOutline, IoTicket } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import React from "react";
 import useAuth from "@/hooks/useAuth";
-import useSWR from "swr";
-import { z } from "zod";
 
-type Toggle = {
-  id: number;
-  name: string;
-  toggle: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-};
+// type Toggle = {
+//   id: number;
+//   name: string;
+//   toggle: boolean;
+//   createdAt: Date;
+//   updatedAt: Date;
+// };
 
 const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
   // const { data } = useSWR<Toggle[]>("/toggle");
