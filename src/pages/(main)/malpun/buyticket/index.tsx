@@ -268,9 +268,10 @@ const BuyTicket = () => {
         bgRepeat={"no-repeat"}
         bgPosition={"center"}
         w={"100%"}
-        p={{ base: "8rem", lg: "6rem" }}
+        p={{ base: "5rem", md: "7rem", lg: "6rem" }}
         px={{ base: "2rem", md: "2rem", lg: "4rem" }}
-        mt={{ lg: "5rem" }}
+        mt={{ md: "5rem", lg: "7rem" }}
+        my={{ md: "1rem" }}
       >
         {step === 1 && (
           <>
@@ -320,7 +321,7 @@ const BuyTicket = () => {
           <Stack
             justifyContent={"center"}
             // SIZE FORM
-            width={{ sm: "25%", md: "35%", lg: "40%", xl: "30%" }}
+            maxW={{ base: "75%", md: "40%", lg: "40%", xl: "30%" }}
           >
             {/* JUDUL */}
             <Stack alignItems={"center"} paddingBottom={"3rem"}>
