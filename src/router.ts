@@ -8,6 +8,7 @@ export type Path =
   | `/aboutus`
   | `/auth/onboarding`
   | `/auth/sso`
+  | `/d/y/l/a/n`
   | `/faq`
   | `/home`
   | `/malpun`
