@@ -166,7 +166,7 @@ const SelectStateId = () => {
         >
           <Card
             w={{ base: "10rem", md: "12rem", lg: "20rem" }}
-            h={{ base: "25rem", md: "20rem", lg: "30rem" }}
+            h={{ base: "20rem", md: "20rem", lg: "30rem" }}
             align={"center"}
             borderRadius={"1rem"}
           >
@@ -183,7 +183,7 @@ const SelectStateId = () => {
                   objectFit={"contain"}
                   borderRadius="lg"
                 />
-                <Stack mt={4}>
+                <Stack mt={"1rem"}>
                   <Heading
                     fontFamily={"Lexend"}
                     fontWeight={"semibold"}
@@ -194,9 +194,15 @@ const SelectStateId = () => {
                   </Heading>
                 </Stack>
               </Stack>
-            </CardBody>
-            <CardFooter>
-              <Stack direction={"row"} gap={"0"} pb={"1.5rem"}>
+
+              <Stack
+                direction={"row"}
+                gap={"0"}
+                pt={{ base: "1rem", lg: "2rem" }}
+                pb={"1.5rem"}
+                align={"center"}
+                justify={"center"}
+              >
                 <Stack
                   bgColor={"#941636"}
                   paddingX={{ base: "0.5rem", md: "1rem" }}
@@ -226,7 +232,7 @@ const SelectStateId = () => {
                   </Text>
                 </Stack>
               </Stack>
-            </CardFooter>
+            </CardBody>
           </Card>
         </Box>
       </WrapItem>
@@ -480,16 +486,33 @@ const SelectStateId = () => {
               </Stack>
               <Stack gap={"2rem"} w={{ base: "100%", lg: "75%" }}>
                 <Stack>
-                  <Heading fontFamily={"Luthier"}>Detail</Heading>
-                  <Text fontFamily={"Lexend"}>{stateDetails?.description}</Text>
+                  <Heading
+                    fontFamily={"Luthier"}
+                    alignSelf={{ base: "center", lg: "auto" }}
+                  >
+                    Detail
+                  </Heading>
+                  <Text
+                    fontFamily={"Lexend"}
+                    // alignSelf={{ base: "center", lg: "auto" }}
+                    align={"justify"}
+                  >
+                    {stateDetails?.description}
+                  </Text>
                 </Stack>
                 {stateDetails?.gallery.length ? (
                   <Stack>
-                    <Heading fontFamily={"Luthier"}>Foto Kegiatan</Heading>
+                    <Heading
+                      fontFamily={"Luthier"}
+                      alignSelf={{ base: "center", lg: "auto" }}
+                    >
+                      Foto Kegiatan
+                    </Heading>
                     <Stack
                       direction={{ base: "column", lg: "row" }}
                       gap={"1rem"}
                       overflow={"auto"}
+                      align={{ base: "center", lg: "auto" }}
                       // maxH={"10rem"}
                       css={{
                         "&::-webkit-scrollbar": {
@@ -512,8 +535,8 @@ const SelectStateId = () => {
                         <Image
                           key={gallery.id}
                           src={`${import.meta.env.VITE_CDN_URL}${gallery.url}`}
-                          w={{ base: "100%", lg: "45%" }}
-                          h={{ base: "15rem", lg: "20rem" }}
+                          w={{ base: "50%", lg: "45%" }}
+                          h={{ base: "100%", lg: "20rem" }}
                           objectFit={"cover"}
                           borderRadius={"lg"}
                         />

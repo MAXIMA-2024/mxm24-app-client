@@ -390,16 +390,33 @@ const State = () => {
               </Stack>
               <Stack gap={"2rem"} w={{ base: "100%", lg: "75%" }}>
                 <Stack>
-                  <Heading fontFamily={"Luthier"}>Detail</Heading>
-                  <Text fontFamily={"Lexend"}>{stateDetails?.description}</Text>
+                  <Heading
+                    fontFamily={"Luthier"}
+                    alignSelf={{ base: "center", lg: "auto" }}
+                  >
+                    Detail
+                  </Heading>
+                  <Text
+                    fontFamily={"Lexend"}
+                    // alignSelf={{ base: "center", lg: "auto" }}
+                    align={"justify"}
+                  >
+                    {stateDetails?.description}
+                  </Text>
                 </Stack>
                 {stateDetails?.gallery.length ? (
                   <Stack>
-                    <Heading fontFamily={"Luthier"}>Foto Kegiatan</Heading>
+                    <Heading
+                      fontFamily={"Luthier"}
+                      alignSelf={{ base: "center", lg: "auto" }}
+                    >
+                      Foto Kegiatan
+                    </Heading>
                     <Stack
                       direction={{ base: "column", lg: "row" }}
                       gap={"1rem"}
                       overflow={"auto"}
+                      align={{ base: "center", lg: "auto" }}
                       // maxH={"10rem"}
                       css={{
                         "&::-webkit-scrollbar": {
@@ -422,8 +439,8 @@ const State = () => {
                         <Image
                           key={gallery.id}
                           src={`${import.meta.env.VITE_CDN_URL}${gallery.url}`}
-                          w={{ base: "100%", lg: "45%" }}
-                          h={{ base: "15rem", lg: "20rem" }}
+                          w={{ base: "50%", lg: "45%" }}
+                          h={{ base: "100%", lg: "20rem" }}
                           objectFit={"cover"}
                           borderRadius={"lg"}
                         />
