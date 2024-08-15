@@ -268,7 +268,7 @@ const BuyTicket = () => {
         bgRepeat={"no-repeat"}
         bgPosition={"center"}
         w={"100%"}
-        p={{ base: "5rem", md: "7rem", lg: "6rem" }}
+        p={{ base: "8rem", sm: "10rem", md: "7rem", lg: "6rem" }}
         px={{ base: "2rem", md: "2rem", lg: "4rem" }}
         mt={{ md: "5rem", lg: "7rem" }}
         my={{ md: "1rem" }}
@@ -388,10 +388,16 @@ const BuyTicket = () => {
                   name="turnstileToken"
                   render={({ field }) => (
                     <>
-                      <Turnstile
-                        siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
-                        onSuccess={field.onChange}
-                      />
+                      <Stack w={"full"} align={"center"}>
+                        <Turnstile
+                          siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                          onSuccess={field.onChange}
+                          options={{
+                            size: "auto",
+                            theme: "auto",
+                          }}
+                        />
+                      </Stack>
                     </>
                   )}
                 />

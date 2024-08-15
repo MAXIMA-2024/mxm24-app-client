@@ -70,7 +70,9 @@ const State = () => {
   const bottomRef = useRef<HTMLDivElement>(null);
   const loc = useLocation();
   const auth = useAuth();
-  const { data, isLoading } = useSWR<ClaimedState>("/state/registration");
+  const { data, isLoading, mutate } = useSWR<ClaimedState>(
+    "/state/registration"
+  );
   const api = useApi();
   const toast = useToast();
   const errorHandler = useToastErrorHandler();
@@ -458,24 +460,25 @@ const State = () => {
               _hover={{ bg: "#FFB1C9", color: "white" }}
               onClick={() => {
                 api
-                  .post<ResponseModel>("/state/registration", {
-                    stateId: stateDetails?.id,
-                  })
-                  .then(() => {
+                  .delete<ResponseModel>(
+                    `/state/registration/${stateDetails?.id}`,
+                    {
+                      data: { stateId: stateDetails?.id },
+                    }
+                  )
+                  .then((res) => {
                     toast({
-                      title: "Berhasil!",
-                      description: `Kamu berhasil mendaftar STATE ${stateDetails?.name}`,
+                      title: "Berhasil",
+                      description: res.data.message,
                       status: "success",
-                      duration: 5000,
-                      isClosable: true,
                     });
-                    //@ts-expect-error tolol
-                    nav("/state#gondola");
+                    setStateDetails(null);
                   })
-                  .catch(errorHandler);
+                  .catch(errorHandler)
+                  .finally(() => mutate());
               }}
             >
-              Ambil
+              Hapus
             </Button>
             <Button
               fontFamily={"Lexend"}
