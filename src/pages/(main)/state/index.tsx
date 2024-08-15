@@ -102,7 +102,7 @@ const State = () => {
 
   useEffect(() => {
     scrollToTop();
-  }, [scrollToTop]);
+  }, []);
 
   return (
     <>
@@ -174,6 +174,11 @@ const State = () => {
                           ? {
                               id: data.StateRegistration[i].state.id,
                               image: data.StateRegistration[i].state.logo,
+                              stateName: data.StateRegistration[i].state.name,
+                              isFirstAttendance:
+                                data.StateRegistration[i].firstAttendance,
+                              isLastAttendance:
+                                data.StateRegistration[i].lastAttendance,
                               setState: (id) => {
                                 const state = data.StateRegistration.find(
                                   (sr) => sr.state.id === id
@@ -279,6 +284,11 @@ const State = () => {
                     data.StateRegistration[i]
                       ? {
                           id: data.StateRegistration[i].state.id,
+                          stateName: data.StateRegistration[i].state.name,
+                          isFirstAttendance:
+                            data.StateRegistration[i].firstAttendance,
+                          isLastAttendance:
+                            data.StateRegistration[i].lastAttendance,
                           image: data.StateRegistration[i].state.logo,
                           setState: (id) => {
                             const state = data.StateRegistration.find(
