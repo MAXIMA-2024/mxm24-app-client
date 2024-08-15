@@ -238,7 +238,7 @@ const BuyTicket = () => {
                       toast({
                         title: "Info",
                         description:
-                          "Tiket dan bukti pembayaran sudah terkirim",
+                          "Tiket dan bukti pembayaran sudah terkirim melalui email",
                         status: "info",
                         duration: 5000,
                         isClosable: true,
