@@ -1109,9 +1109,8 @@ const MainLayout = () => {
         });
 
         auth.logout();
+        return nav("/");
       }
-
-      return nav("/");
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
