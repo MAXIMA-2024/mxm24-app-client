@@ -277,7 +277,7 @@ const BuyTicket = () => {
           <>
             <Heading>Ceritanya Poster</Heading>
             <Stack direction={"row"}>
-              <Link to={"/"}>
+              <Link to={"/malpun"}>
                 <Button
                   bgColor={"button.primary"}
                   w={{ base: "6rem", md: "8rem", lg: "8rem" }}
