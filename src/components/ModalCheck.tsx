@@ -10,6 +10,7 @@ import {
   Text,
   Button,
   useToast,
+  Image,
 } from "@chakra-ui/react";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
@@ -111,6 +112,7 @@ const ModalCheck = ({ isOpen, onClose }: ModalCheckProps) => {
         <ModalContent bgColor={"#e9e9c0"} m={"1rem"}>
           <ModalHeader>Enter your Alfagift card number</ModalHeader>
           <ModalBody>
+            <Image src="/icons/alfagift-header.jpg" rounded={"md"}></Image>
             <Text mb={"10px"}>Card number:</Text>
             <Input
               type="text"
@@ -126,6 +128,9 @@ const ModalCheck = ({ isOpen, onClose }: ModalCheckProps) => {
                 {errorMessage}
               </Text>
             )}
+            <Text mb={"10px"} fontWeight={"bold"}>
+              Membuat akun Alfagift diharuskan untuk dapat klaim tiket MalPun.
+            </Text>
           </ModalBody>
 
           <ModalFooter>

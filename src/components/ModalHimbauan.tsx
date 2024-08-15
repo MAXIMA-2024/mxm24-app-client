@@ -7,6 +7,7 @@ import {
   ModalOverlay,
   Text,
   Button,
+  Image,
 } from "@chakra-ui/react";
 
 interface ModalHimbauanProps {
@@ -22,7 +23,8 @@ const ModalHimbauan = ({ isOpen, onClose }: ModalHimbauanProps) => {
         <ModalContent bgColor={"#e9e9c0"} m={"1rem"}>
           <ModalHeader>Alfagift Card Number</ModalHeader>
           <ModalBody>
-            <Text mb={"10px"}>
+            <Image src="/icons/alfagift-header.jpg" rounded={"md"}></Image>
+            <Text mb={"10px"} fontWeight={"bold"}>
               Membuat akun Alfagift diharuskan untuk dapat klaim tiket MalPun.
             </Text>
           </ModalBody>
