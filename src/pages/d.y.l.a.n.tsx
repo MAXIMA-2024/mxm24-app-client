@@ -1,5 +1,5 @@
 import { useDvdScreensaver } from "@/hooks/useDvdScreenSaver";
-import { Image, Stack } from "@chakra-ui/react";
+import { Image, Stack, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 const DylanEasterEgg = () => {
@@ -7,6 +7,7 @@ const DylanEasterEgg = () => {
     // freezeOnHover: true,
     speed: 4,
   });
+  const toast = useToast();
 
   const [color, setColor] = useState<number>(0);
 
@@ -29,6 +30,7 @@ const DylanEasterEgg = () => {
         audio.remove();
       };
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [impactCount]);
 
   useEffect(() => {
@@ -36,10 +38,20 @@ const DylanEasterEgg = () => {
     bgAudio.loop = true;
     bgAudio.play();
 
+    toast({
+      title: "Wild Dylan appeared! 🦁",
+      description:
+        "Haii, buat siapapun kamu yang berhasil nemuin page ini selamat yaa! 🎉. Website MAXIMA 2024 di buat dengan cinta yang dalam oleh divisi CHARTA. Bikin web ini susah banget, jadi diharapkan kamu ikut menjadi divisi Website di MAXIMA 2025",
+      status: "success",
+      duration: 15000,
+      isClosable: true,
+    });
+
     return () => {
       bgAudio.pause();
       bgAudio.remove();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
