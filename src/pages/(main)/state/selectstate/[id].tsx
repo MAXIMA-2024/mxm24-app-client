@@ -6,7 +6,6 @@ import {
   Card,
   CardBody,
   Image,
-  CardFooter,
   WrapItem,
   Wrap,
   Modal,

@@ -70,9 +70,7 @@ const State = () => {
   const bottomRef = useRef<HTMLDivElement>(null);
   const loc = useLocation();
   const auth = useAuth();
-  const { data, mutate, isLoading } = useSWR<ClaimedState>(
-    "/state/registration"
-  );
+  const { data, isLoading } = useSWR<ClaimedState>("/state/registration");
   const api = useApi();
   const toast = useToast();
   const errorHandler = useToastErrorHandler();
