@@ -12,15 +12,17 @@ import {
   FormErrorMessage,
   Link,
   useToast,
+  Box,
 } from "@chakra-ui/react";
 
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useApi, { ResponseModel, useToastErrorHandler } from "@/hooks/useApi";
 
 import QRCode from "react-qr-code";
+import { useNavigate } from "react-router-dom";
 
 const mahasiswaSchema = z.object({
   name: z
@@ -81,6 +83,24 @@ const Profile = () => {
   const errorHandler = useToastErrorHandler();
   const toast = useToast();
 
+  // easter egg #2
+  const [click, setClick] = useState(0);
+  const nav = useNavigate();
+
+  useEffect(() => {
+    const audio = new Audio("/easteregg/boom.mp3");
+
+    audio.volume = 0.1 * click;
+    audio.play();
+    audio.remove();
+
+    if (click >= 7) {
+      nav("/d/y/l/a/n");
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [click]);
+
   return (
     <Stack
       bgImage={{
@@ -126,12 +146,17 @@ const Profile = () => {
             w={"100%"}
             minH={"5rem"}
           >
-            <Image
-              src="/icons/ticket-logo-maxima.png"
-              alt="Logo"
-              boxSize="3rem"
-              display={{ base: "none", lg: "block" }}
-            />
+            <Box
+              onClick={() => setClick((prev) => prev + 1)}
+              cursor={"pointer"}
+            >
+              <Image
+                src="/icons/ticket-logo-maxima.png"
+                alt="Logo"
+                boxSize="3rem"
+                display={{ base: "none", lg: "block" }}
+              />
+            </Box>
 
             <Show below={"md"}>
               <Heading
@@ -351,12 +376,20 @@ const Profile = () => {
             w={"100%"}
             minH={"5rem"}
           >
-            <Image
-              src="/icons/ticket-logo-maxima.png"
-              alt="Logo"
-              boxSize="3rem"
-              display={{ base: "block", lg: "none" }}
-            />
+            <Box
+              onClick={() => setClick((prev) => prev + 1)}
+              cursor={"pointer"}
+            >
+              <Image
+                onClick={() => setClick((prev) => prev + 1)}
+                cursor={"pointer"}
+                src="/icons/ticket-logo-maxima.png"
+                alt="Logo"
+                boxSize="3rem"
+                display={{ base: "block", lg: "none" }}
+              />
+            </Box>
+
             <Heading
               flex="1"
               // textAlign="start"

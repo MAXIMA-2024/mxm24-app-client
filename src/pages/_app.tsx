@@ -26,6 +26,12 @@ const GlobalLayout = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loc]);
 
+  // easter egg #1
+  useEffect(() => {
+    const style = "color: white; font-style: italic; font-size: 2em;";
+    console.log("%c/d/y/l/a/n", style);
+  }, []);
+
   const isLoading = auth.status === "loading" || !isLoaded;
 
   return (
