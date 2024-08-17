@@ -53,7 +53,7 @@ type TicketDetails =
         attendance: boolean;
         attendanceTime: Date | null;
         alfagiftId: string | null;
-        isChatimeEligible: boolean;
+        isChatimeBundle: boolean;
         createdAt: Date;
         updatedAt: Date;
       };
@@ -124,15 +124,26 @@ const MyTicket = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ticket, isLoading]);
 
-  const imageRightSrc = useBreakpointValue({
-    base: "/bg/bottom-ticket-malpun.png",
-    lg: "/bg/right-ticket-malpun.png",
-  });
-
-  const imageLeftSrc = useBreakpointValue({
-    base: "/bg/top-ticket-malpun.png",
-    lg: "/bg/left-ticket-malpun.png",
-  });
+  const getImageSrc = (
+    position: "left" | "right" | "top" | "bottom",
+    isMobile: boolean
+  ) => {
+    if (ticket?.status === "internal") {
+      return isMobile
+        ? `/ticket/${position}-in-ticket-mobile.png`
+        : `/ticket/${position}-in-ticket-desktop.png`;
+    } else if (ticket?.status === "external") {
+      if (ticket.detail.isChatimeBundle) {
+        return isMobile
+          ? `/ticket/${position}-ex-chatime-ticket-mobile.png`
+          : `/ticket/${position}-ex-chatime-ticket-desktop.png`;
+      } else {
+        return isMobile
+          ? `/ticket/${position}-ex-ticket-mobile.png`
+          : `/ticket/${position}-ex-ticket-desktop.png`;
+      }
+    }
+  };
 
   const isMobile = useBreakpointValue({ base: true, lg: false });
 
@@ -148,60 +159,69 @@ const MyTicket = () => {
         justifyContent={"center"}
         pt={{ base: "2rem", lg: "6rem" }}
       >
-        {/* LEFT TICKET */}
-        <Stack
-          w={{ base: "22rem", md: "25rem", lg: "60rem", xl: "50rem" }}
-          align={"center"}
-          justify={"center"}
-          pos={"relative"}
-        >
-          <Image src={imageLeftSrc}></Image>
-          {/* QR Placeholder MOBILE */}
-          {isMobile && ticket && (
-            // <Image
-            //   src="/icons/qr-dummy.png"
-            //   w={"40%"}
-            //   pos={"absolute"}
-            //   mt={{ base: "2rem", lg: "0" }}
-            // ></Image>
+        {/* MOBILE TICKET (TOP & BOTTOM) */}
+        {isMobile && (
+          <>
+            <Stack
+              w={{ base: "22rem", md: "25rem" }}
+              align={"center"}
+              justify={"center"}
+              pos={"relative"}
+            >
+              <Image src={getImageSrc("top", isMobile)}></Image>
+              {ticket && (
+                <Box w={"45%"} pos={"absolute"}>
+                  <QRCode
+                    value={ticket.code}
+                    size={160}
+                    fgColor="#350025"
+                    bgColor="#d9d9d9"
+                  />
+                </Box>
+              )}
+            </Stack>
+            <Stack
+              w={{ base: "22rem", md: "25rem" }}
+              align={"center"}
+              justify={"center"}
+              pos={"relative"}
+            >
+              <Image src={getImageSrc("bottom", isMobile)}></Image>
+            </Stack>
+          </>
+        )}
 
-            <Box w={"40%"} pos={"absolute"} mt={{ base: "2rem", lg: "0" }}>
-              <QRCode
-                value={ticket.code}
-                size={140}
-                fgColor="#350025"
-                bgColor="#d9d9d9"
-              />
-            </Box>
-          )}
-        </Stack>
-        {/* RIGHT TICKET */}
-        <Stack
-          w={{ base: "22rem", md: "25rem", lg: "34rem", xl: "28.5rem" }}
-          pos={"relative"}
-          justify={"center"}
-          align={"center"}
-        >
-          <Image src={imageRightSrc}></Image>
-          {/* QR Placeholder DESKTOP */}
-          {!isMobile && ticket && (
-            // <Image
-            //   src="/icons/qr-dummy.png"
-            //   w={"60%"}
-            //   pos={"absolute"}
-            //   mr={{ base: "0rem", lg: "3.5rem" }}
-            // ></Image>
-
-            <Box w={"60%"} pos={"absolute"} mr={{ base: "0rem", lg: "2.4rem" }}>
-              <QRCode
-                value={ticket.code}
-                size={256}
-                fgColor="#350025"
-                bgColor="#eee6e9"
-              />
-            </Box>
-          )}
-        </Stack>
+        {/* DESKTOP TICKET (LEFT & RIGHT) */}
+        {!isMobile && (
+          <>
+            <Stack
+              w={{ base: "22rem", md: "25rem", lg: "60rem", xl: "50rem" }}
+              align={"center"}
+              justify={"center"}
+              pos={"relative"}
+            >
+              <Image src={getImageSrc("left", isMobile!)}></Image>
+            </Stack>
+            <Stack
+              w={{ base: "22rem", md: "25rem", lg: "34rem", xl: "28.5rem" }}
+              pos={"relative"}
+              justify={"center"}
+              align={"center"}
+            >
+              <Image src={getImageSrc("right", isMobile!)}></Image>
+              {ticket && (
+                <Box w={"60%"} pos={"absolute"}>
+                  <QRCode
+                    value={ticket.code}
+                    size={256}
+                    fgColor="#350025"
+                    bgColor="#eee6e9"
+                  />
+                </Box>
+              )}
+            </Stack>
+          </>
+        )}
       </Stack>
     </>
   );
