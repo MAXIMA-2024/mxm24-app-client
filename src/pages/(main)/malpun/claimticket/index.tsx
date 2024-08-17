@@ -88,7 +88,8 @@ const ClaimTicket = () => {
           direction={"column"}
           flex={1}
           bg={"linear-gradient(180deg, #47002D 0%, #FFBE00 100%)"}
-          p={{ base: "1rem", lg: "1rem" }}
+          p={{ base: "1rem", lg: "2rem" }}
+          px={{ base: "1rem", lg: "2rem" }}
           rounded={"xl"}
         >
           {/* LEFT IMAGE */}
@@ -104,7 +105,7 @@ const ClaimTicket = () => {
               cursor="pointer"
             ></Image>
           </Stack>
-          <Stack alignItems={"center"}>
+          <Stack alignItems={"center"} mt={{ base: 0, lg: "0.5rem" }}>
             <Button
               bgColor={"button.primary"}
               w={{ base: "6rem", md: "8rem", lg: "8rem" }}
