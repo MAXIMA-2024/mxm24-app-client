@@ -7,6 +7,7 @@ import {
   ModalOverlay,
   Text,
   Button,
+  Image,
   ModalCloseButton,
 } from "@chakra-ui/react";
 
@@ -31,7 +32,10 @@ const ModalChatime = ({
           <ModalHeader>Bundling Chatime</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Text mb={"10px"}>Apakah kamu ingin membeli bundling Chatime?</Text>
+            <Image src="/icons/bundling-chatime-header.png" />
+            <Text fontWeight={"bold"} my={"12.5px"}>
+              Apakah kamu ingin membeli bundling Chatime?
+            </Text>
             <Text>
               <b>• Dengan menambah Rp. 5000,-</b> kamu bisa mendapatkan tiket
               dan minuman spesial dari Chatime!

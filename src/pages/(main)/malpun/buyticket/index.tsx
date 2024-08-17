@@ -412,7 +412,7 @@ const BuyTicket = () => {
 
             <Stack
               paddingTop={"3rem"}
-              direction={{ base: "column", lg: "row" }}
+              direction={"row"}
               alignItems={{ base: "center", lg: "flex-end" }}
               justifyContent={"space-between"}
             >
@@ -423,7 +423,10 @@ const BuyTicket = () => {
                 transition={"0.3s"}
                 color={"text.tertiary"}
                 rounded={"xl"}
-                _hover={{ bgColor: "#3A0025" }}
+                _hover={{
+                  bgColor: "#3A0025",
+                  transform: "scale(1.1)",
+                }}
                 onClick={() => setStep(1)}
               >
                 <Text
@@ -431,7 +434,7 @@ const BuyTicket = () => {
                   fontWeight={"400"}
                   fontSize={{ base: "small", md: "medium", lg: "large" }}
                 >
-                  Kembali
+                  ← Kembali
                 </Text>
               </Button>
               <Button
@@ -441,7 +444,7 @@ const BuyTicket = () => {
                 transition={"0.3s"}
                 color={"text.tertiary"}
                 rounded={"xl"}
-                _hover={{ bgColor: "#3A0025" }}
+                _hover={{ bgColor: "#3A0025", transform: "scale(1.1)" }}
                 onClick={async () => {
                   const isValid = await trigger();
                   if (isValid) {
@@ -457,7 +460,7 @@ const BuyTicket = () => {
                   fontWeight={"400"}
                   fontSize={{ base: "small", md: "medium", lg: "large" }}
                 >
-                  Kirim
+                  Kirim →
                 </Text>
               </Button>
             </Stack>
