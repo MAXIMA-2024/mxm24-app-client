@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "Luthier";
+  src: url("/fonts/Luthier-Regular.woff2") format("woff2"),
+    url("/fonts/Luthier-Bold.woff2") format("woff2"),
+    url("/fonts/Luthier-Italic.woff2") format("woff2"),
+    url("/fonts/Luthier-BoldItalic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
