@@ -1,0 +1,39 @@
+name: Build static site and push to static
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+env:
+  VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
+  VITE_FRONTEND_URL: ${{ vars.VITE_FRONTEND_URL }}
+  VITE_PUBLIC_MIDTRANS_INTERFACE_URL: ${{ vars.VITE_PUBLIC_MIDTRANS_INTERFACE }}
+  VITE_PUBLIC_MIDTRANS_KEY: ${{ vars.VITE_PUBLIC_MIDTRANS_KEY }}
+  VITE_TURNSTILE_SITE_KEY: ${{ vars.VITE_TURNSTILE_SITE_KEY }}
+  VITE_CDN_URL: ${{ vars.VITE_CDN_URL }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build static files
+        run: bun run build
+
+      - name: Deploy to static branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: static
