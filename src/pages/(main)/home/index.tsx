@@ -30,15 +30,15 @@ type Toggle = {
 const CardData = [
   {
     title: "Challenge",
-    icon: "/icons/challenge-icon.png",
+    icon: "/myicons/challenge-icon.png",
   },
   {
     title: "Handbook",
-    icon: "/icons/handbook-icon.png",
+    icon: "/myicons/handbook-icon.png",
   },
   {
     title: "Twibbon",
-    icon: "/icons/twibbon-icon.png",
+    icon: "/myicons/twibbon-icon.png",
   },
 ];
 

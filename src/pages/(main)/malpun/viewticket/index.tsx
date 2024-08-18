@@ -186,7 +186,7 @@ const ViewTicket = () => {
               animation={!isTicketViewed ? `${zoomIn} 1s` : "none"}
             >
               <Image
-                src="/icons/claim-ticket-malpun-v2.png"
+                src="/myicons/claim-ticket-malpun-v2.png"
                 w={{ base: "16rem", md: "16rem", lg: "15rem" }}
               ></Image>
             </Stack>

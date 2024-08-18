@@ -16,27 +16,27 @@ type Toggle = {
 const items = [
   {
     title: "HoME",
-    icon: "/icons/home-icon.png",
+    icon: "/myicons/home-icon.png",
     link: "/home",
   },
   {
     title: "STATE",
-    icon: "/icons/state-icon.png",
+    icon: "/myicons/state-icon.png",
     link: "/state",
   },
   {
     title: "MalPun",
-    icon: "/icons/malpun-icon.png",
+    icon: "/myicons/malpun-icon.png",
     link: "/malpun",
   },
   {
     title: "FAQ",
-    icon: "/icons/faq-icon.png",
+    icon: "/myicons/faq-icon.png",
     link: "/faq",
   },
   {
     title: "About Us",
-    icon: "/icons/aboutus-icon.png",
+    icon: "/myicons/aboutus-icon.png",
     link: "/aboutus",
   },
 ];

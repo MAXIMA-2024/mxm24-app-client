@@ -23,7 +23,7 @@ const ModalHimbauan = ({ isOpen, onClose }: ModalHimbauanProps) => {
         <ModalContent bgColor={"#e9e9c0"} m={"1rem"}>
           <ModalHeader>Alfagift Card Number</ModalHeader>
           <ModalBody>
-            <Image src="/icons/alfagift-header.jpg" rounded={"md"}></Image>
+            <Image src="/myicons/alfagift-header.jpg" rounded={"md"}></Image>
             <Text mb={"10px"} fontWeight={"bold"}>
               Membuat akun Alfagift diharuskan untuk dapat klaim tiket MalPun.
             </Text>

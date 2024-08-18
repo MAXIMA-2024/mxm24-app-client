@@ -151,7 +151,7 @@ const Profile = () => {
               cursor={"pointer"}
             >
               <Image
-                src="/icons/ticket-logo-maxima.png"
+                src="/myicons/ticket-logo-maxima.png"
                 alt="Logo"
                 boxSize="3rem"
                 display={{ base: "none", lg: "block" }}
@@ -383,7 +383,7 @@ const Profile = () => {
               <Image
                 onClick={() => setClick((prev) => prev + 1)}
                 cursor={"pointer"}
-                src="/icons/ticket-logo-maxima.png"
+                src="/myicons/ticket-logo-maxima.png"
                 alt="Logo"
                 boxSize="3rem"
                 display={{ base: "block", lg: "none" }}
@@ -415,7 +415,7 @@ const Profile = () => {
             p={"2rem"}
           >
             {/* <Image
-              src="/icons/qr-dummy.png"
+              src="/myicons/qr-dummy.png"
               maxW={"57.5%"}
               paddingY={"2.5rem"}
             /> */}
