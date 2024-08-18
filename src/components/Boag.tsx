@@ -11,9 +11,11 @@ type SelectState = {
     isLastAttendance: boolean;
     setState: (id: number) => void;
   };
+
+  isStateRegistrationActive: boolean;
 };
 
-const Boag = ({ data }: SelectState) => {
+const Boag = ({ data, isStateRegistrationActive }: SelectState) => {
   return (
     <Stack direction={"column"}>
       <Image
@@ -21,7 +23,36 @@ const Boag = ({ data }: SelectState) => {
         alt="boag"
         w={["16rem", "24rem", "24rem", "24rem", "36rem"]}
       />
-      {!data && (
+      {!data && !isStateRegistrationActive && (
+        <Tooltip
+          label="Masa registrasi STATE ditutup"
+          aria-label="A tooltip"
+          bgColor={"button.primary"}
+          rounded={"lg"}
+          px={"0.8rem"}
+          py={"0.5rem"}
+          shadow={"lg"}
+          mt={"1rem"}
+        >
+          <IconButton
+            isRound={true}
+            variant="solid"
+            bgColor={"#EA7E2B40"}
+            textColor={"white"}
+            aria-label="Done"
+            fontSize="100px"
+            left={["97", "143", "143", "143", "215"]}
+            bottom={["55.5", "82", "82", "82", "120"]}
+            // size={"lg"}
+            w={["2rem", "4rem", "4rem", "4rem", "6rem"]}
+            h={["2.5rem", "4rem", "4rem", "4rem", "6rem"]}
+            icon={<MdAdd />}
+            isDisabled={true}
+          />
+        </Tooltip>
+      )}
+
+      {!data && isStateRegistrationActive && (
         <Link to="/state/selectstate/D01">
           <IconButton
             isRound={true}

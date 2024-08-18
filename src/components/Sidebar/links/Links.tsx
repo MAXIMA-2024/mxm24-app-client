@@ -119,7 +119,7 @@ const Links = ({ closeSidebar }: { closeSidebar: () => void }) => {
                   delay: index * 0.1,
                 }}
               >
-                {!isStateLinkActive && item.title === "STATE" ? (
+                {item.title === "STATE" ? (
                   <Tooltip
                     label="Silahkan Login untuk mengakses STATE"
                     aria-label="A tooltip"

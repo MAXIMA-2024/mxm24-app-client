@@ -677,7 +677,7 @@ const MainLayoutDesktop = () => {
                       duration: 0.75,
                     }}
                   >
-                    {!isStateLinkActive && item.title === "STATE" ? (
+                    {item.title === "STATE" ? (
                       <Tooltip
                         label="Silahkan Login untuk mengakses STATE"
                         aria-label="A tooltip"

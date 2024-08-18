@@ -13,6 +13,7 @@ import {
   Spinner,
   Stack,
   Text,
+  Tooltip,
   useToast,
 } from "@chakra-ui/react";
 import Boag from "@/components/Boag";
@@ -22,6 +23,14 @@ import StateBG from "@/components/animated-bg/state-bg";
 import useAuth from "@/hooks/useAuth";
 import useSWR from "swr";
 import useApi, { ResponseModel, useToastErrorHandler } from "@/hooks/useApi";
+
+type Toggle = {
+  id: number;
+  name: string;
+  toggle: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 type ClaimedState = {
   StateRegistration: {
@@ -67,6 +76,7 @@ type State = {
 };
 
 const State = () => {
+  const { data: toggle } = useSWR<Toggle[]>("/toggle");
   const bottomRef = useRef<HTMLDivElement>(null);
   const loc = useLocation();
   const auth = useAuth();
@@ -78,6 +88,21 @@ const State = () => {
   const errorHandler = useToastErrorHandler();
 
   const [stateDetails, setStateDetails] = useState<State | null>(null);
+
+  const stateRegistration = () => {
+    if (toggle) {
+      const check = toggle.find(
+        (toggle) => toggle.name === "state-registration"
+      );
+      if (!check || !check.toggle) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  };
+
+  const isStateRegistrationActive = stateRegistration();
 
   const scrollToBottom = () => {
     if (bottomRef.current) {
@@ -119,18 +144,44 @@ const State = () => {
             >
               <Img src={"/state/banner.png"} w={["16rem", "24rem"]} />
               <Stack>
-                <Link to="/state/selectstate/D01">
-                  <Button
-                    w={{ base: "16rem", md: "20rem" }}
-                    bgColor={"#44002B"}
-                    textColor={"white"}
-                    fontFamily={"Lexend"}
-                    fontWeight={"light"}
-                    fontSize={"lg"}
+                {isStateRegistrationActive ? (
+                  <Link to="/state/selectstate/D01">
+                    <Button
+                      w={{ base: "16rem", md: "20rem" }}
+                      bgColor={"#44002B"}
+                      textColor={"white"}
+                      fontFamily={"Lexend"}
+                      fontWeight={"light"}
+                      fontSize={"lg"}
+                    >
+                      Pilih UKM dan Komunitas
+                    </Button>
+                  </Link>
+                ) : (
+                  <Tooltip
+                    label="Masa registrasi STATE ditutup"
+                    aria-label="A tooltip"
+                    bgColor={"button.primary"}
+                    rounded={"lg"}
+                    px={"0.8rem"}
+                    py={"0.5rem"}
+                    shadow={"lg"}
+                    placement={"top"}
                   >
-                    Pilih UKM dan Komunitas
-                  </Button>
-                </Link>
+                    <Button
+                      w={{ base: "16rem", md: "20rem" }}
+                      bgColor={"#44002B"}
+                      textColor={"white"}
+                      fontFamily={"Lexend"}
+                      fontWeight={"light"}
+                      fontSize={"lg"}
+                      cursor={"not-allowed"}
+                    >
+                      Pilih UKM dan Komunitas
+                    </Button>
+                  </Tooltip>
+                )}
+
                 <Button
                   w={{ base: "16rem", md: "20rem" }}
                   bgColor={"#44002B"}
@@ -197,6 +248,7 @@ const State = () => {
                             }
                           : undefined
                       }
+                      isStateRegistrationActive={isStateRegistrationActive}
                     />
                   ))
               }
@@ -230,18 +282,43 @@ const State = () => {
                 w={["16rem", "24rem", "32rem", "32rem", "32rem"]}
                 pb={["24rem", "16rem", "10rem", 0, 0]}
               />
-              <Link to="/state/selectstate/D01">
-                <Button
-                  w={{ base: "16rem", md: "20rem" }}
-                  bgColor={"#44002B"}
-                  textColor={"white"}
-                  fontFamily={"Lexend"}
-                  fontWeight={"light"}
-                  fontSize={"lg"}
+              {isStateRegistrationActive ? (
+                <Link to="/state/selectstate/D01">
+                  <Button
+                    w={{ base: "16rem", md: "20rem" }}
+                    bgColor={"#44002B"}
+                    textColor={"white"}
+                    fontFamily={"Lexend"}
+                    fontWeight={"light"}
+                    fontSize={"lg"}
+                  >
+                    Pilih UKM dan Komunitas
+                  </Button>
+                </Link>
+              ) : (
+                <Tooltip
+                  label="Masa registrasi STATE ditutup"
+                  aria-label="A tooltip"
+                  bgColor={"button.primary"}
+                  rounded={"lg"}
+                  px={"0.8rem"}
+                  py={"0.5rem"}
+                  shadow={"lg"}
+                  placement={"top"}
                 >
-                  Pilih UKM dan Komunitas
-                </Button>
-              </Link>
+                  <Button
+                    w={{ base: "16rem", md: "20rem" }}
+                    bgColor={"#44002B"}
+                    textColor={"white"}
+                    fontFamily={"Lexend"}
+                    fontWeight={"light"}
+                    fontSize={"lg"}
+                    cursor={"not-allowed"}
+                  >
+                    Pilih UKM dan Komunitas
+                  </Button>
+                </Tooltip>
+              )}
               <Button
                 w={{ base: "16rem", md: "20rem" }}
                 bgColor={"#44002B"}
@@ -308,6 +385,7 @@ const State = () => {
                         }
                       : undefined
                   }
+                  isStateRegistrationActive={isStateRegistrationActive}
                 />
               ))}
           </Stack>
@@ -462,34 +540,46 @@ const State = () => {
             </Stack>
           </ModalBody>
           <ModalFooter>
-            <Button
-              fontFamily={"Lexend"}
-              bgColor={"#AF1648"}
-              color="white"
-              mr={3}
-              _hover={{ bg: "#FFB1C9", color: "white" }}
-              onClick={() => {
-                api
-                  .delete<ResponseModel>(
-                    `/state/registration/${stateDetails?.id}`,
-                    {
-                      data: { stateId: stateDetails?.id },
-                    }
-                  )
-                  .then((res) => {
-                    toast({
-                      title: "Berhasil",
-                      description: res.data.message,
-                      status: "success",
-                    });
-                    setStateDetails(null);
-                  })
-                  .catch(errorHandler)
-                  .finally(() => mutate());
-              }}
+            <Tooltip
+              label="Masa registrasi STATE ditutup"
+              aria-label="A tooltip"
+              bgColor={"button.primary"}
+              rounded={"lg"}
+              px={"0.8rem"}
+              py={"0.5rem"}
+              shadow={"lg"}
+              isDisabled={isStateRegistrationActive}
             >
-              Hapus
-            </Button>
+              <Button
+                fontFamily={"Lexend"}
+                bgColor={"#AF1648"}
+                color="white"
+                mr={3}
+                _hover={{ bg: "#FFB1C9", color: "white" }}
+                isDisabled={!isStateRegistrationActive}
+                onClick={() => {
+                  api
+                    .delete<ResponseModel>(
+                      `/state/registration/${stateDetails?.id}`,
+                      {
+                        data: { stateId: stateDetails?.id },
+                      }
+                    )
+                    .then((res) => {
+                      toast({
+                        title: "Berhasil",
+                        description: res.data.message,
+                        status: "success",
+                      });
+                      setStateDetails(null);
+                    })
+                    .catch(errorHandler)
+                    .finally(() => mutate());
+                }}
+              >
+                Hapus
+              </Button>
+            </Tooltip>
             <Button
               fontFamily={"Lexend"}
               onClick={() => setStateDetails(null)}

@@ -24,6 +24,14 @@ import { useNavigate, useParams } from "@/router";
 import useSWR from "swr";
 import useApi, { ResponseModel, useToastErrorHandler } from "@/hooks/useApi";
 
+type Toggle = {
+  id: number;
+  name: string;
+  toggle: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
 type AllState = {
   id: number;
   _count: {
@@ -73,6 +81,7 @@ type State = {
 };
 
 const SelectStateId = () => {
+  const { data } = useSWR<Toggle[]>("/toggle");
   const toast = useToast();
   const nav = useNavigate();
   const api = useApi();
@@ -80,10 +89,26 @@ const SelectStateId = () => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const { id } = useParams("/state/selectstate/:id");
   // const ref = useRef<HTMLDivElement | null>(null);
-
   const [stateDetails, setStateDetails] = useState<State | null>(null);
   const states = useSWR<AllState[]>("/state/");
   const days = useSWR<Day[]>("/state/enum/dayManagement/");
+
+  useEffect(() => {
+    if (data) {
+      const check = data.find((toggle) => toggle.name === "state-registration");
+      if (!check || !check.toggle) {
+        toast({
+          title: "Access denied!",
+          description: "Registrasi STATE akan segera dibuka.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+        nav("/");
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   const scrollToTop = () => {
     window.scrollTo({
