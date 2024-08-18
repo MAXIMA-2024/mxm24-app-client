@@ -44,27 +44,27 @@ type Toggle = {
 const NavBarData = [
   {
     title: "HoME",
-    icon: "/icons/home-icon.png",
+    icon: "/myicons/home-icon.png",
     link: "/home",
   },
   {
     title: "STATE",
-    icon: "/icons/state-icon.png",
+    icon: "/myicons/state-icon.png",
     link: "/state",
   },
   {
     title: "MalPun",
-    icon: "/icons/malpun-icon.png",
+    icon: "/myicons/malpun-icon.png",
     link: "/malpun",
   },
   {
     title: "FAQ",
-    icon: "/icons/faq-icon.png",
+    icon: "/myicons/faq-icon.png",
     link: "/faq",
   },
   {
     title: "About Us",
-    icon: "/icons/aboutus-icon.png",
+    icon: "/myicons/aboutus-icon.png",
     link: "/aboutus",
   },
 ];
@@ -219,7 +219,7 @@ const MainLayoutDesktop = () => {
                 <Stack w={"7.5rem"}>
                   <Image
                     mx={{ lg: 0, xl: 5 }}
-                    src="/icons/maxima2024-logo.png"
+                    src="/myicons/maxima2024-logo.png"
                     w={"7.5rem"}
                     transition={"all 0.2s ease-in-out"}
                     _hover={{ w: "7rem", transformOrigin: "center" }}
@@ -643,7 +643,7 @@ const MainLayoutDesktop = () => {
                 <Stack w={"7.5rem"}>
                   <Image
                     mx={{ lg: 0, xl: 5 }}
-                    src="/icons/maxima2024-logo.png"
+                    src="/myicons/maxima2024-logo.png"
                     w={"7.5rem"}
                     transition={"all 0.2s ease-in-out"}
                     _hover={{ w: "7rem", transformOrigin: "center" }}

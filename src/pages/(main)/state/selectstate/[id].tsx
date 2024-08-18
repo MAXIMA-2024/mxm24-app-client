@@ -199,7 +199,7 @@ const SelectStateId = () => {
                 <Image
                   src={
                     logo === "-"
-                      ? "/icons/placeholder-300.png"
+                      ? "/myicons/placeholder-300.png"
                       : `${import.meta.env.VITE_CDN_URL}${logo}`
                   }
                   // w={"15rem"}
@@ -282,7 +282,7 @@ const SelectStateId = () => {
           display={{ base: "flex", lg: "none" }}
         >
           <Image
-            src="/icons/LOGO-MAXIMA-OFFICIAL.png"
+            src="/myicons/LOGO-MAXIMA-OFFICIAL.png"
             w={"2.5rem"}
             alignSelf={"center"}
             justifySelf={"center"}
@@ -480,7 +480,7 @@ const SelectStateId = () => {
                 <Image
                   src={
                     stateDetails?.logo === "-"
-                      ? "/icons/placeholder-300.png"
+                      ? "/myicons/placeholder-300.png"
                       : `${import.meta.env.VITE_CDN_URL}${stateDetails?.logo}`
                   }
                   // w={"15rem"}

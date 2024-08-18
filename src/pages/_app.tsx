@@ -314,7 +314,7 @@ const GlobalLayout = () => {
               align={"center"}
               gap={"2rem"}
             >
-              <Image src="/icons/maxima2024-logo.png" w={"10rem"} />
+              <Image src="/myicons/maxima2024-logo.png" w={"10rem"} />
               <Stack
                 // direction={"row"}
                 gap={"1rem"}

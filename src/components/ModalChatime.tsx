@@ -32,7 +32,7 @@ const ModalChatime = ({
           <ModalHeader>Bundling Chatime</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Image src="/icons/bundling-chatime-header.png" />
+            <Image src="/myicons/bundling-chatime-header.png" />
             <Text fontWeight={"bold"} my={"12.5px"}>
               Apakah kamu ingin membeli bundling Chatime?
             </Text>

@@ -112,7 +112,7 @@ const ModalCheck = ({ isOpen, onClose }: ModalCheckProps) => {
         <ModalContent bgColor={"#e9e9c0"} m={"1rem"}>
           <ModalHeader>Enter your Alfagift card number</ModalHeader>
           <ModalBody>
-            <Image src="/icons/alfagift-header.jpg" rounded={"md"}></Image>
+            <Image src="/myicons/alfagift-header.jpg" rounded={"md"}></Image>
             <Text mb={"10px"}>Card number:</Text>
             <Input
               type="text"

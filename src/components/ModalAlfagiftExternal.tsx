@@ -67,7 +67,7 @@ const ModalAlfagiftExternal = ({
           <ModalHeader>Punya akun Alfagift?</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Image src="/icons/alfagift-header.jpg" rounded={"md"}></Image>
+            <Image src="/myicons/alfagift-header.jpg" rounded={"md"}></Image>
             <Text my={"10px"} fontWeight={"bold"}>
               Ayo download & isi no membermu sekarang dan dapatkan voucher
               belanja Rp10.000 di Alfagift!

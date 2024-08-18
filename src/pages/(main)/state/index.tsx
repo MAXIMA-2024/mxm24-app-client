@@ -448,7 +448,7 @@ const State = () => {
                 <Image
                   src={
                     stateDetails?.logo === "-"
-                      ? "/icons/placeholder-300.png"
+                      ? "/myicons/placeholder-300.png"
                       : `${import.meta.env.VITE_CDN_URL}${stateDetails?.logo}`
                   }
                   // w={"15rem"}
