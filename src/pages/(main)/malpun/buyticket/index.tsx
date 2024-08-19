@@ -10,6 +10,7 @@ import {
   useToast,
   FormErrorMessage,
   FormControl,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -324,10 +325,18 @@ const BuyTicket = () => {
             maxW={{ base: "75%", md: "40%", lg: "40%", xl: "30%" }}
           >
             {/* JUDUL */}
-            <Stack alignItems={"center"} paddingBottom={"3rem"}>
+            <Stack
+              alignItems={"center"}
+              paddingBottom={{ base: "3rem", lg: "1rem", xl: "3rem" }}
+            >
               <Stack color={"text.secondary"}>
                 <Heading
-                  fontSize={{ base: "1.2rem", md: "1.5rem", lg: "2.5rem" }}
+                  fontSize={{
+                    base: "1.2rem",
+                    md: "1.5rem",
+                    lg: "2rem",
+                    xl: "2.5rem",
+                  }}
                   textAlign={"center"}
                   fontFamily={"Luthier"}
                 >
@@ -407,11 +416,29 @@ const BuyTicket = () => {
               </FormControl>
             </Stack>
             {/* END FORM */}
+            <Stack alignItems="center" mt={{ base: 0, xl: "1rem" }}>
+              <Text
+                fontFamily="Luthier"
+                color="text.primary"
+                textAlign="center"
+              >
+                Punya pertanyaan terkait tiket? Hubungi kami melalui{" "}
+                <ChakraLink
+                  href="https://instagram.com/maximaumn"
+                  style={{ textDecoration: "underline" }}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Instagram
+                </ChakraLink>
+                .
+              </Text>
+            </Stack>
 
             {/* BUTTON KEMBALI DAN KIRIM */}
 
             <Stack
-              paddingTop={"3rem"}
+              paddingTop={{ base: "3rem", lg: "1rem", xl: "3rem" }}
               direction={"row"}
               alignItems={{ base: "center", lg: "flex-end" }}
               justifyContent={"space-between"}
