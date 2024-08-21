@@ -83,11 +83,12 @@ const MyTicket = () => {
 
   useEffect(() => {
     if (data) {
-      const check = data.find(
+      const hasAccess = data.some(
         (toggle) =>
-          toggle.name === "malpun-external" || toggle.name === "malpun-internal"
+          (toggle.name === "malpun-internal" && toggle.toggle) ||
+          (toggle.name === "malpun-external" && toggle.toggle)
       );
-      if (!check || !check.toggle) {
+      if (!hasAccess) {
         toast({
           title: "Access denied!",
           description:
