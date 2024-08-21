@@ -83,11 +83,12 @@ const MyTicket = () => {
 
   useEffect(() => {
     if (data) {
-      const check = data.find(
+      const hasAccess = data.some(
         (toggle) =>
-          toggle.name === "malpun-external" || toggle.name === "malpun-internal"
+          (toggle.name === "malpun-internal" && toggle.toggle) ||
+          (toggle.name === "malpun-external" && toggle.toggle)
       );
-      if (!check || !check.toggle) {
+      if (!hasAccess) {
         toast({
           title: "Access denied!",
           description:
@@ -145,6 +146,8 @@ const MyTicket = () => {
     }
   };
 
+  const qrCodeSize = useBreakpointValue({ base: 160, lg: 214, xl: 256 });
+
   const isMobile = useBreakpointValue({ base: true, lg: false });
 
   return (
@@ -173,7 +176,7 @@ const MyTicket = () => {
                 <Box w={"45%"} pos={"absolute"}>
                   <QRCode
                     value={ticket.code}
-                    size={160}
+                    size={qrCodeSize}
                     fgColor="#350025"
                     bgColor="#d9d9d9"
                   />
@@ -195,7 +198,7 @@ const MyTicket = () => {
         {!isMobile && (
           <>
             <Stack
-              w={{ base: "22rem", md: "25rem", lg: "60rem", xl: "50rem" }}
+              w={{ base: "22rem", md: "25rem", lg: "40rem", xl: "48rem" }}
               align={"center"}
               justify={"center"}
               pos={"relative"}
@@ -203,17 +206,17 @@ const MyTicket = () => {
               <Image src={getImageSrc("left", isMobile!)}></Image>
             </Stack>
             <Stack
-              w={{ base: "22rem", md: "25rem", lg: "34rem", xl: "28.5rem" }}
+              w={{ base: "22rem", md: "25rem", lg: "22.5rem", xl: "27rem" }}
               pos={"relative"}
               justify={"center"}
               align={"center"}
             >
               <Image src={getImageSrc("right", isMobile!)}></Image>
               {ticket && (
-                <Box w={"60%"} pos={"absolute"}>
+                <Box w={"63%"} pos={"absolute"}>
                   <QRCode
                     value={ticket.code}
-                    size={256}
+                    size={qrCodeSize}
                     fgColor="#350025"
                     bgColor="#eee6e9"
                   />

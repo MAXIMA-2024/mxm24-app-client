@@ -88,14 +88,16 @@ const ViewTicket = () => {
 
   useEffect(() => {
     if (data) {
-      const check = data.find(
+      const hasAccess = data.some(
         (toggle) =>
-          toggle.name === "malpun-external" || toggle.name === "malpun-internal"
+          (toggle.name === "malpun-internal" && toggle.toggle) ||
+          (toggle.name === "malpun-external" && toggle.toggle)
       );
-      if (!check || !check.toggle) {
+      if (!hasAccess) {
         toast({
           title: "Access denied!",
-          description: "Anda belum bisa melihat tiket Malam Puncak saat ini.",
+          description:
+            "Anda belum bisa melihat tiket Malam Puncak anda saat ini.",
           status: "error",
           duration: 5000,
           isClosable: true,
