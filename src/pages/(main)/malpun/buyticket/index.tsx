@@ -1,5 +1,5 @@
 import ModalAlfagiftExternal from "@/components/ModalAlfagiftExternal";
-import ModalChatime from "@/components/ModalChatime";
+// import ModalChatime from "@/components/ModalChatime";
 import useApi, { ResponseModel, useToastErrorHandler } from "@/hooks/useApi";
 import {
   Heading,
@@ -110,9 +110,9 @@ type ExternalCallbackResponse = {
   updatedAt: string;
 };
 
-type CheckChatime = {
-  isChatTimeEligible: boolean;
-};
+// type CheckChatime = {
+//   isChatTimeEligible: boolean;
+// };
 
 const externalBuyFormSchema = z.object({
   fullName: z.string({ required_error: "Nama lengkap harus diisi" }),
@@ -128,9 +128,9 @@ export type ExternalBuyForm = z.infer<typeof externalBuyFormSchema>;
 
 const BuyTicket = () => {
   const { data } = useSWR<Toggle[]>("/toggle");
-  const { data: chatimeData } = useSWR<CheckChatime>(
-    "/malpun/external/checkChatime"
-  );
+  // const { data: chatimeData } = useSWR<CheckChatime>(
+  //   "/malpun/external/checkChatime"
+  // );
 
   const nav = useNavigate();
   const toast = useToast();
@@ -475,10 +475,10 @@ const BuyTicket = () => {
                 onClick={async () => {
                   const isValid = await trigger();
                   if (isValid) {
-                    if (chatimeData && chatimeData.isChatTimeEligible) {
-                      return setStep(3);
-                    }
-                    setStep(4);
+                    // if (chatimeData && chatimeData.isChatTimeEligible) {
+                    //   return setStep(3);
+                    // }
+                    setStep(3);
                   }
                 }}
               >
@@ -494,16 +494,16 @@ const BuyTicket = () => {
           </Stack>
         )}
       </Stack>
-      <ModalChatime
+      {/* <ModalChatime
         isOpen={step === 3}
         onClose={() => setStep(4)}
         closeModal={() => setStep(2)}
         setChatimeBundling={(val) => {
           setValue("isChatimeBundle", val);
         }}
-      />
+      /> */}
       <ModalAlfagiftExternal
-        isOpen={step === 4}
+        isOpen={step === 3}
         onClose={() => setStep(2)}
         callback={(alfagiftId) => {
           setValue("alfagiftId", alfagiftId);
