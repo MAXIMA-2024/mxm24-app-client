@@ -433,13 +433,13 @@ const SelectStateId = () => {
         isOpen={!!stateDetails}
         isCentered
         motionPreset="slideInBottom"
-
+        scrollBehavior={"outside"}
         // size={{ base: "sm", lg: "xl" }}
       >
         <ModalOverlay backdropFilter="auto" backdropBlur="3px" />
         <ModalContent
           py={"2rem"}
-          px={"2rem"}
+          px={{ base: "1rem", md: "2rem" }}
           // mt={{ base: "4rem", md: "5rem", lg: "7rem" }}
           maxH={{ lg: "90vh" }}
           maxW="90vw"
@@ -469,7 +469,7 @@ const SelectStateId = () => {
             </Stack>
             <Stack
               direction={{ base: "column", lg: "row" }}
-              gap={"5rem"}
+              gap={{ base: "2.5rem", lg: "5rem" }}
               alignItems={"center"}
             >
               <Stack
@@ -508,7 +508,29 @@ const SelectStateId = () => {
                   {stateDetails?.quota}
                 </Text>
               </Stack>
-              <Stack gap={"2rem"} w={{ base: "100%", lg: "75%" }}>
+              <Stack
+                gap={"2rem"}
+                w={{ base: "100%", lg: "75%" }}
+                maxH={{ base: "auto", lg: "30rem" }}
+                p={{ base: 0, md: "1rem" }}
+                overflow={"auto"}
+                css={{
+                  "&::-webkit-scrollbar": {
+                    width: "8px",
+                  },
+                  "&::-webkit-scrollbar:horizontal": {
+                    height: "8px", // Horizontal scrollbar height
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    backgroundColor: "#D9D9D9",
+                    borderRadius: "4px",
+                  },
+                  "&::-webkit-scrollbar-track": {
+                    backgroundColor: "#D9D9D975",
+                    borderRadius: "4px",
+                  },
+                }}
+              >
                 <Stack>
                   <Heading
                     fontFamily={"Luthier"}
@@ -559,7 +581,7 @@ const SelectStateId = () => {
                         <Image
                           key={gallery.id}
                           src={`${import.meta.env.VITE_CDN_URL}${gallery.url}`}
-                          w={{ base: "50%", lg: "45%" }}
+                          w={{ base: "100%", lg: "45%" }}
                           h={{ base: "100%", lg: "20rem" }}
                           objectFit={"cover"}
                           borderRadius={"lg"}
