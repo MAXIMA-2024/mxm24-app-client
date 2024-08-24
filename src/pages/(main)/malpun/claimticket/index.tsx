@@ -60,7 +60,7 @@ const ClaimTicket = () => {
   }, [data]);
 
   useEffect(() => {
-    if (auth.status === "authenticated" && auth.user?.role !== "mahasiswa") {
+    if (auth.status !== "authenticated" && auth.user?.role !== "mahasiswa") {
       toast({
         title: "Access denied!",
         description: "Hanya mahasiswa yang bisa mengklaim tiket Malam Puncak.",

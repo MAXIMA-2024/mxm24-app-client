@@ -271,7 +271,6 @@ const BuyTicket = () => {
         color={"text.primary"}
         fontWeight={"900"}
         gap={{ base: 0, lg: 2 }}
-        
         // bgImage={{
         //   base: "/bg/scroll-claim-ticket-mobile.png",
         //   lg: "/bg/scroll-claim-ticket-desktop.png",
@@ -293,7 +292,7 @@ const BuyTicket = () => {
         {step === 1 && (
           <>
             {/* <Heading>Ceritanya Poster</Heading> */}
-            
+
             <Stack
               align={"center"}
               color={"text.primary"}
@@ -319,13 +318,13 @@ const BuyTicket = () => {
                 >
                   <Image
                     src="/poster/poster-presale.jpg"
-                    w={{ base: "13rem", md: "17rem", lg: "17rem", xl: "17rem" }}
+                    w={{ base: "20rem", md: "23rem", lg: "20rem", xl: "23rem" }}
                     rounded={"xl"}
                     cursor="pointer"
                   ></Image>
                 </Stack>
                 <Stack alignItems={"center"} mt={{ base: 0, lg: "0.5rem" }}>
-                <Stack direction={"row"}>
+                  <Stack direction={"row"}>
                     <Link to={"/malpun"}>
                       <Button
                         bgColor={"button.primary"}
@@ -339,7 +338,11 @@ const BuyTicket = () => {
                         <Text
                           fontFamily={"Lexend"}
                           fontWeight={"400"}
-                          fontSize={{ base: "small", md: "medium", lg: "large" }}
+                          fontSize={{
+                            base: "small",
+                            md: "medium",
+                            lg: "large",
+                          }}
                         >
                           Batal
                         </Text>
@@ -387,9 +390,7 @@ const BuyTicket = () => {
 
             <ModalCheck isOpen={isModalOpen} onClose={handleCloseModal} />
 
-
-{/* Potong disini */}
-
+            {/* Potong disini */}
 
             {/* <Stack direction={"row"}>
               <Link to={"/malpun"}>
@@ -431,9 +432,7 @@ const BuyTicket = () => {
               </Button>
             </Stack> */}
 
-{/* Potong lagi */}
-
-
+            {/* Potong lagi */}
           </>
         )}
         {step === 2 && (
