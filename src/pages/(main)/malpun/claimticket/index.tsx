@@ -88,8 +88,8 @@ const ClaimTicket = () => {
           direction={"column"}
           flex={1}
           bg={"linear-gradient(180deg, #47002D 0%, #FFBE00 100%)"}
-          p={{ base: "1rem", lg: "2rem" }}
-          px={{ base: "1rem", lg: "2rem" }}
+          p={{ base: "1rem", lg: "1rem" }}
+          px={{ base: "1rem", lg: "1rem" }}
           rounded={"xl"}
         >
           {/* LEFT IMAGE */}
@@ -101,7 +101,8 @@ const ClaimTicket = () => {
           >
             <Image
               src="/poster/poster-internal.jpg"
-              w={{ base: "20rem", md: "25rem", lg: "28rem", xl: "30rem" }}
+              w={{ base: "20rem", md: "23rem", lg: "20rem" }}
+              rounded={"xl"}
               cursor="pointer"
             ></Image>
           </Stack>

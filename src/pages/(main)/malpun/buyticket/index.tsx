@@ -328,7 +328,7 @@ const BuyTicket = () => {
                 >
                   <Image
                     src="/poster/poster-presale.jpg"
-                    w={{ base: "20rem", md: "23rem", lg: "20rem", xl: "23rem" }}
+                    w={{ base: "20rem", md: "23rem", lg: "16rem" }}
                     rounded={"xl"}
                     cursor="pointer"
                   ></Image>
