@@ -271,22 +271,32 @@ const BuyTicket = () => {
         color={"text.primary"}
         fontWeight={"900"}
         gap={{ base: 0, lg: 2 }}
-        // bgImage={{
-        //   base: "/bg/scroll-claim-ticket-mobile.png",
-        //   lg: "/bg/scroll-claim-ticket-desktop.png",
-        // }}
-        // bgSize={{
-        //   base: "contain",
-        //   md: "contain",
-        //   lg: "contain",
-        //   xl: "contain",
-        // }}
-        // bgRepeat={"no-repeat"}
-        // bgPosition={"center"}
+        bgImage={
+          step === 2
+            ? {
+                base: "/bg/scroll-claim-ticket-mobile.png",
+                lg: "/bg/scroll-claim-ticket-desktop.png",
+              }
+            : undefined
+        }
+        bgSize={
+          step === 2
+            ? {
+                base: "contain",
+                md: "contain",
+                lg: "contain",
+                xl: "contain",
+              }
+            : undefined
+        }
+        bgRepeat={step === 2 ? "no-repeat" : undefined}
+        bgPosition={"center"}
         w={"100%"}
-        // p={{ base: "8rem", sm: "10rem", md: "7rem", lg: "6rem" }}
+        p={
+          step === 2 ? { base: "8rem", sm: "10rem", md: "7rem", lg: "6rem" } : 0
+        }
         px={{ base: "2rem", md: "2rem", lg: "4rem" }}
-        // mt={{ md: "5rem", lg: "7rem" }}
+        mt={step === 2 ? { md: "5rem", lg: "7rem" } : 0}
         my={{ md: "1rem" }}
       >
         {step === 1 && (
