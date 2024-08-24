@@ -206,7 +206,11 @@ const MyTicket = () => {
               <Image src={getImageSrc("left", isMobile!)}></Image>
             </Stack>
             <Stack
-              w={{ base: "22rem", md: "25rem", lg: "22.5rem", xl: "27rem" }}
+              w={
+                ticket?.status === "external"
+                  ? { base: "22rem", md: "25rem", lg: "22.8rem", xl: "27.3rem" }
+                  : { base: "22rem", md: "25rem", lg: "22.5rem", xl: "27rem" }
+              }
               pos={"relative"}
               justify={"center"}
               align={"center"}
