@@ -1,6 +1,7 @@
 import ModalAlfagiftExternal from "@/components/ModalAlfagiftExternal";
 // import ModalChatime from "@/components/ModalChatime";
 import useApi, { ResponseModel, useToastErrorHandler } from "@/hooks/useApi";
+import ModalCheck from "@/components/ModalCheck";
 import {
   Heading,
   Stack,
@@ -11,6 +12,13 @@ import {
   FormErrorMessage,
   FormControl,
   Link as ChakraLink,
+  Image,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -138,6 +146,13 @@ const BuyTicket = () => {
   const errorHandler = useToastErrorHandler();
   const ref = useRef<HTMLFormElement | null>(null);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure(); // For chakra modal
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   const {
     handleSubmit,
     setValue,
@@ -256,28 +271,127 @@ const BuyTicket = () => {
         color={"text.primary"}
         fontWeight={"900"}
         gap={{ base: 0, lg: 2 }}
-        bgImage={{
-          base: "/bg/scroll-claim-ticket-mobile.png",
-          lg: "/bg/scroll-claim-ticket-desktop.png",
-        }}
-        bgSize={{
-          base: "contain",
-          md: "contain",
-          lg: "contain",
-          xl: "contain",
-        }}
-        bgRepeat={"no-repeat"}
-        bgPosition={"center"}
+        
+        // bgImage={{
+        //   base: "/bg/scroll-claim-ticket-mobile.png",
+        //   lg: "/bg/scroll-claim-ticket-desktop.png",
+        // }}
+        // bgSize={{
+        //   base: "contain",
+        //   md: "contain",
+        //   lg: "contain",
+        //   xl: "contain",
+        // }}
+        // bgRepeat={"no-repeat"}
+        // bgPosition={"center"}
         w={"100%"}
-        p={{ base: "8rem", sm: "10rem", md: "7rem", lg: "6rem" }}
+        // p={{ base: "8rem", sm: "10rem", md: "7rem", lg: "6rem" }}
         px={{ base: "2rem", md: "2rem", lg: "4rem" }}
-        mt={{ md: "5rem", lg: "7rem" }}
+        // mt={{ md: "5rem", lg: "7rem" }}
         my={{ md: "1rem" }}
       >
         {step === 1 && (
           <>
-            <Heading>Ceritanya Poster</Heading>
-            <Stack direction={"row"}>
+            {/* <Heading>Ceritanya Poster</Heading> */}
+            
+            <Stack
+              align={"center"}
+              color={"text.primary"}
+              fontWeight={"900"}
+              gap={{ base: 0, lg: 2 }}
+              w={"100%"}
+              pt={{ base: "2rem", md: "2rem", lg: "8rem" }}
+            >
+              <Stack
+                direction={"column"}
+                flex={1}
+                bg={"linear-gradient(180deg, #47002D 0%, #FFBE00 100%)"}
+                p={{ base: "1rem", lg: "1rem" }}
+                px={{ base: "1rem", lg: "1rem" }}
+                rounded={"xl"}
+              >
+                {/* LEFT IMAGE */}
+                <Stack
+                  alignItems={{ base: "center", lg: "center" }}
+                  justifyContent={{ lg: "center" }}
+                  mb={{ base: "1rem", lg: 0 }}
+                  onClick={onOpen} // Open modal when image is clicked
+                >
+                  <Image
+                    src="/poster/poster-presale.jpg"
+                    w={{ base: "13rem", md: "17rem", lg: "17rem", xl: "17rem" }}
+                    rounded={"xl"}
+                    cursor="pointer"
+                  ></Image>
+                </Stack>
+                <Stack alignItems={"center"} mt={{ base: 0, lg: "0.5rem" }}>
+                <Stack direction={"row"}>
+                    <Link to={"/malpun"}>
+                      <Button
+                        bgColor={"button.primary"}
+                        w={{ base: "6rem", md: "8rem", lg: "8rem" }}
+                        variant={"ghost"}
+                        transition={"0.3s"}
+                        color={"text.tertiary"}
+                        rounded={"xl"}
+                        _hover={{ bgColor: "#3A0025" }}
+                      >
+                        <Text
+                          fontFamily={"Lexend"}
+                          fontWeight={"400"}
+                          fontSize={{ base: "small", md: "medium", lg: "large" }}
+                        >
+                          Batal
+                        </Text>
+                      </Button>
+                    </Link>
+                    <Button
+                      onClick={() => setStep(2)}
+                      bgColor={"button.primary"}
+                      w={{ base: "6rem", md: "8rem", lg: "8rem" }}
+                      variant={"ghost"}
+                      transition={"0.3s"}
+                      color={"text.tertiary"}
+                      rounded={"xl"}
+                      _hover={{ bgColor: "#3A0025" }}
+                    >
+                      <Text
+                        fontFamily={"Lexend"}
+                        fontWeight={"400"}
+                        fontSize={{ base: "small", md: "medium", lg: "large" }}
+                      >
+                        Lanjut
+                      </Text>
+                    </Button>
+                  </Stack>
+                </Stack>
+              </Stack>
+            </Stack>
+
+            {/* Image Modal */}
+            <Modal isOpen={isOpen} onClose={onClose} size="xl">
+              <ModalOverlay />
+              <ModalContent>
+                <ModalCloseButton />
+                <ModalBody mt={"2.5rem"} mb={"1rem"}>
+                  <Image
+                    src="/poster/poster-presale.jpg"
+                    w="100%"
+                    h="100%"
+                    objectFit="contain"
+                    rounded={"lg"}
+                  />
+                </ModalBody>
+              </ModalContent>
+            </Modal>
+
+            <ModalCheck isOpen={isModalOpen} onClose={handleCloseModal} />
+
+
+{/* Potong disini */}
+
+
+            {/* <Stack direction={"row"}>
               <Link to={"/malpun"}>
                 <Button
                   bgColor={"button.primary"}
@@ -315,7 +429,11 @@ const BuyTicket = () => {
                   Lanjut
                 </Text>
               </Button>
-            </Stack>
+            </Stack> */}
+
+{/* Potong lagi */}
+
+
           </>
         )}
         {step === 2 && (
