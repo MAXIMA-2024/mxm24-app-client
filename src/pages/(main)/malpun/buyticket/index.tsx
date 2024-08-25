@@ -327,7 +327,7 @@ const BuyTicket = () => {
                   onClick={onOpen} // Open modal when image is clicked
                 >
                   <Image
-                    src="/poster/poster-presale.jpg"
+                    src="/poster/poster-external.jpg"
                     w={{ base: "20rem", md: "23rem", lg: "16rem" }}
                     rounded={"xl"}
                     cursor="pointer"
@@ -388,7 +388,7 @@ const BuyTicket = () => {
                 <ModalCloseButton />
                 <ModalBody mt={"2.5rem"} mb={"1rem"}>
                   <Image
-                    src="/poster/poster-presale.jpg"
+                    src="/poster/poster-external.jpg"
                     w="100%"
                     h="100%"
                     objectFit="contain"
