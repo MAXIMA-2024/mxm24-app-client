@@ -368,7 +368,21 @@ const SelectStateId = () => {
             fontFamily={"Lexend"}
             fontWeight={"semibold"}
           >
-            Hari, 01 Bulan 2024
+            {days.data &&
+              (() => {
+                const dayObj = days.data.find((day) => day.code === id);
+                if (dayObj) {
+                  const date = new Date(dayObj.date);
+                  const options: Intl.DateTimeFormatOptions = {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  };
+                  return date.toLocaleDateString("id-ID", options);
+                }
+                return null;
+              })()}
           </Text>
         </Stack>
         {/* END Header main */}
