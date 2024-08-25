@@ -339,6 +339,7 @@ const Home = () => {
                     transition: "all 0.2s ease-in-out",
                     bgColor: "#3A0025",
                   }}
+                  w={"100%"}
                 >
                   Close
                 </Button>
