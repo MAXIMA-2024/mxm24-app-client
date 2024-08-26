@@ -63,7 +63,7 @@ const ClaimTicket = () => {
     if (auth.status !== "authenticated" && auth.user?.role !== "mahasiswa") {
       toast({
         title: "Access denied!",
-        description: "Hanya mahasiswa yang bisa mengklaim tiket Malam Puncak.",
+        description: "Ikuti step-by-step klaim tiket malpun!",
         status: "error",
         duration: 5000,
         isClosable: true,
