@@ -522,7 +522,7 @@ const MainLayoutDesktop = () => {
                     </Link>
 
                     <Tooltip
-                      label="Aktifkan fitur ini untuk menambah"
+                      label="Aktifkan fitur ini untuk menambah performa"
                       aria-label="A tooltip"
                       bgColor={"button.primary"}
                       rounded={"lg"}
@@ -553,7 +553,7 @@ const MainLayoutDesktop = () => {
                             setReducedMotion(!isReducedMotion);
                           }}
                         ></Switch>
-                        <Text>Disable animations</Text>
+                        <Text>Disable Animations</Text>
                       </Stack>
                     </Tooltip>
 
