@@ -24,19 +24,19 @@ const WelcomeBG = ({ children }: WelcomeBGProps) => {
     layout: new Layout({ fit: Fit.Cover, alignment: Alignment.TopCenter }),
   });
 
-  const { setLoaded } = useLoading();
+  const { setLoaded, isReducedMotion } = useLoading();
 
   useEffect(() => {
-    if (desktop.rive && desktop.rive.isPlaying) {
+    if (isReducedMotion || (desktop.rive && desktop.rive.isPlaying)) {
       setLoaded(true);
     }
 
-    if (mobile.rive && mobile.rive.isPlaying) {
+    if (isReducedMotion || (mobile.rive && mobile.rive.isPlaying)) {
       setLoaded(true);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [desktop.rive, mobile.rive]);
+  }, [desktop.rive, mobile.rive, isReducedMotion]);
 
   return (
     <Stack
@@ -52,21 +52,25 @@ const WelcomeBG = ({ children }: WelcomeBGProps) => {
       bgRepeat={"no-repeat"}
       bgPosition={"center"}
     >
-      <Show below="md">
-        <mobile.RiveComponent
-          style={{
-            flex: 1,
-          }}
-        />
-      </Show>
+      {!isReducedMotion && (
+        <>
+          <Show below="md">
+            <mobile.RiveComponent
+              style={{
+                flex: 1,
+              }}
+            />
+          </Show>
 
-      <Hide below="md">
-        <desktop.RiveComponent
-          style={{
-            flex: 1,
-          }}
-        />
-      </Hide>
+          <Hide below="md">
+            <desktop.RiveComponent
+              style={{
+                flex: 1,
+              }}
+            />
+          </Hide>
+        </>
+      )}
 
       <Stack
         minW={"100vw"}

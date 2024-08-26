@@ -19,6 +19,7 @@ import {
   useDisclosure,
   useToast,
   Tooltip,
+  Switch,
 } from "@chakra-ui/react";
 
 import { IoLogOutOutline } from "react-icons/io5";
@@ -73,7 +74,7 @@ const MainLayoutDesktop = () => {
   const { data } = useSWR<Toggle[]>("/toggle");
 
   const auth = useAuth();
-  const { isLoaded } = useLoading();
+  const { isLoaded, isReducedMotion, setReducedMotion } = useLoading();
   const toast = useToast();
   const [size, setSize] = React.useState("xl");
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -519,6 +520,43 @@ const MainLayoutDesktop = () => {
                         Edit Profile
                       </Button>
                     </Link>
+
+                    <Tooltip
+                      label="Aktifkan fitur ini untuk menambah"
+                      aria-label="A tooltip"
+                      bgColor={"button.primary"}
+                      rounded={"lg"}
+                      px={"0.8rem"}
+                      py={"0.5rem"}
+                      shadow={"lg"}
+                    >
+                      <Stack
+                        direction={"row"}
+                        p={2}
+                        // py={0}
+                        my={1}
+                        mb={2}
+                        fontSize={["0.8rem", "0.8rem", "0.85rem", "1rem"]}
+                        borderRadius={"xl"}
+                        color={"black"}
+                        fontWeight={"medium"}
+                        gap={2}
+                        w={"full"}
+                        justifyContent={"center"}
+                        bgColor={"gray.100"}
+                        justify={"center"}
+                        align={"center"}
+                      >
+                        <Switch
+                          isChecked={isReducedMotion}
+                          onChange={() => {
+                            setReducedMotion(!isReducedMotion);
+                          }}
+                        ></Switch>
+                        <Text>Reduced motion</Text>
+                      </Stack>
+                    </Tooltip>
+
                     <Button
                       bg={"status.error"}
                       p={2}

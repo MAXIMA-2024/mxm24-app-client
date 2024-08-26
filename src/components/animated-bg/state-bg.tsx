@@ -24,19 +24,19 @@ const StateBG = ({ children }: StateBGProps) => {
     layout: new Layout({ fit: Fit.Cover, alignment: Alignment.TopCenter }),
   });
 
-  const { setLoaded } = useLoading();
+  const { setLoaded, isReducedMotion } = useLoading();
 
   useEffect(() => {
-    if (desktop.rive && desktop.rive.isPlaying) {
+    if (isReducedMotion || (desktop.rive && desktop.rive.isPlaying)) {
       setLoaded(true);
     }
 
-    if (mobile.rive && mobile.rive.isPlaying) {
+    if (isReducedMotion || (mobile.rive && mobile.rive.isPlaying)) {
       setLoaded(true);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [desktop.rive, mobile.rive]);
+  }, [desktop.rive, mobile.rive, isReducedMotion]);
 
   return (
     <Stack
@@ -52,8 +52,10 @@ const StateBG = ({ children }: StateBGProps) => {
       bgRepeat={"no-repeat"}
       bgPosition={"center"}
     >
-      <Show below="md">
-        {/* <Rive
+      {!isReducedMotion && (
+        <>
+          <Show below="md">
+            {/* <Rive
           src="/animated/assets.riv"
           artboard={"STATE_Mobile"}
           stateMachines="Main"
@@ -64,15 +66,15 @@ const StateBG = ({ children }: StateBGProps) => {
             flex: 1,
           }}
         /> */}
-        <mobile.RiveComponent
-          style={{
-            flex: 1,
-          }}
-        />
-      </Show>
+            <mobile.RiveComponent
+              style={{
+                flex: 1,
+              }}
+            />
+          </Show>
 
-      <Hide below="md">
-        {/* <Rive
+          <Hide below="md">
+            {/* <Rive
           src="/animated/assets.riv"
           artboard={"STATE_Desktop"}
           stateMachines="Main"
@@ -81,12 +83,14 @@ const StateBG = ({ children }: StateBGProps) => {
             flex: 1,
           }}
         /> */}
-        <desktop.RiveComponent
-          style={{
-            flex: 1,
-          }}
-        />
-      </Hide>
+            <desktop.RiveComponent
+              style={{
+                flex: 1,
+              }}
+            />
+          </Hide>
+        </>
+      )}
 
       <Stack
         minW={"100vw"}
