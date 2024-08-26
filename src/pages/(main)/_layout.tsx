@@ -553,7 +553,7 @@ const MainLayoutDesktop = () => {
                             setReducedMotion(!isReducedMotion);
                           }}
                         ></Switch>
-                        <Text>Reduced motion</Text>
+                        <Text>Disable animations</Text>
                       </Stack>
                     </Tooltip>
 

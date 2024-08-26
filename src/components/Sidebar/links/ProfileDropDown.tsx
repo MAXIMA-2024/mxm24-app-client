@@ -243,7 +243,7 @@ const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
                       setReducedMotion(!isReducedMotion);
                     }}
                   ></Switch>
-                  <Text>Reduced motion</Text>
+                  <Text>Disable animations</Text>
                 </Stack>
               </Tooltip>
 
@@ -443,7 +443,7 @@ const TopLeftProfile = () => {
                     setReducedMotion(!isReducedMotion);
                   }}
                 ></Switch>
-                <Text>Reduced motion</Text>
+                <Text>Disable animations</Text>
               </Stack>
             </Tooltip>
             <Button
