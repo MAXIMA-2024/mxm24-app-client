@@ -15,12 +15,15 @@ import {
   ModalCloseButton,
   useDisclosure,
   useToast,
+  Tooltip,
+  Switch,
 } from "@chakra-ui/react";
 import { FaRegEdit } from "react-icons/fa";
 import { IoLogOutOutline, IoTicket } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import React from "react";
 import useAuth from "@/hooks/useAuth";
+import useLoading from "@/hooks/useLoading";
 
 // type Toggle = {
 //   id: number;
@@ -36,6 +39,7 @@ const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("xs");
+  const { isReducedMotion, setReducedMotion } = useLoading();
 
   // const claimTicket = () => {
   //   if (data) {
@@ -206,6 +210,43 @@ const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
                   Edit Profile
                 </Button>
               </Link>
+
+              <Tooltip
+                label="Aktifkan fitur ini untuk menambah performa"
+                aria-label="A tooltip"
+                bgColor={"button.primary"}
+                rounded={"lg"}
+                px={"0.8rem"}
+                py={"0.5rem"}
+                shadow={"lg"}
+              >
+                <Stack
+                  direction={"row"}
+                  p={2}
+                  // py={0}
+                  my={1}
+                  mb={2}
+                  fontSize={["0.8rem", "0.8rem", "0.85rem", "1rem"]}
+                  borderRadius={"xl"}
+                  color={"black"}
+                  fontWeight={"medium"}
+                  gap={2}
+                  w={"full"}
+                  justifyContent={"center"}
+                  bgColor={"gray.100"}
+                  justify={"center"}
+                  align={"center"}
+                >
+                  <Switch
+                    isChecked={isReducedMotion}
+                    onChange={() => {
+                      setReducedMotion(!isReducedMotion);
+                    }}
+                  ></Switch>
+                  <Text>Disable Animations</Text>
+                </Stack>
+              </Tooltip>
+
               <Button
                 bg={"status.error"}
                 p={2}
@@ -314,6 +355,7 @@ const ProfileDropDown = ({ closeSidebar }: { closeSidebar: () => void }) => {
 
 const TopLeftProfile = () => {
   const auth = useAuth();
+  const { isReducedMotion, setReducedMotion } = useLoading();
   return (
     <Stack pos={"fixed"} right={-2} top={"25px"} zIndex={999}>
       {auth.status === "authenticated" && (
@@ -369,6 +411,41 @@ const TopLeftProfile = () => {
                 Edit Profile
               </Button>
             </Link>
+            <Tooltip
+              label="Aktifkan fitur ini untuk menambah performa"
+              aria-label="A tooltip"
+              bgColor={"button.primary"}
+              rounded={"lg"}
+              px={"0.8rem"}
+              py={"0.5rem"}
+              shadow={"lg"}
+            >
+              <Stack
+                direction={"row"}
+                p={2}
+                // py={0}
+                my={1}
+                mb={2}
+                fontSize={["0.8rem", "0.8rem", "0.85rem", "1rem"]}
+                borderRadius={"xl"}
+                color={"black"}
+                fontWeight={"medium"}
+                gap={2}
+                w={"full"}
+                justifyContent={"center"}
+                bgColor={"gray.100"}
+                justify={"center"}
+                align={"center"}
+              >
+                <Switch
+                  isChecked={isReducedMotion}
+                  onChange={() => {
+                    setReducedMotion(!isReducedMotion);
+                  }}
+                ></Switch>
+                <Text>Disable Animations</Text>
+              </Stack>
+            </Tooltip>
             <Button
               bg={"status.error"}
               p={2}
