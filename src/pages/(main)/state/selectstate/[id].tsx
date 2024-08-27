@@ -140,6 +140,8 @@ const SelectStateId = () => {
     scrollToTop();
   }, []);
 
+  console.log("abc", stateDetails);
+
   // button atas
   const BtStyle = ({ nomor }: { nomor: string }) => {
     const isActive = id === nomor;
@@ -635,12 +637,16 @@ const SelectStateId = () => {
                   .catch(errorHandler);
               }}
               isDisabled={
-                stateDetails?.quota! >= stateDetails?._count.StateRegistration!
+                // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+                stateDetails?._count.StateRegistration! >= stateDetails?.quota!
               }
             >
-              {stateDetails?.quota! >= stateDetails?._count.StateRegistration!
-                ? "Penuh"
-                : "Ambil"}
+              {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+                stateDetails?._count.StateRegistration! >= stateDetails?.quota!
+                  ? "Penuh"
+                  : "Ambil"
+              }
             </Button>
             <Button
               fontFamily={"Lexend"}
