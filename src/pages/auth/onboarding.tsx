@@ -9,6 +9,7 @@ import {
   Link,
   Select,
   useToast,
+  Spinner,
 } from "@chakra-ui/react";
 
 import { z } from "zod";
@@ -83,8 +84,21 @@ const mahasiswaSchema = z.object({
 
 type Mahasiswa = z.infer<typeof mahasiswaSchema>;
 
+type PreOnboarding = {
+  id: number;
+  nim: string;
+  name: string;
+  prodi: string;
+  angkatan: number;
+  email: string;
+};
+
 const Onboarding = () => {
   const { data } = useSWR<Toggle[]>("/toggle");
+  const { data: preOnboarding, isLoading } = useSWR<PreOnboarding>(
+    "/auth/preOnboarding"
+  );
+
   const auth = useAuth();
   const nav = useNavigate();
   const toast = useToast();
@@ -100,6 +114,26 @@ const Onboarding = () => {
   } = useForm<Mahasiswa>({
     resolver: zodResolver(mahasiswaSchema),
   });
+
+  // pre-onboarding effect
+  useEffect(() => {
+    if (!isLoading && !preOnboarding) {
+      auth.logout();
+      // return nav("/");
+    }
+
+    if (preOnboarding) {
+      reset({
+        name: preOnboarding.name,
+        nim: preOnboarding.nim,
+        prodi: preOnboarding.prodi,
+        angkatan: preOnboarding.angkatan,
+        email: preOnboarding.email,
+      });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [preOnboarding, isLoading]);
 
   useEffect(() => {
     if (data) {
@@ -178,218 +212,239 @@ const Onboarding = () => {
       >
         Register
       </Text>
-      <Stack
-        as={"form"}
-        w={"100%"}
-        align={"center"}
-        onSubmit={handleSubmit((data) => {
-          api
-            .post<ResponseModel>("/auth/onboarding", {
-              data,
-              role: "mahasiswa",
-            })
-            .then(() => {
-              // toast({
-              //   title: "Success",
-              //   description: "Successfully registered, please login again",
-              //   status: "success",
-              //   isClosable: true,
-              // });
+      {preOnboarding ? (
+        <Stack
+          as={"form"}
+          w={"100%"}
+          align={"center"}
+          onSubmit={handleSubmit((data) => {
+            api
+              .post<ResponseModel>("/auth/onboarding", {
+                data,
+                role: "mahasiswa",
+              })
+              .then(() => {
+                // toast({
+                //   title: "Success",
+                //   description: "Successfully registered, please login again",
+                //   status: "success",
+                //   isClosable: true,
+                // });
 
-              // auth.logout();
-              nav("/");
-              window.location.reload();
-            })
-            .catch(errorHandler);
-        })}
-      >
-        <FormControl isInvalid={!!errors.name}>
-          <FormLabel
+                // auth.logout();
+                nav("/");
+                window.location.reload();
+              })
+              .catch(errorHandler);
+          })}
+        >
+          <FormControl isInvalid={!!errors.name}>
+            <FormLabel
+              fontFamily={"Luthier"}
+              color={"text.primary"}
+              fontWeight={"bold"}
+              fontSize={["sm", "md", "lg", "xl", "xl"]}
+            >
+              Nama Lengkap
+            </FormLabel>
+            <Input
+              bgColor={"white"}
+              rounded={"xl"}
+              size={["sm", "sm", "md", "md", "md"]}
+              {...register("name")}
+            />
+            <FormErrorMessage>
+              {errors.name && errors.name.message}
+            </FormErrorMessage>
+          </FormControl>
+          <Stack
+            direction={["column", "column", "column", "row", "row"]}
+            w={"100%"}
+            justify={"space-between"}
+          >
+            <Stack w={["100%", "100%", "100%", "40%", "40%"]}>
+              <FormControl isInvalid={!!errors.nim}>
+                <FormLabel
+                  fontFamily={"Luthier"}
+                  color={"text.primary"}
+                  fontWeight={"bold"}
+                  fontSize={["sm", "md", "lg", "xl", "xl"]}
+                >
+                  NIM
+                </FormLabel>
+                <Input
+                  bgColor={"white"}
+                  rounded={"xl"}
+                  size={["sm", "sm", "md", "md", "md"]}
+                  type="number"
+                  {...register("nim")}
+                />
+                <FormErrorMessage>
+                  {errors.nim && errors.nim.message}
+                </FormErrorMessage>
+              </FormControl>
+              <FormControl isInvalid={!!errors.prodi}>
+                <FormLabel
+                  fontFamily={"Luthier"}
+                  color={"text.primary"}
+                  fontWeight={"bold"}
+                  fontSize={["sm", "md", "lg", "xl", "xl"]}
+                >
+                  Program Studi
+                </FormLabel>
+                <Select
+                  bgColor={"white"}
+                  rounded={"xl"}
+                  size={["sm", "sm", "md", "md", "md"]}
+                  {...register("prodi")}
+                >
+                  {prodiList.map((prodi) => (
+                    <option key={prodi} value={prodi}>
+                      {prodi}
+                    </option>
+                  ))}
+                </Select>
+                <FormErrorMessage>
+                  {errors.prodi && errors.prodi.message}
+                </FormErrorMessage>
+              </FormControl>
+              <FormControl isInvalid={!!errors.whatsapp}>
+                <FormLabel
+                  fontFamily={"Luthier"}
+                  color={"text.primary"}
+                  fontWeight={"bold"}
+                  fontSize={["sm", "md", "lg", "xl", "xl"]}
+                >
+                  WhatsApp
+                </FormLabel>
+                <Input
+                  bgColor={"white"}
+                  rounded={"xl"}
+                  size={["sm", "sm", "md", "md", "md"]}
+                  type="tel"
+                  {...register("whatsapp")}
+                />
+                <FormErrorMessage>
+                  {errors.whatsapp && errors.whatsapp.message}
+                </FormErrorMessage>
+              </FormControl>
+            </Stack>
+            <Stack w={["100%", "100%", "100%", "40%", "40%"]}>
+              <FormControl isInvalid={!!errors.email}>
+                <FormLabel
+                  fontFamily={"Luthier"}
+                  color={"text.primary"}
+                  fontWeight={"bold"}
+                  fontSize={["sm", "md", "lg", "xl", "xl"]}
+                >
+                  Email Student
+                </FormLabel>
+                <Input
+                  bgColor={"white"}
+                  rounded={"xl"}
+                  size={["sm", "sm", "md", "md", "md"]}
+                  {...register("email")}
+                  isDisabled
+                />
+                <FormErrorMessage>
+                  {errors.email && errors.email.message}
+                </FormErrorMessage>
+              </FormControl>
+              <FormControl isInvalid={!!errors.angkatan}>
+                <FormLabel
+                  fontFamily={"Luthier"}
+                  color={"text.primary"}
+                  fontWeight={"bold"}
+                  fontSize={["sm", "md", "lg", "xl", "xl"]}
+                >
+                  Angkatan
+                </FormLabel>
+                <Select
+                  bgColor={"white"}
+                  rounded={"xl"}
+                  size={["sm", "sm", "md", "md", "md"]}
+                  {...register("angkatan", {
+                    valueAsNumber: true,
+                  })}
+                >
+                  <option value="2024">2024</option>
+                </Select>
+                <FormErrorMessage>
+                  {errors.angkatan && errors.angkatan.message}
+                </FormErrorMessage>
+              </FormControl>
+              <FormControl isInvalid={!!errors.lineId}>
+                <FormLabel
+                  fontFamily={"Luthier"}
+                  color={"text.primary"}
+                  fontWeight={"bold"}
+                  fontSize={["sm", "md", "lg", "xl", "xl"]}
+                >
+                  ID Line
+                </FormLabel>
+                <Input
+                  bgColor={"white"}
+                  rounded={"xl"}
+                  size={["sm", "sm", "md", "md", "md"]}
+                  {...register("lineId")}
+                />
+                <FormErrorMessage>
+                  {errors.lineId && errors.lineId.message}
+                </FormErrorMessage>
+              </FormControl>
+            </Stack>
+          </Stack>
+          <Text
+            fontFamily={"Luthier"}
+            color={"text.primary"}
+            fontWeight={"bold"}
+            my={"0.25rem"}
+          >
+            Wrong account?{" "}
+            <Link
+              onClick={auth.logout}
+              fontFamily={"Luthier"}
+              textDecor={"underline"}
+              color={"#FFBE00"}
+              fontWeight={"bold"}
+            >
+              Log Out
+            </Link>
+          </Text>
+          <Button
+            py={"1.5rem"}
+            bgColor={"text.primary"}
+            textColor={"white"}
+            fontSize={"xl"}
+            w={["8rem", "10rem", "16rem", "16rem", "16rem"]}
+            rounded={"2xl"}
+            fontFamily={"Lexend"}
+            fontWeight={"400"}
+            type="submit"
+          >
+            Continue
+          </Button>
+        </Stack>
+      ) : (
+        <Stack py={"4rem"} align={"center"} justify={"center"}>
+          <Text
             fontFamily={"Luthier"}
             color={"text.primary"}
             fontWeight={"bold"}
             fontSize={["sm", "md", "lg", "xl", "xl"]}
           >
-            Nama Lengkap
-          </FormLabel>
-          <Input
-            bgColor={"white"}
-            rounded={"xl"}
-            size={["sm", "sm", "md", "md", "md"]}
-            {...register("name")}
+            Loading...
+          </Text>
+
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="text.primary"
+            size="xl"
           />
-          <FormErrorMessage>
-            {errors.name && errors.name.message}
-          </FormErrorMessage>
-        </FormControl>
-        <Stack
-          direction={["column", "column", "column", "row", "row"]}
-          w={"100%"}
-          justify={"space-between"}
-        >
-          <Stack w={["100%", "100%", "100%", "40%", "40%"]}>
-            <FormControl isInvalid={!!errors.nim}>
-              <FormLabel
-                fontFamily={"Luthier"}
-                color={"text.primary"}
-                fontWeight={"bold"}
-                fontSize={["sm", "md", "lg", "xl", "xl"]}
-              >
-                NIM
-              </FormLabel>
-              <Input
-                bgColor={"white"}
-                rounded={"xl"}
-                size={["sm", "sm", "md", "md", "md"]}
-                type="number"
-                {...register("nim")}
-              />
-              <FormErrorMessage>
-                {errors.nim && errors.nim.message}
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl isInvalid={!!errors.prodi}>
-              <FormLabel
-                fontFamily={"Luthier"}
-                color={"text.primary"}
-                fontWeight={"bold"}
-                fontSize={["sm", "md", "lg", "xl", "xl"]}
-              >
-                Program Studi
-              </FormLabel>
-              <Select
-                bgColor={"white"}
-                rounded={"xl"}
-                size={["sm", "sm", "md", "md", "md"]}
-                {...register("prodi")}
-              >
-                {prodiList.map((prodi) => (
-                  <option key={prodi} value={prodi}>
-                    {prodi}
-                  </option>
-                ))}
-              </Select>
-              <FormErrorMessage>
-                {errors.prodi && errors.prodi.message}
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl isInvalid={!!errors.whatsapp}>
-              <FormLabel
-                fontFamily={"Luthier"}
-                color={"text.primary"}
-                fontWeight={"bold"}
-                fontSize={["sm", "md", "lg", "xl", "xl"]}
-              >
-                WhatsApp
-              </FormLabel>
-              <Input
-                bgColor={"white"}
-                rounded={"xl"}
-                size={["sm", "sm", "md", "md", "md"]}
-                type="tel"
-                {...register("whatsapp")}
-              />
-              <FormErrorMessage>
-                {errors.whatsapp && errors.whatsapp.message}
-              </FormErrorMessage>
-            </FormControl>
-          </Stack>
-          <Stack w={["100%", "100%", "100%", "40%", "40%"]}>
-            <FormControl isInvalid={!!errors.email}>
-              <FormLabel
-                fontFamily={"Luthier"}
-                color={"text.primary"}
-                fontWeight={"bold"}
-                fontSize={["sm", "md", "lg", "xl", "xl"]}
-              >
-                Email Student
-              </FormLabel>
-              <Input
-                bgColor={"white"}
-                rounded={"xl"}
-                size={["sm", "sm", "md", "md", "md"]}
-                {...register("email")}
-                isDisabled
-              />
-              <FormErrorMessage>
-                {errors.email && errors.email.message}
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl isInvalid={!!errors.angkatan}>
-              <FormLabel
-                fontFamily={"Luthier"}
-                color={"text.primary"}
-                fontWeight={"bold"}
-                fontSize={["sm", "md", "lg", "xl", "xl"]}
-              >
-                Angkatan
-              </FormLabel>
-              <Select
-                bgColor={"white"}
-                rounded={"xl"}
-                size={["sm", "sm", "md", "md", "md"]}
-                {...register("angkatan", {
-                  valueAsNumber: true,
-                })}
-              >
-                <option value="2024">2024</option>
-              </Select>
-              <FormErrorMessage>
-                {errors.angkatan && errors.angkatan.message}
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl isInvalid={!!errors.lineId}>
-              <FormLabel
-                fontFamily={"Luthier"}
-                color={"text.primary"}
-                fontWeight={"bold"}
-                fontSize={["sm", "md", "lg", "xl", "xl"]}
-              >
-                ID Line
-              </FormLabel>
-              <Input
-                bgColor={"white"}
-                rounded={"xl"}
-                size={["sm", "sm", "md", "md", "md"]}
-                {...register("lineId")}
-              />
-              <FormErrorMessage>
-                {errors.lineId && errors.lineId.message}
-              </FormErrorMessage>
-            </FormControl>
-          </Stack>
         </Stack>
-        <Text
-          fontFamily={"Luthier"}
-          color={"text.primary"}
-          fontWeight={"bold"}
-          my={"0.25rem"}
-        >
-          Wrong account?{" "}
-          <Link
-            onClick={auth.logout}
-            fontFamily={"Luthier"}
-            textDecor={"underline"}
-            color={"#FFBE00"}
-            fontWeight={"bold"}
-          >
-            Log Out
-          </Link>
-        </Text>
-        <Button
-          py={"1.5rem"}
-          bgColor={"text.primary"}
-          textColor={"white"}
-          fontSize={"xl"}
-          w={["8rem", "10rem", "16rem", "16rem", "16rem"]}
-          rounded={"2xl"}
-          fontFamily={"Lexend"}
-          fontWeight={"400"}
-          type="submit"
-        >
-          Continue
-        </Button>
-      </Stack>
+      )}
     </Stack>
   );
 };
