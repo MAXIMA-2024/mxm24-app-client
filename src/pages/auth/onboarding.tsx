@@ -105,10 +105,19 @@ const Onboarding = () => {
     if (data) {
       const check = data.find((toggle) => toggle.name === "registration");
       if (!check || !check.toggle) {
+        // toast({
+        //   title: "Access denied!",
+        //   description: "Registrasi belum dibuka untuk saat ini.",
+        //   status: "error",
+        //   duration: 5000,
+        //   isClosable: true,
+        // });
+        // maintenance toast
         toast({
-          title: "Access denied!",
-          description: "Registrasi belum dibuka untuk saat ini.",
-          status: "error",
+          title: "Maintenance",
+          description:
+            "Fitur registrasi sedang dalam perbaikan, mohon tunggu ya, MAXIMERS!",
+          status: "info",
           duration: 5000,
           isClosable: true,
         });
