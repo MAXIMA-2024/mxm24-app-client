@@ -11,16 +11,16 @@ import { useEffect } from "react";
 const GlobalLayout = () => {
   const fetcher = useFetcher();
   const auth = useAuth();
-  const { isLoaded, setLoaded } = useLoading();
+  const { isLoaded, setLoaded, isReducedMotion } = useLoading();
   const loc = useLocation();
 
   // this is used for the loader
   useEffect(() => {
     const reset = ["/", "/home", "/state", "/malpun"];
-    if (reset.includes(loc.pathname)) {
-      setLoaded(false);
-    } else {
+    if (!reset.includes(loc.pathname) || isReducedMotion) {
       setLoaded(true);
+    } else {
+      setLoaded(false);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

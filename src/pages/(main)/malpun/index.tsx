@@ -2,6 +2,8 @@ import useAuth from "@/hooks/useAuth";
 import { Heading, Stack, Text, Button, Tooltip } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import useSWR from "swr";
+import { motion } from "framer-motion";
+import useLoading from "@/hooks/useLoading";
 
 type Toggle = {
   id: number;
@@ -61,6 +63,7 @@ const Inbutton = () => {
             }
           >
             <Button
+              as={motion.button}
               bgColor={"button.primary"}
               p={{ base: 5, md: 8, lg: 10 }}
               py={{ base: 0, md: 8, lg: 12 }}
@@ -73,6 +76,24 @@ const Inbutton = () => {
               mt={{ base: "5rem", lg: 0 }}
               shadow={"0 0 5rem #ffffff80"}
               mb={{ base: "13rem", lg: "7rem" }}
+              // anims
+              variants={{
+                initial: {
+                  opacity: 0,
+                  // y: -50,
+                  scale: 0.5,
+                },
+                entry: {
+                  opacity: 1,
+                  scale: 1,
+                  transition: {
+                    delay: 2,
+                    duration: 1,
+                  },
+                },
+              }}
+              initial="initial"
+              whileInView={"entry"}
             >
               <Text
                 fontFamily={"Lexend"}
@@ -151,6 +172,7 @@ const Exbutton = () => {
         {isTicketBuyable ? (
           <Link to="/malpun/buyticket">
             <Button
+              as={motion.button}
               bgColor={"button.primary"}
               p={{ base: 5, md: 8, lg: 10 }}
               py={{ base: 0, md: 8, lg: 12 }}
@@ -169,6 +191,25 @@ const Exbutton = () => {
               shadow={"0 0 5rem #ffffff80"}
               // borderColor={"#fff"}
               // borderWidth={"medium"}
+
+              // anims
+              variants={{
+                initial: {
+                  opacity: 0,
+                  // y: -50,
+                  scale: 0.5,
+                },
+                entry: {
+                  opacity: 1,
+                  scale: 1,
+                  transition: {
+                    delay: 2,
+                    duration: 1,
+                  },
+                },
+              }}
+              initial="initial"
+              whileInView={"entry"}
             >
               <Text
                 fontFamily={"Lexend"}
@@ -231,8 +272,13 @@ const Exbutton = () => {
 
 const Malpun = () => {
   const auth = useAuth();
+  const { isLoaded } = useLoading();
 
   const isMahasiswa = auth.user?.role === "mahasiswa";
+
+  if (!isLoaded) {
+    return <></>;
+  }
 
   return (
     <>
@@ -244,14 +290,33 @@ const Malpun = () => {
         pt={{ base: "0rem", md: "18rem", lg: "7rem" }}
       >
         <Heading
+          as={motion.h1}
           fontFamily={"Luthier"}
           fontSize={{ base: "2rem", md: "3rem", lg: "4rem" }}
           textShadow={"0 0 5rem #000000"}
           color={"text.tertiary"}
+          // anims
+          variants={{
+            initial: {
+              opacity: 0,
+              y: -50,
+            },
+            entry: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                delay: 1,
+                duration: 1,
+              },
+            },
+          }}
+          initial="initial"
+          whileInView={"entry"}
         >
           MALAM PUNCAK
         </Heading>
         <Heading
+          as={motion.h1}
           fontFamily={"Luthier"}
           fontSize={{
             base: "2rem",
@@ -261,6 +326,23 @@ const Malpun = () => {
           }}
           textShadow={"0 0 5rem #000000"}
           color={"button.yellow"}
+          // anims
+          variants={{
+            initial: {
+              opacity: 0,
+              y: -50,
+            },
+            entry: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                delay: 1.5,
+                duration: 1,
+              },
+            },
+          }}
+          initial="initial"
+          whileInView={"entry"}
         >
           MAXIMA 2024
         </Heading>

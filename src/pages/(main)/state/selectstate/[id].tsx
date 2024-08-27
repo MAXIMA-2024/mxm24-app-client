@@ -193,6 +193,7 @@ const SelectStateId = () => {
             h={{ base: "20rem", md: "20rem", lg: "30rem" }}
             align={"center"}
             borderRadius={"1rem"}
+            bgColor={registered >= kuota ? "#B20034" : "white"}
           >
             <CardBody>
               <Stack align={"center"}>
@@ -213,6 +214,7 @@ const SelectStateId = () => {
                     fontWeight={"semibold"}
                     size={{ base: "sm", lg: "md" }}
                     textAlign={"center"}
+                    textColor={registered >= kuota ? "white" : "#44002B"}
                   >
                     {name}
                   </Heading>
@@ -632,8 +634,13 @@ const SelectStateId = () => {
                   })
                   .catch(errorHandler);
               }}
+              isDisabled={
+                stateDetails?.quota! >= stateDetails?._count.StateRegistration!
+              }
             >
-              Ambil
+              {stateDetails?.quota! >= stateDetails?._count.StateRegistration!
+                ? "Penuh"
+                : "Ambil"}
             </Button>
             <Button
               fontFamily={"Lexend"}
