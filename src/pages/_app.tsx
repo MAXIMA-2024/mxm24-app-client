@@ -24,7 +24,7 @@ const GlobalLayout = () => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loc]);
+  }, [loc, isReducedMotion]);
 
   // easter egg #1
   useEffect(() => {
