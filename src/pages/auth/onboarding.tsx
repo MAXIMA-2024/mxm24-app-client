@@ -79,7 +79,9 @@ const mahasiswaSchema = z.object({
   whatsapp: z
     .string({ required_error: "WhatsApp number cannot be empty" })
     .regex(/^(\+62|62|0)8[1-9][0-9]{6,10}$/, "Invalid WhatsApp number"),
-  lineId: z.string({ required_error: "Line ID cannot be empty" }),
+  lineId: z
+    .string({ required_error: "Line ID cannot be empty" })
+    .min(1, { message: "Line ID cannot be empty" }),
 });
 
 type Mahasiswa = z.infer<typeof mahasiswaSchema>;
