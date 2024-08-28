@@ -126,8 +126,11 @@ const State = () => {
   }, [loc, bottomRef, auth]);
 
   useEffect(() => {
-    scrollToTop();
-  }, []);
+    if (loc.hash !== "#gondola") {
+      scrollToTop();
+    }
+    
+  }, [loc.hash]);
 
   return (
     <>
