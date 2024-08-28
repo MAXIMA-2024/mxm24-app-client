@@ -66,6 +66,14 @@ type Mahasiswa = z.infer<typeof mahasiswaSchema>;
 
 const Profile = () => {
   const auth = useAuth();
+  const nav = useNavigate();
+  const api = useApi();
+  const errorHandler = useToastErrorHandler();
+  const toast = useToast();
+
+  // easter egg #2
+  const [click, setClick] = useState(0);
+
   const {
     register,
     handleSubmit,
@@ -76,18 +84,26 @@ const Profile = () => {
   });
 
   useEffect(() => {
-    reset(auth.user?.data);
+    if (
+      auth.status === "unauthenticated" ||
+      (auth.status === "authenticated" && auth.user?.role !== "mahasiswa")
+    ) {
+      toast({
+        title: "Unauthorized",
+        description: "You are not authorized to access this page",
+        status: "error",
+        isClosable: true,
+        duration: 5000,
+      });
+      return nav("/");
+    }
+
+    if (auth.status === "authenticated" && auth.user) {
+      return reset(auth.user.data);
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auth.user]);
-
-  const api = useApi();
-  const errorHandler = useToastErrorHandler();
-  const toast = useToast();
-
-  // easter egg #2
-  const [click, setClick] = useState(0);
-  const nav = useNavigate();
+  }, [auth]);
 
   useEffect(() => {
     const audio = new Audio("/easteregg/boom.mp3");
