@@ -23,6 +23,7 @@ import StateBG from "@/components/animated-bg/state-bg";
 import useAuth from "@/hooks/useAuth";
 import useSWR from "swr";
 import useApi, { ResponseModel, useToastErrorHandler } from "@/hooks/useApi";
+import { Prose } from "@nikolovlazar/chakra-ui-prose";
 
 type Toggle = {
   id: number;
@@ -129,7 +130,6 @@ const State = () => {
     if (loc.hash !== "#gondola") {
       scrollToTop();
     }
-    
   }, [loc.hash]);
 
   return (
@@ -482,7 +482,7 @@ const State = () => {
               <Stack
                 gap={"2rem"}
                 w={{ base: "100%", lg: "75%" }}
-                maxH={{ base: "auto", lg: "30rem" }}
+                maxH={{ base: "auto", lg: "25rem" }}
                 p={{ base: 0, md: "1rem" }}
                 overflow={"auto"}
                 css={{
@@ -509,13 +509,21 @@ const State = () => {
                   >
                     Detail
                   </Heading>
-                  <Text
+                  {/* <Text
                     fontFamily={"Lexend"}
                     // alignSelf={{ base: "center", lg: "auto" }}
                     align={"justify"}
                   >
                     {stateDetails?.description}
-                  </Text>
+                  </Text> */}
+                  <Prose>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+                        __html: stateDetails?.description!,
+                      }}
+                    ></div>
+                  </Prose>
                 </Stack>
                 {stateDetails?.gallery.length ? (
                   <Stack>
