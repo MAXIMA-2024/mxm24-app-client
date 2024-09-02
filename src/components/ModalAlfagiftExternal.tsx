@@ -70,7 +70,7 @@ const ModalAlfagiftExternal = ({
             <Image src="/myicons/alfagift-header.jpg" rounded={"md"}></Image>
             <Text my={"10px"} fontWeight={"bold"}>
               Ayo download & isi no membermu sekarang dan dapatkan voucher
-              belanja Rp10.000 di Alfagift!
+              belanja Rp15.000 di Alfagift!
             </Text>
             <Text mb={"10px"}>Card number:</Text>
             <Input
