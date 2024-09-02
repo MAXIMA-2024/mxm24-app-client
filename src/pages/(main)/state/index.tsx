@@ -475,6 +475,9 @@ const State = () => {
                   }
                 </Text>
                 <Text fontFamily={"Lexend"} fontWeight={"semibold"}>
+                  {stateDetails?.location}{" "}
+                </Text>
+                <Text fontFamily={"Lexend"} fontWeight={"semibold"}>
                   Kuota: {stateDetails?._count.StateRegistration}/
                   {stateDetails?.quota}
                 </Text>
