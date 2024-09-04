@@ -17,16 +17,21 @@ export const LoadingContext = createContext<AuthContext>({
 
 export const LoadingProvider = ({ children }: { children: ReactNode }) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isReducedMotion, setIsReducedMotion] = useState(false);
+  const [isReducedMotion, setIsReducedMotion] = useState(true);
 
   const [reducedMotion, setReducedMotion] = useLocalStorage<boolean>(
     "reduced-motion",
-    false
+    true
   );
 
   useEffect(() => {
     setIsReducedMotion(reducedMotion);
   }, [reducedMotion]);
+
+  const handleSetReducedMotion = (state: boolean) => {
+    setReducedMotion(state);
+    setIsReducedMotion(state);
+  };
 
   const setLoaded = (state: boolean) => {
     setIsLoaded(state);
@@ -34,7 +39,12 @@ export const LoadingProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <LoadingContext.Provider
-      value={{ isLoaded, setLoaded, isReducedMotion, setReducedMotion }}
+      value={{
+        isLoaded,
+        setLoaded,
+        isReducedMotion,
+        setReducedMotion: handleSetReducedMotion,
+      }}
     >
       {children}
     </LoadingContext.Provider>
