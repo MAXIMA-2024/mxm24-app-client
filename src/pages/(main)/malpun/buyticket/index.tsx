@@ -293,7 +293,7 @@ const BuyTicket = () => {
         bgPosition={"center"}
         w={"100%"}
         p={
-          step === 2 ? { base: "8rem", sm: "10rem", md: "7rem", lg: "6rem" } : 0
+          step === 2 ? { base: "8rem", sm: "10rem", md: "7rem", lg: "4rem" } : 0
         }
         px={{ base: "2rem", md: "2rem", lg: "4rem" }}
         mt={step === 2 ? { md: "5rem", lg: "7rem" } : 0}
@@ -454,7 +454,7 @@ const BuyTicket = () => {
             {/* JUDUL */}
             <Stack
               alignItems={"center"}
-              paddingBottom={{ base: "3rem", lg: "1rem", xl: "3rem" }}
+              paddingBottom={{ base: "3rem", lg: "1rem", xl: "1rem" }}
             >
               <Stack color={"text.secondary"}>
                 <Heading
@@ -543,7 +543,7 @@ const BuyTicket = () => {
               </FormControl>
             </Stack>
             {/* END FORM */}
-            <Stack alignItems="center" mt={{ base: 0, xl: "1rem" }}>
+            <Stack alignItems="center" mt={{ base: 0, xl: "0.5rem" }}>
               <Text
                 fontFamily="Luthier"
                 color="text.primary"
@@ -565,7 +565,7 @@ const BuyTicket = () => {
             {/* BUTTON KEMBALI DAN KIRIM */}
 
             <Stack
-              paddingTop={{ base: "3rem", lg: "1rem", xl: "3rem" }}
+              paddingTop={{ base: "3rem", lg: "1rem", xl: "1rem" }}
               direction={"row"}
               alignItems={{ base: "center", lg: "flex-end" }}
               justifyContent={"space-between"}
