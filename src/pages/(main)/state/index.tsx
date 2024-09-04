@@ -24,6 +24,7 @@ import useAuth from "@/hooks/useAuth";
 import useSWR from "swr";
 import useApi, { ResponseModel, useToastErrorHandler } from "@/hooks/useApi";
 import { Prose } from "@nikolovlazar/chakra-ui-prose";
+import { MdQrCodeScanner } from "react-icons/md";
 
 type Toggle = {
   id: number;
@@ -184,7 +185,6 @@ const State = () => {
                     </Button>
                   </Tooltip>
                 )}
-
                 <Button
                   w={{ base: "16rem", md: "20rem" }}
                   bgColor={"#44002B"}
@@ -197,6 +197,20 @@ const State = () => {
                 >
                   Lihat STATE Pilihanmu!
                 </Button>
+                <Link to="/profile">
+                  <Button
+                    w={{ base: "16rem", md: "20rem" }}
+                    bgColor={"#44002B"}
+                    textColor={"white"}
+                    fontFamily={"Lexend"}
+                    fontWeight={"light"}
+                    fontSize={"lg"}
+                    gap={"0.5rem"}
+                  >
+                    <MdQrCodeScanner size={28} />
+                    Buka QR Code Absensi
+                  </Button>
+                </Link>
               </Stack>
             </Stack>
             <Stack
@@ -334,6 +348,20 @@ const State = () => {
               >
                 Lihat STATE Pilihanmu!
               </Button>
+              <Link to="/profile">
+                <Button
+                  w={{ base: "16rem", md: "20rem" }}
+                  bgColor={"#44002B"}
+                  textColor={"white"}
+                  fontFamily={"Lexend"}
+                  fontWeight={"light"}
+                  fontSize={"lg"}
+                  gap={"1rem"}
+                >
+                  <MdQrCodeScanner size={24} />
+                  Buka QR Code Absensi
+                </Button>
+              </Link>
             </Stack>
           </Stack>
           <Stack
