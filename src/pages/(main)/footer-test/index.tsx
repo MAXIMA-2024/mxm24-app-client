@@ -1,22 +1,35 @@
-import { Flex, Heading, Image, Stack, Text, Button } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  Image,
+  Stack,
+  Text,
+  Button,
+  Link,
+} from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 
 function Footer() {
   return (
     <footer>
       <Stack
-        bgImage={"/footer/footer-background.png"}
+        bgImage={{
+          base: "/footer/footer-background-mobile.png",
+          lg: "/footer/footer-background.png",
+        }}
         minW="100vw"
         minH={"100vh"}
         bgRepeat={"no-repeat"}
         bgSize={"cover"}
-        bgPosition={"center"}
+        bgPosition={{ base: "top", lg: "center" }}
+        paddingTop={{ base: 24, lg: 8 }}
       >
         <Flex
-          direction="row"
+          direction={{ base: "column", lg: "row" }}
           justify="space-around"
-          align="left"
-          wrap="wrap"
+          align={"center"}
           mb={24}
+          wrap={"wrap"}
         >
           {/* sponsors */}
           <Stack textAlign={"center"}>
@@ -58,7 +71,13 @@ function Footer() {
         </Flex>
 
         {/* maxima logo & contact*/}
-        <Flex justify="space-around" align="center" w="100vw" wrap="wrap">
+        <Flex
+          justify={{ base: "start", lg: "space-between" }}
+          align="center"
+          wrap="wrap"
+          paddingX={{ base: 8, lg: 32 }}
+          width={"full"}
+        >
           {/* maxima logo */}
           <Stack align={"start"}>
             <Image
@@ -102,7 +121,7 @@ function Footer() {
           </Stack>
 
           {/* maxima contact & page */}
-          <Flex justify="center" gap={{ base: 4, lg: 16 }} paddingX={8}>
+          <Flex justify="center" gap={{ base: 4, lg: 16 }}>
             <Stack>
               <Heading
                 textColor={"#44002B"}
@@ -112,89 +131,72 @@ function Footer() {
               >
                 Pages
               </Heading>
-              <Button
-                as="a"
-                href="/home"
-                variant="link"
+              <Link
+                as={RouterLink}
+                to={"/home"}
                 size={{ base: "sm", lg: "md" }}
                 fontFamily="Lexend"
                 textAlign="left"
                 color="black"
-                display="block"
-                width="100%"
                 fontWeight={"regular"}
               >
                 HoME
-              </Button>
-              <Button
-                as="a"
-                href="/state"
+              </Link>
+              <Link
+                as={RouterLink}
+                to={"/state"}
                 size={{ base: "sm", lg: "md" }}
-                variant="link"
-                fontFamily="Lexend"
-                color="black"
-                display="block"
-                width="100%"
-                fontWeight="regular"
-              >
-                <Text textAlign="left">State</Text>
-              </Button>
-              <Button
-                as="a"
-                href="/malpun"
-                size={{ base: "sm", lg: "md" }}
-                variant="link"
                 fontFamily="Lexend"
                 textAlign="left"
                 color="black"
-                display="block"
-                width="100%"
+                fontWeight={"regular"}
+              >
+                STATE
+              </Link>
+              <Link
+                as={RouterLink}
+                to={"/malpun"}
+                size={{ base: "sm", lg: "md" }}
+                fontFamily="Lexend"
+                textAlign="left"
+                color="black"
                 fontWeight={"regular"}
               >
                 MalPun
-              </Button>
-              <Button
-                as="a"
-                href="/faq"
+              </Link>
+              <Link
+                as={RouterLink}
+                to={"/faq"}
                 size={{ base: "sm", lg: "md" }}
-                variant="link"
                 fontFamily="Lexend"
                 textAlign="left"
                 color="black"
-                display="block"
-                width="100%"
                 fontWeight={"regular"}
               >
                 FAQ
-              </Button>
-              <Button
-                as="a"
-                href="/aboutus"
+              </Link>
+              <Link
+                as={RouterLink}
+                to={"/aboutus"}
                 size={{ base: "sm", lg: "md" }}
-                variant="link"
                 fontFamily="Lexend"
                 textAlign="left"
                 color="black"
-                display="block"
-                width="100%"
                 fontWeight={"regular"}
               >
                 About Us
-              </Button>
-              <Button
-                as="a"
-                href="/profile"
-                variant="link"
+              </Link>
+              <Link
+                as={RouterLink}
+                to={"/profile"}
                 size={{ base: "sm", lg: "md" }}
                 fontFamily="Lexend"
                 textAlign="left"
                 color="black"
-                display="block"
-                width="100%"
                 fontWeight={"regular"}
               >
                 Profile
-              </Button>
+              </Link>
             </Stack>
 
             <Stack maxW="400px">
