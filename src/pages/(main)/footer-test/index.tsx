@@ -12,7 +12,13 @@ function Footer() {
         bgPosition={"center"}
         paddingY={5}
       >
-        <Flex direction="row" justify="space-around" align="left" wrap="wrap">
+        <Flex
+          direction="row"
+          justify="space-around"
+          align="left"
+          wrap="wrap"
+          mb={36}
+        >
           {/* sponsors */}
           <Stack textAlign={"center"}>
             <Heading
@@ -25,7 +31,11 @@ function Footer() {
             >
               Sponsored By
             </Heading>
-            <Image src="/footer/sponsor.png" alt="maxima-sponsors" />
+            <Image
+              src="/footer/sponsor.png"
+              alt="maxima-sponsors"
+              width={{ base: "350px", md: "500px", lg: "700px" }}
+            />
           </Stack>
 
           {/* media partners */}
@@ -40,27 +50,35 @@ function Footer() {
             >
               Media Partners
             </Heading>
-            <Image src="/footer/medpar.png" alt="maxima-media-partners" />
+            <Image
+              src="/footer/medpar.png"
+              alt="maxima-media-partners"
+              width={{ base: "350px", md: "500px", lg: "700px" }}
+            />
           </Stack>
         </Flex>
 
         {/* maxima */}
         <Flex justify="space-around" align="center" w="100vw">
           {/* maxima logo */}
-          <Stack align={"center"}>
+          <Stack align={"start"}>
             <Image
               src="/myicons/maxima2024-logo.png"
               width="350px"
               height={"auto"}
+              mb={4}
             />
             <Text
               fontFamily={"Lexend"}
               fontWeight={"regular"}
               textAlign={"left"}
+              size={"xl"}
+              textColor={"#44002B"}
+              mb={8}
             >
               Express Your Uniqueness, Show It To Shine
             </Text>
-            <Flex justify="start" align="left" gap={4}>
+            <Flex justify="start" align="left" gap={8}>
               <Image src="/footer/logo-line.svg" width="50px" height={"auto"} />
               <Image
                 src="/footer/logo-instagram.svg"
@@ -81,7 +99,7 @@ function Footer() {
           </Stack>
 
           {/* maxima contact & page */}
-          <Flex justify="space-around" direction="row">
+          <Flex justify="center" gap={16}>
             <Stack>
               <Heading
                 textColor={"#44002B"}
