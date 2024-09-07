@@ -6,26 +6,39 @@ function Footer() {
     <footer>
       {/* top and bot wrapper */}
       <Stack
-        minW={"100vw"}
-        minH={"100vh"}
+        w={"100vw"}
+        h={"100vh"}
         gap={0}
         fontFamily={"Lexend"}
         color={"#44002B"}
+        // justifyContent={"center"}
+        bgImage={{
+          base: "/footer/footer-background-mobile.png",
+          md: "/footer/footer-background.png",
+        }}
+        bgRepeat={"no-repeat"}
+        bgSize={"cover"}
+        bgPos={"top"}
+        align={"center"}
       >
         {/* Background Wrapper untuk top section */}
         <Stack
           bgImage={{
             base: "/footer/footer-maxima-mobile-top.png",
-            lg: "/footer/footer-maxima-desktop-top.png",
+            md: "/footer/footer-maxima-desktop-top.png",
           }}
-          bgSize={"cover"}
+          // bgSize={"cover"}
+          bgPos={"bottom"}
           bgRepeat={"no-repeat"}
-          height={"50vh"}
-          width={"100vw"}
+          w={"100vw"}
+          justify={"center"}
+          pt={{ base: 10, md: "10rem", lg: 24 }}
+          h={"100vh"}
+          // height={{ md: "60.5%", lg: "65%" }}
         >
           {/* sponsors and media partners content */}
           <Flex
-            direction={{ base: "column", lg: "row" }}
+            direction={{ base: "column", md: "row" }}
             align={"center"}
             justify={"space-around"}
           >
@@ -36,7 +49,7 @@ function Footer() {
               </Heading>
               <Image
                 src="/footer/sponsor.png"
-                width={{ base: "500px", md: "520px", lg: "700px" }}
+                width={{ base: "350px", md: "350px", lg: "700px" }}
               />
             </Stack>
 
@@ -47,7 +60,7 @@ function Footer() {
               </Heading>
               <Image
                 src="/footer/medpar.png"
-                width={{ base: "500px", md: "520px", lg: "700px" }}
+                width={{ base: "350px", md: "350px", lg: "700px" }}
               />
             </Stack>
           </Flex>
@@ -57,22 +70,26 @@ function Footer() {
         <Stack
           bgImage={{
             base: "/footer/footer-maxima-mobile-bot.png",
-            lg: "/footer/footer-maxima-desktop-bot.png",
+            md: "/footer/footer-maxima-desktop-bot.png",
           }}
-          bgSize={"cover"}
+          // bgSize={"cover"}
           bgRepeat={"no-repeat"}
-          height={"50vh"}
-          width={"100vw"}
+          bgPos={"top"}
+          w={"100vw"}
+          h={"100vh"}
+          // height={{ base: "100%", md: "62%", lg: "100%" }}
+          justify={"center"}
+          pt={{ base: 16, md: 14, lg: 20 }}
         >
           {/* maxima logo & contact*/}
           <Flex
-            direction={{ base: "column", lg: "row" }}
+            direction={{ base: "column", md: "row" }}
             justify={"space-between"}
             align={{ base: "start", sm: "center" }}
             paddingX={{ base: 4, lg: 28 }}
           >
             {/* maxima logo */}
-            <Stack marginBottom={{ base: 10, lg: 0 }}>
+            <Stack marginBottom={{ base: 4, lg: 0 }}>
               <Image
                 src="/myicons/maxima2024-logo.png"
                 width={{ base: "150px", md: "200px", lg: "300px" }}
@@ -111,7 +128,7 @@ function Footer() {
             </Stack>
 
             {/* maxima contact & page */}
-            <Flex gap={{ base: 4, lg: 16 }} paddingBottom={8}>
+            <Flex gap={{ base: 4, lg: 16 }} paddingBottom={{ base: 0, lg: 8 }}>
               <Stack>
                 <Heading size={{ base: "sm", lg: "md" }}>Pages</Heading>
                 <Link as={RouterLink} to={"/home"} color={"black"}>
@@ -147,12 +164,20 @@ function Footer() {
         {/* Footer Copyright */}
       </Stack>
       <Stack
+        // mt={{ base: 8, lg: 0 }}
         bg={"#44002B"}
-        paddingY={3}
+        paddingY={{ base: 3, lg: 3 }}
         fontFamily={"Lexend"}
         fontWeight={"regular"}
+        justify={"center"}
+        align={"center"}
+        gap={0}
       >
-        <Text color={"white"} textAlign={"center"}>
+        <Text
+          color={"white"}
+          textAlign={"center"}
+          fontSize={{ base: "0.75rem", md: "sm" }}
+        >
           © MAXIMA UMN 2024 • Made with Love by Charta
         </Text>
       </Stack>
