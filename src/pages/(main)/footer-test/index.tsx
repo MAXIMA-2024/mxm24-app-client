@@ -5,17 +5,17 @@ function Footer() {
   return (
     <footer>
       {/* top and bot wrapper */}
-      <Stack width={"100vw"} height={"100vh"} gap={0}>
+      <Stack minW={"100vw"} minH={"100vh"} gap={0}>
         {/* Background Wrapper untuk top section */}
         <Stack
-          bgImage={{
-            base: "/footer/footer-maxima-mobile-top.png",
-            lg: "/footer/footer-maxima-desktop-top.png",
-          }}
-          bgSize={"cover"}
-          bgPosition={{ base: "top", lg: "center" }}
-          bgRepeat={"no-repeat"}
-          height={{ base: "55%", lg: "62%" }}
+        // bgImage={{
+        //   base: "/footer/footer-maxima-mobile-top.png",
+        //   lg: "/footer/footer-maxima-desktop-top.png",
+        // }}
+        // bgSize={"cover"}
+        // bgPosition={{ base: "top", lg: "center" }}
+        // bgRepeat={"no-repeat"}
+        // height="50%"
         >
           {/* sponsors and media partners content */}
           <Flex
@@ -65,14 +65,14 @@ function Footer() {
 
         {/* Background Wrapper untuk bottom section */}
         <Stack
-          bgImage={{
-            base: "/footer/footer-maxima-mobile-bottom.png",
-            lg: "/footer/footer-maxima-desktop-bottom.png",
-          }}
-          bgSize={"cover"}
-          bgRepeat={"no-repeat"}
-          bgPosition={{ base: "top", lg: "center" }}
-          height={{ base: "45%", lg: "38%" }}
+        // bgImage={{
+        //   base: "/footer/footer-maxima-mobile-bot.png",
+        //   lg: "/footer/footer-maxima-desktop-bot.png",
+        // }}
+        // bgSize={"cover"}
+        // bgRepeat={"no-repeat"}
+        // bgPosition={{ base: "top", lg: "center" }}
+        // height="50%"
         >
           {/* maxima logo & contact*/}
           <Flex
@@ -106,7 +106,7 @@ function Footer() {
                 gap={8}
                 mb={{ base: 10, lg: 0 }}
               >
-                <Link href="#link-line" isExternal>
+                <Link href="https://line.me/ti/p/vuu4204x" isExternal>
                   <Image
                     src="/footer/logo-line.svg"
                     width={{ base: "30px", md: "40px", lg: "50px" }}
@@ -216,7 +216,7 @@ function Footer() {
                 </Link>
               </Stack>
 
-              <Stack maxW="400px">
+              <Stack maxW="270px">
                 <Heading
                   textColor={"#44002B"}
                   size={{ base: "sm", lg: "md" }}
@@ -229,7 +229,6 @@ function Footer() {
                   fontFamily={"Lexend"}
                   size={{ base: "sm", lg: "md" }}
                   fontWeight={"regular"}
-                  minW="200px"
                 >
                   Universitas Multimedia Nusantara Jl. Scientia Boulevard,
                   Gading Serpong, Tangerang, Banten 15811
