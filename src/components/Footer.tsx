@@ -54,8 +54,8 @@ const Footer: React.FC = () => {
               <Image
                 src="/footer/sponsor.png"
                 width={{
-                  base: "90vw",
-                  sm: "80vw",
+                  base: "70vw",
+                  sm: "45vw",
                   md: "40vw",
                   lg: "45vw",
                   xl: "35vw",
@@ -71,8 +71,8 @@ const Footer: React.FC = () => {
               <Image
                 src="/footer/medpar.png"
                 width={{
-                  base: "90vw",
-                  sm: "80vw",
+                  base: "70vw",
+                  sm: "45vw",
                   md: "40vw",
                   lg: "45vw",
                   xl: "35vw",
@@ -110,7 +110,7 @@ const Footer: React.FC = () => {
               <Image
                 src="/myicons/maxima2024-logo.png"
                 width={{ base: "150px", md: "200px", lg: "240px", xl: "260px" }}
-                marginTop={{ base: 12, md: 0 }}
+                marginTop={{ base: 10, sm: 28, md: 16, lg: 0 }}
               />
               <Text>Express Your Uniqueness, Show It To Shine</Text>
               <Flex gap={3}>
