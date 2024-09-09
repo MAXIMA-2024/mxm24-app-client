@@ -54,6 +54,7 @@ type TicketDetails =
         attendanceTime: Date | null;
         alfagiftId: string | null;
         isChatimeBundle: boolean;
+        isInvited: boolean;
         createdAt: Date;
         updatedAt: Date;
       };
@@ -134,7 +135,7 @@ const MyTicket = () => {
         ? `/ticket/${position}-in-ticket-mobile.png`
         : `/ticket/${position}-in-ticket-desktop.png`;
     } else if (ticket?.status === "external") {
-      if (ticket.detail.isChatimeBundle) {
+      if (ticket.detail.isInvited) {
         return isMobile
           ? `/ticket/${position}-ex-chatime-ticket-mobile.png`
           : `/ticket/${position}-ex-chatime-ticket-desktop.png`;
