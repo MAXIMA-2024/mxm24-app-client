@@ -36,8 +36,8 @@ const Footer: React.FC = () => {
           bgSize="cover"
           w="100vw"
           justify="center"
-          pt={{ base: 10, md: "10rem", lg: 22 }}
-          h="100vh"
+          pt={{ base: 10, md: "10rem", lg: "5rem" }}
+          // h="100vh"
         >
           {/* sponsors and media partners content */}
           <Flex
@@ -92,7 +92,7 @@ const Footer: React.FC = () => {
           bgRepeat="no-repeat"
           bgPos="top"
           w="100vw"
-          h="100vh"
+          // h="100vh"
           justify="center"
           pt={{ base: 0, md: 14, lg: 20 }}
           p={{ base: 2, md: 0 }}
