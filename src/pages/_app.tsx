@@ -3,7 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { SWRConfig } from "swr";
 import { useFetcher } from "@/hooks/useApi";
 import useAuth from "@/hooks/useAuth";
-import ScrollToTop from "@/components/ScrollToTop/ScrollToTop";
+
 import { AnimatePresence, motion } from "framer-motion";
 import useLoading from "@/hooks/useLoading";
 import { useEffect } from "react";
@@ -342,7 +342,6 @@ const GlobalLayout = () => {
           </Stack>
         </AnimatePresence>
       </SWRConfig>
-      <ScrollToTop />
     </Stack>
   );
 };
