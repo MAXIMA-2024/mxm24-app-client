@@ -1,33 +1,29 @@
-import { Flex, Heading, Image, Stack, Text, Link } from "@chakra-ui/react";
+import React from "react";
+import { Stack, Flex, Heading, Image, Text, Link } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 
 const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: "smooth",
-  });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
-function Footer() {
+const Footer: React.FC = () => {
   return (
     <footer>
       {/* top and bot wrapper */}
       <Stack
-        w={"100vw"}
-        h={"100vh"}
+        minW="100vw"
+        minH="100vh"
         gap={0}
-        fontFamily={"Lexend"}
-        color={"#44002B"}
-        // justifyContent={"center"}
+        fontFamily="Lexend"
+        color="#44002B"
         bgImage={{
           base: "/footer/footer-background-mobile.png",
           md: "/footer/footer-background.png",
         }}
-        bgRepeat={"no-repeat"}
-        bgSize={"cover"}
-        bgPos={"top"}
-        align={"center"}
+        bgRepeat="no-repeat"
+        bgSize="cover"
+        bgPos="top"
+        align="center"
       >
         {/* Background Wrapper untuk top section */}
         <Stack
@@ -35,31 +31,28 @@ function Footer() {
             base: "/footer/footer-maxima-mobile-top.png",
             md: "/footer/footer-maxima-desktop-top.png",
           }}
-          // bgSize={"cover"}
-          bgPos={"bottom"}
-          bgRepeat={"no-repeat"}
-          bgSize={"cover"}
-          w={"100vw"}
-          justify={"center"}
+          bgPos="bottom"
+          bgRepeat="no-repeat"
+          bgSize="cover"
+          w="100vw"
+          justify="center"
           pt={{ base: 10, md: "10rem", lg: 22 }}
-          h={"100vh"}
-          // height={{ md: "60.5%", lg: "65%" }}
+          h="100vh"
         >
           {/* sponsors and media partners content */}
           <Flex
             direction={{ base: "column", md: "row" }}
-            align={"center"}
-            justify={"space-around"}
+            align="center"
+            justify="space-around"
             paddingX={4}
           >
             {/* sponsors */}
             <Stack>
-              <Heading textAlign={"center"} fontWeight={"semibold"}>
+              <Heading textAlign="center" fontWeight="semibold">
                 Sponsored By
               </Heading>
               <Image
                 src="/footer/sponsor.png"
-                // width={{ base: "350px", md: "350px", lg: "700px" }}
                 width={{
                   base: "90vw",
                   sm: "80vw",
@@ -72,12 +65,11 @@ function Footer() {
 
             {/* media partners */}
             <Stack>
-              <Heading textAlign={"center"} fontWeight={"semibold"}>
+              <Heading textAlign="center" fontWeight="semibold">
                 Media Partners
               </Heading>
               <Image
                 src="/footer/medpar.png"
-                // width={{ base: "350px", md: "350px", lg: "700px" }}
                 width={{
                   base: "90vw",
                   sm: "80vw",
@@ -96,20 +88,19 @@ function Footer() {
             base: "/footer/footer-maxima-mobile-bot.png",
             md: "/footer/footer-maxima-desktop-bot.png",
           }}
-          bgSize={"cover"}
-          bgRepeat={"no-repeat"}
-          bgPos={"top"}
-          w={"100vw"}
-          h={"100vh"}
-          // height={{ base: "100%", md: "62%", lg: "100%" }}
-          justify={"center"}
+          bgSize="cover"
+          bgRepeat="no-repeat"
+          bgPos="top"
+          w="100vw"
+          h="100vh"
+          justify="center"
           pt={{ base: 0, md: 14, lg: 20 }}
           p={{ base: 2, md: 0 }}
         >
-          {/* maxima logo & contact*/}
+          {/* maxima logo & contact */}
           <Flex
             direction={{ base: "column", md: "row" }}
-            justify={"space-between"}
+            justify="space-between"
             align={{ base: "start", sm: "center" }}
             paddingX={{ base: 4, lg: 28 }}
           >
@@ -175,49 +166,49 @@ function Footer() {
                 <Heading size={{ base: "sm", lg: "md" }}>Pages</Heading>
                 <Link
                   as={RouterLink}
-                  to={"/home"}
+                  to="/home"
                   onClick={() => scrollToTop()}
-                  color={"black"}
+                  color="black"
                 >
                   HoME
                 </Link>
                 <Link
                   as={RouterLink}
-                  to={"/state"}
+                  to="/state"
                   onClick={() => scrollToTop()}
-                  color={"black"}
+                  color="black"
                 >
                   STATE
                 </Link>
                 <Link
                   as={RouterLink}
-                  to={"/malpun"}
+                  to="/malpun"
                   onClick={() => scrollToTop()}
-                  color={"black"}
+                  color="black"
                 >
                   MalPun
                 </Link>
                 <Link
                   as={RouterLink}
-                  to={"/faq"}
+                  to="/faq"
                   onClick={() => scrollToTop()}
-                  color={"black"}
+                  color="black"
                 >
                   FAQ
                 </Link>
                 <Link
                   as={RouterLink}
-                  to={"/aboutus"}
+                  to="/aboutus"
                   onClick={() => scrollToTop()}
-                  color={"black"}
+                  color="black"
                 >
                   About Us
                 </Link>
                 <Link
                   as={RouterLink}
-                  to={"/profile"}
+                  to="/profile"
                   onClick={() => scrollToTop()}
-                  color={"black"}
+                  color="black"
                 >
                   Profile
                 </Link>
@@ -225,7 +216,7 @@ function Footer() {
 
               <Stack maxW="270px">
                 <Heading size={{ base: "sm", lg: "md" }}>Location</Heading>
-                <Text size={{ base: "sm", lg: "md" }} color={"black"}>
+                <Text size={{ base: "sm", lg: "md" }} color="black">
                   Universitas Multimedia Nusantara Jl. Scientia Boulevard,
                   Gading Serpong, Tangerang, Banten 15811
                 </Text>
@@ -236,18 +227,17 @@ function Footer() {
         {/* Footer Copyright */}
       </Stack>
       <Stack
-        // mt={{ base: "2.75rem", lg: 6 }}
-        bg={"#44002B"}
+        bg="#44002B"
         paddingY={{ base: 2, lg: 3 }}
-        fontFamily={"Lexend"}
-        fontWeight={"regular"}
-        justify={"center"}
-        align={"center"}
+        fontFamily="Lexend"
+        fontWeight="regular"
+        justify="center"
+        align="center"
         gap={0}
       >
         <Text
-          color={"white"}
-          textAlign={"center"}
+          color="white"
+          textAlign="center"
           fontSize={{ base: "0.75rem", md: "sm" }}
         >
           © MAXIMA UMN 2024 • Made with Love by Charta
@@ -255,6 +245,6 @@ function Footer() {
       </Stack>
     </footer>
   );
-}
+};
 
 export default Footer;

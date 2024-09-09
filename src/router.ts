@@ -10,7 +10,6 @@ export type Path =
   | `/auth/sso`
   | `/d/y/l/a/n`
   | `/faq`
-  | `/footer-test`
   | `/home`
   | `/malpun`
   | `/malpun/buyticket`
