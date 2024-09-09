@@ -33,7 +33,7 @@ function Footer() {
           bgSize={"cover"}
           w={"100vw"}
           justify={"center"}
-          pt={{ base: 10, md: "10rem", lg: 24 }}
+          pt={{ base: 10, md: "10rem", lg: 22 }}
           h={"100vh"}
           // height={{ md: "60.5%", lg: "65%" }}
         >
@@ -95,7 +95,8 @@ function Footer() {
           h={"100vh"}
           // height={{ base: "100%", md: "62%", lg: "100%" }}
           justify={"center"}
-          pt={{ base: 16, md: 14, lg: 20 }}
+          pt={{ base: 0, md: 14, lg: 20 }}
+          p={{ base: 2, md: 0 }}
         >
           {/* maxima logo & contact*/}
           <Flex
@@ -181,9 +182,9 @@ function Footer() {
         {/* Footer Copyright */}
       </Stack>
       <Stack
-        // mt={{ base: 8, lg: 0 }}
+        // mt={{ base: "2.75rem", lg: 6 }}
         bg={"#44002B"}
-        paddingY={{ base: 3, lg: 3 }}
+        paddingY={{ base: 2, lg: 3 }}
         fontFamily={"Lexend"}
         fontWeight={"regular"}
         justify={"center"}
