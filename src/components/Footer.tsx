@@ -1,6 +1,14 @@
 import { Flex, Heading, Image, Stack, Text, Link } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
+};
+
 function Footer() {
   return (
     <footer>
@@ -114,28 +122,44 @@ function Footer() {
               />
               <Text>Express Your Uniqueness, Show It To Shine</Text>
               <Flex gap={3}>
-                <Link href="https://line.me/ti/p/vuu4204x" isExternal>
+                <Link
+                  href="https://line.me/ti/p/vuu4204x"
+                  target="_blank"
+                  isExternal
+                >
                   <Image
                     src="/footer/logo-line.svg"
                     width={{ base: "30px", md: "35px", lg: "40px" }}
                     height="auto"
                   />
                 </Link>
-                <Link href="https://www.instagram.com/maximaumn/" isExternal>
+                <Link
+                  href="https://www.instagram.com/maximaumn/"
+                  target="_blank"
+                  isExternal
+                >
                   <Image
                     src="/footer/logo-instagram.svg"
                     width={{ base: "30px", md: "35px", lg: "40px" }}
                     height="auto"
                   />
                 </Link>
-                <Link href="https://www.tiktok.com/@maximaumn" isExternal>
+                <Link
+                  href="https://www.tiktok.com/@maximaumn"
+                  target="_blank"
+                  isExternal
+                >
                   <Image
                     src="/footer/logo-tiktok.svg"
                     width={{ base: "30px", md: "35px", lg: "40px" }}
                     height="auto"
                   />
                 </Link>
-                <Link href="https://www.youtube.com/@MAXIMAUMN" isExternal>
+                <Link
+                  href="https://www.youtube.com/@MAXIMAUMN"
+                  target="_blank"
+                  isExternal
+                >
                   <Image
                     src="/footer/logo-youtube.svg"
                     width={{ base: "30px", md: "35px", lg: "40px" }}
@@ -149,22 +173,52 @@ function Footer() {
             <Flex gap={{ base: 4, lg: 16 }} paddingBottom={{ base: 0, lg: 8 }}>
               <Stack>
                 <Heading size={{ base: "sm", lg: "md" }}>Pages</Heading>
-                <Link as={RouterLink} to={"/home"} color={"black"}>
+                <Link
+                  as={RouterLink}
+                  to={"/home"}
+                  onClick={() => scrollToTop()}
+                  color={"black"}
+                >
                   HoME
                 </Link>
-                <Link as={RouterLink} to={"/state"} color={"black"}>
+                <Link
+                  as={RouterLink}
+                  to={"/state"}
+                  onClick={() => scrollToTop()}
+                  color={"black"}
+                >
                   STATE
                 </Link>
-                <Link as={RouterLink} to={"/malpun"} color={"black"}>
+                <Link
+                  as={RouterLink}
+                  to={"/malpun"}
+                  onClick={() => scrollToTop()}
+                  color={"black"}
+                >
                   MalPun
                 </Link>
-                <Link as={RouterLink} to={"/faq"} color={"black"}>
+                <Link
+                  as={RouterLink}
+                  to={"/faq"}
+                  onClick={() => scrollToTop()}
+                  color={"black"}
+                >
                   FAQ
                 </Link>
-                <Link as={RouterLink} to={"/aboutus"} color={"black"}>
+                <Link
+                  as={RouterLink}
+                  to={"/aboutus"}
+                  onClick={() => scrollToTop()}
+                  color={"black"}
+                >
                   About Us
                 </Link>
-                <Link as={RouterLink} to={"/profile"} color={"black"}>
+                <Link
+                  as={RouterLink}
+                  to={"/profile"}
+                  onClick={() => scrollToTop()}
+                  color={"black"}
+                >
                   Profile
                 </Link>
               </Stack>

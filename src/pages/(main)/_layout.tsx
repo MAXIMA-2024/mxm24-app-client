@@ -34,6 +34,7 @@ import { motion } from "framer-motion";
 import useLoading from "@/hooks/useLoading";
 import useSWR from "swr";
 import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 
 type Toggle = {
   id: number;
@@ -1158,6 +1159,7 @@ const MainLayout = () => {
 
   return (
     <>
+      <ScrollToTop isLoaded={isLoaded} />
       <Stack
         gap={0}
         w={"100vw"}
