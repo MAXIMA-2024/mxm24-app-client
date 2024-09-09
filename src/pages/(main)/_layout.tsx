@@ -33,7 +33,6 @@ import { useNavigate } from "@/router";
 import { motion } from "framer-motion";
 import useLoading from "@/hooks/useLoading";
 import useSWR from "swr";
-import Footer from "@/components/Footer";
 
 type Toggle = {
   id: number;
@@ -1124,7 +1123,6 @@ const MainLayout = () => {
   const nav = useNavigate();
   const auth = useAuth();
   const toast = useToast();
-  const { isLoaded } = useLoading();
   const { data } = useSWR<Toggle[]>("/toggle");
 
   useEffect(() => {
@@ -1158,21 +1156,12 @@ const MainLayout = () => {
 
   return (
     <>
-      <Stack
-        gap={0}
-        w={"100vw"}
-        h={"100vh"}
-        overflowX={"hidden"}
-        overflowY={auth.status !== "loading" && !isLoaded ? "hidden" : "auto"}
-      >
-        <Show above="lg">
-          <MainLayoutDesktop />
-        </Show>
-        <Hide above="lg">
-          <MainLayoutMobile />
-        </Hide>
-        <Footer />
-      </Stack>
+      <Show above="lg">
+        <MainLayoutDesktop />
+      </Show>
+      <Hide above="lg">
+        <MainLayoutMobile />
+      </Hide>
     </>
   );
 };
