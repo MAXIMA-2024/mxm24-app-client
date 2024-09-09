@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
           w="100vw"
           justify="center"
           pt={{ base: 10, md: "10rem", lg: "5rem" }}
-          // h="100vh"
+          h="50vh"
         >
           {/* sponsors and media partners content */}
           <Flex
@@ -96,6 +96,7 @@ const Footer: React.FC = () => {
           justify="center"
           pt={{ base: 0, md: 14, lg: 20 }}
           p={{ base: 2, md: 0 }}
+          h={"50vh"}
         >
           {/* maxima logo & contact */}
           <Flex
@@ -161,7 +162,11 @@ const Footer: React.FC = () => {
             </Stack>
 
             {/* maxima contact & page */}
-            <Flex gap={{ base: 4, lg: 16 }} paddingBottom={{ base: 0, lg: 8 }}>
+            <Flex
+              gap={{ base: 4, lg: 16 }}
+              paddingBottom={{ base: 0, lg: 8 }}
+              marginTop={8}
+            >
               <Stack>
                 <Heading size={{ base: "sm", lg: "md" }}>Pages</Heading>
                 <Link
