@@ -30,6 +30,7 @@ function Footer() {
           // bgSize={"cover"}
           bgPos={"bottom"}
           bgRepeat={"no-repeat"}
+          bgSize={"cover"}
           w={"100vw"}
           justify={"center"}
           pt={{ base: 10, md: "10rem", lg: 24 }}
@@ -41,6 +42,7 @@ function Footer() {
             direction={{ base: "column", md: "row" }}
             align={"center"}
             justify={"space-around"}
+            paddingX={4}
           >
             {/* sponsors */}
             <Stack>
@@ -49,7 +51,14 @@ function Footer() {
               </Heading>
               <Image
                 src="/footer/sponsor.png"
-                width={{ base: "350px", md: "350px", lg: "700px" }}
+                // width={{ base: "350px", md: "350px", lg: "700px" }}
+                width={{
+                  base: "90vw",
+                  sm: "80vw",
+                  md: "40vw",
+                  lg: "45vw",
+                  xl: "35vw",
+                }}
               />
             </Stack>
 
@@ -60,7 +69,14 @@ function Footer() {
               </Heading>
               <Image
                 src="/footer/medpar.png"
-                width={{ base: "350px", md: "350px", lg: "700px" }}
+                // width={{ base: "350px", md: "350px", lg: "700px" }}
+                width={{
+                  base: "90vw",
+                  sm: "80vw",
+                  md: "40vw",
+                  lg: "45vw",
+                  xl: "35vw",
+                }}
               />
             </Stack>
           </Flex>
@@ -72,7 +88,7 @@ function Footer() {
             base: "/footer/footer-maxima-mobile-bot.png",
             md: "/footer/footer-maxima-desktop-bot.png",
           }}
-          // bgSize={"cover"}
+          bgSize={"cover"}
           bgRepeat={"no-repeat"}
           bgPos={"top"}
           w={"100vw"}
@@ -92,35 +108,36 @@ function Footer() {
             <Stack marginBottom={{ base: 4, lg: 0 }}>
               <Image
                 src="/myicons/maxima2024-logo.png"
-                width={{ base: "150px", md: "200px", lg: "300px" }}
+                width={{ base: "150px", md: "200px", lg: "240px", xl: "260px" }}
+                marginTop={{ base: 12, md: 0 }}
               />
               <Text>Express Your Uniqueness, Show It To Shine</Text>
-              <Flex>
+              <Flex gap={3}>
                 <Link href="https://line.me/ti/p/vuu4204x" isExternal>
                   <Image
                     src="/footer/logo-line.svg"
-                    width={{ base: "30px", md: "40px", lg: "50px" }}
+                    width={{ base: "30px", md: "35px", lg: "40px" }}
                     height="auto"
                   />
                 </Link>
                 <Link href="https://www.instagram.com/maximaumn/" isExternal>
                   <Image
                     src="/footer/logo-instagram.svg"
-                    width={{ base: "30px", md: "40px", lg: "50px" }}
+                    width={{ base: "30px", md: "35px", lg: "40px" }}
                     height="auto"
                   />
                 </Link>
                 <Link href="https://www.tiktok.com/@maximaumn" isExternal>
                   <Image
                     src="/footer/logo-tiktok.svg"
-                    width={{ base: "30px", md: "40px", lg: "50px" }}
+                    width={{ base: "30px", md: "35px", lg: "40px" }}
                     height="auto"
                   />
                 </Link>
                 <Link href="https://www.youtube.com/@MAXIMAUMN" isExternal>
                   <Image
                     src="/footer/logo-youtube.svg"
-                    width={{ base: "30px", md: "40px", lg: "50px" }}
+                    width={{ base: "30px", md: "35px", lg: "40px" }}
                     height="auto"
                   />
                 </Link>
