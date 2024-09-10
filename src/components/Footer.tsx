@@ -106,13 +106,17 @@ const Footer: React.FC = () => {
             paddingX={{ base: 4, lg: 28 }}
           >
             {/* maxima logo */}
-            <Stack marginBottom={{ base: 4, lg: 0 }}>
+            <Stack>
               <Image
                 src="/myicons/maxima2024-logo.png"
                 width={{ base: "150px", md: "200px", lg: "240px", xl: "260px" }}
-                marginTop={{ base: 10, sm: 28, md: 16, lg: 0 }}
+                marginTop={{ base: 20, sm: 28, md: 16, lg: 0 }}
               />
-              <Text>Express Your Uniqueness, Show It To Shine</Text>
+              <Text
+                fontSize={{ base: "3vw", sm: "2vw", md: "1.5vw", lg: "md" }}
+              >
+                Express Your Uniqueness, Show It To Shine
+              </Text>
               <Flex gap={3}>
                 <Link
                   href="https://line.me/ti/p/vuu4204x"
@@ -165,15 +169,20 @@ const Footer: React.FC = () => {
             <Flex
               gap={{ base: 4, lg: 16 }}
               paddingBottom={{ base: 0, lg: 8 }}
-              marginTop={8}
+              marginTop={3}
             >
               <Stack>
-                <Heading size={{ base: "sm", lg: "md" }}>Pages</Heading>
+                <Heading
+                  fontSize={{ base: "3vw", sm: "2vw", md: "1.5vw", lg: "md" }}
+                >
+                  Pages
+                </Heading>
                 <Link
                   as={RouterLink}
                   to="/home"
                   onClick={() => scrollToTop()}
                   color="black"
+                  fontSize={{ base: "3vw", sm: "2vw", md: "1.5vw", lg: "md" }}
                 >
                   HoME
                 </Link>
@@ -182,6 +191,7 @@ const Footer: React.FC = () => {
                   to="/state"
                   onClick={() => scrollToTop()}
                   color="black"
+                  fontSize={{ base: "3vw", sm: "2vw", md: "1.5vw", lg: "md" }}
                 >
                   STATE
                 </Link>
@@ -190,6 +200,7 @@ const Footer: React.FC = () => {
                   to="/malpun"
                   onClick={() => scrollToTop()}
                   color="black"
+                  fontSize={{ base: "3vw", sm: "2vw", md: "1.5vw", lg: "md" }}
                 >
                   MalPun
                 </Link>
@@ -198,6 +209,7 @@ const Footer: React.FC = () => {
                   to="/faq"
                   onClick={() => scrollToTop()}
                   color="black"
+                  fontSize={{ base: "3vw", sm: "2vw", md: "1.5vw", lg: "md" }}
                 >
                   FAQ
                 </Link>
@@ -206,6 +218,7 @@ const Footer: React.FC = () => {
                   to="/aboutus"
                   onClick={() => scrollToTop()}
                   color="black"
+                  fontSize={{ base: "3vw", sm: "2vw", md: "1.5vw", lg: "md" }}
                 >
                   About Us
                 </Link>
@@ -214,14 +227,22 @@ const Footer: React.FC = () => {
                   to="/profile"
                   onClick={() => scrollToTop()}
                   color="black"
+                  fontSize={{ base: "3vw", sm: "2vw", md: "1.5vw", lg: "md" }}
                 >
                   Profile
                 </Link>
               </Stack>
 
               <Stack maxW="270px">
-                <Heading size={{ base: "sm", lg: "md" }}>Location</Heading>
-                <Text size={{ base: "sm", lg: "md" }} color="black">
+                <Heading
+                  fontSize={{ base: "3vw", sm: "2vw", md: "1.5vw", lg: "md" }}
+                >
+                  Location
+                </Heading>
+                <Text
+                  fontSize={{ base: "3vw", sm: "2vw", md: "1.5vw", lg: "md" }}
+                  color="black"
+                >
                   Universitas Multimedia Nusantara Jl. Scientia Boulevard,
                   Gading Serpong, Tangerang, Banten 15811
                 </Text>
