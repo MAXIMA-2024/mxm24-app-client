@@ -48,14 +48,18 @@ const Footer: React.FC = () => {
           >
             {/* sponsors */}
             <Stack>
-              <Heading textAlign="center" fontWeight="semibold">
+              <Heading
+                textAlign="center"
+                fontWeight="semibold"
+                fontSize={{ base: "5vw", sm: "4vw", md: "1.5vw", lg: "md" }}
+              >
                 Sponsored By
               </Heading>
               <Image
                 src="/footer/sponsor.png"
                 width={{
-                  base: "70vw",
-                  sm: "45vw",
+                  base: "65vw",
+                  sm: "43vw",
                   md: "40vw",
                   lg: "45vw",
                   xl: "35vw",
@@ -65,14 +69,18 @@ const Footer: React.FC = () => {
 
             {/* media partners */}
             <Stack>
-              <Heading textAlign="center" fontWeight="semibold">
+              <Heading
+                textAlign="center"
+                fontWeight="semibold"
+                fontSize={{ base: "5vw", sm: "4vw", md: "1.5vw", lg: "md" }}
+              >
                 Media Partners
               </Heading>
               <Image
                 src="/footer/medpar.png"
                 width={{
-                  base: "70vw",
-                  sm: "45vw",
+                  base: "65vw",
+                  sm: "43vw",
                   md: "40vw",
                   lg: "45vw",
                   xl: "35vw",
@@ -109,8 +117,8 @@ const Footer: React.FC = () => {
             <Stack>
               <Image
                 src="/myicons/maxima2024-logo.png"
-                width={{ base: "150px", md: "200px", lg: "240px", xl: "260px" }}
-                marginTop={{ base: 20, sm: 28, md: 16, lg: 0 }}
+                width={{ base: "25vw", md: "200px", lg: "240px", xl: "260px" }}
+                marginTop={{ base: 16, sm: 28, md: 16, lg: 0 }}
               />
               <Text
                 fontSize={{ base: "3vw", sm: "2vw", md: "1.5vw", lg: "md" }}
@@ -167,7 +175,7 @@ const Footer: React.FC = () => {
 
             {/* maxima contact & page */}
             <Flex
-              gap={{ base: 4, lg: 16 }}
+              gap={{ base: 0, lg: 16 }}
               paddingBottom={{ base: 0, lg: 8 }}
               marginTop={3}
             >
