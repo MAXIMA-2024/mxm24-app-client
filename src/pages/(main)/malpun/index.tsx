@@ -105,46 +105,64 @@ const Inbutton = () => {
             </Button>
           </Link>
         ) : (
-          <Tooltip
-            label={
-              <>
-                <Text>Klaim Tiket MalPun </Text>
-                <Text>akan segera dibuka</Text>
-              </>
+          <Link
+            to={
+              ticket?.status === "unclaimed"
+                ? "/malpun/claimticket"
+                : `/malpun/myticket?order_id=${ticket?.ticket.code}`
             }
-            color={"text.primary"}
-            aria-label="A tooltip"
-            bgColor={"white"}
-            rounded={"lg"}
-            px={"1rem"}
-            py={"0.5rem"}
-            shadow={"lg"}
-            textAlign={"center"}
           >
-            <Button
-              bgColor={"button.primary"}
-              p={{ base: 5, md: 8, lg: 10 }}
-              py={{ base: 0, md: 8, lg: 12 }}
-              px={{ base: "2rem", md: "4rem", lg: "10rem" }}
-              variant={"ghost"}
-              transition={"0.3s"}
-              color={"text.tertiary"}
-              rounded={"xl"}
-              _hover={{ bgColor: "#3A0025" }}
-              mt={{ base: "5rem", lg: 0 }}
-              shadow={"0 0 5rem #ffffff80"}
-              mb={{ base: "13rem", lg: "7rem" }}
-              isDisabled={true}
+            <Tooltip
+              label={
+                <>
+                  {ticket?.status === "unclaimed" ? (
+                    <>
+                      <Text>Klaim Tiket MalPun</Text>
+                      <Text>sudah ditutup!</Text>
+                    </>
+                  ) : (
+                    <>
+                      <Text>Lihat Tiket MalPun</Text>
+                    </>
+                  )}
+                </>
+              }
+              color={"text.primary"}
+              aria-label="A tooltip"
+              bgColor={"white"}
+              rounded={"lg"}
+              px={"1rem"}
+              py={"0.5rem"}
+              shadow={"lg"}
+              textAlign={"center"}
             >
-              <Text
-                fontFamily={"Lexend"}
-                fontWeight={"400"}
-                fontSize={{ base: "medium", md: "larger", lg: "xx-large" }}
+              <Button
+                bgColor={"button.primary"}
+                p={{ base: 5, md: 8, lg: 10 }}
+                py={{ base: 0, md: 8, lg: 12 }}
+                px={{ base: "2rem", md: "4rem", lg: "10rem" }}
+                variant={"ghost"}
+                transition={"0.3s"}
+                color={"text.tertiary"}
+                rounded={"xl"}
+                _hover={{ bgColor: "#3A0025" }}
+                mt={{ base: "5rem", lg: 0 }}
+                shadow={"0 0 5rem #ffffff80"}
+                mb={{ base: "13rem", lg: "7rem" }}
+                isDisabled={ticket?.status === "unclaimed"}
               >
-                KLAIM TIKET
-              </Text>
-            </Button>
-          </Tooltip>
+                <Text
+                  fontFamily={"Lexend"}
+                  fontWeight={"400"}
+                  fontSize={{ base: "medium", md: "larger", lg: "xx-large" }}
+                >
+                  {ticket?.status === "unclaimed"
+                    ? "KLAIM TIKET"
+                    : "LIHAT TIKET"}
+                </Text>
+              </Button>
+            </Tooltip>
+          </Link>
         )}
       </Stack>
     </>
