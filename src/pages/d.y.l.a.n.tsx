@@ -1,5 +1,20 @@
+import useAuth from "@/hooks/useAuth";
 import { useDvdScreensaver } from "@/hooks/useDvdScreenSaver";
-import { Image, Stack, useToast } from "@chakra-ui/react";
+import useLoading from "@/hooks/useLoading";
+import {
+  Button,
+  Image,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Stack,
+  useDisclosure,
+  Text,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 const DylanEasterEgg = () => {
@@ -7,9 +22,11 @@ const DylanEasterEgg = () => {
     // freezeOnHover: true,
     speed: 4,
   });
-  const toast = useToast();
 
   const [color, setColor] = useState<number>(0);
+  const { isOpen, onClose, onOpen } = useDisclosure();
+  const { isLoaded } = useLoading();
+  const { status } = useAuth();
 
   useEffect(() => {
     // random hue degree
@@ -34,25 +51,22 @@ const DylanEasterEgg = () => {
   }, [impactCount]);
 
   useEffect(() => {
-    const bgAudio = new Audio("/easteregg/skibidi.mp3");
-    bgAudio.loop = true;
-    bgAudio.play();
+    if (isLoaded && status !== "loading") {
+      const bgAudio = new Audio("/easteregg/skibidi.mp3");
+      bgAudio.loop = true;
+      bgAudio.autoplay = false;
 
-    toast({
-      title: "Wild Dylan appeared! 🦁",
-      description:
-        "Haii, buat siapapun kamu yang berhasil nemuin page ini selamat yaa! 🎉. Website MAXIMA 2024 di buat dengan cinta yang dalam oleh divisi CHARTA. Bikin web ini susah banget, jadi diharapkan kamu ikut menjadi divisi Website di MAXIMA 2025",
-      status: "success",
-      duration: 15000,
-      isClosable: true,
-    });
+      bgAudio.play();
 
-    return () => {
-      bgAudio.pause();
-      bgAudio.remove();
-    };
+      onOpen();
+
+      return () => {
+        bgAudio.pause();
+        bgAudio.remove();
+      };
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isLoaded, status]);
 
   return (
     <Stack
@@ -70,9 +84,54 @@ const DylanEasterEgg = () => {
             src="/easteregg/dylanlion.png"
             w={"10rem"}
             filter={`hue-rotate(${color}deg)`}
+            onClick={onOpen}
+            cursor={"pointer"}
           />
         </Stack>
       </Stack>
+
+      <Modal isOpen={isOpen} onClose={onClose} size={"md"} isCentered>
+        <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
+        <ModalContent m={"1.5rem"}>
+          <ModalHeader>
+            Ucapan Terima Kasih dari Charta MAXIMA UMN 2024
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Stack gap={"1rem"}>
+              <Text>
+                Kepada seluruh <b>NOBLES</b>, panitia MAXIMA UMN 2024 yang luar
+                biasa,
+              </Text>
+              <Text>
+                Kami dari Charta,{" "}
+                <b>mengucapkan terima kasih yang sebesar-besarnya</b> atas
+                dedikasi, kerja keras, dan kebersamaan yang kalian tunjukkan
+                dalam menyukseskan MAXIMA tahun ini. Tanpa kontribusi kalian
+                yang luar biasa, acara ini tidak akan mencapai kesuksesan dan
+                kemeriahan yang kita lihat bersama.
+              </Text>
+              <Text>
+                Kini, tibalah saatnya bagi kami untuk berpamit. Semoga semangat
+                dan kenangan indah yang kita bangun di MAXIMA 2024 menjadi
+                fondasi untuk acara-acara hebat selanjutnya.{" "}
+                <b>Tetaplah bersemangat dan terus berkarya!</b>
+              </Text>
+              <Text>
+                Salam hangat,
+                <br />
+                <b>Charta MAXIMA UMN 2024</b>
+              </Text>
+            </Stack>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Stack>
   );
 };

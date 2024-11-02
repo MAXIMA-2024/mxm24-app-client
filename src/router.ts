@@ -16,11 +16,15 @@ export type Path =
   | `/malpun/claimticket`
   | `/malpun/myticket`
   | `/malpun/viewticket`
+  | `/memories`
+  | `/memories/gallery/:event`
+  | `/memories/maxmories`
   | `/profile`
   | `/state`
   | `/state/selectstate/:id`
 
 export type Params = {
+  '/memories/gallery/:event': { event: string }
   '/state/selectstate/:id': { id: string }
 }
 
