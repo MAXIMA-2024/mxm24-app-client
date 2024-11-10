@@ -1,7 +1,7 @@
 import {
   Stack,
   Image,
-  keyframes,
+  // keyframes,
   useBreakpointValue,
   useToast,
   Box,
@@ -60,18 +60,18 @@ type TicketDetails =
       };
     };
 
-const zoomIn = keyframes`
-  0% {
-    opacity: 0;
-    transform: scale(0.3);
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-  }
-`;
+// const zoomIn = keyframes`
+//   0% {
+//     opacity: 0;
+//     transform: scale(0.3);
+//   }
+//   50% {
+//     opacity: 1;
+//   }
+//   100% {
+//     transform: scale(1);
+//   }
+// `;
 
 const MyTicket = () => {
   const { data } = useSWR<Toggle[]>("/toggle");
@@ -157,7 +157,7 @@ const MyTicket = () => {
         w={"100%"}
         alignItems={"center"}
         position={"relative"}
-        animation={`${zoomIn} 1s`}
+        // animation={`${zoomIn} 1s`}
         direction={{ base: "column", lg: "row" }}
         gap={0}
         justifyContent={"center"}

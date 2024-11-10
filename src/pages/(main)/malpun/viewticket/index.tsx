@@ -3,7 +3,7 @@ import {
   Text,
   Button,
   Image,
-  keyframes,
+  // keyframes,
   useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -58,23 +58,23 @@ type TicketDetails =
       };
     };
 
-const fadeIn = keyframes`
-  from { opacity: 0; }
-  to { opacity: 1; }
-`;
+// const fadeIn = keyframes`
+//   from { opacity: 0; }
+//   to { opacity: 1; }
+// `;
 
-const zoomIn = keyframes`
-  0% {
-    opacity: 0;
-    transform: scale(0.3);
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-  }
-`;
+// const zoomIn = keyframes`
+//   0% {
+//     opacity: 0;
+//     transform: scale(0.3);
+//   }
+//   50% {
+//     opacity: 1;
+//   }
+//   100% {
+//     transform: scale(1);
+//   }
+// `;
 
 const ViewTicket = () => {
   const { data } = useSWR<Toggle[]>("/toggle");
@@ -161,7 +161,7 @@ const ViewTicket = () => {
                   textAlign={"center"}
                   fontFamily={"Luthier"}
                   fontWeight={"bold"}
-                  animation={isTicketViewed ? `${fadeIn} 1s` : "none"}
+                  // animation={isTicketViewed ? `${fadeIn} 1s` : "none"}
                 >
                   {isTicketViewed ? (
                     <Stack>
@@ -185,7 +185,7 @@ const ViewTicket = () => {
               alignItems={"center"}
               justifyContent={"center"}
               alignContent={"center"}
-              animation={!isTicketViewed ? `${zoomIn} 1s` : "none"}
+              // animation={!isTicketViewed ? `${zoomIn} 1s` : "none"}
             >
               <Image
                 src="/myicons/claim-ticket-malpun-v2.png"
@@ -200,7 +200,7 @@ const ViewTicket = () => {
                   textAlign={"center"}
                   fontFamily={"Lexend"}
                   fontWeight={"semibold"}
-                  animation={!isTicketViewed ? `${fadeIn} 1s` : "none"}
+                  // animation={!isTicketViewed ? `${fadeIn} 1s` : "none"}
                 >
                   {isTicketViewed ? (
                     <Stack w={{ base: "18rem", lg: "40rem" }} gap={"1rem"}>
